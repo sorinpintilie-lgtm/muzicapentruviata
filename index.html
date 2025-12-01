@@ -121,6 +121,13 @@
       color: var(--accent);
       font-size: 0.8rem;
       font-weight: 600;
+    }
+
+    .pill-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
       margin-bottom: 28px;
     }
 
@@ -326,6 +333,12 @@
         font-size: 0.98rem;
       }
 
+      .pill-cta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
       .cta-row {
         flex-direction: column;
         align-items: stretch;
@@ -408,11 +421,10 @@
         modern, dedicat lor, chiar aici, la Reșița.
       </p>
 
-      <div class="pill">
-        ❤️ Contribuția dumneavoastră poate schimba o viață întreagă.
-      </div>
-
-      <div class="cta-row">
+      <div class="pill-cta">
+        <div class="pill">
+          ❤️ Contribuția dumneavoastră poate schimba o viață întreagă.
+        </div>
         <a
           class="btn-primary"
           href="https://oncohelp.ro/donatii/"
@@ -421,6 +433,9 @@
         >
           DONEAZĂ ACUM
         </a>
+      </div>
+
+      <div class="cta-row">
         <span class="cta-note">Orice sumă contează. Împreună construim, cărămidă cu cărămidă,
           un loc unde speranța prinde formă.</span>
       </div>
