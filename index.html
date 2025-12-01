@@ -122,6 +122,7 @@
       color: var(--accent);
       font-size: 0.8rem;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .pill-cta {
@@ -186,6 +187,19 @@
       max-height: 36px;
       object-fit: contain;
       filter: grayscale(0.1);
+    }
+
+    .sponsor-logos-partners {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 16px;
+      gap: 24px;
+    }
+
+    .sponsor-logos-partners img {
+      max-width: 100%;
+      max-height: 36px;
     }
 
     .logo-oncohelp {
@@ -337,6 +351,10 @@
         font-size: 0.98rem;
       }
 
+      .pill {
+        white-space: normal;
+      }
+
       .pill-cta {
         flex-direction: column;
         align-items: stretch;
@@ -456,7 +474,7 @@
           <div class="sponsors-divider" aria-hidden="true"></div>
           <div class="sponsors-col">
             <span><strong>Mulțumim!</strong></span>
-            <div class="sponsor-logos">
+            <div class="sponsor-logos sponsor-logos-partners">
               <img
                 src="Logo Radio Romania Resita.svg"
                 alt="Radio România Reșița"
