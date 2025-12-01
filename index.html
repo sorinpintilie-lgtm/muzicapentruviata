@@ -47,7 +47,7 @@
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
       gap: 48px;
-      align-items: center;
+      align-items: stretch;
     }
 
     .hero-main {
@@ -72,7 +72,7 @@
     }
 
     .logo-main-aside {
-      height: 96px;
+      height: 120px;
       max-width: 100%;
     }
 
@@ -181,16 +181,17 @@
 
     .aside-placeholder {
       border-radius: 18px;
-      border: 1px dashed var(--border-soft);
-      background: #fafafa;
-      min-height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 12px;
-      font-size: 0.85rem;
-      color: var(--muted);
+      overflow: hidden;
+      background: #000000;
+      min-height: 160px;
+      display: block;
+    }
+
+    .aside-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .badge {
@@ -257,7 +258,7 @@
       }
 
       .logo-main-aside {
-        height: 80px;
+        height: 96px;
       }
     }
   </style>
@@ -317,7 +318,7 @@
         />
       </div>
       <div class="aside-placeholder">
-        <span>Loc pentru fotografie sau vizual de prezentare al evenimentului.</span>
+        <img src="16.jpg" alt="Muzica pentru Viață – eveniment caritabil" />
       </div>
       <div class="badge">Următorul eveniment • 14 decembrie</div>
       <div class="countdown" id="countdown">
