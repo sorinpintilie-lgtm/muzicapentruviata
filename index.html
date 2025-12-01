@@ -65,6 +65,17 @@
       height: 64px;
     }
 
+    .aside-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+
+    .logo-main-aside {
+      height: 96px;
+      max-width: 100%;
+    }
+
     .tagline {
       font-size: 0.9rem;
       text-transform: uppercase;
@@ -168,6 +179,20 @@
       gap: 18px;
     }
 
+    .aside-placeholder {
+      border-radius: 18px;
+      border: 1px dashed var(--border-soft);
+      background: #fafafa;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
     .badge {
       font-size: 0.78rem;
       letter-spacing: 0.16em;
@@ -231,8 +256,8 @@
         order: -1;
       }
 
-      .logo-main {
-        height: 52px;
+      .logo-main-aside {
+        height: 80px;
       }
     }
   </style>
@@ -240,18 +265,12 @@
 <body>
   <main class="page">
     <section class="hero-main" aria-labelledby="hero-title">
-      <div class="logo-row">
-        <img
-          src="Logo Muzica pentru viata.svg"
-          alt="Muzica pentru Viață"
-          class="logo-main"
-        />
-      </div>
+      
 
       <p class="tagline">Un gest mic poate schimba lumea.</p>
 
       <h1 id="hero-title">
-        Impreuna construim <span class="highlight">primul spital pentru bolnavii de cancer</span>
+        Împreună construim <span class="highlight">primul spital pentru bolnavii de cancer</span>
         din Reșița.
       </h1>
 
@@ -290,6 +309,16 @@
     </section>
 
     <aside class="aside" aria-label="Numărătoare inversă până la eveniment">
+      <div class="aside-logo">
+        <img
+          src="Logo Muzica pentru viata.svg"
+          alt="Muzica pentru Viață"
+          class="logo-main logo-main-aside"
+        />
+      </div>
+      <div class="aside-placeholder">
+        <span>Loc pentru fotografie sau vizual de prezentare al evenimentului.</span>
+      </div>
       <div class="badge">Următorul concert caritabil • 14 decembrie</div>
       <div class="countdown" id="countdown">
         <div class="time-box">
