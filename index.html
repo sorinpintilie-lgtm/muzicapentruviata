@@ -241,6 +241,28 @@
       color: var(--text-main);
     }
 
+    .audio-section {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 48px) 32px;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .audio-section strong {
+      color: var(--text-main);
+    }
+
+    .audio-section audio {
+      width: 100%;
+      max-width: 480px;
+    }
+
     @media (max-width: 820px) {
       body {
         align-items: flex-start;
@@ -399,6 +421,14 @@
       </div>
     </aside>
   </main>
+
+  <section class="audio-section" aria-label="Ascultă piesa Muzică pentru Viață 2025">
+    <div><strong>Ascultă piesa „Muzică pentru Viață 2025”</strong></div>
+    <audio controls preload="none">
+      <source src="Muzică pentru Viață 2025.mp3" type="audio/mpeg" />
+      Browserul dumneavoastră nu suportă redarea audio.
+    </audio>
+  </section>
 
   <script>
     (function () {
