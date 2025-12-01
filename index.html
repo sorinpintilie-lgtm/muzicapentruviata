@@ -166,6 +166,25 @@
       filter: grayscale(0.1);
     }
 
+    .sponsors-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .sponsors-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .sponsors-divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--border-soft);
+    }
+
     .aside {
       border-radius: 24px;
       border: 1px solid var(--border-soft);
@@ -321,6 +340,17 @@
         align-items: stretch;
       }
 
+      .sponsors-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+
+      .sponsors-divider {
+        width: 100%;
+        height: 1px;
+      }
+
       .sponsor-logos {
         width: 100%;
         justify-content: space-between;
@@ -367,17 +397,24 @@
       </div>
 
       <div class="sponsors" aria-label="Sponsori și parteneri">
-        <span><strong>Beneficiar donații: </strong></span>
-        <div class="sponsor-logos">
-          <img src="onco-help-logo-d.png" alt="OncoHelp – beneficiarul donațiilor" />
-        </div>
-        <span>Mulțumim!</span>
-        <div class="sponsor-logos">
-          <img
-            src="Logo Radio Romania Resita.svg"
-            alt="Radio România Reșița"
-          />
-          <img src="dacus_logo_site.png" alt="Dacus" />
+        <div class="sponsors-row">
+          <div class="sponsors-col">
+            <span><strong>Beneficiar donații:</strong></span>
+            <div class="sponsor-logos">
+              <img src="onco-help-logo-d.png" alt="OncoHelp – beneficiarul donațiilor" />
+            </div>
+          </div>
+          <div class="sponsors-divider" aria-hidden="true"></div>
+          <div class="sponsors-col">
+            <span>Mulțumim!</span>
+            <div class="sponsor-logos">
+              <img
+                src="Logo Radio Romania Resita.svg"
+                alt="Radio România Reșița"
+              />
+              <img src="dacus_logo_site.png" alt="Dacus" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
