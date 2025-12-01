@@ -353,7 +353,8 @@
       }
 
       .pill {
-        white-space: normal;
+        white-space: nowrap;
+        font-size: 0.75rem;
       }
 
       .pill-cta {
@@ -368,9 +369,11 @@
         gap: 12px;
       }
 
-      .cta-row .btn-primary {
-        width: 100%;
+      .pill-cta .btn-primary {
+        width: 75%;
+        max-width: 260px;
         text-align: center;
+        align-self: center;
       }
 
       .aside {
@@ -397,6 +400,11 @@
         flex-direction: column;
         align-items: stretch;
         gap: 16px;
+      }
+
+      .sponsors-col {
+        align-items: center;
+        text-align: center;
       }
 
       .sponsors-divider {
