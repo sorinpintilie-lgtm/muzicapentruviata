@@ -190,11 +190,12 @@
     }
 
     .sponsor-logos-partners {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: center;
-      justify-content: center;
+      justify-items: center;
       column-gap: 16px;
-      gap: 24px;
+      row-gap: 8px;
     }
 
     .sponsor-logos-partners img {
