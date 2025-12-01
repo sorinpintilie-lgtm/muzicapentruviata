@@ -109,6 +109,7 @@
       line-height: 1.6;
       color: var(--muted);
       margin-bottom: 28px;
+      text-align: justify;
     }
 
     .pill {
@@ -148,6 +149,7 @@
       font-size: 0.98rem;
       font-weight: 600;
       text-decoration: none;
+      white-space: nowrap;
       cursor: pointer;
       box-shadow: 0 10px 30px rgba(216, 27, 96, 0.25);
       transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
@@ -162,6 +164,7 @@
     .cta-note {
       font-size: 0.86rem;
       color: var(--muted);
+      text-align: justify;
     }
 
     .sponsors {
@@ -275,6 +278,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      text-align: justify;
     }
 
     .event-title {
@@ -385,11 +389,12 @@
         width: 100%;
         justify-content: space-between;
         gap: 12px;
+        flex-wrap: nowrap;
       }
 
       .sponsor-logos img {
         flex: 1 1 0;
-        max-width: 140px;
+        max-width: 120px;
         width: 100%;
         height: auto;
       }
