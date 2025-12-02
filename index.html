@@ -193,7 +193,7 @@
 
     .sponsor-logos-partners {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: center;
       justify-items: center;
       column-gap: 16px;
@@ -202,7 +202,9 @@
 
     .sponsor-logos-partners img {
       max-width: 100%;
+      height: 36px;
       max-height: 36px;
+      object-fit: contain;
     }
 
     .logo-oncohelp {
@@ -464,6 +466,22 @@
         height: auto;
       }
 
+      .sponsor-logos-partners {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        justify-items: center;
+        column-gap: 12px;
+        row-gap: 8px;
+      }
+
+      .sponsor-logos-partners img {
+        flex: 0 0 auto;
+        max-width: 100%;
+        height: 36px;
+        max-height: 36px;
+        object-fit: contain;
+      }
+
       .sponsors-col:first-child .sponsor-logos {
         justify-content: center;
       }
@@ -535,6 +553,7 @@
                 alt="Radio România Reșița"
               />
               <img src="dacus_logo_site.png" alt="Dacus" />
+              <img src="skyro-LOGO-6A-final -without tagline-01.png" alt="Sky Radio" />
             </div>
           </div>
         </div>
