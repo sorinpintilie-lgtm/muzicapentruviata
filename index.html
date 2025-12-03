@@ -187,28 +187,29 @@
     }
 
     .sponsor-logos img {
-      max-height: 52px;
+      max-height: 28px;
       object-fit: contain;
       filter: grayscale(0.1);
     }
 
     .sponsor-logos-partners {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      justify-items: center;
+      column-gap: 16px;
+      row-gap: 12px;
     }
 
     .sponsor-logos-partners img {
       max-width: 100%;
-      height: 52px;
-      max-height: 52px;
+      height: 28px;
+      max-height: 28px;
       object-fit: contain;
     }
 
     .logo-oncohelp {
-      max-height: 52px;
+      max-height: 28px;
     }
 
     .sponsors-row {
@@ -476,17 +477,18 @@
       }
 
       .sponsor-logos-partners {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-items: center;
+        column-gap: 16px;
+        row-gap: 12px;
       }
 
       .sponsor-logos-partners img {
         flex: 0 0 auto;
         max-width: 100%;
-        height: 48px;
-        max-height: 48px;
+        height: 28px;
+        max-height: 28px;
         object-fit: contain;
       }
 
