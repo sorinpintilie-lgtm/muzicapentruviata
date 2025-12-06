@@ -1043,9 +1043,19 @@ h1 {
   .donor-chip-xxl { font-size: 1.3rem; }
 
   .sponsors-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+
+  .sponsors-col {
     flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
+    text-align: center;
+  }
+
+  .sponsors-divider {
+    display: none;
   }
 }
 
