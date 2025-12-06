@@ -1023,19 +1023,26 @@ h1 {
   }
 
   .donor-wall-flow {
-    gap: 8px 12px;
+    gap: 6px 8px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     align-items: baseline;
   }
 
-  .donor-chip-xs { font-size: 0.8rem; }
-  .donor-chip-sm { font-size: 0.9rem; }
-  .donor-chip-md { font-size: 1rem; }
-  .donor-chip-lg { font-size: 1.1rem; }
-  .donor-chip-xl { font-size: 1.3rem; }
-  .donor-chip-xxl { font-size: 1.5rem; }
+  .donor-name-simple {
+    white-space: normal;
+    word-break: break-word;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .donor-chip-xs { font-size: 0.65rem; }
+  .donor-chip-sm { font-size: 0.75rem; }
+  .donor-chip-md { font-size: 0.85rem; }
+  .donor-chip-lg { font-size: 0.95rem; }
+  .donor-chip-xl { font-size: 1.1rem; }
+  .donor-chip-xxl { font-size: 1.3rem; }
 
   .sponsors-row {
     flex-direction: column;
