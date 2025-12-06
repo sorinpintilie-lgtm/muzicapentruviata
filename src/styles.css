@@ -1023,11 +1023,8 @@ h1 {
   }
 
   .donor-wall-flow {
-    gap: 6px 8px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-    align-items: baseline;
+    gap: 4px 6px;
+    line-height: 1.6;
   }
 
   .donor-name-simple {
@@ -1035,6 +1032,7 @@ h1 {
     word-break: break-word;
     max-width: 100%;
     text-align: center;
+    padding: 1px 4px;
   }
 
   .donor-chip-xs { font-size: 0.65rem; }
