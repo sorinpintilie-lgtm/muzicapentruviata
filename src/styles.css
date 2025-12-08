@@ -1843,19 +1843,21 @@ h1 {
   }
 
   .donor-wall-flow {
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px 12px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: start;
+    justify-content: space-between;
     align-items: baseline;
-    grid-auto-rows: min-content;
     line-height: 1.6;
   }
 
   .donor-name-container {
-    width: 100%;
-    max-width: 100%;
+    flex: 0 1 calc(50% - 6px);
+    min-width: 0;
+    max-width: calc(50% - 6px);
     overflow: hidden;
+    display: flex;
+    justify-content: center;
   }
 
   .donor-name-simple {
@@ -1865,6 +1867,7 @@ h1 {
     max-width: 100%;
     text-align: center;
     padding: 1px 4px;
+    flex: 1;
   }
 
   .donor-chip-xs { font-size: 0.55rem; }
