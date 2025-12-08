@@ -47,7 +47,7 @@ export default function DonatePage() {
   }, []);
 
   return (
-    <div className="homepage-wrapper">
+    <>
       {/* Mobile logo - only visible on homepage */}
       <header className="site-header homepage-header">
         <img
@@ -57,7 +57,8 @@ export default function DonatePage() {
         />
       </header>
 
-      <main className="page">
+      <div className="homepage-wrapper">
+        <main className="page">
         <section className="hero-main" aria-labelledby="hero-title">
           <p className="tagline">O donație mică poate schimba o lume.</p>
 
@@ -152,5 +153,6 @@ export default function DonatePage() {
         </aside>
       </main>
     </div>
+    </>
   );
 }
