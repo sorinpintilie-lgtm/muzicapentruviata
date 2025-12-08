@@ -66,7 +66,7 @@ body {
 .logo-main-top {
   height: 80px;
   max-width: 100%;
-  animation: heartbeat 2s ease-in-out infinite;
+  animation: heartbeat 1s ease-in-out infinite;
   transition: transform 0.3s ease;
 }
 
@@ -939,17 +939,14 @@ h1 {
 
 /* Floating animations */
 @keyframes heartbeat {
-  0%, 100% {
+  0%, 50%, 100% {
     transform: scale(1);
   }
-  25% {
-    transform: scale(1.1);
+  15% {
+    transform: scale(1.08);
   }
-  50% {
-    transform: scale(1);
-  }
-  75% {
-    transform: scale(1.05);
+  30% {
+    transform: scale(1.02);
   }
 }
 
@@ -1334,6 +1331,10 @@ h1 {
   .feature-card-wide {
     grid-column: 1 / -1; /* Span full width */
     padding: 16px;
+  }
+
+  .feature-card-wide .feature-image img {
+    height: 120px !important;
   }
 
   /* Mobile Navigation */
