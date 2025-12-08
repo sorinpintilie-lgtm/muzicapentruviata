@@ -102,7 +102,7 @@ body {
 
   /* Hide desktop header on mobile for protected pages */
   .site-header:not(.homepage-header) {
-    display: none;
+    display: none !important;
   }
 
   .site-nav {
@@ -1390,7 +1390,7 @@ h1 {
   }
 
   .feature-card-compact .feature-image img {
-    height: 100px !important;
+    height: 160px !important;
   }
 
   .feature-card-wide {
@@ -1399,7 +1399,12 @@ h1 {
   }
 
   .feature-card-wide .feature-image img {
-    height: 120px !important;
+    height: 180px !important;
+  }
+
+  /* Make main about image bigger on mobile */
+  .about-image-card img {
+    height: 300px !important;
   }
 
   /* Mobile Navigation */
