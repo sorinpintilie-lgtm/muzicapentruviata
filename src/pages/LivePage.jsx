@@ -15,6 +15,33 @@ export default function LivePage() {
           </p>
         </div>
 
+        {/* Radio Player Section */}
+        <div className="radio-player-section">
+          <div className="radio-player-container">
+            <div className="radio-player-header">
+              <h2>📻 Radio Reșița - Live</h2>
+              <p>Ascultă Radio Reșița în timp real</p>
+            </div>
+            <div className="radio-player-controls">
+              <audio
+                controls
+                preload="none"
+                className="radio-audio-player"
+                aria-label="Player Radio Reșița"
+              >
+                <source src="http://89.238.227.6:8344/;stream/1" type="audio/mpeg" />
+                Browserul dumneavoastră nu suportă redarea audio.
+              </audio>
+            </div>
+            <div className="radio-player-info">
+              <p>
+                Conectează-te la vocea Reșiței și rămâi la curent cu știri, muzică și evenimente locale.
+                Radio Reșița - mereu aproape de comunitatea noastră.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="live-layout">
           <div>
             <div className="live-badge">Live în curând</div>
@@ -25,7 +52,7 @@ export default function LivePage() {
               <div className="live-video-placeholder">
                 <p>
                   Transmisiunea live video va apărea aici în 14 decembrie. Până atunci, poți
-                  asculta melodia campaniei și poți dona pentru spitalul oncologic.
+                  asculta Radio Reșița live și poți dona pentru spitalul oncologic.
                 </p>
               </div>
               {/*
