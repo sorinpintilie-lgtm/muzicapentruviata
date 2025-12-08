@@ -9,6 +9,7 @@ import WallPage from './pages/WallPage.jsx';
 import PersonalizedWallPage from './pages/PersonalizedWallPage.jsx';
 import SponsorsPage from './pages/SponsorsPage.jsx';
 import MobileWallScreenshot from './pages/MobileWallScreenshot.jsx';
+import GlobalRadioPlayer from './components/GlobalRadioPlayer.jsx';
 
 function Layout({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -304,56 +305,61 @@ function PasswordProtected({ children }) {
 
 function App() {
   return (
-    <Routes>
-      {/* Homepage without layout */}
-      <Route path="/" element={<DonatePage />} />
-      <Route path="/donatii" element={<DonatePage />} />
+    <>
+      <Routes>
+        {/* Homepage without layout */}
+        <Route path="/" element={<DonatePage />} />
+        <Route path="/donatii" element={<DonatePage />} />
 
-      {/* Protected routes with layout */}
-      <Route path="/live" element={
-        <PasswordProtected>
-          <Layout><LivePage /></Layout>
-        </PasswordProtected>
-      } />
-      <Route path="/galerie" element={
-        <PasswordProtected>
-          <Layout><GalleryPage /></Layout>
-        </PasswordProtected>
-      } />
-      <Route path="/despre-oncohelp" element={
-        <PasswordProtected>
-          <Layout><AboutOncohelpPage /></Layout>
-        </PasswordProtected>
-      } />
-      <Route path="/despre-resita" element={
-        <PasswordProtected>
-          <Layout><AboutResitaPage /></Layout>
-        </PasswordProtected>
-      } />
-      <Route path="/multumiri" element={
-        <PasswordProtected>
-          <Layout><WallPage /></Layout>
-        </PasswordProtected>
-      } />
-      <Route path="/multumiri/:donorName" element={
-        <PasswordProtected>
-          <Layout><PersonalizedWallPage /></Layout>
-        </PasswordProtected>
-      } />
-      <Route path="/sponsori" element={
-        <PasswordProtected>
-          <Layout><SponsorsPage /></Layout>
-        </PasswordProtected>
-      } />
-      <Route path="/mobile/:donorName" element={
-        <PasswordProtected>
-          <Layout><MobileWallScreenshot /></Layout>
-        </PasswordProtected>
-      } />
+        {/* Protected routes with layout */}
+        <Route path="/live" element={
+          <PasswordProtected>
+            <Layout><LivePage /></Layout>
+          </PasswordProtected>
+        } />
+        <Route path="/galerie" element={
+          <PasswordProtected>
+            <Layout><GalleryPage /></Layout>
+          </PasswordProtected>
+        } />
+        <Route path="/despre-oncohelp" element={
+          <PasswordProtected>
+            <Layout><AboutOncohelpPage /></Layout>
+          </PasswordProtected>
+        } />
+        <Route path="/despre-resita" element={
+          <PasswordProtected>
+            <Layout><AboutResitaPage /></Layout>
+          </PasswordProtected>
+        } />
+        <Route path="/multumiri" element={
+          <PasswordProtected>
+            <Layout><WallPage /></Layout>
+          </PasswordProtected>
+        } />
+        <Route path="/multumiri/:donorName" element={
+          <PasswordProtected>
+            <Layout><PersonalizedWallPage /></Layout>
+          </PasswordProtected>
+        } />
+        <Route path="/sponsori" element={
+          <PasswordProtected>
+            <Layout><SponsorsPage /></Layout>
+          </PasswordProtected>
+        } />
+        <Route path="/mobile/:donorName" element={
+          <PasswordProtected>
+            <Layout><MobileWallScreenshot /></Layout>
+          </PasswordProtected>
+        } />
 
-      {/* Fallback to homepage */}
-      <Route path="*" element={<DonatePage />} />
-    </Routes>
+        {/* Fallback to homepage */}
+        <Route path="*" element={<DonatePage />} />
+      </Routes>
+
+      {/* Global Radio Player - appears on all pages */}
+      <GlobalRadioPlayer />
+    </>
   );
 }
 
