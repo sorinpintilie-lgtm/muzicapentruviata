@@ -127,14 +127,6 @@ function Layout({ children }) {
       {/* Mobile Menu Drawer */}
       <div className={`mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-drawer-content">
-          <button
-            className="mobile-drawer-close"
-            onClick={closeMobileMenu}
-            aria-label="Închide meniul"
-          >
-            ×
-          </button>
-
           <div className="mobile-drawer-links">
             <NavLink
               to="/"
