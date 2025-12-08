@@ -65,7 +65,7 @@ function Layout({ children }) {
             href="https://oncohelp.ro/donatii/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ fontSize: '0.8rem', padding: '8px 12px' }}
+            style={{ fontSize: '1.2rem', padding: '12px 18px' }}
           >
             DONEAZĂ ACUM
           </a>
@@ -89,7 +89,7 @@ function Layout({ children }) {
             href="https://oncohelp.ro/donatii/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ fontSize: '0.9rem', padding: '10px 20px' }}
+            style={{ fontSize: '1.35rem', padding: '15px 30px' }}
           >
             DONEAZĂ ACUM
           </a>
