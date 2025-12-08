@@ -1922,11 +1922,12 @@ h1 {
    display: flex;
    flex-wrap: wrap;
    align-items: baseline;
-   justify-content: center;
+   justify-content: flex-start;
    margin-top: 32px;
    width: 100%;
-   gap: 8px 6px;
+   gap: 8px 4px;
    line-height: 2;
+   padding: 0 8px;
   }
 
   .donor-separator {
