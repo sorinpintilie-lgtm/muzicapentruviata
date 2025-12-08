@@ -158,15 +158,19 @@ export default function PersonalizedWallPage() {
               d => d.name.toLowerCase() === decodedDonorName.toLowerCase()
             );
 
-            // For 2-column grid: Exactly 2 names on highlighted row (one row)
-            const isInHighlightedRow = index === highlightedIndex || index === highlightedIndex + 1;
-            const shouldForceRowBreakAfter = index === highlightedIndex + 1 && index < donors.length - 1;
+            // ABSOLUTE GUARANTEE: Exactly 3 names on highlighted row
+            const isInHighlightedRow = index >= highlightedIndex - 1 && index <= highlightedIndex + 1;
+            const shouldForceRowBreakBefore = index === highlightedIndex - 1;
+            const shouldForceRowBreakAfter = index === highlightedIndex + 2; // Move to AFTER the right neighbor
 
             return (
               <React.Fragment key={donor.id}>
-                {/* FORCE exactly 2 names on highlighted row in grid */}
-                {shouldForceRowBreakAfter && (
-                  <div style={{ width: '100%', gridColumn: '1 / -1', height: 0 }} />
+                {/* ABSOLUTELY FORCE exactly 3 names on highlighted row */}
+                {shouldForceRowBreakBefore && (
+                  <div style={{ width: '100%', flexBasis: '100%', height: 0 }} />
+                )}
+                {shouldForceRowBreakAfter && index < donors.length - 1 && (
+                  <div style={{ width: '100%', flexBasis: '100%', height: 0 }} />
                 )}
                 <div
                   className="donor-name-container"

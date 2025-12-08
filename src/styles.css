@@ -334,6 +334,7 @@ body {
   display: flex;
   align-items: center;
   height: 100%;
+  margin-top: 8px;
 }
 
 /* Homepage Styles - Single Screen Layout */
@@ -1918,14 +1919,18 @@ h1 {
   }
 
   .donor-wall-flow {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    margin-top: 32px;
-    width: 100%;
-    gap: 8px 0;
-    line-height: 2;
-    text-align: center;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: baseline;
+   margin-top: 32px;
+   width: 100%;
+   gap: 8px 0;
+   line-height: 2;
+   text-align: center;
+  }
+
+  .donor-separator {
+   display: none;
   }
 
   .donor-name-container {
@@ -1952,18 +1957,18 @@ h1 {
     -moz-osx-font-smoothing: grayscale;
   }
 
-  .donor-chip-xs { font-size: 0.275rem; }
-  .donor-chip-xs-plus { font-size: 0.325rem; }
-  .donor-chip-sm { font-size: 0.375rem; }
-  .donor-chip-md { font-size: 0.425rem; }
-  .donor-chip-md-plus { font-size: 0.475rem; }
-  .donor-chip-lg { font-size: 0.525rem; }
-  .donor-chip-lg-plus { font-size: 0.575rem; }
-  .donor-chip-xl { font-size: 0.625rem; }
-  .donor-chip-xxl { font-size: 0.7rem; }
-  .donor-chip-3xl { font-size: 0.775rem; }
-  .donor-chip-4xl { font-size: 0.85rem; }
-  .donor-chip-5xl { font-size: 0.925rem; }
+  .donor-chip-xs { font-size: 0.7rem; }
+  .donor-chip-xs-plus { font-size: 0.75rem; }
+  .donor-chip-sm { font-size: 0.8rem; }
+  .donor-chip-md { font-size: 0.9rem; }
+  .donor-chip-md-plus { font-size: 0.95rem; }
+  .donor-chip-lg { font-size: 1.05rem; }
+  .donor-chip-lg-plus { font-size: 1.15rem; }
+  .donor-chip-xl { font-size: 1.25rem; }
+  .donor-chip-xxl { font-size: 1.4rem; }
+  .donor-chip-3xl { font-size: 1.55rem; }
+  .donor-chip-4xl { font-size: 1.7rem; }
+  .donor-chip-5xl { font-size: 1.85rem; }
 
   .sponsors-row {
     display: grid;
