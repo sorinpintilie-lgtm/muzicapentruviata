@@ -1792,12 +1792,8 @@ h1 {
   }
 
   .app-content {
-    padding: 16px 0 40px;
+    padding: 16px 16px 40px;
     gap: 40px;
-  }
-
-  .donor-wall-flow {
-    padding: 0 16px;
   }
 
   .app-section {
@@ -1869,7 +1865,7 @@ h1 {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
-    text-align: justify;
+    text-align: center;
     padding: 1px 4px;
     flex: 1;
   }
