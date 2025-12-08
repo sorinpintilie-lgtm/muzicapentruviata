@@ -1834,13 +1834,25 @@ h1 {
   }
 
   .donor-wall-flow {
-    gap: 4px 6px;
+    gap: 8px 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: start;
+    align-items: baseline;
+    grid-auto-rows: min-content;
     line-height: 1.6;
   }
 
+  .donor-name-container {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
   .donor-name-simple {
-    white-space: normal;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     max-width: 100%;
     text-align: center;
     padding: 1px 4px;
