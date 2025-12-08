@@ -110,11 +110,17 @@ export function useDonors() {
 
 export function getDonorSizeClass(amount) {
   if (!amount || amount <= 0) return 'donor-chip-xs';
-  if (amount >= 2000) return 'donor-chip-xxl';
+  if (amount >= 5000) return 'donor-chip-5xl';
+  if (amount >= 3000) return 'donor-chip-4xl';
+  if (amount >= 2000) return 'donor-chip-3xl';
+  if (amount >= 1500) return 'donor-chip-xxl';
   if (amount >= 1000) return 'donor-chip-xl';
+  if (amount >= 750) return 'donor-chip-lg-plus';
   if (amount >= 500) return 'donor-chip-lg';
+  if (amount >= 300) return 'donor-chip-md-plus';
   if (amount >= 200) return 'donor-chip-md';
-  if (amount >= 50) return 'donor-chip-sm';
+  if (amount >= 100) return 'donor-chip-sm';
+  if (amount >= 25) return 'donor-chip-xs-plus';
   return 'donor-chip-xs';
 }
 

@@ -1608,15 +1608,24 @@ h1 {
 
 
 /* Size classes for donor names - bigger donations = bigger text */
-.donor-chip-xs { font-size: 0.75rem; }
+.donor-chip-xs { font-size: 0.65rem; }
+.donor-chip-xs-plus { font-size: 0.75rem; }
 .donor-chip-sm { font-size: 0.85rem; }
 .donor-chip-md { font-size: 0.95rem; }
-.donor-chip-lg { font-size: 1.1rem; }
-.donor-chip-xl { font-size: 1.3rem; }
+.donor-chip-md-plus { font-size: 1.05rem; }
+.donor-chip-lg { font-size: 1.15rem; }
+.donor-chip-lg-plus { font-size: 1.25rem; }
+.donor-chip-xl { font-size: 1.4rem; }
 .donor-chip-xxl { font-size: 1.6rem; }
+.donor-chip-3xl { font-size: 1.8rem; }
+.donor-chip-4xl { font-size: 2.0rem; }
+.donor-chip-5xl { font-size: 2.2rem; }
 
 .donor-chip-xl,
-.donor-chip-xxl {
+.donor-chip-xxl,
+.donor-chip-3xl,
+.donor-chip-4xl,
+.donor-chip-5xl {
   font-weight: 200;
   letter-spacing: 0;
 }
@@ -1858,12 +1867,18 @@ h1 {
     padding: 1px 4px;
   }
 
-  .donor-chip-xs { font-size: 0.65rem; }
+  .donor-chip-xs { font-size: 0.55rem; }
+  .donor-chip-xs-plus { font-size: 0.65rem; }
   .donor-chip-sm { font-size: 0.75rem; }
   .donor-chip-md { font-size: 0.85rem; }
-  .donor-chip-lg { font-size: 0.95rem; }
-  .donor-chip-xl { font-size: 1.1rem; }
-  .donor-chip-xxl { font-size: 1.3rem; }
+  .donor-chip-md-plus { font-size: 0.95rem; }
+  .donor-chip-lg { font-size: 1.05rem; }
+  .donor-chip-lg-plus { font-size: 1.15rem; }
+  .donor-chip-xl { font-size: 1.25rem; }
+  .donor-chip-xxl { font-size: 1.4rem; }
+  .donor-chip-3xl { font-size: 1.55rem; }
+  .donor-chip-4xl { font-size: 1.7rem; }
+  .donor-chip-5xl { font-size: 1.85rem; }
 
   .sponsors-row {
     display: grid;
