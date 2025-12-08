@@ -52,7 +52,14 @@ function Layout({ children }) {
 
       {/* Mobile Header with Donate Button */}
       <header className="mobile-header-donate">
-        <div className="mobile-header-normal">
+        <div className={`mobile-header-normal ${isScrolled ? 'hide' : ''}`}>
+          <div className="mobile-logo-center">
+            <img
+              src="/Logo Muzica pentru viata.svg"
+              alt="Muzică pentru Viață"
+              style={{ height: '60px', maxWidth: '100%' }}
+            />
+          </div>
           <a
             className="btn-primary mobile-donate-left"
             href="https://oncohelp.ro/donatii/"
@@ -62,13 +69,6 @@ function Layout({ children }) {
           >
             DONEAZĂ ACUM
           </a>
-          <div className="mobile-logo-center">
-            <img
-              src="/Logo Muzica pentru viata.svg"
-              alt="Muzică pentru Viață"
-              style={{ height: '60px', maxWidth: '100%' }}
-            />
-          </div>
           <nav className="mobile-nav mobile-hamburger-right">
             <button
               className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}

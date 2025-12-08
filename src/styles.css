@@ -287,10 +287,16 @@ body {
 .mobile-header-normal {
   padding: 16px;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 16px;
   transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-header-normal.hide {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
 }
 
 .mobile-header-compact {
@@ -317,11 +323,11 @@ body {
   pointer-events: auto;
 }
 
-.mobile-donate-left {
+.mobile-logo-center {
   justify-self: start;
 }
 
-.mobile-logo-center {
+.mobile-donate-left {
   justify-self: center;
 }
 
