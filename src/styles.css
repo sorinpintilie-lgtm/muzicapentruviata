@@ -1436,8 +1436,7 @@ h1 {
 }
 
 .donor-name-container {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
   white-space: nowrap;
 }
 
@@ -1922,11 +1921,11 @@ h1 {
    display: flex;
    flex-wrap: wrap;
    align-items: baseline;
+   justify-content: center;
    margin-top: 32px;
    width: 100%;
-   gap: 8px 0;
+   gap: 8px 12px;
    line-height: 2;
-   text-align: center;
   }
 
   .donor-separator {
