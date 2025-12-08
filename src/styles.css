@@ -1922,11 +1922,22 @@ h1 {
    display: flex;
    flex-wrap: wrap;
    align-items: baseline;
-   justify-content: center;
+   justify-content: space-evenly;
    margin-top: 32px;
    width: 100%;
    gap: 8px 4px;
    line-height: 2;
+  }
+
+  /* Prevent single orphan names */
+  .donor-name-container:nth-last-child(2) {
+    margin-right: auto;
+  }
+
+  /* Desktop: add dots between names */
+  .donor-name-container:not(:last-child)::after {
+    content: " •";
+    margin-left: 0.25rem;
   }
 
   .donor-separator {
@@ -1947,6 +1958,7 @@ h1 {
     padding: 2px 8px;
     border-radius: 4px;
     white-space: nowrap;
+    text-wrap: balance;
     animation-duration: 20s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
