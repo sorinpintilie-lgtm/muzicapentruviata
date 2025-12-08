@@ -59,7 +59,7 @@ export default function AboutResitaPage() {
               <img
                 src="/ubb-resita.jpg"
                 alt="Instituții culturale din Reșița"
-                style={{ width: '100%', height: '120px', objectFit: 'contain', borderRadius: '8px', background: '#f8f9fa', padding: '15px' }}
+                style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '8px' }}
               />
             </div>
             <h3>Instituții de Învățământ</h3>
