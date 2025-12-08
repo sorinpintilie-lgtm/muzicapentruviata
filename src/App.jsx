@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import DonatePage from './pages/DonatePage.jsx';
 import LivePage from './pages/LivePage.jsx';
@@ -11,6 +11,16 @@ import SponsorsPage from './pages/SponsorsPage.jsx';
 import MobileWallScreenshot from './pages/MobileWallScreenshot.jsx';
 
 function Layout({ children }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="app-shell">
       <header className="site-header">
@@ -21,7 +31,8 @@ function Layout({ children }) {
         />
       </header>
 
-      <nav className="site-nav" aria-label="Navigație principală">
+      {/* Desktop Navigation */}
+      <nav className="site-nav desktop-nav" aria-label="Navigație principală">
         <div className="site-nav-inner">
           <div className="site-nav-links">
             <NavLink
@@ -99,6 +110,116 @@ function Layout({ children }) {
           </a>
         </div>
       </nav>
+
+      {/* Mobile Navigation */}
+      <nav className="mobile-nav">
+        <button
+          className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
+          onClick={toggleMobileMenu}
+          aria-label="Deschide meniul"
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
+      </nav>
+
+      {/* Mobile Menu Drawer */}
+      <div className={`mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
+        <div className="mobile-drawer-overlay" onClick={closeMobileMenu}></div>
+        <div className="mobile-drawer-content">
+          <button
+            className="mobile-drawer-close"
+            onClick={closeMobileMenu}
+            aria-label="Închide meniul"
+          >
+            ×
+          </button>
+
+          <div className="mobile-drawer-links">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+              }
+              onClick={closeMobileMenu}
+            >
+              Donează
+            </NavLink>
+
+            <NavLink
+              to="/live"
+              className={({ isActive }) =>
+                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+              }
+              onClick={closeMobileMenu}
+            >
+              Live & Video
+            </NavLink>
+
+            <NavLink
+              to="/galerie"
+              className={({ isActive }) =>
+                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+              }
+              onClick={closeMobileMenu}
+            >
+              Galerie
+            </NavLink>
+
+            <NavLink
+              to="/despre-oncohelp"
+              className={({ isActive }) =>
+                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+              }
+              onClick={closeMobileMenu}
+            >
+              Despre OncoHelp
+            </NavLink>
+
+            <NavLink
+              to="/despre-resita"
+              className={({ isActive }) =>
+                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+              }
+              onClick={closeMobileMenu}
+            >
+              Despre Reșița
+            </NavLink>
+
+            <NavLink
+              to="/multumiri"
+              className={({ isActive }) =>
+                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+              }
+              onClick={closeMobileMenu}
+            >
+              Peretele Eroilor
+            </NavLink>
+
+            <NavLink
+              to="/sponsori"
+              className={({ isActive }) =>
+                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+              }
+              onClick={closeMobileMenu}
+            >
+              Sponsori
+            </NavLink>
+          </div>
+
+          <a
+            className="btn-primary mobile-nav-donate"
+            href="https://oncohelp.ro/donatii/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMobileMenu}
+          >
+            DONEAZĂ ACUM
+          </a>
+        </div>
+      </div>
 
       <main className="app-shell-main">{children}</main>
 
