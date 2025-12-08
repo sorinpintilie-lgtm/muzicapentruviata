@@ -100,8 +100,9 @@ body {
     display: block;
   }
 
-  .site-header {
-    display: none; /* Hide desktop header on mobile */
+  /* Hide desktop header on mobile for protected pages */
+  .site-header:not(.homepage-header) {
+    display: none;
   }
 
   .site-nav {
