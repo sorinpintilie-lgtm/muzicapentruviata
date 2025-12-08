@@ -597,6 +597,52 @@ h1 {
   gap: 8px;
 }
 
+/* About Resita Page Styles */
+.resita-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 32px 0;
+}
+
+.feature-card {
+  border-radius: 16px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.feature-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.feature-image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.about-image-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
 /* Wall Page Styles - Flowing with Random Offsets */
 .donor-wall-flow {
   display: flex;
@@ -1085,6 +1131,16 @@ h1 {
 
   .sponsors-divider {
     display: none;
+  }
+
+  .resita-features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .feature-card {
+    padding: 16px;
   }
 }
 

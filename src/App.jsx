@@ -4,6 +4,7 @@ import DonatePage from './pages/DonatePage.jsx';
 import LivePage from './pages/LivePage.jsx';
 import GalleryPage from './pages/GalleryPage.jsx';
 import AboutOncohelpPage from './pages/AboutOncohelpPage.jsx';
+import AboutResitaPage from './pages/AboutResitaPage.jsx';
 import WallPage from './pages/WallPage.jsx';
 import PersonalizedWallPage from './pages/PersonalizedWallPage.jsx';
 import SponsorsPage from './pages/SponsorsPage.jsx';
@@ -58,6 +59,15 @@ function Layout({ children }) {
               }
             >
               Despre OncoHelp
+            </NavLink>
+
+            <NavLink
+              to="/despre-resita"
+              className={({ isActive }) =>
+                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+              }
+            >
+              Despre Reșița
             </NavLink>
 
             <NavLink
@@ -201,6 +211,11 @@ function App() {
       <Route path="/despre-oncohelp" element={
         <PasswordProtected>
           <Layout><AboutOncohelpPage /></Layout>
+        </PasswordProtected>
+      } />
+      <Route path="/despre-resita" element={
+        <PasswordProtected>
+          <Layout><AboutResitaPage /></Layout>
         </PasswordProtected>
       } />
       <Route path="/multumiri" element={
