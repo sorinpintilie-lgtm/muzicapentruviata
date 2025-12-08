@@ -94,6 +94,19 @@ body {
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
+
+  /* Mobile header with donate button */
+  .mobile-header-donate {
+    display: block;
+  }
+
+  .site-header {
+    display: none; /* Hide desktop header on mobile */
+  }
+
+  .site-nav {
+    display: none; /* Hide desktop nav on mobile */
+  }
 }
 
 .site-nav {
@@ -265,6 +278,57 @@ body {
   text-align: center;
   font-size: 0.9rem;
   padding: 14px 20px;
+}
+
+/* Mobile Header with Donate Button */
+.mobile-header-donate {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.mobile-header-normal {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mobile-header-compact {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.mobile-header-compact.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mobile-donate-left {
+  flex-shrink: 0;
+}
+
+.mobile-logo-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-hamburger-right {
+  flex-shrink: 0;
 }
 
 /* Homepage Styles - Single Screen Layout */
