@@ -74,7 +74,7 @@ export default function AboutResitaPage() {
               <img
                 src="/resita populatie.jpg"
                 alt="Comunitate activă din Reșița"
-                style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px' }}
+                style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '8px' }}
               />
             </div>
             <h3>Spirit Comunitar</h3>
