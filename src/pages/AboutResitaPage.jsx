@@ -39,12 +39,12 @@ export default function AboutResitaPage() {
         </div>
 
         <div className="resita-features-grid">
-          <div className="feature-card">
+          <div className="feature-card feature-card-compact">
             <div className="feature-image">
               <img
                 src="/WhatsApp Image 2025-12-02 at 16.19.50.jpeg"
                 alt="Arhitectură industrială din Reșița"
-                style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px' }}
+                style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '8px' }}
               />
             </div>
             <h3>Patrimoniu Industrial</h3>
@@ -54,12 +54,12 @@ export default function AboutResitaPage() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card feature-card-compact">
             <div className="feature-image">
               <img
                 src="/dacus_logo_site.png"
                 alt="Instituții culturale din Reșița"
-                style={{ width: '100%', height: '150px', objectFit: 'contain', borderRadius: '8px', background: '#f8f9fa', padding: '20px' }}
+                style={{ width: '100%', height: '120px', objectFit: 'contain', borderRadius: '8px', background: '#f8f9fa', padding: '15px' }}
               />
             </div>
             <h3>Instituții de Învățământ</h3>
@@ -69,7 +69,7 @@ export default function AboutResitaPage() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className="feature-card feature-card-wide">
             <div className="feature-image">
               <img
                 src="/skyro-LOGO-6A-final -without tagline-01.png"

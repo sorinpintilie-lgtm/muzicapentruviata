@@ -643,6 +643,22 @@ h1 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* Mobile-specific card styles */
+@media (max-width: 820px) {
+  .feature-card-compact {
+    padding: 12px;
+  }
+
+  .feature-card-compact .feature-image img {
+    height: 100px !important;
+  }
+
+  .feature-card-wide {
+    grid-column: 1 / -1; /* Span full width */
+    padding: 16px;
+  }
+}
+
 /* Wall Page Styles - Flowing with Random Offsets */
 .donor-wall-flow {
   display: flex;
