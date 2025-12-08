@@ -780,14 +780,23 @@ h1 {
   justify-content: center;
   cursor: pointer;
   font-size: 1.2rem;
+  line-height: 1;
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+  padding: 0;
+  margin: 0;
 }
 
 .radio-control-button:hover {
   background: #c2185b;
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(216, 27, 96, 0.4);
+}
+
+.play-symbol {
+  display: block;
+  line-height: 1;
+  transform: translateY(1px);
 }
 
 .radio-hide-button {
@@ -872,6 +881,7 @@ h1 {
     width: 36px;
     height: 36px;
     font-size: 1.1rem;
+    line-height: 1;
   }
 
   .radio-hide-button {

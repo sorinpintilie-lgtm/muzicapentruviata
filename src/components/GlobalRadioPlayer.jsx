@@ -66,7 +66,7 @@ export default function GlobalRadioPlayer() {
             className="radio-control-button"
             aria-label={isPlaying ? "Oprește Radio Reșița" : "Porneste Radio Reșița"}
           >
-            {isPlaying ? '⏸' : '▶'}
+            <span className="play-symbol">{isPlaying ? '⏸' : '▶'}</span>
           </button>
 
           <button
