@@ -42,7 +42,7 @@ export default function AboutResitaPage() {
           <div className="feature-card feature-card-compact">
             <div className="feature-image">
               <img
-                src="/tmk-resita.jpg"
+                src="/tmk-resita-4-1200x675.jpg"
                 alt="Arhitectură industrială din Reșița"
                 style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '8px' }}
               />
@@ -57,7 +57,7 @@ export default function AboutResitaPage() {
           <div className="feature-card feature-card-compact">
             <div className="feature-image">
               <img
-                src="/ubb.jpg"
+                src="/ubb-resita.jpg"
                 alt="Instituții culturale din Reșița"
                 style={{ width: '100%', height: '120px', objectFit: 'contain', borderRadius: '8px', background: '#f8f9fa', padding: '15px' }}
               />
