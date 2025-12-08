@@ -76,10 +76,17 @@ body {
 @media (max-width: 820px) {
   .homepage-header {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     text-align: center;
     padding: 16px 0 8px;
     justify-content: center;
+    background: #ffffff;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -141,6 +148,13 @@ body {
   min-height: calc(100vh - 140px);
   display: flex;
   align-items: center;
+}
+
+/* Add top padding on mobile to account for fixed header */
+@media (max-width: 820px) {
+  .homepage-wrapper {
+    padding-top: 120px; /* Space for the fixed logo header */
+  }
 }
 
 .page {
