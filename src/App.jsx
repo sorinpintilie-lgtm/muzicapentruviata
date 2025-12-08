@@ -126,7 +126,6 @@ function Layout({ children }) {
 
       {/* Mobile Menu Drawer */}
       <div className={`mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-drawer-overlay" onClick={closeMobileMenu}></div>
         <div className="mobile-drawer-content">
           <button
             className="mobile-drawer-close"
