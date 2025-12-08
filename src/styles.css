@@ -676,6 +676,38 @@ h1 {
   margin: 0;
 }
 
+/* Custom Radio Play Button */
+.radio-play-button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+}
+
+.radio-play-button:hover {
+  background: #c2185b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(216, 27, 96, 0.4);
+}
+
+.radio-play-button:active {
+  transform: translateY(0);
+}
+
+/* Hide default audio controls */
+.radio-audio-player.hidden {
+  display: none !important;
+}
+
 /* Gallery Page Styles */
 .gallery-grid {
   display: grid;
