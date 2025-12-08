@@ -1436,8 +1436,9 @@ h1 {
 }
 
 .donor-name-container {
-  display: inline-block;
-  white-space: nowrap;
+ display: inline-block;
+ white-space: nowrap;
+ margin: 0 2px 0 0 !important; /* Reduce margins on mobile */
 }
 
 .donor-name-simple {
@@ -1924,7 +1925,7 @@ h1 {
    justify-content: center;
    margin-top: 32px;
    width: 100%;
-   gap: 8px 12px;
+   gap: 8px 6px;
    line-height: 2;
   }
 
