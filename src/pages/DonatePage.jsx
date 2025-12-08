@@ -48,6 +48,15 @@ export default function DonatePage() {
 
   return (
     <div className="homepage-wrapper">
+      {/* Mobile logo - only visible on homepage */}
+      <header className="site-header homepage-header">
+        <img
+          src="/Logo Muzica pentru viata.svg"
+          alt="Muzică pentru Viață"
+          className="logo-main-top"
+        />
+      </header>
+
       <main className="page">
         <section className="hero-main" aria-labelledby="hero-title">
           <p className="tagline">O donație mică poate schimba o lume.</p>

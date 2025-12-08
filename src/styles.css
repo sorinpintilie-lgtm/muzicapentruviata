@@ -68,6 +68,14 @@ body {
   max-width: 100%;
 }
 
+.homepage-header {
+  width: 100%;
+  text-align: center;
+  padding: 16px 0 8px;
+  display: flex;
+  justify-content: center;
+}
+
 .site-nav {
   position: sticky;
   top: 0;
