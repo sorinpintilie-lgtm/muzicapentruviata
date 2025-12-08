@@ -331,6 +331,9 @@ body {
 
 .mobile-hamburger-right {
   justify-self: end;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 /* Homepage Styles - Single Screen Layout */
