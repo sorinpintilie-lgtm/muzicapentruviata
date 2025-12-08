@@ -31,7 +31,7 @@ export default function AboutResitaPage() {
           </div>
           <div className="about-image-card">
             <img
-              src="/16.jpg"
+              src="/resita.jpg"
               alt="Peisaj urban din Reșița cu clădiri istorice"
               style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '12px' }}
             />
@@ -42,7 +42,7 @@ export default function AboutResitaPage() {
           <div className="feature-card feature-card-compact">
             <div className="feature-image">
               <img
-                src="/WhatsApp Image 2025-12-02 at 16.19.50.jpeg"
+                src="/tmk-resita.jpg"
                 alt="Arhitectură industrială din Reșița"
                 style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '8px' }}
               />
@@ -57,7 +57,7 @@ export default function AboutResitaPage() {
           <div className="feature-card feature-card-compact">
             <div className="feature-image">
               <img
-                src="/dacus_logo_site.png"
+                src="/ubb.jpg"
                 alt="Instituții culturale din Reșița"
                 style={{ width: '100%', height: '120px', objectFit: 'contain', borderRadius: '8px', background: '#f8f9fa', padding: '15px' }}
               />
@@ -72,9 +72,9 @@ export default function AboutResitaPage() {
           <div className="feature-card feature-card-wide">
             <div className="feature-image">
               <img
-                src="/skyro-LOGO-6A-final -without tagline-01.png"
+                src="/resita populatie.jpg"
                 alt="Comunitate activă din Reșița"
-                style={{ width: '100%', height: '150px', objectFit: 'contain', borderRadius: '8px', background: '#f8f9fa', padding: '20px' }}
+                style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px' }}
               />
             </div>
             <h3>Spirit Comunitar</h3>
