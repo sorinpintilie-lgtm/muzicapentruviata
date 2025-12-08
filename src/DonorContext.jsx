@@ -39,12 +39,9 @@ function shuffleArray(array) {
 }
 
 // Create randomized donors with varying amounts
-// Ensure number of donors divisible by 3 for 3-column mobile layout (no orphaned names)
 const shuffledNames = shuffleArray(ALL_NAMES);
-const remainder = shuffledNames.length % 3;
-const adjustedCount = remainder === 0 ? shuffledNames.length : shuffledNames.length - remainder;
 
-const INITIAL_DONORS = shuffledNames.slice(0, adjustedCount).map((name, index) => ({
+const INITIAL_DONORS = shuffledNames.map((name, index) => ({
   id: (index + 1).toString(),
   name: name,
   amount: Math.floor(Math.random() * 3000) + 100, // Random amount between 100-3100

@@ -1845,28 +1845,36 @@ h1 {
   .donor-wall-flow {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 12px;
-    justify-content: space-between;
     align-items: baseline;
-    line-height: 1.6;
+    margin-top: 32px;
+    width: 100%;
+    gap: 8px 0;
+    line-height: 2;
+    text-align: center;
   }
 
   .donor-name-container {
-    flex: 0 1 calc(33.333% - 8px);
-    min-width: 0;
-    max-width: calc(33.333% - 8px);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
   }
 
   .donor-name-simple {
-    white-space: normal;
-    word-break: break-word;
-    text-align: center;
-    padding: 1px 4px;
-    flex: 1;
-    line-height: 1.2;
+    font-family: 'TT Ricks', 'Helvetica Neue', 'Arial', sans-serif;
+    font-weight: 200;
+    color: #B8B8B8;
+    transition: all 0.2s ease;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    display: inline-block;
+    will-change: transform, opacity, filter;
+    transform-origin: center center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .donor-chip-xs { font-size: 0.55rem; }
