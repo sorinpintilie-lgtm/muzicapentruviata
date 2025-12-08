@@ -1861,10 +1861,12 @@ h1 {
   }
 
   .donor-name-simple {
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
     text-align: center;
     padding: 1px 4px;
     flex: 1;
+    line-height: 1.2;
   }
 
   .donor-chip-xs { font-size: 0.55rem; }
