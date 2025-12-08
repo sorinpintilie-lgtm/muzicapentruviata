@@ -223,9 +223,8 @@ function Layout({ children }) {
             <NavLink
               to="/galerie"
               className={({ isActive }) =>
-                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
               }
-              onClick={closeMobileMenu}
             >
               Galerie
             </NavLink>
