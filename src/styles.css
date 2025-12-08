@@ -78,29 +78,19 @@ body {
   display: flex;
 }
 
-/* Show homepage header only on mobile */
+/* Mobile header behavior */
 @media (max-width: 820px) {
+  /* Hide homepage header on mobile */
   .homepage-header {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    text-align: center;
-    padding: 16px 0 8px;
-    justify-content: center;
-    background: #ffffff;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none !important;
   }
 
-  /* Mobile header with donate button */
+  /* Show mobile header with donate button on protected pages */
   .mobile-header-donate {
-    display: block;
+    display: block !important;
   }
 
-  /* Hide desktop header on mobile for protected pages */
+  /* Hide desktop headers on mobile for protected pages */
   .site-header:not(.homepage-header) {
     display: none !important;
   }
