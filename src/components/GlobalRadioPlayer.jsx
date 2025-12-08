@@ -45,7 +45,7 @@ export default function GlobalRadioPlayer() {
         aria-label="Afișează player radio"
         title="Afișează Radio Reșița"
       >
-        📻
+        Radio
       </button>
     );
   }
@@ -55,7 +55,7 @@ export default function GlobalRadioPlayer() {
       <div className="global-radio-player">
         <div className="radio-player-content">
           <div className="radio-info">
-            <span className="radio-station">📻 Radio Reșița</span>
+            <span className="radio-station">Radio Reșița</span>
             <span className="radio-status">
               {isPlaying ? '• Live' : '• Oprit'}
             </span>
@@ -66,7 +66,7 @@ export default function GlobalRadioPlayer() {
             className="radio-control-button"
             aria-label={isPlaying ? "Oprește Radio Reșița" : "Porneste Radio Reșița"}
           >
-            {isPlaying ? '⏸️' : '▶️'}
+            {isPlaying ? '⏸' : '▶'}
           </button>
 
           <button
