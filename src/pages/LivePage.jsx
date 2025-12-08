@@ -34,7 +34,7 @@ export default function LivePage() {
         </div>
 
         <div className="live-layout">
-          <div>
+          <div className="live-video-section">
             <div className="live-badge">Live în curând</div>
             <div
               className="live-video-frame"
@@ -63,8 +63,8 @@ export default function LivePage() {
             </p>
           </div>
 
-          <div>
-            <p className="app-section-lead">
+          <div className="live-description-section">
+            <p className="app-section-lead live-description-text">
               Timp de câteva ore, muzica devine pretextul pentru un lucru simplu: să nu îi
               lăsăm singuri pe cei care trec prin tratament oncologic. Fiecare piesă cântată
               înseamnă încă un pas spre un spital complet dedicat lor.
@@ -85,7 +85,7 @@ export default function LivePage() {
                 className="radio-play-button"
                 aria-label={isPlaying ? "Oprește Radio Reșița" : "Porneste Radio Reșița"}
               >
-                {isPlaying ? '⏸️ Stop' : '▶️ Play'}
+                {isPlaying ? 'Stop' : 'Play'}
               </button>
               <audio
                 ref={audioRef}
