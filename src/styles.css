@@ -1371,7 +1371,7 @@ h1 {
   font-weight: 200;
   color: #B8B8B8;
   transition: all 0.2s ease;
-  padding: 2px 8px;
+  padding: 1px 4px;
   border-radius: 4px;
   white-space: nowrap;
   animation-duration: 20s;
@@ -1382,6 +1382,7 @@ h1 {
   transform-origin: center center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 0.75rem;
 }
 
 .donor-name-simple {
