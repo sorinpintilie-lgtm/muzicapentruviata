@@ -39,7 +39,11 @@ function shuffleArray(array) {
 }
 
 // Create randomized donors with varying amounts
-const INITIAL_DONORS = shuffleArray(ALL_NAMES).map((name, index) => ({
+// Ensure even number of donors for 2-column grid (no single names on rows)
+const shuffledNames = shuffleArray(ALL_NAMES);
+const evenCount = shuffledNames.length % 2 === 0 ? shuffledNames.length : shuffledNames.length - 1;
+
+const INITIAL_DONORS = shuffledNames.slice(0, evenCount).map((name, index) => ({
   id: (index + 1).toString(),
   name: name,
   amount: Math.floor(Math.random() * 3000) + 100, // Random amount between 100-3100
