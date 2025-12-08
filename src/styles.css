@@ -286,17 +286,17 @@ body {
 
 .mobile-header-normal {
   padding: 16px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
 }
 
 .mobile-header-compact {
   padding: 12px 16px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: center;
   opacity: 0;
   transform: translateY(-100%);
   pointer-events: none;
@@ -308,18 +308,16 @@ body {
   pointer-events: auto;
 }
 
-.mobile-donate-left {
-  flex-shrink: 0;
+.mobile-hamburger-left {
+  justify-self: start;
 }
 
 .mobile-logo-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+  justify-self: center;
 }
 
-.mobile-hamburger-right {
-  flex-shrink: 0;
+.mobile-donate-right {
+  justify-self: end;
 }
 
 /* Homepage Styles - Single Screen Layout */

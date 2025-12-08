@@ -53,23 +53,7 @@ function Layout({ children }) {
       {/* Mobile Header with Donate Button */}
       <header className="mobile-header-donate">
         <div className="mobile-header-normal">
-          <a
-            className="btn-primary mobile-donate-left"
-            href="https://oncohelp.ro/donatii/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ fontSize: '0.8rem', padding: '8px 12px' }}
-          >
-            DONEAZĂ ACUM
-          </a>
-          <div className="mobile-logo-center">
-            <img
-              src="/Logo Muzica pentru viata.svg"
-              alt="Muzică pentru Viață"
-              style={{ height: '60px', maxWidth: '100%' }}
-            />
-          </div>
-          <nav className="mobile-nav">
+          <nav className="mobile-nav mobile-hamburger-left">
             <button
               className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
               onClick={toggleMobileMenu}
@@ -80,9 +64,26 @@ function Layout({ children }) {
               <span className="hamburger-line"></span>
             </button>
           </nav>
+          <div className="mobile-logo-center">
+            <img
+              src="/Logo Muzica pentru viata.svg"
+              alt="Muzică pentru Viață"
+              style={{ height: '60px', maxWidth: '100%' }}
+            />
+          </div>
+          <a
+            className="btn-primary mobile-donate-right"
+            href="https://oncohelp.ro/donatii/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontSize: '0.8rem', padding: '8px 12px' }}
+          >
+            DONEAZĂ ACUM
+          </a>
         </div>
 
         <div className={`mobile-header-compact ${isScrolled && !isScrollingUp ? 'active' : ''}`}>
+          <div></div> {/* Empty left column */}
           <a
             className="btn-primary"
             href="https://oncohelp.ro/donatii/"
@@ -92,6 +93,7 @@ function Layout({ children }) {
           >
             DONEAZĂ ACUM
           </a>
+          <div></div> {/* Empty right column */}
         </div>
       </header>
 
