@@ -1862,9 +1862,6 @@ h1 {
 
   .donor-name-simple {
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
     text-align: center;
     padding: 1px 4px;
     flex: 1;
