@@ -29,7 +29,7 @@ export default function LivePage() {
                 className="radio-audio-player"
                 aria-label="Player Radio Reșița"
               >
-                <source src="http://89.238.227.6:8344/;stream/1" type="audio/mpeg" />
+                <source src="/api/radio-proxy" type="audio/mpeg" />
                 Browserul dumneavoastră nu suportă redarea audio.
               </audio>
             </div>
