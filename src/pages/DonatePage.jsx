@@ -1,11 +1,47 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const EVENT_DATE = new Date(2025, 11, 14, 19, 0, 0);
 
 export default function DonatePage() {
-  const [countdown, setCountdown] = useState({ days: '–', hours: '–', minutes: '–', seconds: '–' });
+  const [countdown, setCountdown] = useState({
+    days: '–',
+    hours: '–',
+    minutes: '–',
+    seconds: '–',
+  });
   const [isAfterEvent, setIsAfterEvent] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
+    // Donation state (post-event)
+    const [selectedAmount, setSelectedAmount] = useState(10); // EUR
+    const [customAmount, setCustomAmount] = useState('');
+    const [donationMode, setDonationMode] = useState('monthly'); // 'monthly' | 'once'
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((open) => !open);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrolled = currentScrollY > 50;
+
+      setIsScrolled(scrolled);
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  // Countdown until event
   useEffect(() => {
     function updateCountdown() {
       const now = new Date().getTime();
@@ -45,6 +81,57 @@ export default function DonatePage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Donation logic (EuPlătesc)
+  const presetAmounts = [10, 25, 50, 100]; // EUR
+
+  const parsedCustom =
+    customAmount !== ''
+      ? parseFloat(customAmount.replace(',', '.'))
+      : NaN;
+
+  const effectiveAmountEur =
+    customAmount !== '' && !Number.isNaN(parsedCustom) && parsedCustom > 0
+      ? parsedCustom
+      : selectedAmount;
+
+  const ronAmount = effectiveAmountEur ? Math.round(effectiveAmountEur * 5) : 0;
+
+  // Approximate brick calculation: 1 cărămidă ≈ 2.40 RON
+  const BRICK_RON_VALUE = 2.4;
+  const bricksCount =
+    ronAmount && ronAmount > 0 ? Math.max(1, Math.round(ronAmount / BRICK_RON_VALUE)) : 0;
+
+  // Change image based on how many bricks you contribute
+  let brickImageSrc = '/16.jpg';
+  let brickImageAlt = 'Public la evenimentul Muzică pentru Viață în Reșița';
+
+  if (bricksCount >= 10 && bricksCount < 40) {
+    brickImageSrc = '/resita.jpg';
+    brickImageAlt = 'Reșița – orașul în care construim spitalul oncologic';
+  } else if (bricksCount >= 40) {
+    brickImageSrc = '/tmk-resita-4-1200x675.jpg';
+    brickImageAlt = 'Reșița industrială – un viitor construit cărămidă cu cărămidă';
+  }
+
+  const handlePresetClick = (amount) => {
+    setSelectedAmount(amount);
+    setCustomAmount('');
+  };
+
+  const handleCustomChange = (e) => {
+    setCustomAmount(e.target.value);
+  };
+
+  const handleDonateClick = (e) => {
+    e.preventDefault();
+    const amountRon = ronAmount && ronAmount > 0 ? ronAmount : 0;
+    if (!amountRon) return;
+
+    const baseUrl = 'https://secure.euplatesc.ro/epayment';
+    const url = `${baseUrl}?amount=${encodeURIComponent(amountRon)}&currency=RON`;
+    window.location.href = url;
+  };
+
   const isPostEventPreview =
     typeof window !== 'undefined' && window.location.search.includes('postEventPreview=1');
 
@@ -52,7 +139,8 @@ export default function DonatePage() {
   if (isAfterEvent || isPostEventPreview) {
     return (
       <>
-        <header className="site-header homepage-header">
+        {/* Desktop header (same as other pages) */}
+        <header className="site-header">
           <img
             src="/Logo Muzica pentru viata.svg"
             alt="Muzică pentru Viață"
@@ -60,83 +148,374 @@ export default function DonatePage() {
           />
         </header>
 
+        {/* Mobile Header with Donate Button */}
+        <header className="mobile-header-donate">
+          <div className={`mobile-header-normal ${isScrolled ? 'hide' : ''}`}>
+            <div className="mobile-logo-center">
+              <img
+                src="/Logo Muzica pentru viata.svg"
+                alt="Muzică pentru Viață"
+                style={{ height: '60px', maxWidth: '100%' }}
+              />
+            </div>
+            <a
+              className="btn-primary mobile-donate-left"
+              href="https://oncohelp.ro/donatii/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontSize: '1.2rem', padding: '12px 18px' }}
+            >
+              DONEAZĂ ACUM
+            </a>
+            <nav className="mobile-nav mobile-hamburger-right">
+              <button
+                className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
+                onClick={toggleMobileMenu}
+                aria-label="Deschide meniul"
+              >
+                <span className="hamburger-line"></span>
+                <span className="hamburger-line"></span>
+                <span className="hamburger-line"></span>
+              </button>
+            </nav>
+          </div>
+
+          <div className={`mobile-header-compact ${isScrolled ? 'active' : ''}`}>
+            <div></div>
+            <a
+              className="btn-primary"
+              href="https://oncohelp.ro/donatii/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontSize: '1.35rem', padding: '15px 30px' }}
+            >
+              DONEAZĂ ACUM
+            </a>
+            <div></div>
+          </div>
+        </header>
+
+        {/* Mobile Menu Drawer */}
+        <div
+          className={`mobile-drawer-overlay ${isMobileMenuOpen ? 'open' : ''}`}
+          onClick={closeMobileMenu}
+        ></div>
+
+        <div className={`mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
+          <div className="mobile-drawer-content">
+            <button
+              className="mobile-drawer-close"
+              onClick={closeMobileMenu}
+              aria-label="Închide meniul"
+            >
+              ×
+            </button>
+
+            <div className="mobile-drawer-links">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                }
+                onClick={closeMobileMenu}
+              >
+                Donează
+              </NavLink>
+
+              <NavLink
+                to="/live"
+                className={({ isActive }) =>
+                  'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                }
+                onClick={closeMobileMenu}
+              >
+                Live & Video
+              </NavLink>
+
+              <NavLink
+                to="/galerie"
+                className={({ isActive }) =>
+                  'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                }
+                onClick={closeMobileMenu}
+              >
+                Galerie
+              </NavLink>
+
+              <NavLink
+                to="/despre-oncohelp"
+                className={({ isActive }) =>
+                  'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                }
+                onClick={closeMobileMenu}
+              >
+                Despre OncoHelp
+              </NavLink>
+
+              <NavLink
+                to="/despre-resita"
+                className={({ isActive }) =>
+                  'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                }
+                onClick={closeMobileMenu}
+              >
+                Despre Reșița
+              </NavLink>
+
+              <NavLink
+                to="/multumiri"
+                className={({ isActive }) =>
+                  'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                }
+                onClick={closeMobileMenu}
+              >
+                Peretele Eroilor
+              </NavLink>
+
+              <NavLink
+                to="/sponsori"
+                className={({ isActive }) =>
+                  'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
+                }
+                onClick={closeMobileMenu}
+              >
+                Sponsori
+              </NavLink>
+            </div>
+
+            <a
+              className="btn-primary mobile-nav-donate"
+              href="https://oncohelp.ro/donatii/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobileMenu}
+            >
+              DONEAZĂ ACUM
+            </a>
+          </div>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="site-nav desktop-nav" aria-label="Navigație principală">
+          <div className="site-nav-inner">
+            <div className="site-nav-links">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Donează
+              </NavLink>
+
+              <NavLink
+                to="/live"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Live & Video
+              </NavLink>
+
+              <NavLink
+                to="/galerie"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Galerie
+              </NavLink>
+
+              <NavLink
+                to="/despre-oncohelp"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Despre OncoHelp
+              </NavLink>
+
+              <NavLink
+                to="/despre-resita"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Despre Reșița
+              </NavLink>
+
+              <NavLink
+                to="/multumiri"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Peretele Eroilor
+              </NavLink>
+
+              <NavLink
+                to="/sponsori"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Sponsori
+              </NavLink>
+            </div>
+
+            <a
+              className="btn-primary nav-donate"
+              href="https://oncohelp.ro/donatii/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DONEAZĂ ACUM
+            </a>
+          </div>
+        </nav>
+
         <div className="homepage-wrapper post-event-wrapper">
           <main className="post-event-grid">
             <section
               className="hero-main donation-panel page-enter-bottom"
               aria-labelledby="post-hero-title"
             >
-              <p className="tagline">După concert, puterea ta de a schimba vieți rămâne.</p>
+              <div className="donation-panel-inner">
+                <div className="donation-panel-left">
+                  <p className="tagline">După concert, puterea ta de a schimba vieți rămâne.</p>
 
-              <h1 id="post-hero-title">
-                Continuăm să construim{' '}
-                <span className="highlight">primul spital pentru pacienții cu cancer</span> din
-                Reșița.
-              </h1>
+                  <h1 id="post-hero-title">
+                    Continuăm să construim{' '}
+                    <span className="highlight">primul spital pentru pacienții cu cancer</span> din
+                    Reșița.
+                  </h1>
 
-              <p className="lead">
-                Muzică pentru Viață nu se oprește în seara concertului. Fiecare donație făcută
-                acum înseamnă tratamente mai aproape de casă, drumuri mai puține pentru pacienți și
-                familii care pot rămâne aproape unii de alții.
-              </p>
+                  <p className="lead">
+                    Muzică pentru Viață nu se oprește în seara concertului. Fiecare donație făcută acum
+                    înseamnă tratamente mai aproape de casă, drumuri mai puține pentru pacienți și
+                    familii care pot rămâne aproape unii de alții.
+                  </p>
 
-              <div className="donation-summary">
-                Alege o sumă de mai jos sau introdu o valoare personalizată. Donația ta ajunge
-                direct la Fundația OncoHelp pentru construcția spitalului oncologic din Reșița.
-              </div>
+                  <div className="donation-mode-tabs">
+                    <button
+                      type="button"
+                      className={
+                        'donation-mode-tab' +
+                        (donationMode === 'monthly' ? ' donation-mode-tab--active' : '')
+                      }
+                      onClick={() => setDonationMode('monthly')}
+                    >
+                      Lunar
+                    </button>
+                    <button
+                      type="button"
+                      className={
+                        'donation-mode-tab' +
+                        (donationMode === 'once' ? ' donation-mode-tab--active' : '')
+                      }
+                      onClick={() => setDonationMode('once')}
+                    >
+                      O singură dată
+                    </button>
+                  </div>
 
-              {/* Preset amounts – visual only in this version */}
-              <div className="donation-amounts-grid">
-                <button
-                  type="button"
-                  className="donation-amount-button donation-amount-button--active"
-                >
-                  <span className="donation-amount-main">10 €</span>
-                  <span className="donation-amount-ron">≈ 50 RON</span>
-                </button>
-                <button type="button" className="donation-amount-button">
-                  <span className="donation-amount-main">25 €</span>
-                  <span className="donation-amount-ron">≈ 125 RON</span>
-                </button>
-                <button type="button" className="donation-amount-button">
-                  <span className="donation-amount-main">50 €</span>
-                  <span className="donation-amount-ron">≈ 250 RON</span>
-                </button>
-                <button type="button" className="donation-amount-button">
-                  <span className="donation-amount-main">100 €</span>
-                  <span className="donation-amount-ron">≈ 500 RON</span>
-                </button>
-              </div>
+                  <div className="donation-summary">
+                    {effectiveAmountEur ? (
+                      <>
+                        {donationMode === 'monthly' ? 'Donezi lunar ' : 'Donezi o singură dată '}
+                        <strong>
+                          {Number.isNaN(effectiveAmountEur) ? '' : Math.round(effectiveAmountEur)} €
+                        </strong>{' '}
+                        (aprox. <strong>{ronAmount} RON</strong>), adică contribui la aproximativ{' '}
+                        <strong>{bricksCount || 1} {bricksCount === 1 ? 'cărămidă' : 'cărămizi'}</strong>{' '}
+                        pentru spitalul oncologic din Reșița.
+                      </>
+                    ) : (
+                      <>
+                        Alege o sumă de mai jos sau introdu o valoare personalizată. Vom calcula automat
+                        câte <strong>cărămizi</strong> adaugi la construcția spitalului.
+                      </>
+                    )}
+                  </div>
 
-              <div className="donation-custom">
-                <label className="donation-custom-label" htmlFor="custom-amount">
-                  Sau introdu altă sumă (în euro sau lei, direct pe pagina OncoHelp):
-                </label>
-                <div className="donation-custom-input-row">
-                  <input
-                    id="custom-amount"
-                    type="number"
-                    min="1"
-                    step="1"
-                    className="donation-custom-input"
-                    placeholder="Ex: 30"
-                  />
+                  {/* Sume presetate – selectează rapid o donație */}
+                  <div className="donation-amounts-grid">
+                    {presetAmounts.map((amount) => (
+                      <button
+                        key={amount}
+                        type="button"
+                        className={
+                          'donation-amount-button' +
+                          (customAmount === '' && effectiveAmountEur === amount
+                            ? ' donation-amount-button--active'
+                            : '')
+                        }
+                        onClick={() => handlePresetClick(amount)}
+                      >
+                        <span className="donation-amount-main">{amount} €</span>
+                        <span className="donation-amount-ron">≈ {Math.round(amount * 5)} RON</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="donation-custom">
+                    <label className="donation-custom-label" htmlFor="custom-amount">
+                      Sau introdu altă sumă (în euro, se transformă automat în RON pe pagina de plată):
+                    </label>
+                    <div className="donation-custom-input-row">
+                      <input
+                        id="custom-amount"
+                        type="number"
+                        min="1"
+                        step="1"
+                        className="donation-custom-input"
+                        placeholder="Ex: 30"
+                        value={customAmount}
+                        onChange={handleCustomChange}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn-primary donation-cta-big"
+                    onClick={handleDonateClick}
+                    disabled={!ronAmount}
+                  >
+                    DONEAZĂ ACUM PRIN EUPLĂTEȘC
+                  </button>
+
+                  <p className="donation-cta-note">
+                    Vei fi redirecționat către pagina securizată EuPlătesc.ro, unde suma ta va fi
+                    setată automat în RON. Tranzacția este procesată în siguranță, iar fondurile merg
+                    direct către Fundația OncoHelp.
+                  </p>
                 </div>
+
+                <aside className="donation-panel-right">
+                  <div className="brick-visual">
+                    <p className="brick-visual-title">Contribuția ta în cărămizi</p>
+                    <div className="brick-visual-count">
+                      <span className="brick-visual-number">
+                        {bricksCount || '—'}
+                      </span>
+                      <span className="brick-visual-label">
+                        {bricksCount === 1 ? 'cărămidă' : 'cărămizi'}
+                      </span>
+                    </div>
+                    <p className="brick-visual-text">
+                      {donationMode === 'monthly'
+                        ? 'Donația ta lunară ridică spitalul cărămidă cu cărămidă, lună de lună, pentru pacienții din Banatul de Munte.'
+                        : 'Cu această donație unică ajuți la construirea spitalului oncologic din Reșița, cărămidă cu cărămidă.'}
+                    </p>
+                    <div className="brick-visual-image">
+                      <img src={brickImageSrc} alt={brickImageAlt} />
+                    </div>
+                  </div>
+                </aside>
               </div>
-
-              <a
-                className="btn-primary donation-cta-big"
-                href="https://oncohelp.ro/donatii/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                DONEAZĂ ACUM
-              </a>
-
-              <p className="donation-cta-note">
-                Vei fi redirecționat către pagina oficială de donații a Fundației OncoHelp, unde
-                poți alege suma și metoda de plată preferată. Orice contribuție contează.
-              </p>
             </section>
 
             <aside
@@ -170,8 +549,8 @@ export default function DonatePage() {
                 </p>
                 <div className="post-event-image-block post-event-image-block--clinic">
                   <img
-                    src="/onco-help-logo-d.png"
-                    alt="Fundația OncoHelp – partenerul medical al proiectului"
+                    src="/resita.jpg"
+                    alt="Reșița – orașul în care construim spitalul oncologic"
                   />
                 </div>
               </div>

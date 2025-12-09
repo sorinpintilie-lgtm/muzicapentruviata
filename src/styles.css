@@ -358,15 +358,16 @@ body {
   align-items: flex-start;
 }
 
+/* Full-width donation hero with story stacked underneath */
 .post-event-grid {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: clamp(8px, 2vh, 16px) clamp(20px, 4vw, 40px);
-  display: grid;
-  grid-template-columns: minmax(320px, 2.2fr) minmax(280px, 2.3fr);
+  display: flex;
+  flex-direction: column;
   gap: clamp(28px, 4vw, 44px);
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 /* Donation panel (post-event left column) */
@@ -379,6 +380,125 @@ body {
   border: 1px solid rgba(216, 27, 96, 0.18);
   position: relative;
   overflow: hidden;
+}
+
+/* Inner layout: left = controls, right = brick visual */
+.donation-panel-inner {
+  display: flex;
+  gap: clamp(20px, 3vw, 32px);
+  align-items: stretch;
+}
+
+.donation-panel-left {
+  flex: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.donation-panel-right {
+  flex: 1.2;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Monthly / one-time tabs */
+.donation-mode-tabs {
+  display: flex;
+  width: 100%;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(252, 228, 236, 0.9);
+  box-shadow: 0 8px 24px rgba(216, 27, 96, 0.18);
+  margin: 8px 0 4px;
+  gap: 0;
+}
+
+.donation-mode-tab {
+  flex: 1 1 50%;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  background: transparent;
+  color: #ad1457;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.donation-mode-tab--active {
+  background: #d81b60;
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(216, 27, 96, 0.4);
+}
+
+/* Brick visual card on the right */
+.brick-visual {
+  width: 100%;
+  border-radius: 18px;
+  padding: 14px 14px 16px;
+  background: radial-gradient(circle at top, rgba(216, 27, 96, 0.14), rgba(255, 255, 255, 0.96));
+  border: 1px solid rgba(216, 27, 96, 0.3);
+  box-shadow: 0 20px 42px rgba(216, 27, 96, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.brick-visual-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.brick-visual-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.brick-visual-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.brick-visual-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.brick-visual-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.brick-visual-image {
+  margin-top: auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+}
+
+.brick-visual-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.brick-visual:hover .brick-visual-image img {
+  transform: scale(1.1);
+  filter: brightness(1.05);
 }
 
 .donation-panel::before {
@@ -508,18 +628,82 @@ body {
   border-radius: 22px;
   padding: clamp(18px, 2.5vh, 24px) clamp(18px, 2.5vw, 24px);
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
-}
-
-.post-event-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 18px;
+  gap: 18px;
 }
 
-.post-event-section:last-child {
+/* Story sections as compact, animated mosaics with big images */
+.post-event-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
+  align-items: stretch;
+  gap: 14px;
   margin-bottom: 0;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+  animation: fadeInScale 0.7s ease-out;
+  transform-origin: center;
 }
+
+/* First card: text left, big image right */
+.post-event-section:nth-child(1) .post-event-section-title,
+.post-event-section:nth-child(1) .post-event-text {
+  grid-column: 1;
+}
+
+.post-event-section:nth-child(1) .post-event-image-block {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+}
+
+/* Second card: big image left, text right */
+.post-event-section:nth-child(2) {
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.3fr);
+}
+
+.post-event-section:nth-child(2) .post-event-section-title,
+.post-event-section:nth-child(2) .post-event-text {
+  grid-column: 2;
+}
+
+.post-event-section:nth-child(2) .post-event-image-block {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+}
+
+/* Third card: full-width stacked */
+.post-event-section:nth-child(3) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.post-event-section:nth-child(3) .post-event-section-title,
+.post-event-section:nth-child(3) .post-event-text,
+.post-event-section:nth-child(3) .post-event-image-block {
+  grid-column: 1;
+}
+
+.post-event-section:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.post-event-section:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.post-event-section:nth-child(3) {
+  animation-delay: 0.18s;
+}
+
+.post-event-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+/* (moved into compact card styles above) */
 
 .post-event-section-title {
   font-size: 1.1rem;
@@ -588,7 +772,7 @@ body {
   }
 
   .post-event-grid {
-    grid-template-columns: minmax(0, 1fr);
+    padding: 16px 16px 32px;
     gap: 24px;
   }
 
@@ -636,6 +820,12 @@ body {
 
 .hero-main {
   max-width: 600px;
+}
+
+/* Post-event: make donation hero truly full-width inside the container */
+.post-event-wrapper .hero-main,
+.post-event-grid .hero-main {
+  max-width: 100%;
 }
 
 .tagline {
@@ -2032,16 +2222,100 @@ h1 {
   width: 100%;
   border-top: 1px solid var(--border-soft);
   padding: 32px 0 40px;
+  background: radial-gradient(circle at top, #fff5f8 0%, #ffffff 55%, #f8f9fa 100%);
 }
 
-.audio-section {
+.app-footer-inner {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 clamp(24px, 5vw, 48px);
   display: flex;
   flex-direction: column;
+  gap: 24px;
+}
+
+/* Top tagline */
+.footer-top {
+  text-align: center;
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Logos + sponsors block */
+.footer-logos {
+  width: 100%;
+}
+
+.footer-logos-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: center;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 12px;
+  text-align: center;
+}
+
+.footer-column-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Main logos */
+.footer-logo-main img {
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+  filter: grayscale(0.15);
+}
+
+.footer-logo-main--oncohelp img {
+  max-height: 80px;
+}
+
+.footer-logo-main--radio img {
+  max-height: 70px;
+}
+
+/* Sponsor grid */
+.footer-sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: center;
+  justify-items: center;
+}
+
+.footer-sponsor-grid img {
+  max-height: 48px;
+  width: 100%;
+  object-fit: contain;
+  filter: grayscale(0.15);
+}
+
+/* Audio strip under logos */
+.audio-section {
+  width: 100%;
+  margin-top: 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   font-size: 0.9rem;
   color: var(--muted);
 }
@@ -2049,6 +2323,37 @@ h1 {
 .audio-section audio {
   width: 100%;
   max-width: 100%;
+}
+
+/* Footer responsive tweaks */
+@media (max-width: 820px) {
+  .app-footer {
+    padding: 24px 0 32px;
+  }
+
+  .app-footer-inner {
+    padding-inline: 16px;
+    gap: 20px;
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .footer-logos-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-sponsor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .footer-sponsor-grid img {
+    max-height: 40px;
+  }
 }
 
 /* Responsive Styles */
@@ -2440,12 +2745,13 @@ h1 {
 .mobile-wall-content {
   width: 1080px;
   height: 1920px;
+  /* Light, clean background for sharing & TikTok tail */
   background: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100px 80px;
+  padding: 100px 80px 160px; /* extra bottom space for footer banner */
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
@@ -2460,6 +2766,57 @@ h1 {
   gap: 15px 0;
   line-height: 2.5;
   text-align: center;
+}
+
+/* Bottom banner overlay for TikTok screenshot */
+.mobile-wall-footer-banner {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  padding: 16px 20px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(216, 27, 96, 0.92), rgba(123, 31, 162, 0.9));
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-wall-footer-banner span {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Scale down banner and text for smaller exported sizes */
+@media (max-width: 1100px) {
+  .mobile-wall-footer-banner {
+    left: 24px;
+    right: 24px;
+    bottom: 32px;
+    padding: 12px 18px;
+  }
+
+  .mobile-wall-footer-banner span {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .mobile-wall-footer-banner {
+    left: 18px;
+    right: 18px;
+    bottom: 24px;
+    padding: 10px 16px;
+  }
+
+  .mobile-wall-footer-banner span {
+    font-size: 16px;
+  }
 }
 
 /* Download button for testing */
@@ -2487,7 +2844,7 @@ h1 {
   .mobile-wall-content {
     width: 540px;
     height: 960px;
-    padding: 40px 30px;
+    padding: 40px 30px 120px; /* extra bottom padding for banner */
   }
 }
 
@@ -2495,7 +2852,7 @@ h1 {
   .mobile-wall-content {
     width: 360px;
     height: 640px;
-    padding: 30px 20px;
+    padding: 30px 20px 90px; /* extra bottom padding for banner */
   }
   
   .mobile-wall-flow {

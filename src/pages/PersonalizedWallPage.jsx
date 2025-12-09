@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDonors, getDonorSizeClass } from '../DonorContext.jsx';
+import html2canvas from 'html2canvas';
 
 const animations = [
   'anim-float',
@@ -77,11 +78,15 @@ export default function PersonalizedWallPage() {
   const { donorName } = useParams();
   const { donors } = useDonors();
   const highlightedRef = useRef(null);
-  
+  const wallRef = useRef(null);
+  const [isImageDownloading, setIsImageDownloading] = useState(false);
+  const [isVideoDownloading, setIsVideoDownloading] = useState(false);
+
   // Decode the donor name from URL
   const decodedDonorName = decodeURIComponent(donorName || '');
   
-  // Reorder donors to put the highlighted one in the second column of a row (middle position)
+  // Reorder donors to put the highlighted one a few rows below the top of the wall
+  // (2–3 rows down), still surrounded by others and visible on the first screen.
   const reorderedDonors = React.useMemo(() => {
     const highlightedIndex = donors.findIndex(
       d => d.name.toLowerCase() === decodedDonorName.toLowerCase()
@@ -91,38 +96,110 @@ export default function PersonalizedWallPage() {
 
     const donorsCopy = [...donors];
 
-    // For 2-column grid, we want highlighted in second column (positions 1, 3, 5, etc.)
-    // Choose a row in the middle, position 1 (second in first row), or 3, etc.
-    let targetPosition = 1; // Start with second position
+    // Approximate a 2-column layout:
+    // row 0 => indexes 0,1 ; row 1 => 2,3 ; row 2 => 4,5 ; row 3 => 6,7 ...
+    // We want the highlighted donor on row 2 (3rd row), second column if possible.
+    let targetRow = 2; // 0-based => 3rd row
+    const maxRow = Math.floor((donors.length - 1) / 2);
+    targetRow = Math.min(targetRow, maxRow);
 
-    // If more than 2 donors, choose a middle row
-    if (donors.length > 4) {
-      const middleRow = Math.floor(donors.length / 4); // Approximate middle row
-      targetPosition = middleRow * 2 + 1; // Second column of that row
-    }
+    let targetPosition = targetRow * 2 + 1; // second column on that row
 
     // Ensure within bounds
     targetPosition = Math.min(targetPosition, donors.length - 1);
 
     // Swap highlighted donor with the target position
     [donorsCopy[highlightedIndex], donorsCopy[targetPosition]] =
-    [donorsCopy[targetPosition], donorsCopy[highlightedIndex]];
+      [donorsCopy[targetPosition], donorsCopy[highlightedIndex]];
 
     return donorsCopy;
   }, [donors, decodedDonorName]);
-  
-  // Scroll to highlighted name on mount
-  useEffect(() => {
-    if (highlightedRef.current) {
-      setTimeout(() => {
-        highlightedRef.current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-          inline: 'center'
-        });
-      }, 100);
+
+  // Share & download handlers for buttons at the top of the page
+  const handleDownloadImage = async () => {
+    if (isImageDownloading) return;
+    setIsImageDownloading(true);
+    try {
+      if (!wallRef.current) throw new Error('wallRef not set');
+      const canvas = await html2canvas(wallRef.current, {
+        backgroundColor: null,
+        scale: 1,
+        logging: false,
+        useCORS: true,
+        allowTaint: true
+      });
+      const link = document.createElement('a');
+      link.download = `${decodedDonorName || 'donor'}_thank_you.jpg`;
+      link.href = canvas.toDataURL('image/jpeg', 0.9);
+      link.click();
+    } catch (e) {
+      console.error('Error downloading wall image:', e);
+    } finally {
+      setIsImageDownloading(false);
     }
-  }, [decodedDonorName]);
+  };
+
+  const handleDownloadVideo = async () => {
+    if (isVideoDownloading) return;
+    setIsVideoDownloading(true);
+    try {
+      if (!wallRef.current) throw new Error('wallRef not set');
+      const canvas = await html2canvas(wallRef.current, {
+        backgroundColor: null,
+        scale: 1,
+        logging: false,
+        useCORS: true,
+        allowTaint: true
+      });
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+
+      const response = await fetch('/.netlify/functions/generate-tiktok-video', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          imageData: dataUrl,
+          donorName: decodedDonorName
+        })
+      });
+
+      if (!response.ok) {
+        console.error(
+          'Error from generate-tiktok-video function:',
+          response.status,
+          response.statusText
+        );
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${decodedDonorName || 'donor'}_muzica_pentru_viata.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error('Error generating TikTok video:', e);
+    } finally {
+      setIsVideoDownloading(false);
+    }
+  };
+
+  const handleShareFacebook = () => {
+    const shareUrl = window.location.href;
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleShareWhatsApp = () => {
+    const shareUrl = window.location.href;
+    const text = `Și eu susțin campania Muzică pentru Viață – vezi peretele meu de onoare:\n\n${shareUrl}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+  
 
   return (
     <div className="app-content">
@@ -138,7 +215,54 @@ export default function PersonalizedWallPage() {
           </p>
         </div>
 
-        <div className="donor-wall-flow">
+        <div className="share-buttons-section">
+          <h2 className="share-section-title">Distribuie recunoștința ta</h2>
+          <p className="share-section-subtitle">
+            Trimite prietenilor peretele tău de onoare sau descarcă imaginea și TikTok video.
+          </p>
+          <div className="share-buttons-container">
+            <button
+              type="button"
+              className="share-button facebook-share"
+              onClick={handleShareFacebook}
+            >
+              <span className="share-button-icon">f</span>
+              <span className="share-button-text">Distribuie pe Facebook</span>
+            </button>
+            <button
+              type="button"
+              className="share-button whatsapp-share"
+              onClick={handleShareWhatsApp}
+            >
+              <span className="share-button-icon">↗</span>
+              <span className="share-button-text">Trimite pe WhatsApp</span>
+            </button>
+            <button
+              type="button"
+              className="share-button download-share"
+              onClick={handleDownloadImage}
+              disabled={isImageDownloading}
+            >
+              <span className="share-button-icon">⬇</span>
+              <span className="share-button-text">
+                {isImageDownloading ? 'Se descarcă...' : 'Descarcă imagine'}
+              </span>
+            </button>
+            <button
+              type="button"
+              className="share-button download-share"
+              onClick={handleDownloadVideo}
+              disabled={isVideoDownloading}
+            >
+              <span className="share-button-icon">▶</span>
+              <span className="share-button-text">
+                {isVideoDownloading ? 'Se generează video...' : 'Descarcă TikTok video'}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div className="donor-wall-flow" ref={wallRef}>
           {reorderedDonors.map((donor, index) => {
             const sizeClass = getDonorSizeClass(donor.amount);
             const animClass = getRandomAnimation(index);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
 import DonatePage from './pages/DonatePage.jsx';
 import LivePage from './pages/LivePage.jsx';
 import GalleryPage from './pages/GalleryPage.jsx';
@@ -280,18 +280,6 @@ function Layout({ children }) {
       </nav>
 
       <main className="app-shell-main">{children}</main>
-
-      <footer className="app-footer">
-        <section
-          className="audio-section"
-          aria-label="Ascultă piesa Muzică pentru Viață 2025"
-        >
-          <audio controls preload="none">
-            <source src="/Muzică pentru Viață 2025.mp3" type="audio/mpeg" />
-            Browserul dumneavoastră nu suportă redarea audio.
-          </audio>
-        </section>
-      </footer>
     </div>
   );
 }
@@ -369,7 +357,63 @@ function PasswordProtected({ children }) {
   return children;
 }
 
+function SiteFooter() {
+  return (
+    <footer className="app-footer">
+      <div className="app-footer-inner">
+        <section className="footer-top">
+          <p className="footer-tagline">
+            Muzică pentru Viață • Împreună pentru pacienții cu cancer din Banatul de Munte
+          </p>
+        </section>
+
+        <section className="footer-logos" aria-label="Beneficiar, organizator și sponsori">
+          <div className="footer-logos-row">
+            <div className="footer-column">
+              <span className="footer-column-title">Beneficiar donații</span>
+              <div className="footer-logo-main footer-logo-main--oncohelp">
+                <img src="/onco-help-logo-d.png" alt="Fundația OncoHelp" />
+              </div>
+            </div>
+
+            <div className="footer-column">
+              <span className="footer-column-title">Organizat de</span>
+              <div className="footer-logo-main footer-logo-main--radio">
+                <img src="/Logo Radio Romania Resita.svg" alt="Radio România Reșița" />
+              </div>
+            </div>
+
+            <div className="footer-column">
+              <span className="footer-column-title">Sponsori și parteneri</span>
+              <div className="footer-sponsor-grid">
+                <img src="/dacus_logo_site.png" alt="Dacus" />
+                <img
+                  src="/skyro-LOGO-6A-final -without tagline-01.png"
+                  alt="Sky Radio"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="audio-section"
+          aria-label="Ascultă piesa Muzică pentru Viață 2025"
+        >
+          <audio controls preload="none">
+            <source src="/Muzică pentru Viață 2025.mp3" type="audio/mpeg" />
+            Browserul dumneavoastră nu suportă redarea audio.
+          </audio>
+        </section>
+      </div>
+    </footer>
+  );
+}
+
 function App() {
+  const location = useLocation();
+  const isHomepage = location.pathname === '/' || location.pathname === '/donatii';
+
   return (
     <>
       <Routes>
@@ -422,6 +466,8 @@ function App() {
         {/* Fallback to homepage */}
         <Route path="*" element={<DonatePage />} />
       </Routes>
+
+      {!isHomepage && <SiteFooter />}
 
       {/* Global Radio Player - appears on all pages */}
       <GlobalRadioPlayer />

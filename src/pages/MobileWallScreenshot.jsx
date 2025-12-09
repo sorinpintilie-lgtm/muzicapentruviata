@@ -95,10 +95,41 @@ export default function MobileWallScreenshot() {
 
     // Swap highlighted donor with the target position
     [donorsCopy[highlightedIndex], donorsCopy[targetPosition]] =
-    [donorsCopy[targetPosition], donorsCopy[highlightedIndex]];
+      [donorsCopy[targetPosition], donorsCopy[highlightedIndex]];
 
     return donorsCopy;
   }, [donors, decodedDonorName]);
+
+  // Limit to a fixed window of donors around the highlighted one so the wall fits on a single screen
+  const visibleDonors = React.useMemo(() => {
+    if (!reorderedDonors || reorderedDonors.length === 0) return [];
+
+    const highlightedIndex = reorderedDonors.findIndex(
+      d => d.name.toLowerCase() === decodedDonorName.toLowerCase()
+    );
+
+    // If we can't find the highlighted donor or list is already small, show all
+    const WINDOW_SIZE = 15; // total donors to show (before + after + highlighted)
+    if (highlightedIndex === -1 || reorderedDonors.length <= WINDOW_SIZE) {
+      return reorderedDonors;
+    }
+
+    const half = Math.floor(WINDOW_SIZE / 2);
+    let start = highlightedIndex - half;
+    let end = highlightedIndex + half + 1; // end is exclusive
+
+    if (start < 0) {
+      end += -start;
+      start = 0;
+    }
+    if (end > reorderedDonors.length) {
+      start -= (end - reorderedDonors.length);
+      end = reorderedDonors.length;
+      if (start < 0) start = 0;
+    }
+
+    return reorderedDonors.slice(start, end);
+  }, [reorderedDonors, decodedDonorName]);
 
   // Scroll to highlighted name on mount
   useEffect(() => {
@@ -114,6 +145,7 @@ export default function MobileWallScreenshot() {
   }, [decodedDonorName]);
 
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
 
   const downloadScreenshot = async () => {
     if (isDownloading) return;
@@ -123,8 +155,9 @@ export default function MobileWallScreenshot() {
       const container = document.querySelector('.mobile-wall-content');
       if (container) {
         const canvas = await html2canvas(container, {
-          backgroundColor: '#000000',
-          scale: 2,
+          // Use the CSS background and a 9:16 canvas size without extra upscaling
+          backgroundColor: null,
+          scale: 1,
           logging: false,
           useCORS: true,
           allowTaint: true
@@ -142,6 +175,59 @@ export default function MobileWallScreenshot() {
     }
   };
 
+  const downloadVideo = async () => {
+    if (isGeneratingVideo) return;
+
+    setIsGeneratingVideo(true);
+    try {
+      const container = document.querySelector('.mobile-wall-content');
+      if (!container) {
+        throw new Error('mobile-wall-content not found');
+      }
+
+      const canvas = await html2canvas(container, {
+        backgroundColor: null,
+        scale: 1,
+        logging: false,
+        useCORS: true,
+        allowTaint: true
+      });
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+
+      const response = await fetch('/.netlify/functions/generate-tiktok-video', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          imageData: dataUrl,
+          donorName: decodedDonorName
+        })
+      });
+
+      if (!response.ok) {
+        console.error(
+          'Error from generate-tiktok-video function:',
+          response.status,
+          response.statusText
+        );
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${decodedDonorName || 'donor'}_muzica_pentru_viata.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error generating TikTok video:', error);
+    } finally {
+      setIsGeneratingVideo(false);
+    }
+  };
+
   return (
     <div className="mobile-screenshot-container">
       <button
@@ -151,9 +237,17 @@ export default function MobileWallScreenshot() {
       >
         {isDownloading ? 'Downloading...' : 'Download Screenshot'}
       </button>
+      <button
+        className="download-screenshot-btn"
+        style={{ bottom: '60px' }}
+        onClick={downloadVideo}
+        disabled={isGeneratingVideo}
+      >
+        {isGeneratingVideo ? 'Generating video...' : 'Download TikTok Video'}
+      </button>
       <div className="mobile-wall-content">
         <div className="donor-wall-flow mobile-wall-flow">
-          {reorderedDonors.map((donor, index) => {
+          {visibleDonors.map((donor, index) => {
             const sizeClass = getDonorSizeClass(donor.amount);
             const animClass = getRandomAnimation(index);
             const margins = getRandomMargins(index);
@@ -167,8 +261,8 @@ export default function MobileWallScreenshot() {
               classes.push('donor-name-blurred');
             }
 
-            // Find highlighted donor index for special row handling
-            const highlightedIndex = reorderedDonors.findIndex(
+            // Find highlighted donor index within the visible window for special row handling
+            const highlightedIndex = visibleDonors.findIndex(
               d => d.name.toLowerCase() === decodedDonorName.toLowerCase()
             );
 
@@ -183,7 +277,7 @@ export default function MobileWallScreenshot() {
                 {shouldForceRowBreakBefore && (
                   <div style={{ width: '100%', flexBasis: '100%', height: 0 }} />
                 )}
-                {shouldForceRowBreakAfter && index < donors.length - 1 && (
+                {shouldForceRowBreakAfter && index < visibleDonors.length - 1 && (
                   <div style={{ width: '100%', flexBasis: '100%', height: 0 }} />
                 )}
                 <div
@@ -202,10 +296,14 @@ export default function MobileWallScreenshot() {
                     {donor.name}
                   </span>
                 </div>
-                {index < donors.length - 1 && !isInHighlightedRow && <div className="donor-separator" />}
+                {index < visibleDonors.length - 1 && !isInHighlightedRow && <div className="donor-separator" />}
               </React.Fragment>
             );
           })}
+        </div>
+
+        <div className="mobile-wall-footer-banner">
+          <span>Și eu susțin campania Muzică pentru Viață</span>
         </div>
       </div>
     </div>
