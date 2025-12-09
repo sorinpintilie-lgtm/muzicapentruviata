@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "tiktok:video": "node scripts/generate-tiktok-video.js"
   },
+  "packageManager": "yarn@1.22.19",
   "dependencies": {
     "dom-to-image": "^2.6.0",
     "html2canvas": "^1.4.1",
