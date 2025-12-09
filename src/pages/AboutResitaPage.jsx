@@ -7,26 +7,26 @@ export default function AboutResitaPage() {
         <div className="app-section-header">
           <span className="app-section-overline">Despre oraș</span>
           <h1 id="resita-title" className="app-section-title">
-            Reșița - Orașul de pe Bârzava
+            Reșița – Orașul care și-a transformat forța în solidaritate
           </h1>
         </div>
 
         <div className="about-grid">
           <div className="about-text">
             <span className="about-pill">
-              Un oraș cu istorie industrială și spirit comunitar puternic.
+              Orașul care și-a transformat forța în solidaritate.
             </span>
             <p>
-              <span className="about-highlight">Reșița</span> este un oraș din vestul României,
-              situat în județul Caraș-Severin, la poalele Munților Semenic. Fondat în secolul
-              al XVIII-lea, orașul a devenit un important centru industrial, cunoscut pentru
-              producția de locomotive și utilaje grele.
+              Situat în sud-vestul României, <span className="about-highlight">Reșița</span> este un oraș cu aproape 80.000 de oameni, așezat pe malurile Bârzavei și crescut între dealuri care i-au modelat identitatea. Timp de peste un secol, Reșița a fost inima industrială a țării, locul unde s-au construit locomotive, s-au aprins furnale și s-a scris istorie tehnică pentru întreaga Europă.
             </p>
             <p>
-              Astăzi, Reșița este un oraș modern cu aproximativ 70.000 de locuitori, care
-              combină tradiția industrială cu dezvoltarea contemporană. Orașul găzduiește
-              Universitatea Eftimie Murgu și are o comunitate activă în domeniul cultural
-              și sportiv.
+              Astăzi, Reșița nu mai este doar orașul oțelului. Este orașul renașterii. Al oamenilor care se ridică împreună, care cred în comunitate, în cultură, în educație și în puterea gesturilor mici ce schimbă destine.
+            </p>
+            <p>
+              Aici, în Reșița, s-a născut Muzică pentru Viață – o inițiativă care a adunat în jurul ei mii de oameni, familii, copii, artiști, voluntari și inimile tuturor celor care își doresc un viitor în care bolnavii de cancer să nu mai fie nevoiți să plece departe pentru tratament.
+            </p>
+            <p>
+              Reșița este mai mult decât un oraș. Este o promisiune. Este o comunitate care nu stă deoparte, ci construiește – pas cu pas – speranță.
             </p>
           </div>
           <div className="about-image-card">
