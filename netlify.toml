@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  NETLIFY_USE_NEW_BUILD_IMAGE = "true"
 
 [[redirects]]
   from = "/*"
