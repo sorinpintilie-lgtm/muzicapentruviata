@@ -10,6 +10,7 @@ import PersonalizedWallPage from './pages/PersonalizedWallPage.jsx';
 import SponsorsPage from './pages/SponsorsPage.jsx';
 import MobileWallScreenshot from './pages/MobileWallScreenshot.jsx';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage.jsx';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
 import GlobalRadioPlayer from './components/GlobalRadioPlayer.jsx';
 
 function Layout({ children }) {
@@ -413,9 +414,9 @@ function SiteFooter() {
               Termeni și condiții
             </NavLink>
             <span className="footer-legal-separator">|</span>
-            <a href="/politica-de-confidentialitate" className="footer-legal-link">
+            <NavLink to="/politica-de-confidențialitate" className="footer-legal-link">
               Politica de confidențialitate
-            </a>
+            </NavLink>
           </div>
           <p className="footer-copyright">
             © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
@@ -481,6 +482,9 @@ function App() {
 
         {/* Terms and Conditions page - accessible without password */}
         <Route path="/termeni-si-conditii" element={<TermsAndConditionsPage />} />
+
+        {/* Privacy Policy page - accessible without password */}
+        <Route path="/politica-de-confidentialitate" element={<PrivacyPolicyPage />} />
 
         {/* Fallback to homepage */}
         <Route path="*" element={<DonatePage />} />
