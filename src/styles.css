@@ -485,6 +485,13 @@ body {
   box-shadow: 0 10px 28px rgba(216, 27, 96, 0.4);
 }
 
+.donation-mode-tab--disabled {
+  background: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 /* Brick visual card on the right */
 .brick-visual {
   width: 100%;

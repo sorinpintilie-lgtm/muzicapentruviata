@@ -19,7 +19,7 @@ export default function DonatePage() {
   // Donation state (post-event)
   const [selectedAmount, setSelectedAmount] = useState(1); // EUR (smaller default for testing)
   const [customAmount, setCustomAmount] = useState('');
-  const [donationMode, setDonationMode] = useState('monthly'); // 'monthly' | 'once'
+  const [donationMode, setDonationMode] = useState('once'); // 'monthly' | 'once'
   const [donorName, setDonorName] = useState(''); // Donor name field
 
   const toggleMobileMenu = () => {
@@ -312,11 +312,8 @@ export default function DonatePage() {
                 <div className="donation-mode-tabs">
                   <button
                     type="button"
-                    className={
-                      'donation-mode-tab' +
-                      (donationMode === 'monthly' ? ' donation-mode-tab--active' : '')
-                    }
-                    onClick={() => setDonationMode('monthly')}
+                    className="donation-mode-tab donation-mode-tab--disabled"
+                    disabled={true}
                   >
                     Lunar
                   </button>
