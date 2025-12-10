@@ -207,6 +207,26 @@ export default function TermsAndConditionsPage() {
           </section>
         </main>
       </div>
+
+      {/* Footer with legal links */}
+      <footer className="app-footer" style={{marginTop: '40px'}}>
+        <div className="app-footer-inner">
+          <section className="footer-legal">
+            <div className="footer-legal-links">
+              <NavLink to="/termeni-si-conditii" className="footer-legal-link">
+                Termeni și condiții
+              </NavLink>
+              <span className="footer-legal-separator">|</span>
+              <NavLink to="/politica-de-confidențialitate" className="footer-legal-link">
+                Politica de confidențialitate
+              </NavLink>
+            </div>
+            <p className="footer-copyright">
+              © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
+            </p>
+          </section>
+        </div>
+      </footer>
     </>
   );
 }
