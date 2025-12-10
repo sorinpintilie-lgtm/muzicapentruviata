@@ -4,7 +4,7 @@ const crypto = require('crypto');
 // via process.env - no need for dotenv.config()
 // EuPlatesc configuration from environment variables
 // NOTE: These MUST be set in Netlify environment variables
-// No fallback values to ensure we catch missing configuration
+// No fallback values to ensure we catch missing configurationa
 const MERCHANT_ID = process.env.MERCHANT_ID;
 const SECRET_KEY = process.env.SECRET_KEY;
 const ENDPOINT = process.env.ENDPOINT || 'https://secure.euplatesc.ro/tdsprocess/tranzactd.php';
