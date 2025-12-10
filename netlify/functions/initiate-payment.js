@@ -3,8 +3,10 @@ const crypto = require('crypto');
 // Note: In Netlify functions, environment variables are automatically available
 // via process.env - no need for dotenv.config()
 // EuPlatesc configuration from environment variables
-const MERCHANT_ID = process.env.MERCHANT_ID || '44841006414';
-const SECRET_KEY = process.env.SECRET_KEY || '73c441de5dd98a3c5e0c153b0e7625b43e1718f6';
+// NOTE: These MUST be set in Netlify environment variables
+// No fallback values to ensure we catch missing configuration
+const MERCHANT_ID = process.env.MERCHANT_ID;
+const SECRET_KEY = process.env.SECRET_KEY;
 const ENDPOINT = process.env.ENDPOINT || 'https://secure.euplatesc.ro/tdsprocess/tranzactd.php';
 
 exports.handler = async (event, context) => {
@@ -13,6 +15,19 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 405,
       body: JSON.stringify({ error: 'Method not allowed' }),
+    };
+  }
+
+  // Validate that required environment variables are set
+  if (!MERCHANT_ID || !SECRET_KEY || !ENDPOINT) {
+    console.error('Missing required environment variables:', {
+      MERCHANT_ID: !!MERCHANT_ID,
+      SECRET_KEY: !!SECRET_KEY,
+      ENDPOINT: !!ENDPOINT
+    });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Server configuration error - missing environment variables' }),
     };
   }
 
