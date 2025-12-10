@@ -21,6 +21,7 @@ export default function DonatePage() {
   const [customAmount, setCustomAmount] = useState('');
   const [donationMode, setDonationMode] = useState('once'); // 'monthly' | 'once'
   const [donorName, setDonorName] = useState(''); // Donor name field
+  const [currency, setCurrency] = useState('EUR'); // EUR or USD
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((open) => !open);
