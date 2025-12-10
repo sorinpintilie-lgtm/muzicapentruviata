@@ -290,14 +290,14 @@ export default function DonatePage() {
   return (
     <>
       {/* Pre-event homepage - no header, no footer, just countdown and donation form */}
-      <div className="homepage-wrapper pre-event-wrapper">
-        <main className="pre-event-grid">
+      <div className="homepage-wrapper post-event-wrapper">
+        <main className="post-event-grid">
           <section
-            className="hero-main pre-event-hero page-enter-bottom"
+            className="hero-main donation-panel page-enter-bottom"
             aria-labelledby="pre-hero-title"
           >
-            <div className="pre-event-hero-inner">
-              <div className="pre-event-hero-left">
+            <div className="donation-panel-inner">
+              <div className="donation-panel-left">
                 <p className="tagline">Muzică pentru Viață 2025</p>
 
                 <h1 id="pre-hero-title">
@@ -450,7 +450,7 @@ export default function DonatePage() {
                 </p>
               </div>
 
-              <aside className="pre-event-hero-right">
+              <aside className="donation-panel-right">
                 <div className="brick-visual">
                   <p className="brick-visual-title">Contribuția ta în cărămizi</p>
                   <div className="brick-visual-count">
