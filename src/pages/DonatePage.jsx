@@ -316,29 +316,24 @@ export default function DonatePage() {
                 </p>
               </div>
 
-              <div className="donation-panel-right">
-                <img src={brickImageSrc} alt={brickImageAlt} className="brick-image" />
+              <div className="donation-panel-left">
+                <p className="tagline">Muzică pentru Viață 2025</p>
 
-                {/* Countdown Timer */}
-                <div className="countdown">
-                  <div className="time-box">
-                    <span className="time-value">{timeLeft.days}</span>
-                    <span className="time-label">zile</span>
-                  </div>
-                  <div className="time-box">
-                    <span className="time-value">{timeLeft.hours}</span>
-                    <span className="time-label">ore</span>
-                  </div>
-                  <div className="time-box">
-                    <span className="time-value">{timeLeft.minutes}</span>
-                    <span className="time-label">minute</span>
-                  </div>
-                  <div className="time-box">
-                    <span className="time-value">{timeLeft.seconds}</span>
-                    <span className="time-label">secunde</span>
-                  </div>
-                </div>
-              </div>
+                <h1 id="pre-hero-title">
+                  Împreună construim{' '}
+                  <span className="highlight">primul spital pentru pacienții cu cancer</span> din
+                  Reșița.
+                </h1>
+
+                <p className="pre-event-subtitle">
+                  Fiecare cărămidă contează. Fiecare donație aduce speranță.
+                </p>
+
+                <p className="pre-event-text">
+                  În seara de 14 decembrie 2025, de la ora 19:00, ne unim forțele pentru a strânge
+                  fonduri pentru construcția primului spital oncologic din Reșița. Fiecare donație
+                  făcută acum ne apropie de acest obiectiv.
+                </p>
 
                 <div className="donation-mode-tabs">
                   <button
@@ -452,6 +447,31 @@ export default function DonatePage() {
                   setată automat în RON. Tranzacția este procesată în siguranță, iar fondurile merg
                   direct către Fundația OncoHelp.
                 </p>
+              </div>
+
+              <div className="donation-panel-right">
+                <img src={brickImageSrc} alt={brickImageAlt} className="brick-image" />
+
+                {/* Countdown Timer */}
+                <div className="countdown">
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.days}</span>
+                    <span className="time-label">zile</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.hours}</span>
+                    <span className="time-label">ore</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.minutes}</span>
+                    <span className="time-label">minute</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.seconds}</span>
+                    <span className="time-label">secunde</span>
+                  </div>
+                </div>
+              </div>
             </div>
       </section>
     </main>
