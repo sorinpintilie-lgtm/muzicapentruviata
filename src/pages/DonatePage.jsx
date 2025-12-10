@@ -509,12 +509,6 @@ export default function DonatePage() {
                   Reșița.
                 </h1>
 
-                <p className="lead">
-                  Muzică pentru Viață nu se oprește în seara concertului. Fiecare donație făcută acum
-                  înseamnă tratamente mai aproape de casă, drumuri mai puține pentru pacienți și
-                  familii care pot rămâne aproape unii de alții.
-                </p>
-
                 <div className="donation-mode-tabs">
                   <button
                     type="button"
@@ -784,6 +778,18 @@ export default function DonatePage() {
             <p className="footer-copyright">
               © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
             </p>
+            {/* WhatsApp Contact - Added as requested */}
+            <div className="whatsapp-contact" style={{ marginTop: '10px' }}>
+              <a
+                href="https://wa.me/0751288777"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-whatsapp-link"
+                style={{ color: '#25D366', textDecoration: 'none', fontWeight: '500' }}
+              >
+                📞 Contact WhatsApp: 0751288777
+              </a>
+            </div>
           </section>
         </div>
       </footer>
