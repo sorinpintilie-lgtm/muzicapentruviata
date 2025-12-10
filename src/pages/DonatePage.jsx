@@ -449,8 +449,8 @@ export default function DonatePage() {
                   direct către Fundația OncoHelp.
                 </p>
             </div>
+            </div>
           </section>
-
         </main>
       </div>
     </>
