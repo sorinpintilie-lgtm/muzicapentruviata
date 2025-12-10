@@ -411,6 +411,10 @@ body {
   gap: 16px;
 }
 
+.mobile-image-counter {
+  display: none;
+}
+
 .brick-image {
   width: 100%;
   border-radius: 14px;
@@ -445,7 +449,7 @@ body {
     width: 100%;
     order: 2;
     margin-top: 20px;
-    display: flex;
+    display: none; /* Hide right column on mobile */
     flex-direction: column;
     align-items: center;
   }
@@ -461,6 +465,23 @@ body {
 
   .donation-panel-left {
     padding-bottom: 20px;
+  }
+  
+  /* Mobile image and counter under donate button */
+  .mobile-image-counter {
+    display: block !important;
+    margin-top: 24px;
+    text-align: center;
+  }
+  
+  .mobile-image-counter .brick-image {
+    margin-bottom: 20px;
+  }
+  
+  .mobile-image-counter .countdown {
+    justify-content: center;
+    max-width: 300px;
+    margin: 20px auto 0;
   }
 }
 }
