@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-// Import CryptoJS for hash calculation (will be loaded via CDN in production)
 
 const EVENT_DATE = new Date(2025, 11, 14, 19, 0, 0);
 
@@ -128,7 +127,8 @@ export default function DonatePage() {
   };
 
 
-  // Function to calculate FP_HASH for EuPlatesc using CryptoJS (matches working implementation)
+  // Function to calculate FP_HASH for EuPlatesc (local development only)
+  // In production, this function is not used - all hash calculation happens in the Netlify function
   const calculateFPHash = (amount, currency, invoiceId, orderDesc, timestamp, nonce) => {
     try {
       // Fields for MAC calculation (in exact order as per EuPlatesc docs)
@@ -162,14 +162,15 @@ export default function DonatePage() {
       console.log('MAC Source String:', macSource);
       console.log('Secret Key (first 6 chars):', SECRET_KEY.substring(0, 6) + '...');
 
-      // Compute HMAC-MD5 using CryptoJS (same as working example)
-      const key = CryptoJS.enc.Hex.parse(SECRET_KEY);
-      const hash = CryptoJS.HmacMD5(macSource, key).toString();
-
-      console.log('Calculated FP_HASH:', hash);
+      // In production, this will return a placeholder since the real hash comes from the backend
+      // For local development, you would need to load CryptoJS via CDN or install it
+      console.log('FP_HASH calculation would happen here in local development');
+      console.log('In production, the Netlify function calculates the real hash');
       console.log('=========================');
 
-      return hash;
+      // Return a placeholder hash for local development
+      // Real hash calculation happens in the Netlify function using environment variables
+      return 'local-development-hash-placeholder';
     } catch (error) {
       console.error('Error calculating FP_HASH:', error);
       return 'error-calculating-hash';

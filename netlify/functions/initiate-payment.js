@@ -1,6 +1,7 @@
 const crypto = require('crypto');
-require('dotenv').config();
 
+// Note: In Netlify functions, environment variables are automatically available
+// via process.env - no need for dotenv.config()
 // EuPlatesc configuration from environment variables
 const MERCHANT_ID = process.env.MERCHANT_ID || '44841006414';
 const SECRET_KEY = process.env.SECRET_KEY || '73c441de5dd98a3c5e0c153b0e7625b43e1718f6';
