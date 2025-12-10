@@ -399,7 +399,9 @@ body {
 .donation-panel-right {
   flex: 1.2;
   display: flex;
+  flex-direction: column;
   align-items: stretch;
+  gap: 16px;
 /* Donation panel right column with image and countdown */
 .donation-panel-right {
   flex: 1.2;
