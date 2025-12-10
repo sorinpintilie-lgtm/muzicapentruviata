@@ -68,27 +68,32 @@ exports.handler = async (event, context) => {
       nonce,
     ];
 
-    // Build MAC source string: length(value) + value for each field
+    // Build MAC source string: length(value) + value for each field (exact PHP match)
     let macSource = '';
     fieldsForMac.forEach(value => {
       macSource += value.length.toString() + value;
     });
 
-    // Debug logging
+    // Enhanced debug logging
     console.log('=== BACKEND FP_HASH DEBUG INFO ===');
-    console.log('Field values:', {
-      amount: amount,
-      currency: currency,
-      invoiceId: invoiceId,
-      orderDesc: orderDesc,
-      merch_id: MERCHANT_ID,
-      timestamp: timestamp,
-      nonce: nonce
-    });
-    console.log('MAC Source String:', macSource);
-    console.log('Secret Key (first 6 chars):', SECRET_KEY.substring(0, 6) + '...');
+    console.log('Field values (with types and lengths):');
+    console.log('  amount:', amount, '| type:', typeof amount, '| length:', amount.length);
+    console.log('  currency:', currency, '| type:', typeof currency, '| length:', currency.length);
+    console.log('  invoiceId:', invoiceId, '| type:', typeof invoiceId, '| length:', invoiceId.length);
+    console.log('  orderDesc:', orderDesc, '| type:', typeof orderDesc, '| length:', orderDesc.length);
+    console.log('  merch_id:', MERCHANT_ID, '| type:', typeof MERCHANT_ID, '| length:', MERCHANT_ID.length);
+    console.log('  timestamp:', timestamp, '| type:', typeof timestamp, '| length:', timestamp.length);
+    console.log('  nonce:', nonce, '| type:', typeof nonce, '| length:', nonce.length);
 
-    // Compute HMAC-MD5 with hex key
+    console.log('\nMAC Source String:', macSource);
+    console.log('MAC Source String length:', macSource.length);
+
+    console.log('\nSecret Key info:');
+    console.log('  First 6 chars:', SECRET_KEY.substring(0, 6) + '...');
+    console.log('  Total length:', SECRET_KEY.length);
+    console.log('  Binary key length:', Buffer.from(SECRET_KEY, 'hex').length, 'bytes');
+
+    // Compute HMAC-MD5 with hex key (exact PHP match: pack('H*', $secretKey))
     const binaryKey = Buffer.from(SECRET_KEY, 'hex');
     const fpHash = crypto.createHmac('md5', binaryKey).update(macSource, 'utf8').digest('hex');
 
