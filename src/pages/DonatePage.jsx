@@ -79,6 +79,12 @@ export default function DonatePage() {
   // Allow smaller amounts for testing - can be changed back to [10, 25, 50, 100] for production
   const presetAmounts = [1, 5, 10, 25]; // EUR (smaller amounts for testing)
 
+  // Currency conversion rates (approximate)
+  const currencyRates = {
+    EUR: 5, // 1 EUR = 5 RON
+    USD: 4.5 // 1 USD = 4.5 RON
+  };
+
   const parsedCustom =
     customAmount !== ''
       ? parseFloat(customAmount.replace(',', '.'))
