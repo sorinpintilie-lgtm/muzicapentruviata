@@ -309,12 +309,6 @@ export default function DonatePage() {
                   Fiecare cărămidă contează. Fiecare donație aduce speranță.
                 </p>
 
-                <p className="pre-event-text">
-                  În seara de 14 decembrie 2025, de la ora 19:00, ne unim forțele pentru a strânge
-                  fonduri pentru construcția primului spital oncologic din Reșița. Fiecare donație
-                  făcută acum ne apropie de acest obiectiv.
-                </p>
-
                 <div className="donation-mode-tabs">
                   <button
                     type="button"
