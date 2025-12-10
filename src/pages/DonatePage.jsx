@@ -448,84 +448,9 @@ export default function DonatePage() {
                   setată automat în RON. Tranzacția este procesată în siguranță, iar fondurile merg
                   direct către Fundația OncoHelp.
                 </p>
-              </div>
-
-              <aside className="donation-panel-right">
-                <div className="brick-visual">
-                  <p className="brick-visual-title">Contribuția ta în cărămizi</p>
-                  <div className="brick-visual-count">
-                    <span className="brick-visual-number">
-                      {bricksCount || '—'}
-                    </span>
-                    <span className="brick-visual-label">
-                      {bricksCount === 1 ? 'cărămidă' : 'cărămizi'}
-                    </span>
-                  </div>
-                  <p className="brick-visual-text">
-                    {donationMode === 'monthly'
-                      ? 'Donația ta lunară ridică spitalul cărămidă cu cărămidă, lună de lună, pentru pacienții din Banatul de Munte.'
-                      : 'Cu această donație unică ajuți la construirea spitalului oncologic din Reșița, cărămidă cu cărămidă.'}
-                  </p>
-                  <div className="brick-visual-image">
-                    <img src={brickImageSrc} alt={brickImageAlt} />
-                  </div>
-                </div>
-              </aside>
             </div>
           </section>
 
-          <aside
-            className="aside pre-event-story page-enter-right"
-            aria-label="Povestea campaniei Muzică pentru Viață"
-          >
-            <div className="pre-event-section">
-              <h2 className="pre-event-section-title">Ce este Muzică pentru Viață</h2>
-              <p className="pre-event-text">
-                Muzică pentru Viață a pornit din Reșița, din dorința de a transforma emoția unui
-                concert într-un proiect care schimbă vieți. În fiecare an, oameni din tot Banatul
-                de Munte se adună pentru a susține pacienții cu cancer.
-              </p>
-              <div className="pre-event-image-block pre-event-image-block--history">
-                <img
-                  src="/16.jpg"
-                  alt="Public la evenimentul Muzică pentru Viață în Reșița"
-                />
-              </div>
-            </div>
-
-            <div className="pre-event-section">
-              <h2 className="pre-event-section-title">
-                De ce construim un spital oncologic la Reșița
-              </h2>
-              <p className="pre-event-text">
-                Astăzi, mulți pacienți din Banatul de Munte sunt nevoiți să străbată sute de
-                kilometri pentru tratament. Un spital oncologic aici, în Reșița, înseamnă
-                drumuri mai scurte, mai puțină suferință pe drumuri și mai mult timp petrecut
-                alături de familie.
-              </p>
-              <div className="pre-event-image-block pre-event-image-block--clinic">
-                <img
-                  src="/resita.jpg"
-                  alt="Reșița – orașul în care construim spitalul oncologic"
-                />
-              </div>
-            </div>
-
-            <div className="pre-event-section">
-              <h2 className="pre-event-section-title">Cum poți ajuta chiar acum</h2>
-              <p className="pre-event-text">
-                Fie că donezi o sumă mică sau mare, vorbești cu prietenii tăi despre proiect sau
-                distribui campania în mediul online, devii parte din comunitatea care construiește
-                speranță, aici, în Banatul de Munte.
-              </p>
-              <div className="pre-event-image-block pre-event-image-block--live">
-                <img
-                  src="/WhatsApp Image 2025-12-02 at 16.19.50.jpeg"
-                  alt="Voluntari și public la Muzică pentru Viață"
-                />
-              </div>
-            </div>
-          </aside>
         </main>
       </div>
     </>
