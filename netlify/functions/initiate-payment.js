@@ -102,16 +102,16 @@ exports.handler = async (event, context) => {
     console.log('Calculated FP_HASH:', fpHash);
     console.log('===============================');
 
-    // Return the payment data
+    // Return the payment data (using EXACT field names from working PHP)
     const paymentData = {
-      amount,
-      curr: currency,
-      invoice_id: invoiceId,
-      order_desc: orderDesc,
-      merch_id: MERCHANT_ID,
-      timestamp,
-      nonce,
-      fp_hash: fpHash,
+      Ammount: amount,
+      Currency: currency,
+      InvoiceID: invoiceId,
+      OrderDesc: orderDesc,
+      MerchantID: MERCHANT_ID,
+      TranTimeStamp: timestamp,
+      Nonce: nonce,
+      FP_HASH: fpHash,
       email,
       back_to_site: `${process.env.URL || 'https://muzicapentruviata.netlify.app'}/`, // Return URL
       endpoint: ENDPOINT,
