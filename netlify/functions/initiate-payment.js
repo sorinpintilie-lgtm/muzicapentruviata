@@ -35,7 +35,7 @@ exports.handler = async (event, context) => {
     const body = JSON.parse(event.body);
     let { amount, currency = 'RON', orderDesc = 'Donație Muzică pentru Viață', email = '' } = body;
 
-    // Validate and format amount
+    // Validate and format amount (exact PHP match: number_format((float)$amount, 2, '.', ''))
     if (!amount || !isFinite(amount) || amount <= 0) {
       return {
         statusCode: 400,
@@ -47,7 +47,8 @@ exports.handler = async (event, context) => {
     // Generate invoice ID
     const invoiceId = 'MPV-' + Date.now();
 
-    // Generate timestamp and nonce (match working example)
+    // Generate timestamp and nonce (exact PHP match)
+    // PHP: gmdate('YmdHis') - GMT timestamp in YYYYMMDDHHMMSS format
     const now = new Date();
     const timestamp = now.getUTCFullYear().toString() +
                       (now.getUTCMonth() + 1).toString().padStart(2, '0') +
@@ -55,6 +56,7 @@ exports.handler = async (event, context) => {
                       now.getUTCHours().toString().padStart(2, '0') +
                       now.getUTCMinutes().toString().padStart(2, '0') +
                       now.getUTCSeconds().toString().padStart(2, '0');
+    // PHP: bin2hex(random_bytes(16)) - 32 hex chars
     const nonce = crypto.randomBytes(16).toString('hex'); // 32 hex chars
 
     // Fields for MAC calculation (in exact order as per EuPlatesc docs)
