@@ -78,7 +78,7 @@ export default function DonatePage() {
 
   // Donation logic (EuPlătesc)
   // Allow smaller amounts for testing - can be changed back to [10, 25, 50, 100] for production
-  const presetAmounts = [0.5, 1, 5, 10, 25]; // EUR (smaller amounts for testing)
+  const presetAmounts = [1, 5, 10, 25]; // EUR (smaller amounts for testing)
 
   // Currency conversion rates (approximate)
   const currencyRates = {
