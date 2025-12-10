@@ -311,25 +311,22 @@ export default function DonatePage() {
                 </p>
 
                 {/* Countdown Timer */}
-                <div className="countdown-timer">
-                  <div className="countdown-label">Evenimentul începe în:</div>
-                  <div className="countdown-display">
-                    <div className="countdown-item">
-                      <span className="countdown-number">{timeLeft.days}</span>
-                      <span className="countdown-unit">zile</span>
-                    </div>
-                    <div className="countdown-item">
-                      <span className="countdown-number">{timeLeft.hours}</span>
-                      <span className="countdown-unit">ore</span>
-                    </div>
-                    <div className="countdown-item">
-                      <span className="countdown-number">{timeLeft.minutes}</span>
-                      <span className="countdown-unit">minute</span>
-                    </div>
-                    <div className="countdown-item">
-                      <span className="countdown-number">{timeLeft.seconds}</span>
-                      <span className="countdown-unit">secunde</span>
-                    </div>
+                <div className="countdown">
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.days}</span>
+                    <span className="time-label">zile</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.hours}</span>
+                    <span className="time-label">ore</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.minutes}</span>
+                    <span className="time-label">minute</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.seconds}</span>
+                    <span className="time-label">secunde</span>
                   </div>
                 </div>
 
