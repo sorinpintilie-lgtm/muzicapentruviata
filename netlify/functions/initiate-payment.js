@@ -70,22 +70,27 @@ exports.handler = async (event, context) => {
       nonce,
     ];
 
-    // Build MAC source string: length(value) + value for each field (exact PHP match)
+    // Build MAC source string: byteLength(value) + value for each field (exact PHP match)
+    // CRITICAL: Use Buffer.byteLength() to match PHP's strlen() behavior with UTF-8 strings
+    // JavaScript's .length counts code units, but PHP's strlen() counts bytes in UTF-8
+    // For strings with diacritics (ă, ț, î, ș), this makes a difference!
     let macSource = '';
     fieldsForMac.forEach(value => {
-      macSource += value.length.toString() + value;
+      const v = String(value);
+      const len = Buffer.byteLength(v, 'utf8'); // Match PHP's strlen() behavior
+      macSource += len.toString() + v;
     });
 
     // Enhanced debug logging
     console.log('=== BACKEND FP_HASH DEBUG INFO ===');
-    console.log('Field values (with types and lengths):');
-    console.log('  amount:', amount, '| type:', typeof amount, '| length:', amount.length);
-    console.log('  currency:', currency, '| type:', typeof currency, '| length:', currency.length);
-    console.log('  invoiceId:', invoiceId, '| type:', typeof invoiceId, '| length:', invoiceId.length);
-    console.log('  orderDesc:', orderDesc, '| type:', typeof orderDesc, '| length:', orderDesc.length);
-    console.log('  merch_id:', MERCHANT_ID, '| type:', typeof MERCHANT_ID, '| length:', MERCHANT_ID.length);
-    console.log('  timestamp:', timestamp, '| type:', typeof timestamp, '| length:', timestamp.length);
-    console.log('  nonce:', nonce, '| type:', typeof nonce, '| length:', nonce.length);
+    console.log('Field values (with types, char lengths, and byte lengths):');
+    console.log('  amount:', amount, '| type:', typeof amount, '| chars:', amount.length, '| bytes:', Buffer.byteLength(amount, 'utf8'));
+    console.log('  currency:', currency, '| type:', typeof currency, '| chars:', currency.length, '| bytes:', Buffer.byteLength(currency, 'utf8'));
+    console.log('  invoiceId:', invoiceId, '| type:', typeof invoiceId, '| chars:', invoiceId.length, '| bytes:', Buffer.byteLength(invoiceId, 'utf8'));
+    console.log('  orderDesc:', orderDesc, '| type:', typeof orderDesc, '| chars:', orderDesc.length, '| bytes:', Buffer.byteLength(orderDesc, 'utf8'));
+    console.log('  merch_id:', MERCHANT_ID, '| type:', typeof MERCHANT_ID, '| chars:', MERCHANT_ID.length, '| bytes:', Buffer.byteLength(MERCHANT_ID, 'utf8'));
+    console.log('  timestamp:', timestamp, '| type:', typeof timestamp, '| chars:', timestamp.length, '| bytes:', Buffer.byteLength(timestamp, 'utf8'));
+    console.log('  nonce:', nonce, '| type:', typeof nonce, '| chars:', nonce.length, '| bytes:', Buffer.byteLength(nonce, 'utf8'));
 
     console.log('\nMAC Source String:', macSource);
     console.log('MAC Source String length:', macSource.length);
