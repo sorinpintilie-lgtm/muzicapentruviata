@@ -443,6 +443,10 @@ body {
   .donation-panel-right {
     margin-top: 20px;
   }
+
+  .countdown {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 }
 
@@ -1001,7 +1005,7 @@ h1 {
 
 .countdown {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(6px, 1.2vw, 8px);
 }
 
