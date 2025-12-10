@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+// Import CryptoJS for hash calculation (will be loaded via CDN in production)
 
 const EVENT_DATE = new Date(2025, 11, 14, 19, 0, 0);
+
+// EuPlatesc configuration - ALL sensitive values come from backend in production
+// Local development uses placeholder values that won't work with real EuPlatesc
+// The actual merchant ID and secret key are stored securely in Netlify environment variables
+const MERCHANT_ID = ''; // Will be provided by backend in production
+const SECRET_KEY = ''; // Will be provided by backend in production
+const ENDPOINT = 'https://secure.euplatesc.ro/tdsprocess/tranzactd.php';
 
 export default function DonatePage() {
   const [countdown, setCountdown] = useState({
@@ -16,7 +24,7 @@ export default function DonatePage() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
     // Donation state (post-event)
-    const [selectedAmount, setSelectedAmount] = useState(10); // EUR
+    const [selectedAmount, setSelectedAmount] = useState(1); // EUR (smaller default for testing)
     const [customAmount, setCustomAmount] = useState('');
     const [donationMode, setDonationMode] = useState('monthly'); // 'monthly' | 'once'
 
@@ -82,7 +90,8 @@ export default function DonatePage() {
   }, []);
 
   // Donation logic (EuPlătesc)
-  const presetAmounts = [10, 25, 50, 100]; // EUR
+  // Allow smaller amounts for testing - can be changed back to [10, 25, 50, 100] for production
+  const presetAmounts = [1, 5, 10, 25]; // EUR (smaller amounts for testing)
 
   const parsedCustom =
     customAmount !== ''
@@ -94,7 +103,7 @@ export default function DonatePage() {
       ? parsedCustom
       : selectedAmount;
 
-  const ronAmount = effectiveAmountEur ? Math.round(effectiveAmountEur * 5) : 0;
+  const ronAmount = effectiveAmountEur ? parseFloat((effectiveAmountEur * 5).toFixed(2)) : 0;
 
   // Approximate brick calculation: 1 cărămidă ≈ 2.40 RON
   const BRICK_RON_VALUE = 2.4;
@@ -118,18 +127,172 @@ export default function DonatePage() {
     setCustomAmount('');
   };
 
-  const handleCustomChange = (e) => {
-    setCustomAmount(e.target.value);
+
+  // Function to calculate FP_HASH for EuPlatesc using CryptoJS (matches working implementation)
+  const calculateFPHash = (amount, currency, invoiceId, orderDesc, timestamp, nonce) => {
+    try {
+      // Fields for MAC calculation (in exact order as per EuPlatesc docs)
+      const fieldsForMac = [
+        amount,
+        currency,
+        invoiceId,
+        orderDesc,
+        MERCHANT_ID,
+        timestamp,
+        nonce,
+      ];
+
+      // Build MAC source string: length(value) + value for each field
+      let macSource = '';
+      fieldsForMac.forEach(value => {
+        macSource += value.length + value;
+      });
+
+      // Debug logging
+      console.log('=== FP_HASH DEBUG INFO ===');
+      console.log('Field values:', {
+        amount: amount,
+        currency: currency,
+        invoiceId: invoiceId,
+        orderDesc: orderDesc,
+        merch_id: MERCHANT_ID,
+        timestamp: timestamp,
+        nonce: nonce
+      });
+      console.log('MAC Source String:', macSource);
+      console.log('Secret Key (first 6 chars):', SECRET_KEY.substring(0, 6) + '...');
+
+      // Compute HMAC-MD5 using CryptoJS (same as working example)
+      const key = CryptoJS.enc.Hex.parse(SECRET_KEY);
+      const hash = CryptoJS.HmacMD5(macSource, key).toString();
+
+      console.log('Calculated FP_HASH:', hash);
+      console.log('=========================');
+
+      return hash;
+    } catch (error) {
+      console.error('Error calculating FP_HASH:', error);
+      return 'error-calculating-hash';
+    }
   };
 
-  const handleDonateClick = (e) => {
+  const handleDonateClick = async (e) => {
     e.preventDefault();
     const amountRon = ronAmount && ronAmount > 0 ? ronAmount : 0;
     if (!amountRon) return;
 
-    const baseUrl = 'https://secure.euplatesc.ro/epayment';
-    const url = `${baseUrl}?amount=${encodeURIComponent(amountRon)}&currency=RON`;
-    window.location.href = url;
+    try {
+      // For local development, use a mock response
+      // In production, this will call the Netlify function
+      // Check if we should force production mode (for testing deployed sites)
+      const forceProduction = window.location.search.includes('forceProduction=true');
+      const isLocalDevelopment = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && !forceProduction;
+      console.log('Payment environment:', isLocalDevelopment ? 'Local Development' : 'Production');
+      console.log('Force production mode:', forceProduction);
+
+      let paymentData;
+
+      if (isLocalDevelopment) {
+        // Generate proper payment data with calculated hash for local development
+        const amountValue = amountRon.toFixed(2);
+        const currencyValue = 'RON';
+        const invoiceIdValue = 'MPV-' + Date.now();
+        const orderDescValue = `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'}`;
+
+        // Generate timestamp (match working example exactly)
+        const now = new Date();
+        const timestampValue = now.getUTCFullYear().toString() +
+                              (now.getUTCMonth() + 1).toString().padStart(2, '0') +
+                              now.getUTCDate().toString().padStart(2, '0') +
+                              now.getUTCHours().toString().padStart(2, '0') +
+                              now.getUTCMinutes().toString().padStart(2, '0') +
+                              now.getUTCSeconds().toString().padStart(2, '0');
+        const nonceValue = Math.random().toString(36).substring(2, 18) + Math.random().toString(36).substring(2, 18);
+
+        // Calculate hash using the exact field names that will be sent to EuPlatesc
+        const fpHash = calculateFPHash(amountValue, currencyValue, invoiceIdValue, orderDescValue, timestampValue, nonceValue);
+
+        paymentData = {
+          amount: amountValue,
+          curr: currencyValue,
+          invoice_id: invoiceIdValue,
+          order_desc: orderDescValue,
+          merch_id: MERCHANT_ID,
+          timestamp: timestampValue,
+          nonce: nonceValue,
+          fp_hash: fpHash,
+          email: '',
+          back_to_site: window.location.origin + '/',
+          endpoint: ENDPOINT,
+        };
+      } else {
+        // Production: Call Netlify function
+        console.log('Calling Netlify function with amount:', amountRon);
+        const response = await fetch('/.netlify/functions/initiate-payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            amount: amountRon,
+            currency: 'RON',
+            orderDesc: `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'}`,
+            email: '', // Optional, can be collected later if needed
+          }),
+        });
+
+        console.log('Netlify function response status:', response.status);
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Netlify function error:', errorText);
+          throw new Error('Payment initiation failed: ' + errorText);
+        }
+
+        paymentData = await response.json();
+        console.log('Payment data received:', paymentData);
+      }
+
+      // Create and submit form to EuPlatesc
+      console.log('Submitting payment form to EuPlatesc...');
+      console.log('Form data:', paymentData);
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = paymentData.endpoint;
+      form.style.display = 'none';
+      form.target = '_blank'; // Open in new tab for better visibility
+
+      // Add all required fields
+      Object.keys(paymentData).forEach(key => {
+        if (key !== 'endpoint') {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = paymentData[key];
+          form.appendChild(input);
+        }
+      });
+
+      document.body.appendChild(form);
+
+      // Add a delay to ensure form is properly added to DOM
+      setTimeout(() => {
+        console.log('Form submission initiated');
+        form.submit();
+
+        // Show feedback to user
+        alert('Payment form submitted to EuPlatesc. Check the new browser tab/window for the payment page.');
+
+        // Remove the form after submission
+        setTimeout(() => {
+          document.body.removeChild(form);
+        }, 5000);
+      }, 100);
+
+    } catch (error) {
+      console.error('Payment error:', error);
+      alert('A apărut o eroare la inițierea plății. Vă rugăm să încercați din nou.');
+    }
   };
 
   const isPostEventPreview =
@@ -426,7 +589,7 @@ export default function DonatePage() {
                       <>
                         {donationMode === 'monthly' ? 'Donezi lunar ' : 'Donezi o singură dată '}
                         <strong>
-                          {Number.isNaN(effectiveAmountEur) ? '' : Math.round(effectiveAmountEur)} €
+                          {Number.isNaN(effectiveAmountEur) ? '' : effectiveAmountEur} €
                         </strong>{' '}
                         (aprox. <strong>{ronAmount} RON</strong>), adică contribui la aproximativ{' '}
                         <strong>{bricksCount || 1} {bricksCount === 1 ? 'cărămidă' : 'cărămizi'}</strong>{' '}
@@ -448,7 +611,7 @@ export default function DonatePage() {
                         type="button"
                         className={
                           'donation-amount-button' +
-                          (customAmount === '' && effectiveAmountEur === amount
+                          (customAmount === '' && selectedAmount === amount
                             ? ' donation-amount-button--active'
                             : '')
                         }
@@ -468,12 +631,12 @@ export default function DonatePage() {
                       <input
                         id="custom-amount"
                         type="number"
-                        min="1"
-                        step="1"
+                        min="0.01"
+                        step="0.01"
                         className="donation-custom-input"
-                        placeholder="Ex: 30"
+                        placeholder="Ex: 0.50, 1.00, 5.00"
                         value={customAmount}
-                        onChange={handleCustomChange}
+                        onChange={(e) => setCustomAmount(e.target.value)}
                       />
                     </div>
                   </div>

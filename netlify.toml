@@ -6,6 +6,9 @@
   NODE_VERSION = "18"
   NETLIFY_USE_NEW_BUILD_IMAGE = "true"
 
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
