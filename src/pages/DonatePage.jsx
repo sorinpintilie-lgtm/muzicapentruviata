@@ -84,12 +84,11 @@ export default function DonatePage() {
       ? parseFloat(customAmount.replace(',', '.'))
       : NaN;
 
-  const effectiveAmountEur =
-    customAmount !== '' && !Number.isNaN(parsedCustom) && parsedCustom > 0
-      ? parsedCustom
-      : selectedAmount;
+  const effectiveAmount = customAmount !== '' && !Number.isNaN(parsedCustom) && parsedCustom > 0
+    ? parsedCustom
+    : selectedAmount;
 
-  const ronAmount = effectiveAmountEur ? parseFloat((effectiveAmountEur * 5).toFixed(2)) : 0;
+  const ronAmount = effectiveAmount ? parseFloat((effectiveAmount * currencyRates[currency]).toFixed(2)) : 0;
 
   // Approximate brick calculation: 1 cărămidă ≈ 2.40 RON
   const BRICK_RON_VALUE = 2.4;
@@ -330,11 +329,11 @@ export default function DonatePage() {
                 </div>
 
                 <div className="donation-summary">
-                  {effectiveAmountEur ? (
+                  {effectiveAmount ? (
                     <>
                       {donationMode === 'monthly' ? 'Donezi lunar ' : 'Donezi o singură dată '}
                       <strong>
-                        {Number.isNaN(effectiveAmountEur) ? '' : effectiveAmountEur} €
+                        {Number.isNaN(effectiveAmount) ? '' : effectiveAmount} {currency}
                       </strong>{' '}
                       (aprox. <strong>{ronAmount} RON</strong>), adică contribui la aproximativ{' '}
                       <strong>{bricksCount || 1} {bricksCount === 1 ? 'cărămidă' : 'cărămizi'}</strong>{' '}
@@ -363,15 +362,15 @@ export default function DonatePage() {
                       }
                       onClick={() => handlePresetClick(amount)}
                     >
-                      <span className="donation-amount-main">{amount} €</span>
-                      <span className="donation-amount-ron">≈ {Math.round(amount * 5)} RON</span>
+                      <span className="donation-amount-main">{amount} {currency}</span>
+                      <span className="donation-amount-ron">≈ {Math.round(amount * currencyRates[currency])} RON</span>
                     </button>
                   ))}
                 </div>
 
                 <div className="donation-custom">
                   <label className="donation-custom-label" htmlFor="custom-amount">
-                    Sau introdu altă sumă (în euro, se transformă automat în RON pe pagina de plată):
+                    Sau introdu altă sumă (în {currency}, se transformă automat în RON pe pagina de plată):
                   </label>
                   <div className="donation-custom-input-row">
                     <input
@@ -380,10 +379,28 @@ export default function DonatePage() {
                       min="0.01"
                       step="0.01"
                       className="donation-custom-input"
-                      placeholder="Ex: 0.50, 1.00, 5.00"
+                      placeholder={`Ex: 0.50, 1.00, 5.00 ${currency}`}
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
                     />
+                  </div>
+                </div>
+
+                {/* Currency Selector */}
+                <div className="donation-custom" style={{ marginTop: '20px' }}>
+                  <label className="donation-custom-label" htmlFor="currency-select">
+                    Alege moneda:
+                  </label>
+                  <div className="donation-custom-input-row">
+                    <select
+                      id="currency-select"
+                      className="donation-custom-input"
+                      value={currency}
+                      onChange={(e) => setCurrency(e.target.value)}
+                    >
+                      <option value="EUR">EUR (€)</option>
+                      <option value="USD">USD ($)</option>
+                    </select>
                   </div>
                 </div>
 
