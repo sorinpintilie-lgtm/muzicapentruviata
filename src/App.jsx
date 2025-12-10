@@ -9,6 +9,7 @@ import WallPage from './pages/WallPage.jsx';
 import PersonalizedWallPage from './pages/PersonalizedWallPage.jsx';
 import SponsorsPage from './pages/SponsorsPage.jsx';
 import MobileWallScreenshot from './pages/MobileWallScreenshot.jsx';
+import TermsAndConditionsPage from './pages/TermsAndConditionsPage.jsx';
 import GlobalRadioPlayer from './components/GlobalRadioPlayer.jsx';
 
 function Layout({ children }) {
@@ -405,6 +406,21 @@ function SiteFooter() {
             Browserul dumneavoastră nu suportă redarea audio.
           </audio>
         </section>
+
+        <section className="footer-legal">
+          <div className="footer-legal-links">
+            <NavLink to="/termeni-si-conditii" className="footer-legal-link">
+              Termeni și condiții
+            </NavLink>
+            <span className="footer-legal-separator">|</span>
+            <a href="/politica-de-confidentialitate" className="footer-legal-link">
+              Politica de confidențialitate
+            </a>
+          </div>
+          <p className="footer-copyright">
+            © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
+          </p>
+        </section>
       </div>
     </footer>
   );
@@ -462,6 +478,9 @@ function App() {
             <Layout><MobileWallScreenshot /></Layout>
           </PasswordProtected>
         } />
+
+        {/* Terms and Conditions page - accessible without password */}
+        <Route path="/termeni-si-conditii" element={<TermsAndConditionsPage />} />
 
         {/* Fallback to homepage */}
         <Route path="*" element={<DonatePage />} />
