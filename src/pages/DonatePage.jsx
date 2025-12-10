@@ -297,7 +297,7 @@ export default function DonatePage() {
           >
             <div className="donation-panel-inner">
               <div className="donation-panel-left">
-                <p className="tagline">Muzică pentru Viață 2025</p>
+                <p className="tagline">Un gest mic poate schimba o lume.</p>
 
                 <h1 id="pre-hero-title">
                   Împreună construim{' '}
@@ -413,7 +413,7 @@ export default function DonatePage() {
                   onClick={handleDonateClick}
                   disabled={!ronAmount}
                 >
-                  DONEAZĂ ACUM PRIN EUPLĂTEȘC
+                  DONEAZĂ ACUM
                 </button>
 
                 <p className="donation-cta-note">
