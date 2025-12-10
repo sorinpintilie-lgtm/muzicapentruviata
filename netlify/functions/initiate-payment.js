@@ -102,17 +102,19 @@ exports.handler = async (event, context) => {
     console.log('Calculated FP_HASH:', fpHash);
     console.log('===============================');
 
-    // Return the payment data (using EXACT field names from working PHP)
+    // Return the payment data (using EXACT field names from working PHP form submission)
+    // Note: The hash calculation uses the internal variable names, but the form field names
+    // must match exactly what EuPlatesc expects (lowercase with underscores)
     const paymentData = {
-      Ammount: amount,
-      Currency: currency,
-      InvoiceID: invoiceId,
-      OrderDesc: orderDesc,
-      MerchantID: MERCHANT_ID,
-      TranTimeStamp: timestamp,
-      Nonce: nonce,
-      FP_HASH: fpHash,
-      email,
+      amount: amount,      // Form field name (lowercase)
+      curr: currency,      // Form field name (lowercase)
+      invoice_id: invoiceId, // Form field name (lowercase with underscore)
+      order_desc: orderDesc, // Form field name (lowercase with underscore)
+      merch_id: MERCHANT_ID, // Form field name (lowercase with underscore)
+      timestamp: timestamp,  // Form field name (lowercase)
+      nonce: nonce,        // Form field name (lowercase)
+      fp_hash: fpHash,      // Form field name (lowercase with underscore)
+      email: email,
       back_to_site: `${process.env.URL || 'https://muzicapentruviata.netlify.app'}/`, // Return URL
       endpoint: ENDPOINT,
     };
