@@ -380,8 +380,23 @@ function SiteFooter() {
 
             <div className="footer-column">
               <span className="footer-column-title">Organizat de</span>
-              <div className="footer-logo-main footer-logo-main--radio">
-                <img src="/Logo Radio Romania Resita.svg" alt="Radio România Reșița" />
+              <div className="footer-logo-main footer-logo-main--radio" data-fallback-text="Radio România Reșița">
+                <img
+                  src="/Logo Radio Romania Resita.svg"
+                  alt="Radio România Reșița"
+                  onError={(e) => {
+                    console.error('Radio Romania Resita logo failed to load');
+                    e.target.style.display = 'none';
+                    e.target.parentElement.style.minHeight = '70px';
+                    e.target.parentElement.style.justifyContent = 'center';
+                  }}
+                  style={{
+                    maxHeight: '70px',
+                    objectFit: 'contain',
+                    filter: 'grayscale(0.15)',
+                    transition: 'all 0.3s ease'
+                  }}
+                />
               </div>
             </div>
 

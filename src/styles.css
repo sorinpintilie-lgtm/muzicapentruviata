@@ -2277,11 +2277,26 @@ h1 {
 }
 
 /* Main logos */
+.footer-logo-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding: 8px 0;
+}
+
 .footer-logo-main img {
   display: block;
   max-width: 100%;
+  max-height: 80px;
   object-fit: contain;
   filter: grayscale(0.15);
+  transition: all 0.3s ease;
+}
+
+.footer-logo-main img:hover {
+  filter: grayscale(0) brightness(1.1);
+  transform: scale(1.05);
 }
 
 .footer-logo-main--oncohelp img {
@@ -2290,6 +2305,23 @@ h1 {
 
 .footer-logo-main--radio img {
   max-height: 70px;
+  min-height: 50px;
+  object-fit: contain;
+}
+
+/* Fallback for missing logos */
+.footer-logo-main::after {
+  content: attr(data-fallback-text);
+  display: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.footer-logo-main img[src=""] + ::after,
+.footer-logo-main img:not([src]) + ::after {
+  display: block;
 }
 
 /* Sponsor grid */
