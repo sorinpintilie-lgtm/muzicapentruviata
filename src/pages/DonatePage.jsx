@@ -289,7 +289,6 @@ export default function DonatePage() {
   // Show pre-event countdown page (before the concert)
   return (
     <>
-      {/* Pre-event homepage - no header, no footer, just countdown and donation form */}
       <div className="homepage-wrapper post-event-wrapper">
         <main className="post-event-grid">
           <section
@@ -310,6 +309,16 @@ export default function DonatePage() {
                   Fiecare cărămidă contează. Fiecare donație aduce speranță.
                 </p>
 
+                <p className="pre-event-text">
+                  În seara de 14 decembrie 2025, de la ora 19:00, ne unim forțele pentru a strânge
+                  fonduri pentru construcția primului spital oncologic din Reșița. Fiecare donație
+                  făcută acum ne apropie de acest obiectiv.
+                </p>
+              </div>
+
+              <div className="donation-panel-right">
+                <img src={brickImageSrc} alt={brickImageAlt} className="brick-image" />
+
                 {/* Countdown Timer */}
                 <div className="countdown">
                   <div className="time-box">
@@ -329,12 +338,7 @@ export default function DonatePage() {
                     <span className="time-label">secunde</span>
                   </div>
                 </div>
-
-                <p className="pre-event-text">
-                  În seara de 14 decembrie 2025, de la ora 19:00, ne unim forțele pentru a strânge
-                  fonduri pentru construcția primului spital oncologic din Reșița. Fiecare donație
-                  făcută acum ne apropie de acest obiectiv.
-                </p>
+              </div>
 
                 <div className="donation-mode-tabs">
                   <button
@@ -449,10 +453,8 @@ export default function DonatePage() {
                   direct către Fundația OncoHelp.
                 </p>
             </div>
-            </div>
-          </section>
-        </main>
-      </div>
-    </>
-  );
+      </section>
+    </main>
+  </div>
+</>);
 }
