@@ -778,16 +778,34 @@ export default function DonatePage() {
             <p className="footer-copyright">
               © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
             </p>
-            {/* WhatsApp Contact - Added as requested */}
-            <div className="whatsapp-contact" style={{ marginTop: '10px' }}>
+            {/* WhatsApp Contact - Improved styling and positioning */}
+            <div className="footer-whatsapp-container" style={{
+              marginTop: '15px',
+              paddingTop: '15px',
+              borderTop: '1px solid #e0e0e0',
+              width: '100%',
+              textAlign: 'center'
+            }}>
               <a
                 href="https://wa.me/0751288777"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-whatsapp-link"
-                style={{ color: '#25D366', textDecoration: 'none', fontWeight: '500' }}
+                style={{
+                  color: '#25D366',
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  fontSize: '0.9rem',
+                  display: 'inline-block',
+                  padding: '8px 16px',
+                  borderRadius: '4px',
+                  backgroundColor: 'rgba(37, 211, 102, 0.1)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgba(37, 211, 102, 0.2)'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'rgba(37, 211, 102, 0.1)'}
               >
-                📞 Contact WhatsApp: 0751288777
+                Contact WhatsApp: 0751288777
               </a>
             </div>
           </section>
