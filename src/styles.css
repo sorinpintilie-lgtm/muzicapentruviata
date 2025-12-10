@@ -445,10 +445,14 @@ body {
     width: 100%;
     order: 2;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .countdown {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 20px;
   }
 
   .donation-amounts-grid {
