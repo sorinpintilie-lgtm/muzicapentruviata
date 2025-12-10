@@ -496,13 +496,10 @@ function App() {
         } />
 
         {/* Terms and Conditions page - accessible without password */}
-        <Route path="/termeni-si-conditii" element={<TermsAndConditionsPage />} />
-
-        {/* Terms and Conditions page - accessible without password */}
-        <Route path="/termeni-si-conditii" element={<TermsAndConditionsPage />} />
+        <Route path="/termeni-si-conditii" element={<Layout><TermsAndConditionsPage /></Layout>} />
 
         {/* Privacy Policy page - accessible without password */}
-        <Route path="/politica-de-confidentialitate" element={<PrivacyPolicyPage />} />
+        <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
       </Routes>
 
       {!isHomepage && <SiteFooter />}
