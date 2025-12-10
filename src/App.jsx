@@ -429,7 +429,7 @@ function SiteFooter() {
               Termeni și condiții
             </NavLink>
             <span className="footer-legal-separator">|</span>
-            <NavLink to="/politica-de-confidențialitate" className="footer-legal-link">
+            <NavLink to="/politica-de-confidentialitate" className="footer-legal-link">
               Politica de confidențialitate
             </NavLink>
           </div>
@@ -498,11 +498,11 @@ function App() {
         {/* Terms and Conditions page - accessible without password */}
         <Route path="/termeni-si-conditii" element={<TermsAndConditionsPage />} />
 
+        {/* Terms and Conditions page - accessible without password */}
+        <Route path="/termeni-si-conditii" element={<TermsAndConditionsPage />} />
+
         {/* Privacy Policy page - accessible without password */}
         <Route path="/politica-de-confidentialitate" element={<PrivacyPolicyPage />} />
-
-        {/* Fallback to homepage */}
-        <Route path="*" element={<DonatePage />} />
       </Routes>
 
       {!isHomepage && <SiteFooter />}

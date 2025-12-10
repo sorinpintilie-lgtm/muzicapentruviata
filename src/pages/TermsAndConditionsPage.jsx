@@ -217,7 +217,7 @@ export default function TermsAndConditionsPage() {
                 Termeni și condiții
               </NavLink>
               <span className="footer-legal-separator">|</span>
-              <NavLink to="/politica-de-confidențialitate" className="footer-legal-link">
+              <NavLink to="/politica-de-confidentialitate" className="footer-legal-link">
                 Politica de confidențialitate
               </NavLink>
             </div>
