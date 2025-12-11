@@ -22,8 +22,6 @@ export default function DonatePage() {
   const [donationMode, setDonationMode] = useState('once'); // 'monthly' | 'once'
   const [donorName, setDonorName] = useState(''); // Donor name field
   const [currency, setCurrency] = useState('RON'); // RON, EUR or USD
-  const [currencyRates, setCurrencyRates] = useState({ EUR: 5, USD: 4.5 }); // Live rates, fallback to static
-  const [ratesLoading, setRatesLoading] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((open) => !open);
@@ -86,50 +84,6 @@ export default function DonatePage() {
     USD: [1, 5, 10, 25]
   };
 
-  // Fetch live exchange rates
-  const fetchExchangeRates = async () => {
-    try {
-      setRatesLoading(true);
-      console.log('Fetching exchange rates...');
-      // Using exchangerate-api.com (free tier: 1500 requests/month)
-      const response = await fetch('https://api.exchangerate-api.com/v4/latest/RON');
-      const data = await response.json();
-      console.log('API Response:', data);
-
-      if (data.rates && data.rates.EUR && data.rates.USD) {
-        // API returns rates as "how many of this currency for 1 RON"
-        // We need "how many RON for 1 of this currency"
-        const eurRate = 1 / data.rates.EUR;
-        const usdRate = 1 / data.rates.USD;
-
-        console.log('Calculated rates:', { EUR: eurRate, USD: usdRate });
-
-        setCurrencyRates({
-          EUR: eurRate,
-          USD: usdRate
-        });
-        // Cache rates for 1 hour
-        localStorage.setItem('exchangeRates', JSON.stringify({
-          rates: { EUR: eurRate, USD: usdRate },
-          timestamp: Date.now()
-        }));
-      } else {
-        console.error('Invalid API response structure:', data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch exchange rates:', error);
-      // Keep existing rates as fallback
-    } finally {
-      setRatesLoading(false);
-    }
-  };
-
-  // Load cached rates or fetch new ones
-  useEffect(() => {
-    // Clear old cache on first load to force fresh rates
-    localStorage.removeItem('exchangeRates');
-    fetchExchangeRates();
-  }, []);
 
   const parsedCustom =
     customAmount !== ''
@@ -140,23 +94,24 @@ export default function DonatePage() {
     ? parsedCustom
     : selectedAmount;
 
-  const ronAmount = effectiveAmount ? parseFloat((effectiveAmount * currencyRates[currency]).toFixed(2)) : 0;
-
-  // Approximate brick calculation: 1 cărămidă ≈ 2.40 RON
+  // Brick calculation only for RON donations
   const BRICK_RON_VALUE = 2.4;
-  const bricksCount =
-    ronAmount && ronAmount > 0 ? Math.max(1, Math.round(ronAmount / BRICK_RON_VALUE)) : 0;
+  const bricksCount = (currency === 'RON' && effectiveAmount > 0)
+    ? Math.max(1, Math.round(effectiveAmount / BRICK_RON_VALUE))
+    : 0;
 
-  // Change image based on how many bricks you contribute
+  // Change image based on how many bricks you contribute (only for RON)
   let brickImageSrc = '/16.jpg';
   let brickImageAlt = 'Public la evenimentul Muzică pentru Viață în Reșița';
 
-  if (bricksCount >= 10 && bricksCount < 40) {
-    brickImageSrc = '/resita.jpg';
-    brickImageAlt = 'Reșița – orașul în care construim spitalul oncologic';
-  } else if (bricksCount >= 40) {
-    brickImageSrc = '/tmk-resita-4-1200x675.jpg';
-    brickImageAlt = 'Reșița industrială – un viitor construit cărămidă cu cărămidă';
+  if (currency === 'RON') {
+    if (bricksCount >= 10 && bricksCount < 40) {
+      brickImageSrc = '/resita.jpg';
+      brickImageAlt = 'Reșița – orașul în care construim spitalul oncologic';
+    } else if (bricksCount >= 40) {
+      brickImageSrc = '/tmk-resita-4-1200x675.jpg';
+      brickImageAlt = 'Reșița industrială – un viitor construit cărămidă cu cărămidă';
+    }
   }
 
   const handlePresetClick = (amount) => {
@@ -385,18 +340,18 @@ export default function DonatePage() {
                       <strong>
                         {Number.isNaN(effectiveAmount) ? '' : effectiveAmount} {currency}
                       </strong>
-                      {currency !== 'RON' && (
-                        <> (aprox. <strong>{ronAmount} RON</strong>)</>
+                      {currency === 'RON' && bricksCount > 0 && (
+                        <>, adică contribui la aproximativ{' '}
+                        <strong>{bricksCount} {bricksCount === 1 ? 'cărămidă' : 'cărămizi'}</strong>{' '}
+                        pentru spitalul oncologic din Reșița.
+                      </>
                       )}
-                      , adică contribui la aproximativ{' '}
-                      <strong>{bricksCount || 1} {bricksCount === 1 ? 'cărămidă' : 'cărămizi'}</strong>{' '}
-                      pentru spitalul oncologic din Reșița.
                       {donorName && ` Numele tău "${donorName}" va apărea pe Peretele Eroilor.`}
                     </>
                   ) : (
                     <>
-                      Alege o sumă de mai jos sau introdu o valoare personalizată. Vom calcula automat
-                      câte <strong>cărămizi</strong> adaugi la construcția spitalului.
+                      Alege o sumă de mai jos sau introdu o valoare personalizată.
+                      {currency === 'RON' && ' Vom calcula automat câte cărămizi adaugi la construcția spitalului.'}
                     </>
                   )}
                 </div>
@@ -416,18 +371,13 @@ export default function DonatePage() {
                       onClick={() => handlePresetClick(amount)}
                     >
                       <span className="donation-amount-main">{amount} {currency}</span>
-                      {currency !== 'RON' && (
-                        <span className="donation-amount-ron">≈ {Math.round(amount * currencyRates[currency])} RON</span>
-                      )}
                     </button>
                   ))}
                 </div>
 
                 <div className="donation-custom">
                   <label className="donation-custom-label" htmlFor="custom-amount">
-                    Sau introdu altă sumă (în {currency}
-                    {currency !== 'RON' && ', se transformă automat în RON pe pagina de plată'}
-                    ):
+                    Sau introdu altă sumă (în {currency}):
                   </label>
                   <div className="donation-custom-input-row">
                     <input
@@ -489,9 +439,8 @@ export default function DonatePage() {
                 </button>
 
                 <p className="donation-cta-note">
-                  Vei fi redirecționat către pagina securizată EuPlătesc.ro
-                  {currency !== 'RON' && ', unde suma ta va fi setată automat în RON'}
-                  . Tranzacția este procesată în siguranță, iar fondurile merg
+                  Vei fi redirecționat către pagina securizată EuPlătesc.ro.
+                  Tranzacția este procesată în siguranță, iar fondurile merg
                   direct către Fundația OncoHelp.
                 </p>
 
