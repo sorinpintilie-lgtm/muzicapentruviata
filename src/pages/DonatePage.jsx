@@ -433,7 +433,7 @@ export default function DonatePage() {
                   type="button"
                   className="btn-primary donation-cta-big"
                   onClick={handleDonateClick}
-                  disabled={!ronAmount}
+                  disabled={!effectiveAmount}
                 >
                   DONEAZĂ ACUM
                 </button>
