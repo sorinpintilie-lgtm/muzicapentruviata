@@ -90,22 +90,31 @@ export default function DonatePage() {
   const fetchExchangeRates = async () => {
     try {
       setRatesLoading(true);
+      console.log('Fetching exchange rates...');
       // Using exchangerate-api.com (free tier: 1500 requests/month)
       const response = await fetch('https://api.exchangerate-api.com/v4/latest/RON');
       const data = await response.json();
+      console.log('API Response:', data);
 
-      if (data.rates) {
+      if (data.rates && data.rates.EUR && data.rates.USD) {
         // API returns rates as "how many of this currency for 1 RON"
         // We need "how many RON for 1 of this currency"
+        const eurRate = 1 / data.rates.EUR;
+        const usdRate = 1 / data.rates.USD;
+
+        console.log('Calculated rates:', { EUR: eurRate, USD: usdRate });
+
         setCurrencyRates({
-          EUR: 1 / data.rates.EUR,
-          USD: 1 / data.rates.USD
+          EUR: eurRate,
+          USD: usdRate
         });
         // Cache rates for 1 hour
         localStorage.setItem('exchangeRates', JSON.stringify({
-          rates: { EUR: 1 / data.rates.EUR, USD: 1 / data.rates.USD },
+          rates: { EUR: eurRate, USD: usdRate },
           timestamp: Date.now()
         }));
+      } else {
+        console.error('Invalid API response structure:', data);
       }
     } catch (error) {
       console.error('Failed to fetch exchange rates:', error);
@@ -117,16 +126,8 @@ export default function DonatePage() {
 
   // Load cached rates or fetch new ones
   useEffect(() => {
-    const cached = localStorage.getItem('exchangeRates');
-    if (cached) {
-      const { rates, timestamp } = JSON.parse(cached);
-      // Use cached rates if less than 1 hour old
-      if (Date.now() - timestamp < 3600000) {
-        setCurrencyRates(rates);
-        return;
-      }
-    }
-    // Fetch new rates if no cache or cache is old
+    // Clear old cache on first load to force fresh rates
+    localStorage.removeItem('exchangeRates');
     fetchExchangeRates();
   }, []);
 
