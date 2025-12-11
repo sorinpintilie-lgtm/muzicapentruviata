@@ -2171,6 +2171,7 @@ h1 {
     position: relative;
     max-width: 100%;
     padding: 0;
+    display: block;
   }
 
   .timeline-item-inner {
@@ -2207,15 +2208,19 @@ h1 {
     top: 50%;
     width: 12px;
     height: 12px;
+    left: auto;
+    right: auto;
   }
 
   .timeline-item--left .timeline-item-marker {
     left: 18px;
+    right: auto;
     transform: translate(-50%, -50%);
   }
 
   .timeline-item--right .timeline-item-marker {
     right: 18px;
+    left: auto;
     transform: translate(50%, -50%);
   }
 
