@@ -1,35 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 
 export default function LivePage() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null);
-
-  const togglePlay = async () => {
-    if (!audioRef.current) return;
-
-    try {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        await audioRef.current.play();
-        setIsPlaying(true);
-      }
-    } catch (error) {
-      console.error('Error playing audio:', error);
-    }
-  };
   return (
     <div className="app-content">
       <section className="app-section live-section" aria-labelledby="live-title">
         <div className="app-section-header">
-          <span className="app-section-overline">Muzică pentru Viață în direct</span>
+          <span className="app-section-overline" style={{ color: '#d81b60', fontWeight: '600' }}>
+            LIVE: Muzică Pentru Viață
+          </span>
           <h1 id="live-title" className="app-section-title">
-            Vezi și ascultă emoția din căsuța de sticlă.
+            Emoție direct din căsuța de sticlă.
           </h1>
           <p className="app-section-lead">
-            Atunci când muzica începe, Reșița devine un singur suflet. De aici, din căsuța
-            de sticlă, fiecare refren adună donații pentru spital.
+            Totul începe într-o căsuță de sticlă, iar Reșița se alătură cauzei care schimbă o lume. Haideți la muzică, pentru viață!
           </p>
         </div>
 
@@ -41,9 +24,8 @@ export default function LivePage() {
               aria-label="Transmisiune live Muzică pentru Viață"
             >
               <div className="live-video-placeholder">
-                <p>
-                  Transmisiunea live video va apărea aici în 14 decembrie. Până atunci, poți
-                  asculta Radio Reșița live și poți dona pentru spitalul oncologic.
+                <p style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '600' }}>
+                  Transmisiunea live va începe din 14 Decembrie!
                 </p>
               </div>
               {/*
@@ -69,43 +51,6 @@ export default function LivePage() {
               lăsăm singuri pe cei care trec prin tratament oncologic. Fiecare piesă cântată
               înseamnă încă un pas spre un spital complet dedicat lor.
             </p>
-          </div>
-        </div>
-
-        {/* Radio Player Section */}
-        <div className="radio-player-section">
-          <div className="radio-player-container">
-            <div className="radio-player-header">
-              <h2>📻 Radio Reșița - Live</h2>
-              <p>Ascultă Radio Reșița în timp real</p>
-            </div>
-            <div className="radio-player-controls">
-              <button
-                onClick={togglePlay}
-                className="radio-play-button"
-                aria-label={isPlaying ? "Oprește Radio Reșița" : "Porneste Radio Reșița"}
-              >
-                {isPlaying ? 'Stop' : 'Play'}
-              </button>
-              <audio
-                ref={audioRef}
-                preload="none"
-                className="radio-audio-player hidden"
-                aria-label="Player Radio Reșița"
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onEnded={() => setIsPlaying(false)}
-              >
-                <source src="/api/radio-proxy" type="audio/mpeg" />
-                Browserul dumneavoastră nu suportă redarea audio.
-              </audio>
-            </div>
-            <div className="radio-player-info">
-              <p>
-                Conectează-te la vocea Reșiței și rămâi la curent cu știri, muzică și evenimente locale.
-                Radio Reșița - mereu aproape de comunitatea noastră.
-              </p>
-            </div>
           </div>
         </div>
       </section>
