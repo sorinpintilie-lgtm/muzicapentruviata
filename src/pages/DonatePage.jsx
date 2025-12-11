@@ -468,6 +468,31 @@ export default function DonatePage() {
                   </div>
                 </div>
               </div>
+
+              {/* Right column: Image and Countdown for desktop */}
+              <div className="donation-panel-right">
+                <img src={brickImageSrc} alt={brickImageAlt} className="brick-image" />
+
+                {/* Countdown Timer */}
+                <div className="countdown">
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.days}</span>
+                    <span className="time-label">zile</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.hours}</span>
+                    <span className="time-label">ore</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.minutes}</span>
+                    <span className="time-label">minute</span>
+                  </div>
+                  <div className="time-box">
+                    <span className="time-value">{timeLeft.seconds}</span>
+                    <span className="time-label">secunde</span>
+                  </div>
+                </div>
+              </div>
             </div>
       </section>
     </main>
