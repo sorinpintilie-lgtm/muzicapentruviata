@@ -175,8 +175,8 @@ export default function DonatePage() {
 
   const handleDonateClick = async (e) => {
     e.preventDefault();
-    const amountRon = ronAmount && ronAmount > 0 ? ronAmount : 0;
-    if (!amountRon) return;
+    const amountToSend = effectiveAmount && effectiveAmount > 0 ? effectiveAmount : 0;
+    if (!amountToSend) return;
 
     try {
       // For local development, use a mock response
@@ -191,8 +191,8 @@ export default function DonatePage() {
 
       if (isLocalDevelopment) {
         // Generate proper payment data with calculated hash for local development
-        const amountValue = amountRon.toFixed(2);
-        const currencyValue = 'RON';
+        const amountValue = amountToSend.toFixed(2);
+        const currencyValue = currency;
         const invoiceIdValue = 'MPV-' + Date.now();
         const orderDescValue = donorName
           ? `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'} - ${donorName}`
@@ -226,15 +226,15 @@ export default function DonatePage() {
         };
       } else {
         // Production: Call Netlify function
-        console.log('Calling Netlify function with amount:', amountRon);
+        console.log('Calling Netlify function with amount:', amountToSend, 'currency:', currency);
         const response = await fetch('/.netlify/functions/initiate-payment', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            amount: amountRon,
-            currency: 'RON',
+            amount: amountToSend,
+            currency: currency,
             orderDesc: donorName
               ? `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'} - ${donorName}`
               : `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'}`,
