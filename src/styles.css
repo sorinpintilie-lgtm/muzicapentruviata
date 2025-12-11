@@ -2152,8 +2152,7 @@ h1 {
   text-align: left;
 }
 
-/* Mobile layout: keep center line and alternate items left/right like desktop,
-   but keep cards compact so text doesn't look stretched */
+/* Mobile layout: keep center line and alternate items left/right like desktop */
 @media (max-width: 820px) {
   .timeline-container {
     padding-inline: 16px;
@@ -2165,21 +2164,6 @@ h1 {
 
   .timeline-item {
     max-width: 100%;
-  }
-
-  /* Make cards narrower and text more readable on phone */
-  .timeline-item-inner {
-    max-width: 320px;
-  }
-
-  .timeline-item--left .timeline-item-inner,
-  .timeline-item--right .timeline-item-inner {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .timeline-item-text {
-    text-align: left;
   }
 }
 /* Gallery Page Styles */
