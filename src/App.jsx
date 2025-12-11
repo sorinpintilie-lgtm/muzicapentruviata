@@ -145,7 +145,7 @@ function Layout({ children }) {
               }
               onClick={closeMobileMenu}
             >
-              Timeline
+              Cronologie
             </NavLink>
 
             <NavLink
@@ -230,7 +230,7 @@ function Layout({ children }) {
                 'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
               }
             >
-              Timeline
+              Cronologie
             </NavLink>
 
             <NavLink

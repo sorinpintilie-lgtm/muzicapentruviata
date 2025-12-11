@@ -30,91 +30,6 @@ export default function SponsorsPage() {
             <p>
               Devino partenerul nostru. <strong>Contactează-ne aici.</strong>
             </p>
-            <form
-              className="sponsor-contact-form"
-              onSubmit={(e) => e.preventDefault()}
-              style={{
-                marginTop: '16px',
-                display: 'grid',
-                gap: '12px',
-                maxWidth: '420px'
-              }}
-            >
-              <div style={{ display: 'grid', gap: '6px' }}>
-                <label htmlFor="sponsor-last-name" style={{ fontSize: '0.85rem', color: '#666' }}>
-                  Nume
-                </label>
-                <input
-                  id="sponsor-last-name"
-                  type="text"
-                  name="lastName"
-                  required
-                  style={{
-                    padding: '10px 12px',
-                    borderRadius: '8px',
-                    border: '1px solid #e0e0e0',
-                    fontSize: '0.9rem'
-                  }}
-                />
-              </div>
-              <div style={{ display: 'grid', gap: '6px' }}>
-                <label htmlFor="sponsor-first-name" style={{ fontSize: '0.85rem', color: '#666' }}>
-                  Prenume
-                </label>
-                <input
-                  id="sponsor-first-name"
-                  type="text"
-                  name="firstName"
-                  required
-                  style={{
-                    padding: '10px 12px',
-                    borderRadius: '8px',
-                    border: '1px solid #e0e0e0',
-                    fontSize: '0.9rem'
-                  }}
-                />
-              </div>
-              <div style={{ display: 'grid', gap: '6px' }}>
-                <label htmlFor="sponsor-email" style={{ fontSize: '0.85rem', color: '#666' }}>
-                  Email
-                </label>
-                <input
-                  id="sponsor-email"
-                  type="email"
-                  name="email"
-                  required
-                  style={{
-                    padding: '10px 12px',
-                    borderRadius: '8px',
-                    border: '1px solid #e0e0e0',
-                    fontSize: '0.9rem'
-                  }}
-                />
-              </div>
-              <div style={{ display: 'grid', gap: '6px' }}>
-                <label htmlFor="sponsor-phone" style={{ fontSize: '0.85rem', color: '#666' }}>
-                  Telefon
-                </label>
-                <input
-                  id="sponsor-phone"
-                  type="tel"
-                  name="phone"
-                  style={{
-                    padding: '10px 12px',
-                    borderRadius: '8px',
-                    border: '1px solid #e0e0e0',
-                    fontSize: '0.9rem'
-                  }}
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn-primary"
-                style={{ marginTop: '8px', alignSelf: 'flex-start' }}
-              >
-                Trimite mesajul
-              </button>
-            </form>
           </div>
           <div className="sponsors-logos-extended">
             <div className="sponsor-section">
@@ -137,6 +52,96 @@ export default function SponsorsPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div
+          className="sponsor-contact-form-wrapper"
+          style={{ marginTop: '32px', width: '100%' }}
+        >
+          <form
+            className="sponsor-contact-form"
+            onSubmit={(e) => e.preventDefault()}
+            style={{
+              display: 'grid',
+              gap: '12px',
+              maxWidth: '100%',
+            }}
+          >
+            <div style={{ display: 'grid', gap: '6px' }}>
+              <label htmlFor="sponsor-last-name" style={{ fontSize: '0.85rem', color: '#666' }}>
+                Nume
+              </label>
+              <input
+                id="sponsor-last-name"
+                type="text"
+                name="lastName"
+                required
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid #e0e0e0',
+                  fontSize: '0.9rem'
+                }}
+              />
+            </div>
+            <div style={{ display: 'grid', gap: '6px' }}>
+              <label htmlFor="sponsor-first-name" style={{ fontSize: '0.85rem', color: '#666' }}>
+                Prenume
+              </label>
+              <input
+                id="sponsor-first-name"
+                type="text"
+                name="firstName"
+                required
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid #e0e0e0',
+                  fontSize: '0.9rem'
+                }}
+              />
+            </div>
+            <div style={{ display: 'grid', gap: '6px' }}>
+              <label htmlFor="sponsor-email" style={{ fontSize: '0.85rem', color: '#666' }}>
+                Email
+              </label>
+              <input
+                id="sponsor-email"
+                type="email"
+                name="email"
+                required
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid #e0e0e0',
+                  fontSize: '0.9rem'
+                }}
+              />
+            </div>
+            <div style={{ display: 'grid', gap: '6px' }}>
+              <label htmlFor="sponsor-phone" style={{ fontSize: '0.85rem', color: '#666' }}>
+                Telefon
+              </label>
+              <input
+                id="sponsor-phone"
+                type="tel"
+                name="phone"
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid #e0e0e0',
+                  fontSize: '0.9rem'
+                }}
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn-primary"
+              style={{ marginTop: '8px', justifySelf: 'flex-start' }}
+            >
+              Trimite mesajul
+            </button>
+          </form>
         </div>
       </section>
     </div>

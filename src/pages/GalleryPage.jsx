@@ -95,7 +95,7 @@ const timelineEvents = [
 function TimelineItem({ event }) {
   const [ref, isVisible] = useScrollAnimation(0.2, '0px 0px -60px 0px');
   const isLeft = event.position === 'left';
-  const showContent = !event.hideContent;
+  const hideDetails = event.hideContent;
 
   const wrapperClasses = [
     'timeline-item-inner',
@@ -115,13 +115,15 @@ function TimelineItem({ event }) {
             <img src={event.image} alt={event.alt} loading="lazy" />
           </figure>
         )}
-        {showContent && (
-          <div className="timeline-item-content">
-            <p className="timeline-item-year">{event.year}</p>
-            <h2 className="timeline-item-title">{event.title}</h2>
-            <p className="timeline-item-text">{event.description}</p>
-          </div>
-        )}
+        <div className="timeline-item-content">
+          <p className="timeline-item-year">{event.year}</p>
+          {!hideDetails && (
+            <>
+              <h2 className="timeline-item-title">{event.title}</h2>
+              <p className="timeline-item-text">{event.description}</p>
+            </>
+          )}
+        </div>
       </div>
     </article>
   );
@@ -141,14 +143,21 @@ export default function TimelinePage() {
     <div className="app-content">
       <section className="app-section timeline-section" aria-labelledby="timeline-title">
         <div className="app-section-header">
-          <span className="app-section-overline">Cronologia campaniei</span>
+          <span className="app-section-overline">Cronolgia Campaniei</span>
           <h1 id="timeline-title" className="app-section-title">
-            Timeline-ul „Muzică pentru Viață”
+            Muzică pentru viață, pentru oameni, pentru un spital oncologic la Reșița.
           </h1>
           <p className="app-section-lead">
-            Din 2015-2016 până astăzi, fiecare ediție a adus mai aproape visul construirii unui
-            spital oncologic la Reșița. Urmărește, an cu an, cum muzica a devenit speranță
-            pentru pacienții din Banatul de Munte.
+            O comunitate, o țară, iar acum… o lume întreagă.
+          </p>
+          <p className="app-section-lead">
+            Efortul colectiv este dovada că se poate, mai ales atunci când se dorește. Muzică Pentru
+            Viață împlinește zece ani. Zece ani de unitate si luptă, zece ani în care oamenii se
+            alătură, dăruiesc și susțin cu stoicism o cauză nobilă: construirea primului spital
+            oncologic la Reșița.
+          </p>
+          <p className="app-section-lead">
+            Acum suntem tot mai aproape, iar spitalul are deja o clădire.
           </p>
         </div>
 
