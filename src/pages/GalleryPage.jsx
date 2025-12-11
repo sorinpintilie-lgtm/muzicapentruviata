@@ -3,10 +3,10 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const timelineEvents = [
   {
-    year: '2016',
+    year: '2015-2016',
     title: 'Primele ore de emisie dedicate comunității',
     description:
-      'La Radio România Reșița apar primele ore de emisie dedicate strângerii de fonduri și proiectelor sociale. Încă nu se numește „Muzică pentru Viață”, dar se pune prima cărămidă a spiritului de solidaritate.',
+      'În anii 2015–2016, la Radio România Reșița apar primele ore de emisie dedicate strângerii de fonduri și proiectelor sociale. Încă nu se numește „Muzică pentru Viață”, dar se pune prima cărămidă a spiritului de solidaritate.',
     image: '/Logo Radio Romania Resita.svg',
     alt: 'Sigla Radio România Reșița, începutul poveștii pentru comunitate',
     position: 'left',
@@ -28,6 +28,13 @@ const timelineEvents = [
     image: '/onco-help-logo-d.png',
     alt: 'Logo-ul Fundației OncoHelp, partenerul medical al campaniei',
     position: 'left',
+  },
+  {
+    year: '2019',
+    image: '/dacus_logo_site.png',
+    alt: 'Logo de sponsor local, semn că mediul de afaceri se implică în Muzică pentru Viață',
+    position: 'right',
+    hideContent: true,
   },
   {
     year: '2020',
@@ -88,6 +95,7 @@ const timelineEvents = [
 function TimelineItem({ event }) {
   const [ref, isVisible] = useScrollAnimation(0.2, '0px 0px -60px 0px');
   const isLeft = event.position === 'left';
+  const showContent = !event.hideContent;
 
   const wrapperClasses = [
     'timeline-item-inner',
@@ -102,15 +110,17 @@ function TimelineItem({ event }) {
     <article className={`timeline-item timeline-item--${isLeft ? 'left' : 'right'}`}>
       <div className="timeline-item-marker" aria-hidden="true" />
       <div ref={ref} className={wrapperClasses}>
-        <div className="timeline-item-content">
-          <p className="timeline-item-year">{event.year}</p>
-          <h2 className="timeline-item-title">{event.title}</h2>
-          <p className="timeline-item-text">{event.description}</p>
-        </div>
         {event.image && (
           <figure className="timeline-item-media">
             <img src={event.image} alt={event.alt} loading="lazy" />
           </figure>
+        )}
+        {showContent && (
+          <div className="timeline-item-content">
+            <p className="timeline-item-year">{event.year}</p>
+            <h2 className="timeline-item-title">{event.title}</h2>
+            <p className="timeline-item-text">{event.description}</p>
+          </div>
         )}
       </div>
     </article>
@@ -136,7 +146,7 @@ export default function TimelinePage() {
             Timeline-ul „Muzică pentru Viață”
           </h1>
           <p className="app-section-lead">
-            Din 2016 până astăzi, fiecare ediție a adus mai aproape visul construirii unui
+            Din 2015-2016 până astăzi, fiecare ediție a adus mai aproape visul construirii unui
             spital oncologic la Reșița. Urmărește, an cu an, cum muzica a devenit speranță
             pentru pacienții din Banatul de Munte.
           </p>
