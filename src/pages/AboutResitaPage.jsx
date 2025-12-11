@@ -5,16 +5,16 @@ export default function AboutResitaPage() {
     <div className="app-content">
       <section className="app-section about-section" aria-labelledby="resita-title">
         <div className="app-section-header">
-          <span className="app-section-overline">Despre oraș</span>
+          <span className="app-section-overline">Despre Reșița</span>
           <h1 id="resita-title" className="app-section-title">
-            Reșița – Orașul care și-a transformat forța în solidaritate
+            Orașul care și-a transformat forța în solidaritate
           </h1>
         </div>
 
         <div className="about-grid">
           <div className="about-text">
             <span className="about-pill">
-              Orașul care și-a transformat forța în solidaritate.
+              Dăruiește. Donează. Pentru viață.
             </span>
             <p>
               Situat în sud-vestul României, <span className="about-highlight">Reșița</span> este un oraș cu aproape 80.000 de oameni, așezat pe malurile Bârzavei și crescut între dealuri care i-au modelat identitatea. Timp de peste un secol, Reșița a fost inima industrială a țării, locul unde s-au construit locomotive, s-au aprins furnale și s-a scris istorie tehnică pentru întreaga Europă.

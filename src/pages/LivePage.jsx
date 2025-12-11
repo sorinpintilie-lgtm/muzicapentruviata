@@ -27,9 +27,6 @@ export default function LivePage() {
                 <p style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '600' }}>
                   Transmisiunea live va începe din 14 Decembrie!
                 </p>
-                <p style={{ color: '#ffffff', fontSize: '1rem', marginTop: '8px' }}>
-                  Vezi aici artiștii, voluntarii și oamenii care fac parte din poveste. Alătură-te și tu!
-                </p>
               </div>
               {/*
                 Pentru a integra un stream YouTube Live, înlocuiește VIDEO_ID cu id-ul clipului:
@@ -89,25 +86,6 @@ export default function LivePage() {
             justifyContent: 'center',
             flexWrap: 'wrap'
           }}>
-            <button
-              className="radio-play-button"
-              style={{
-                background: '#d81b60',
-                color: 'white',
-                border: 'none',
-                borderRadius: '25px',
-                padding: '12px 24px',
-                fontSize: '1rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: '0 4px 12px rgba(216, 27, 96, 0.3)'
-              }}
-              onMouseEnter={(e) => e.target.style.transform = 'translateY(-1px)'}
-              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
-            >
-              ASCULTĂ-NE!
-            </button>
             <button
               className="radio-play-button"
               style={{
