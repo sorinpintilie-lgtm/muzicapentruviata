@@ -2058,6 +2058,10 @@ h1 {
 
 .timeline-item {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(24px, 5vw, 56px);
   max-width: 960px;
   margin: 0 auto;
 }
@@ -2139,15 +2143,13 @@ h1 {
 
 /* Zig-zag layout: alternate cards left/right around the center line on all viewports */
 .timeline-item--left .timeline-item-inner {
-  margin-right: auto;
-  padding-right: clamp(24px, 5vw, 56px);
+  grid-column: 1 / 2;
   align-items: flex-end;
   text-align: right;
 }
 
 .timeline-item--right .timeline-item-inner {
-  margin-left: auto;
-  padding-left: clamp(24px, 5vw, 56px);
+  grid-column: 2 / 3;
   align-items: flex-start;
   text-align: left;
 }
