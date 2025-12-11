@@ -22,6 +22,7 @@ export default function DonatePage() {
   const [donationMode, setDonationMode] = useState('once'); // 'monthly' | 'once'
   const [donorName, setDonorName] = useState(''); // Donor name field
   const [currency, setCurrency] = useState('RON'); // RON, EUR or USD
+  const [locationDetected, setLocationDetected] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((open) => !open);
@@ -53,6 +54,11 @@ export default function DonatePage() {
     return () => clearInterval(timer);
   }, []);
 
+  // Detect user location on component mount
+  useEffect(() => {
+    detectUserLocation();
+  }, []);
+
   function calculateTimeLeft() {
     const now = new Date();
     const difference = EVENT_DATE - now;
@@ -82,6 +88,36 @@ export default function DonatePage() {
     RON: [5, 25, 50, 100],
     EUR: [1, 5, 10, 25],
     USD: [1, 5, 10, 25]
+  };
+
+  // Detect user location and set default currency
+  const detectUserLocation = async () => {
+    try {
+      // Use ipapi.co for IP geolocation (free tier)
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+
+      if (data.country_code) {
+        let defaultCurrency = 'USD'; // Default for non-Europe
+
+        if (data.country_code === 'RO') {
+          // Romania
+          defaultCurrency = 'RON';
+        } else if (data.continent_code === 'EU') {
+          // Europe (excluding Romania)
+          defaultCurrency = 'EUR';
+        }
+        // USD for everywhere else (already set as default)
+
+        console.log('Detected location:', data.country_name, data.country_code, '- Setting currency to:', defaultCurrency);
+        setCurrency(defaultCurrency);
+      }
+    } catch (error) {
+      console.error('Failed to detect location:', error);
+      // Keep default RON currency
+    } finally {
+      setLocationDetected(true);
+    }
   };
 
 
