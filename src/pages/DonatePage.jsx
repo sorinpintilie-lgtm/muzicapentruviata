@@ -95,13 +95,15 @@ export default function DonatePage() {
       const data = await response.json();
 
       if (data.rates) {
+        // API returns rates as "how many of this currency for 1 RON"
+        // We need "how many RON for 1 of this currency"
         setCurrencyRates({
-          EUR: data.rates.EUR,
-          USD: data.rates.USD
+          EUR: 1 / data.rates.EUR,
+          USD: 1 / data.rates.USD
         });
         // Cache rates for 1 hour
         localStorage.setItem('exchangeRates', JSON.stringify({
-          rates: { EUR: data.rates.EUR, USD: data.rates.USD },
+          rates: { EUR: 1 / data.rates.EUR, USD: 1 / data.rates.USD },
           timestamp: Date.now()
         }));
       }
