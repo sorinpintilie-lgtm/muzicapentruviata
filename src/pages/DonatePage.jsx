@@ -22,6 +22,8 @@ export default function DonatePage() {
   const [donationMode, setDonationMode] = useState('once'); // 'monthly' | 'once'
   const [donorName, setDonorName] = useState(''); // Donor name field
   const [currency, setCurrency] = useState('RON'); // RON, EUR or USD
+  const [currencyRates, setCurrencyRates] = useState({ EUR: 5, USD: 4.5 }); // Live rates, fallback to static
+  const [ratesLoading, setRatesLoading] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((open) => !open);
@@ -84,11 +86,47 @@ export default function DonatePage() {
     USD: [1, 5, 10, 25]
   };
 
-  // Currency conversion rates (approximate)
-  const currencyRates = {
-    EUR: 5, // 1 EUR = 5 RON
-    USD: 4.5 // 1 USD = 4.5 RON
+  // Fetch live exchange rates
+  const fetchExchangeRates = async () => {
+    try {
+      setRatesLoading(true);
+      // Using exchangerate-api.com (free tier: 1500 requests/month)
+      const response = await fetch('https://api.exchangerate-api.com/v4/latest/RON');
+      const data = await response.json();
+
+      if (data.rates) {
+        setCurrencyRates({
+          EUR: data.rates.EUR,
+          USD: data.rates.USD
+        });
+        // Cache rates for 1 hour
+        localStorage.setItem('exchangeRates', JSON.stringify({
+          rates: { EUR: data.rates.EUR, USD: data.rates.USD },
+          timestamp: Date.now()
+        }));
+      }
+    } catch (error) {
+      console.error('Failed to fetch exchange rates:', error);
+      // Keep existing rates as fallback
+    } finally {
+      setRatesLoading(false);
+    }
   };
+
+  // Load cached rates or fetch new ones
+  useEffect(() => {
+    const cached = localStorage.getItem('exchangeRates');
+    if (cached) {
+      const { rates, timestamp } = JSON.parse(cached);
+      // Use cached rates if less than 1 hour old
+      if (Date.now() - timestamp < 3600000) {
+        setCurrencyRates(rates);
+        return;
+      }
+    }
+    // Fetch new rates if no cache or cache is old
+    fetchExchangeRates();
+  }, []);
 
   const parsedCustom =
     customAmount !== ''
@@ -280,9 +318,6 @@ export default function DonatePage() {
       setTimeout(() => {
         console.log('Form submission initiated');
         form.submit();
-
-        // Show feedback to user
-        alert('Payment form submitted to EuPlatesc. Check the new browser tab/window for the payment page.');
 
         // Remove the form after submission
         setTimeout(() => {
