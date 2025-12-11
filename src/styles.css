@@ -371,6 +371,14 @@ body {
   align-items: flex-start;
 }
 
+/* Desktop: Make full width */
+@media (min-width: 821px) {
+  .post-event-grid {
+    max-width: none;
+    margin: 0;
+  }
+}
+
 /* Donation panel (post-event left column) */
 .donation-panel {
   max-width: none;
