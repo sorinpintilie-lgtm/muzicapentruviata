@@ -27,6 +27,9 @@ export default function LivePage() {
                 <p style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '600' }}>
                   Transmisiunea live va începe din 14 Decembrie!
                 </p>
+                <p style={{ color: '#ffffff', fontSize: '1rem', marginTop: '8px' }}>
+                  Vezi aici artiștii, voluntarii și oamenii care fac parte din poveste. Alătură-te și tu!
+                </p>
               </div>
               {/*
                 Pentru a integra un stream YouTube Live, înlocuiește VIDEO_ID cu id-ul clipului:
@@ -47,10 +50,83 @@ export default function LivePage() {
 
           <div className="live-description-section">
             <p className="app-section-lead live-description-text">
-              Timp de câteva ore, muzica devine pretextul pentru un lucru simplu: să nu îi
-              lăsăm singuri pe cei care trec prin tratament oncologic. Fiecare piesă cântată
-              înseamnă încă un pas spre un spital complet dedicat lor.
+              Muzica nu este doar pentru suflet, ci și pentru viață. Aici, la căsuța de sticlă,
+              fiecare melodie ne aduce mai aproape de misiunea noastră: construirea primului
+              spital oncologic la Reșița!
             </p>
+          </div>
+        </div>
+
+        {/* Radio Promotion Section */}
+        <div className="radio-promotion-section" style={{
+          textAlign: 'center',
+          marginTop: '40px',
+          padding: '30px',
+          background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+          borderRadius: '16px',
+          border: '2px solid #dee2e6'
+        }}>
+          <h3 style={{
+            fontSize: '1.8rem',
+            fontWeight: '700',
+            color: '#d81b60',
+            marginBottom: '16px'
+          }}>
+            RADIO REȘIȚA
+          </h3>
+          <p style={{
+            fontSize: '1.1rem',
+            color: '#666',
+            marginBottom: '24px',
+            maxWidth: '600px',
+            margin: '0 auto 24px'
+          }}>
+            Conectează-te la vocea Reșiței și rămâi la curent cu știri, muzică și evenimente locale.
+          </p>
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <button
+              className="radio-play-button"
+              style={{
+                background: '#d81b60',
+                color: 'white',
+                border: 'none',
+                borderRadius: '25px',
+                padding: '12px 24px',
+                fontSize: '1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 4px 12px rgba(216, 27, 96, 0.3)'
+              }}
+              onMouseEnter={(e) => e.target.style.transform = 'translateY(-1px)'}
+              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+            >
+              ASCULTĂ-NE!
+            </button>
+            <button
+              className="radio-play-button"
+              style={{
+                background: '#d81b60',
+                color: 'white',
+                border: 'none',
+                borderRadius: '25px',
+                padding: '12px 24px',
+                fontSize: '1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 4px 12px rgba(216, 27, 96, 0.3)'
+              }}
+              onMouseEnter={(e) => e.target.style.transform = 'translateY(-1px)'}
+              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+            >
+              ASCULTĂ ACUM!
+            </button>
           </div>
         </div>
       </section>

@@ -145,7 +145,7 @@ function Layout({ children }) {
               }
               onClick={closeMobileMenu}
             >
-              Galerie
+              Timeline
             </NavLink>
 
             <NavLink
@@ -230,7 +230,7 @@ function Layout({ children }) {
                 'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
               }
             >
-              Galerie
+              Timeline
             </NavLink>
 
             <NavLink
