@@ -3,38 +3,49 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const timelineEvents = [
   {
-    year: '2015-2016',
-    title: 'Primele ore de emisie dedicate comunității',
+    year: '2015',
+    title: 'Începuturi',
     description:
-      'În anii 2015–2016, la Radio România Reșița apar primele ore de emisie dedicate strângerii de fonduri și proiectelor sociale. Încă nu se numește „Muzică pentru Viață”, dar se pune prima cărămidă a spiritului de solidaritate.',
+      'Radio România Reșița dă startul unei campanii care avea, prin gesturi mici, să schimbe o comunitate întreagă. Muzică Pentru Viață ia naștere între 2015 și 2016. În scurt timp, primul strop de speranță își face loc în inimile oamenilor din Banat.',
     image: '/Logo Radio Romania Resita.svg',
     alt: 'Sigla Radio România Reșița, începutul poveștii pentru comunitate',
     position: 'left',
   },
   {
-    year: '2017',
-    title: 'Se naște ideea unei campanii anuale',
+    year: '2016',
+    title: 'Sprijin',
     description:
-      'Echipa de la radio și partenerii locali încep să contureze o campanie recurentă, care să lege muzica de fapte bune. Se caută cauza potrivită și modul în care orașul poate ajuta, an de an.',
+      'Campania prinde rădăcini puternice și sprijină centrul oncologic de la Slatina Nera. Muzică pentru viață devine un concept îndrăgit și așteptat cu nerăbdare în fiecare an.',
     image: '/Logo Muzica pentru viata.svg',
-    alt: 'Sigla campaniei Muzică pentru Viață, simbolul unei promisiuni făcute orașului',
+    alt: 'Sigla campaniei Muzică pentru Viață în anii de început',
     position: 'right',
   },
   {
-    year: '2018',
-    title: 'Întâlnirea cu Fundația OncoHelp',
+    year: '2017',
+    title: 'Dăruință',
     description:
-      'Povestea se leagă de pacienții oncologici. Împreună cu Fundația OncoHelp, se desenează un drum pe termen lung: muzica de la Reșița va aduce speranță pentru cei care se luptă cu cancerul.',
-    image: '/onco-help-logo-d.png',
-    alt: 'Logo-ul Fundației OncoHelp, partenerul medical al campaniei',
+      'Muzică Pentru Viață oferă ajutor centrului Cristian Șerban. Un centru de evaluare și recuperare pentru copii și tineri cu diabet și hemofilie situat în Buziaș.',
+    image: '/Logo Muzica pentru viata.svg',
+    alt: 'Sigla campaniei Muzică pentru Viață, simbol al dăruinței pentru copii și tineri',
     position: 'left',
   },
   {
-    year: '2019',
-    image: '/dacus_logo_site.png',
-    alt: 'Logo de sponsor local, semn că mediul de afaceri se implică în Muzică pentru Viață',
+    year: '2018',
+    title: 'Speranță',
+    description:
+      'În acest an, Muzică Pentru Viață a adus speranţă pentru copii cu nevoi speciale de la Centrul Primăvara. Căsuța de sticlă a devenit locul unde visele chiar se împlinesc.',
+    image: '/16.jpg',
+    alt: 'Imagine caldă de la un eveniment Muzică pentru Viață, simbol al speranței pentru copii',
     position: 'right',
-    hideContent: true,
+  },
+  {
+    year: '2019',
+    title: 'Lupta continuă',
+    description:
+      'Implicări active în sprijinirea pacienților bolnavi de cancer prin colaborări cu OncoHelp, clinici de tratament și diverse instituții. Povestea merge mai departe și prinde un nou sens. Alături de Asociația OncoHelp, ne unim forțele pentru un scop comun: să oferim o șansă reală pacienților care luptă cu cancerul.',
+    image: '/onco-help-logo-d.png',
+    alt: 'Logo-ul Fundației OncoHelp, simbol al luptei continue împotriva cancerului',
+    position: 'left',
   },
   {
     year: '2020',
@@ -43,7 +54,7 @@ const timelineEvents = [
       'Chiar și într-un context dificil, dorința de a ajuta rămâne. Campania se adaptează, mesajele ajung mai mult online, iar oamenii continuă să doneze pentru pacienții vulnerabili.',
     image: '/16.jpg',
     alt: 'Lumini calde și atmosferă de seară la un eveniment caritabil în Reșița',
-    position: 'left',
+    position: 'right',
   },
   {
     year: '2021',
@@ -52,7 +63,7 @@ const timelineEvents = [
       'Începe oficial povestea căsuței de sticlă la Reșița. O mână de oameni, un microfon și un vis: ca muzica să poată construi, la propriu, speranță pentru pacienții cu cancer.',
     image: '/tmk-resita-4-1200x675.jpg',
     alt: 'Reșița văzută de sus, oraș pregătit pentru un nou început caritabil',
-    position: 'right',
+    position: 'left',
   },
   {
     year: '2022',
@@ -61,7 +72,7 @@ const timelineEvents = [
       'Tot mai mulți oameni se opresc în fața căsuței de sticlă. Donațiile cresc, iar campania începe să devină un reper anual pentru Reșița.',
     image: '/resita.jpg',
     alt: 'Panoramă cu Reșița, luminile orașului și oamenii în mișcare',
-    position: 'left',
+    position: 'right',
   },
   {
     year: '2023',
@@ -70,7 +81,7 @@ const timelineEvents = [
       'Voluntari, artiști, ascultători – toți în aceeași frecvență. Mesajul „Muzică pentru Viață” trece de granițele orașului și adună susținători din tot Banatul de Munte.',
     image: '/resita populatie.jpg',
     alt: 'Oamenii din Reșița surprinși într-o zi obișnuită, fiecare cu propria poveste',
-    position: 'right',
+    position: 'left',
   },
   {
     year: '2024',
@@ -79,7 +90,7 @@ const timelineEvents = [
       'Nu mai vorbim doar despre un vis. Se conturează planuri, proiecte, parteneriate. Fiecare donație înseamnă mai mult decât o sumă – e o cărămidă în viitorul pacienților.',
     image: '/ubb-resita.jpg',
     alt: 'Clădire reprezentativă din Reșița, simbol al unei comunități unite',
-    position: 'left',
+    position: 'right',
   },
   {
     year: '2025',
@@ -88,7 +99,7 @@ const timelineEvents = [
       'Anul în care Reșița își asumă pe deplin rolul de oraș care dăruiește. Muzica se aude mai puternic ca niciodată, iar fiecare gest de generozitate apropie spitalul oncologic de realitate.',
     image: '/WhatsApp Image 2025-12-02 at 16.19.50.jpeg',
     alt: 'Oameni adunați în jurul căsuței de sticlă, lumină caldă și emoție în aer',
-    position: 'right',
+    position: 'left',
   },
 ];
 
