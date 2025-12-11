@@ -1251,29 +1251,32 @@ h1 {
 
 .countdown {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(6px, 1.2vw, 8px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 16px);
 }
 
 .time-box {
   text-align: center;
-  padding: clamp(6px, 1.5vh, 8px) clamp(4px, 1vw, 6px);
-  border-radius: 12px;
+  padding: clamp(12px, 2.5vh, 16px) clamp(8px, 1.5vw, 12px);
+  border-radius: 16px;
   background: #fafafa;
   border: 1px solid #f1f1f1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .time-value {
-  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
   font-weight: 700;
+  color: var(--accent);
 }
 
 .time-label {
-  font-size: clamp(0.62rem, 1.2vw, 0.68rem);
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-top: 2px;
+  margin-top: 4px;
+  font-weight: 600;
 }
 
 .event-meta {
