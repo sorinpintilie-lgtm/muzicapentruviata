@@ -36,6 +36,28 @@ export default function GlobalRadioPlayer() {
     }
   };
 
+  // Allow external controls (e.g. Live & Video page button) to toggle the global radio
+  useEffect(() => {
+    const handleExternalToggle = async () => {
+      if (!audioRef.current) return;
+      try {
+        if (!audioRef.current.paused) {
+          audioRef.current.pause();
+        } else {
+          await audioRef.current.play();
+        }
+        // isPlaying state will be updated via audio onPlay/onPause handlers
+      } catch (error) {
+        console.error('Error toggling global radio from external control:', error);
+      }
+    };
+
+    window.addEventListener('global-radio-toggle', handleExternalToggle);
+    return () => {
+      window.removeEventListener('global-radio-toggle', handleExternalToggle);
+    };
+  }, []);
+
   // Don't render if hidden
   if (!isVisible) {
     return (

@@ -100,8 +100,12 @@ export default function LivePage() {
                 transition: 'all 0.2s ease',
                 boxShadow: '0 4px 12px rgba(216, 27, 96, 0.3)'
               }}
-              onMouseEnter={(e) => e.target.style.transform = 'translateY(-1px)'}
-              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+              onMouseEnter={(e) => (e.target.style.transform = 'translateY(-1px)')}
+              onMouseLeave={(e) => (e.target.style.transform = 'translateY(0)')}
+              onClick={() => {
+                // Trigger the same behavior as the floating global radio player
+                window.dispatchEvent(new Event('global-radio-toggle'));
+              }}
             >
               ASCULTĂ ACUM!
             </button>

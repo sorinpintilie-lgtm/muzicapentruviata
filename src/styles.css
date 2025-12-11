@@ -391,6 +391,13 @@ body {
   overflow: hidden;
 }
 
+/* Temporary highlight when navigated from header DONEAZĂ ACUM */
+.donation-form-highlight {
+  box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.4), 0 22px 55px rgba(216, 27, 96, 0.3);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  transform: translateY(-2px);
+}
+
 /* Inner layout: left = controls, right = brick visual */
 .donation-panel-inner {
   display: flex;
@@ -1363,7 +1370,8 @@ h1 {
 .app-content {
   width: 100%;
   max-width: 1100px;
-  margin: 0 auto 72px;
+  /* Reduce bottom margin to remove excessive gap before footer */
+  margin: 0 auto 24px;
   padding: 32px clamp(24px, 5vw, 48px) 48px;
   display: flex;
   flex-direction: column;

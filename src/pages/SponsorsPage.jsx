@@ -56,15 +56,26 @@ export default function SponsorsPage() {
 
         <div
           className="sponsor-contact-form-wrapper"
-          style={{ marginTop: '32px', width: '100%' }}
+          style={{
+            marginTop: '40px',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
         >
           <form
             className="sponsor-contact-form"
             onSubmit={(e) => e.preventDefault()}
             style={{
               display: 'grid',
-              gap: '12px',
-              maxWidth: '100%',
+              gap: '14px',
+              maxWidth: '480px',
+              width: '100%',
+              padding: '20px 24px',
+              borderRadius: '18px',
+              background: 'linear-gradient(135deg, #fff5f8 0%, #ffffff 60%)',
+              border: '1px solid rgba(216, 27, 96, 0.15)',
+              boxShadow: '0 14px 32px rgba(216, 27, 96, 0.12)',
             }}
           >
             <div style={{ display: 'grid', gap: '6px' }}>
@@ -126,6 +137,7 @@ export default function SponsorsPage() {
                 id="sponsor-phone"
                 type="tel"
                 name="phone"
+                required
                 style={{
                   padding: '10px 12px',
                   borderRadius: '8px',
@@ -137,7 +149,7 @@ export default function SponsorsPage() {
             <button
               type="submit"
               className="btn-primary"
-              style={{ marginTop: '8px', justifySelf: 'flex-start' }}
+              style={{ marginTop: '12px', justifySelf: 'center', minWidth: '60%' }}
             >
               Trimite mesajul
             </button>

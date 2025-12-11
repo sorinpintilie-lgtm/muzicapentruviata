@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useDonors } from '../DonorContext.jsx';
 
 const EVENT_DATE = new Date(2025, 11, 14, 19, 0, 0);
 
@@ -15,6 +16,8 @@ export default function DonatePage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [highlightForm, setHighlightForm] = useState(false);
+  const location = useLocation();
 
   // Donation state (post-event)
   const [selectedAmount, setSelectedAmount] = useState(5); // RON (smaller default for testing)
@@ -23,6 +26,8 @@ export default function DonatePage() {
   const [donorName, setDonorName] = useState(''); // Donor name field
   const [currency, setCurrency] = useState('RON'); // RON, EUR or USD
   const [locationDetected, setLocationDetected] = useState(false);
+
+  const { addDonor } = useDonors();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((open) => !open);
@@ -58,6 +63,57 @@ export default function DonatePage() {
   useEffect(() => {
     detectUserLocation();
   }, []);
+
+  // If navigated with #donation-form anchor, scroll to the form and highlight it briefly
+  useEffect(() => {
+    if (location.hash === '#donation-form') {
+      // Small delay to ensure layout is ready
+      setTimeout(() => {
+        const el = document.getElementById('donation-form');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50);
+
+      setHighlightForm(true);
+      const timer = setTimeout(() => setHighlightForm(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
+  // When returning from EuPlătesc, add confirmed donor to Peretele Eroilor
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const completed = params.get('donationCompleted');
+    const donorNameFromQuery = params.get('donor_name');
+    const amountFromQuery = params.get('donor_amount');
+    const donationIdFromQuery = params.get('donation_id');
+
+    if (completed === '1' && donorNameFromQuery && donationIdFromQuery) {
+      const storageKey = `mpv_donation_${donationIdFromQuery}`;
+      if (!sessionStorage.getItem(storageKey)) {
+        const parsedAmount = amountFromQuery
+          ? parseFloat(String(amountFromQuery).replace(',', '.'))
+          : 0;
+
+        addDonor({
+          name: donorNameFromQuery,
+          amount: Number.isFinite(parsedAmount) ? parsedAmount : 0,
+          message: '',
+        });
+
+        sessionStorage.setItem(storageKey, 'true');
+
+        // Clean sensitive query params from URL after processing
+        const url = new URL(window.location.href);
+        url.searchParams.delete('donationCompleted');
+        url.searchParams.delete('donor_name');
+        url.searchParams.delete('donor_amount');
+        url.searchParams.delete('donation_id');
+        window.history.replaceState({}, '', url.toString());
+      }
+    }
+  }, [addDonor]);
 
   function calculateTimeLeft() {
     const now = new Date();
@@ -210,12 +266,26 @@ export default function DonatePage() {
     const amountToSend = effectiveAmount && effectiveAmount > 0 ? effectiveAmount : 0;
     if (!amountToSend) return;
 
+    const safeDonorName = (donorName || '').trim();
+    const donationId = Date.now().toString(36) + Math.random().toString(16).slice(2);
+    const backToSiteBase = window.location.origin + '/';
+    const backToSiteParams =
+      safeDonorName
+        ? new URLSearchParams({
+            donationCompleted: '1',
+            donor_name: safeDonorName,
+            donor_amount: amountToSend.toFixed(2),
+            donation_id: donationId,
+          })
+        : null;
+
     try {
       // For local development, use a mock response
       // In production, this will call the Netlify function
       // Check if we should force production mode (for testing deployed sites)
       const forceProduction = window.location.search.includes('forceProduction=true');
-      const isLocalDevelopment = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && !forceProduction;
+      const isLocalDevelopment =
+        (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && !forceProduction;
       console.log('Payment environment:', isLocalDevelopment ? 'Local Development' : 'Production');
       console.log('Force production mode:', forceProduction);
 
@@ -226,22 +296,37 @@ export default function DonatePage() {
         const amountValue = amountToSend.toFixed(2);
         const currencyValue = currency;
         const invoiceIdValue = 'MPV-' + Date.now();
-        const orderDescValue = donorName
-          ? `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'} - ${donorName}`
+        const orderDescValue = safeDonorName
+          ? `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'} - ${safeDonorName}`
           : `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'}`;
 
         // Generate timestamp (match working example exactly)
         const now = new Date();
-        const timestampValue = now.getUTCFullYear().toString() +
-                              (now.getUTCMonth() + 1).toString().padStart(2, '0') +
-                              now.getUTCDate().toString().padStart(2, '0') +
-                              now.getUTCHours().toString().padStart(2, '0') +
-                              now.getUTCMinutes().toString().padStart(2, '0') +
-                              now.getUTCSeconds().toString().padStart(2, '0');
-        const nonceValue = Math.random().toString(36).substring(2, 18) + Math.random().toString(36).substring(2, 18);
+        const timestampValue =
+          now.getUTCFullYear().toString() +
+          (now.getUTCMonth() + 1).toString().padStart(2, '0') +
+          now.getUTCDate().toString().padStart(2, '0') +
+          now.getUTCHours().toString().padStart(2, '0') +
+          now.getUTCMinutes().toString().padStart(2, '0') +
+          now.getUTCSeconds().toString().padStart(2, '0');
+        const nonceValue =
+          Math.random().toString(36).substring(2, 18) +
+          Math.random().toString(36).substring(2, 18);
 
         // Calculate hash using the exact field names that will be sent to EuPlatesc
-        const fpHash = calculateFPHash(amountValue, currencyValue, invoiceIdValue, orderDescValue, timestampValue, nonceValue);
+        const fpHash = calculateFPHash(
+          amountValue,
+          currencyValue,
+          invoiceIdValue,
+          orderDescValue,
+          timestampValue,
+          nonceValue
+        );
+
+        const backToSite =
+          backToSiteParams && safeDonorName
+            ? `${backToSiteBase}?${backToSiteParams.toString()}`
+            : backToSiteBase;
 
         paymentData = {
           amount: amountValue,
@@ -253,7 +338,7 @@ export default function DonatePage() {
           nonce: nonceValue,
           fp_hash: fpHash,
           email: '',
-          back_to_site: window.location.origin + '/',
+          back_to_site: backToSite,
           endpoint: ENDPOINT,
         };
       } else {
@@ -267,8 +352,8 @@ export default function DonatePage() {
           body: JSON.stringify({
             amount: amountToSend,
             currency: currency,
-            orderDesc: donorName
-              ? `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'} - ${donorName}`
+            orderDesc: safeDonorName
+              ? `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'} - ${safeDonorName}`
               : `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'Unică'}`,
             email: '', // Optional, can be collected later if needed
           }),
@@ -283,6 +368,11 @@ export default function DonatePage() {
 
         paymentData = await response.json();
         console.log('Payment data received:', paymentData);
+
+        if (backToSiteParams && safeDonorName) {
+          const backToSite = `${backToSiteBase}?${backToSiteParams.toString()}`;
+          paymentData.back_to_site = backToSite;
+        }
       }
 
       // Create and submit form to EuPlatesc
@@ -332,7 +422,11 @@ export default function DonatePage() {
         <main className="post-event-grid">
           {/* Left column: Donation form */}
           <section
-            className="hero-main donation-panel page-enter-bottom"
+            id="donation-form"
+            className={
+              'hero-main donation-panel page-enter-bottom' +
+              (highlightForm ? ' donation-form-highlight' : '')
+            }
             aria-labelledby="pre-hero-title"
           >
             <div className="donation-panel-inner">

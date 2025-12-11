@@ -112,9 +112,11 @@ export default function WallPage() {
           <h1 id="wall-title" className="app-section-title">
             Peretele Eroilor
           </h1>
+          <p className="about-pill">
+            Voi sunteți adevărații eroi!
+          </p>
           <p className="app-section-lead">
-            Fiecare nume de aici înseamnă o poveste. Unele sunt scrise cu emoție, altele cu
-            dor. Toate însă spun același lucru: &quot;Sunt aici. Contezi.&quot;
+            Contribuția dumnevoastră contează mai mult decât credeți. Vă auzim, vă vedem, vă mulțumim!
           </p>
         </div>
 

@@ -62,15 +62,13 @@ function Layout({ children }) {
               style={{ height: '60px', maxWidth: '100%' }}
             />
           </div>
-          <a
+          <NavLink
+            to="/#donation-form"
             className="btn-primary mobile-donate-left"
-            href="https://oncohelp.ro/donatii/"
-            target="_blank"
-            rel="noopener noreferrer"
             style={{ fontSize: '1.2rem', padding: '12px 18px' }}
           >
             DONEAZĂ ACUM
-          </a>
+          </NavLink>
           <nav className="mobile-nav mobile-hamburger-right">
             <button
               className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
@@ -86,15 +84,13 @@ function Layout({ children }) {
 
         <div className={`mobile-header-compact ${isScrolled ? 'active' : ''}`}>
           <div></div> {/* Empty left column */}
-          <a
+          <NavLink
+            to="/#donation-form"
             className="btn-primary"
-            href="https://oncohelp.ro/donatii/"
-            target="_blank"
-            rel="noopener noreferrer"
             style={{ fontSize: '1.35rem', padding: '15px 30px' }}
           >
             DONEAZĂ ACUM
-          </a>
+          </NavLink>
           <div></div> {/* Empty right column */}
         </div>
       </header>
@@ -189,15 +185,13 @@ function Layout({ children }) {
             </NavLink>
           </div>
 
-          <a
+          <NavLink
+            to="/#donation-form"
             className="btn-primary mobile-nav-donate"
-            href="https://oncohelp.ro/donatii/"
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={closeMobileMenu}
           >
             DONEAZĂ ACUM
-          </a>
+          </NavLink>
         </div>
       </div>
 
@@ -270,14 +264,12 @@ function Layout({ children }) {
             </NavLink>
           </div>
 
-          <a
+          <NavLink
+            to="/#donation-form"
             className="btn-primary nav-donate"
-            href="https://oncohelp.ro/donatii/"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             DONEAZĂ ACUM
-          </a>
+          </NavLink>
         </div>
       </nav>
 
