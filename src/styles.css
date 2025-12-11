@@ -422,6 +422,15 @@ body {
   gap: 16px;
 }
 
+/* Right section for desktop grid layout */
+.donation-panel-right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  padding: clamp(16px, 2vh, 20px) clamp(14px, 2vw, 22px);
+}
+
 .mobile-image-counter {
   display: none;
 }
@@ -563,6 +572,11 @@ body {
     gap: 20px;
     display: flex;
     flex-direction: column;
+  }
+
+  /* Hide desktop right section on mobile */
+  .donation-panel-right-section {
+    display: none;
   }
 
   /* Mobile-specific donation amount button styling */
