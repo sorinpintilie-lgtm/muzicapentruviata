@@ -2058,18 +2058,24 @@ h1 {
 
 .timeline-item {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  column-gap: clamp(24px, 5vw, 56px);
   max-width: 960px;
   margin: 0 auto;
 }
 
+/* Card that slides in and holds image + text stacked */
+.timeline-item-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+}
+
 .timeline-item-marker {
   position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: 14px;
   height: 14px;
   border-radius: 999px;
@@ -2085,6 +2091,7 @@ h1 {
   background: #ffffff;
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
   border: 1px solid var(--border-soft);
+  order: 2; /* text under image */
 }
 
 .timeline-item-year {
@@ -2112,6 +2119,7 @@ h1 {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  order: 1; /* image above text */
 }
 
 .timeline-item-media img {
@@ -2129,39 +2137,25 @@ h1 {
   filter: brightness(1.05);
 }
 
-/* Zig-zag layout: alternate left/right around the center line on desktop */
-.timeline-item--left .timeline-item-content {
-  grid-column: 1 / 2;
+/* Zig-zag layout: alternate cards left/right around the center line on all viewports */
+.timeline-item--left .timeline-item-inner {
+  margin-right: auto;
+  padding-right: clamp(24px, 5vw, 56px);
+  align-items: flex-end;
   text-align: right;
 }
 
-.timeline-item--left .timeline-item-media {
-  grid-column: 2 / 3;
-}
-
-.timeline-item--right .timeline-item-content {
-  grid-column: 2 / 3;
+.timeline-item--right .timeline-item-inner {
+  margin-left: auto;
+  padding-left: clamp(24px, 5vw, 56px);
+  align-items: flex-start;
   text-align: left;
 }
 
-.timeline-item--right .timeline-item-media {
-  grid-column: 1 / 2;
-}
-
-/* Mobile layout: stack items on one side with the line to the left */
+/* Mobile layout: keep center line and alternate items left/right like desktop */
 @media (max-width: 820px) {
   .timeline-container {
-    padding-inline: 0;
-  }
-
-  .timeline-line {
-    left: 24px;
-    transform: translateX(0);
-  }
-
-  .timeline-line::before,
-  .timeline-line::after {
-    width: 200%;
+    padding-inline: 16px;
   }
 
   .timeline-items {
@@ -2169,23 +2163,7 @@ h1 {
   }
 
   .timeline-item {
-    grid-template-columns: minmax(0, 1fr);
     max-width: 100%;
-    padding-left: 48px;
-  }
-
-  .timeline-item-marker {
-    left: 24px;
-    transform: translateX(0);
-  }
-
-  .timeline-item-content {
-    text-align: left;
-  }
-
-  .timeline-item-media {
-    grid-column: 1 / 2;
-    margin-top: 12px;
   }
 }
 /* Gallery Page Styles */

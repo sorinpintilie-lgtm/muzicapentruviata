@@ -30,15 +30,6 @@ const timelineEvents = [
     position: 'left',
   },
   {
-    year: '2019',
-    title: 'Primii mari parteneri și sponsori',
-    description:
-      'Companii, instituții și oameni de afaceri se alătură cauzei. Nu mai este doar un proiect de radio, ci o platformă prin care Reșița întreagă își arată generozitatea.',
-    image: '/dacus_logo_site.png',
-    alt: 'Logo de sponsor local, semn că mediul de afaceri se implică',
-    position: 'right',
-  },
-  {
     year: '2020',
     title: 'Un an greu, dar fără pauză pentru bine',
     description:
@@ -98,9 +89,8 @@ function TimelineItem({ event }) {
   const [ref, isVisible] = useScrollAnimation(0.2, '0px 0px -60px 0px');
   const isLeft = event.position === 'left';
 
-  const classes = [
-    'timeline-item',
-    `timeline-item--${isLeft ? 'left' : 'right'}`,
+  const wrapperClasses = [
+    'timeline-item-inner',
     'animate-on-scroll',
     isLeft ? 'animate-slide-left' : 'animate-slide-right',
     isVisible ? 'animate-fade-in' : '',
@@ -109,18 +99,20 @@ function TimelineItem({ event }) {
     .join(' ');
 
   return (
-    <article ref={ref} className={classes}>
+    <article className={`timeline-item timeline-item--${isLeft ? 'left' : 'right'}`}>
       <div className="timeline-item-marker" aria-hidden="true" />
-      <div className="timeline-item-content">
-        <p className="timeline-item-year">{event.year}</p>
-        <h2 className="timeline-item-title">{event.title}</h2>
-        <p className="timeline-item-text">{event.description}</p>
+      <div ref={ref} className={wrapperClasses}>
+        <div className="timeline-item-content">
+          <p className="timeline-item-year">{event.year}</p>
+          <h2 className="timeline-item-title">{event.title}</h2>
+          <p className="timeline-item-text">{event.description}</p>
+        </div>
+        {event.image && (
+          <figure className="timeline-item-media">
+            <img src={event.image} alt={event.alt} loading="lazy" />
+          </figure>
+        )}
       </div>
-      {event.image && (
-        <figure className="timeline-item-media">
-          <img src={event.image} alt={event.alt} loading="lazy" />
-        </figure>
-      )}
     </article>
   );
 }
