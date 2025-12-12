@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const timelineEvents = [
@@ -103,7 +103,7 @@ const timelineEvents = [
   },
 ];
 
-function TimelineItem({ event }) {
+function TimelineItem({ event, onImageClick }) {
   const [ref, isVisible] = useScrollAnimation(0.2, '0px 0px -60px 0px');
   const isLeft = event.position === 'left';
   const hideDetails = event.hideContent;
@@ -123,7 +123,7 @@ function TimelineItem({ event }) {
       <div ref={ref} className={wrapperClasses}>
         {event.image && (
           <figure className="timeline-item-media">
-            <img src={event.image} alt={event.alt} loading="lazy" />
+            <img src={event.image} alt={event.alt} loading="lazy" onClick={() => onImageClick(event.image)} style={{ cursor: 'pointer' }} />
           </figure>
         )}
         <div className="timeline-item-content">
@@ -141,6 +141,7 @@ function TimelineItem({ event }) {
 }
 
 export default function TimelinePage() {
+  const [selectedImage, setSelectedImage] = useState(null);
   const [lineRef, lineVisible] = useScrollAnimation(0.1, '-10% 0px -40% 0px');
 
   const lineClasses = [
@@ -177,11 +178,17 @@ export default function TimelinePage() {
 
           <div className="timeline-items">
             {timelineEvents.map((event) => (
-              <TimelineItem key={event.year} event={event} />
+              <TimelineItem key={event.year} event={event} onImageClick={setSelectedImage} />
             ))}
           </div>
         </div>
       </section>
+
+      {selectedImage && (
+        <div className="image-modal" onClick={() => setSelectedImage(null)}>
+          <img src={selectedImage} alt="Full size" />
+        </div>
+      )}
     </div>
   );
 }
