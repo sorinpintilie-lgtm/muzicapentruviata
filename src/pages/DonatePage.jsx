@@ -238,27 +238,29 @@ export default function DonatePage() {
                 </div>
 
                 {/* Donor Information */}
-                <div className="donation-custom">
-                  <label className="donation-custom-label">Numele tău (opțional):</label>
-                  <input
-                    type="text"
-                    className="donation-custom-input"
-                    placeholder="Numele tău sau 'Anonim'"
-                    value={donorName}
-                    onChange={(e) => setDonorName(e.target.value)}
-                  />
-                </div>
+                <div className="donor-info-row">
+                  <div className="donation-custom">
+                    <label className="donation-custom-label">Numele tău (opțional):</label>
+                    <input
+                      type="text"
+                      className="donation-custom-input"
+                      placeholder="Numele tău sau 'Anonim'"
+                      value={donorName}
+                      onChange={(e) => setDonorName(e.target.value)}
+                    />
+                  </div>
 
-                <div className="donation-custom">
-                  <label className="donation-custom-label">Email (necesar pentru confirmare):</label>
-                  <input
-                    type="email"
-                    className="donation-custom-input"
-                    placeholder="email@exemplu.ro"
-                    value={donorEmail}
-                    onChange={(e) => setDonorEmail(e.target.value)}
-                    required
-                  />
+                  <div className="donation-custom">
+                    <label className="donation-custom-label">Email (necesar pentru confirmare):</label>
+                    <input
+                      type="email"
+                      className="donation-custom-input"
+                      placeholder="email@exemplu.ro"
+                      value={donorEmail}
+                      onChange={(e) => setDonorEmail(e.target.value)}
+                      required
+                    />
+                  </div>
                 </div>
 
                 {/* Error Message */}
