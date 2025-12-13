@@ -121,7 +121,7 @@ body {
 
 .site-nav-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px 14px;
   align-items: center;
 }
@@ -434,9 +434,22 @@ body {
   align-items: flex-start;
 }
 
+/* Vertical layout for homepage - donation form above, story below */
+.homepage-vertical-layout {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(8px, 2vh, 16px) clamp(20px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vw, 48px);
+  align-items: center;
+}
+
 /* Desktop: Make full width */
 @media (min-width: 821px) {
-  .post-event-grid {
+  .post-event-grid,
+  .homepage-vertical-layout {
     max-width: none;
     margin: 0;
   }

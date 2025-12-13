@@ -23,11 +23,6 @@ function MoneyCounter() {
       <div className="money-counter-amount">
         {loading ? '...' : formattedAmount}
       </div>
-      {error && (
-        <div className="money-counter-label" style={{ opacity: 0.75 }}>
-          (offline)
-        </div>
-      )}
     </div>
   );
 }

@@ -138,7 +138,7 @@ export default function DonatePage() {
 
   return (
     <div className="homepage-wrapper post-event-wrapper">
-      <div className="post-event-grid">
+      <div className="homepage-vertical-layout">
         {/* Donation Panel */}
         <div className="donation-panel" id="donation-form">
           <div className="donation-panel-inner">
@@ -251,7 +251,7 @@ export default function DonatePage() {
           </div>
         </div>
 
-        {/* Story Section */}
+        {/* Story Section - Now below donation form */}
         <div className="post-event-story">
           <div className="post-event-section">
             <div className="post-event-section-title">De ce este important?</div>
