@@ -361,6 +361,10 @@ function SiteFooter() {
 function App() {
   const location = useLocation();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <>
       <Routes>

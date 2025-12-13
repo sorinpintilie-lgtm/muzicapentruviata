@@ -173,7 +173,7 @@ export default function DonatePage() {
 
   return (
     <div className="homepage-wrapper post-event-wrapper">
-      <div className="post-event-grid">
+      <div className="homepage-vertical-layout">
         {/* Donation Panel */}
         <div className="donation-panel" id="donation-form">
           <div className="donation-panel-inner">
@@ -285,16 +285,15 @@ export default function DonatePage() {
                 </p>
               </form>
             </div>
-          </div>
-  
-          {/* Right side image */}
-          <div className="donation-panel-right-section">
-            <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)'}} />
+
+            <div className="donation-panel-right">
+              <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)'}} />
+            </div>
           </div>
         </div>
-  
+
         {/* Story Section - Now below donation form */}
-        <div className="post-event-story" style={{gridColumn: '1 / -1'}}>
+        <div className="post-event-story">
           <div className="post-event-section">
             <div className="post-event-section-title">De ce este important?</div>
             <p className="post-event-text">
