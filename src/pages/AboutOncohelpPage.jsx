@@ -7,9 +7,11 @@ export default function AboutOncohelpPage() {
         <div className="app-section-header">
           <span className="app-section-overline">Beneficiar</span>
           <h1 id="oncohelp-title" className="app-section-title">
-            OncoHelp, singura unitate sanitară din România certificată pentru servicii integrate
-            de oncologie. Un proiect dedicat tuturor!
+            OncoHelp – singura unitate sanitară din România certificată pentru servicii integrate de oncologie
           </h1>
+          <p className="app-section-lead">
+            Un proiect dedicat tuturor.
+          </p>
         </div>
 
         <div className="about-grid">
@@ -22,11 +24,6 @@ export default function AboutOncohelpPage() {
               fundații din vestul țării în îngrijirea pacienților cu cancer. De ani întregi,
               medici, asistenți și voluntari luptă pentru ca tratamentele moderne să fie cât mai
               aproape de cei care au nevoie de ele.
-            </p>
-            <p>
-              Un spital de această magnitudine, la Reșița, ar însemna o șansă reală la viață. Ar
-              sprijini sute de familii care, zi de zi, străbat kilometri întregi pentru a avea
-              acces la tratamentele potrivite.
             </p>
             <p>
               Un gest mic poate schimba o lume. Fii parte din schimbare, alătură-te campaniei{' '}

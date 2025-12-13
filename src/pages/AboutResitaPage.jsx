@@ -7,7 +7,7 @@ export default function AboutResitaPage() {
         <div className="app-section-header">
           <span className="app-section-overline">Despre Reșița</span>
           <h1 id="resita-title" className="app-section-title">
-            Orașul care și-a transformat forța în solidaritate
+            Reșița – Orașul care și-a transformat forța în solidaritate
           </h1>
         </div>
 
@@ -20,7 +20,7 @@ export default function AboutResitaPage() {
               Situat în sud-vestul României, <span className="about-highlight">Reșița</span> este un oraș cu aproape 80.000 de oameni, așezat pe malurile Bârzavei și crescut între dealuri care i-au modelat identitatea. Timp de peste un secol, Reșița a fost inima industrială a țării, locul unde s-au construit locomotive, s-au aprins furnale și s-a scris istorie tehnică pentru întreaga Europă.
             </p>
             <p>
-              Astăzi, Reșița nu mai este doar orașul oțelului. Este orașul renașterii. Al oamenilor care se ridică împreună, care cred în comunitate, în cultură, în educație și în puterea gesturilor mici ce schimbă destine.
+              Astăzi, Reșița nu mai este orașul oțelului. Este orașul renașterii. Al oamenilor care se ridică împreună, care cred în comunitate, în cultură, în educație și în puterea gesturilor mici ce schimbă destine.
             </p>
             <p>
               Aici, în Reșița, s-a născut Muzică pentru Viață – o inițiativă care a adunat în jurul ei mii de oameni, familii, copii, artiști, voluntari și inimile tuturor celor care își doresc un viitor în care bolnavii de cancer să nu mai fie nevoiți să plece departe pentru tratament.
