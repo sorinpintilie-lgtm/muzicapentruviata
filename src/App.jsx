@@ -372,8 +372,8 @@ function SiteFooter({ isScrolled }) {
             </NavLink>
           </div>
           <div className="footer-contact">
-            <a href="https://wa.me/40255210100" className="footer-contact-link" target="_blank" rel="noopener noreferrer">
-              Contact WhatsApp: 0255 210 100
+            <a href="https://wa.me/40751288777" className="footer-contact-link" target="_blank" rel="noopener noreferrer">
+              Contact WhatsApp: +40 751 288 777
             </a>
           </div>
           <p className="footer-copyright">
