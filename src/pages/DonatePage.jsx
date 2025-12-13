@@ -191,8 +191,9 @@ export default function DonatePage() {
                 <div className="donation-mode-tabs">
                   <button
                     type="button"
-                    className={`donation-mode-tab ${donationMode === 'onetime' ? 'donation-mode-tab--active' : ''}`}
-                    onClick={() => setDonationMode('onetime')}
+                    className="donation-mode-tab donation-mode-tab--disabled"
+                    disabled
+                    title="Donațiile vor fi disponibile în curând"
                   >
                     O singură dată
                   </button>
