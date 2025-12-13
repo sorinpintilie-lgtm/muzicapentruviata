@@ -1015,57 +1015,20 @@ body {
   gap: 18px;
 }
 
-/* Story sections as compact, animated mosaics with big images */
+/* Story sections as full-width text with images below */
 .post-event-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
-  align-items: stretch;
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-bottom: 0;
-  padding: 16px 18px;
+  padding: 20px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid var(--border-soft);
   box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
   animation: fadeInScale 0.7s ease-out;
   transform-origin: center;
-}
-
-/* First card: text left, big image right */
-.post-event-section:nth-child(1) .post-event-section-title,
-.post-event-section:nth-child(1) .post-event-text {
-  grid-column: 1;
-}
-
-.post-event-section:nth-child(1) .post-event-image-block {
-  grid-column: 2;
-  grid-row: 1 / span 3;
-}
-
-/* Second card: big image left, text right */
-.post-event-section:nth-child(2) {
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.3fr);
-}
-
-.post-event-section:nth-child(2) .post-event-section-title,
-.post-event-section:nth-child(2) .post-event-text {
-  grid-column: 2;
-}
-
-.post-event-section:nth-child(2) .post-event-image-block {
-  grid-column: 1;
-  grid-row: 1 / span 3;
-}
-
-/* Third card: full-width stacked */
-.post-event-section:nth-child(3) {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.post-event-section:nth-child(3) .post-event-section-title,
-.post-event-section:nth-child(3) .post-event-text,
-.post-event-section:nth-child(3) .post-event-image-block {
-  grid-column: 1;
+  width: 100%;
 }
 
 .post-event-section:nth-child(1) {

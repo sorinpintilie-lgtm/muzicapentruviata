@@ -286,7 +286,8 @@ export default function DonatePage() {
             <div className="post-event-section-title">De ce este important?</div>
             <p className="post-event-text">
               În fiecare an, în România, aproximativ 100.000 de oameni află că au cancer. Pentru mulți dintre ei, lupta nu înseamnă doar boala, ci și drumuri lungi, epuizare, costuri mari și timp prețios pierdut departe de cei dragi.
-              <br /><br />
+            </p>
+            <p className="post-event-text">
               Reșița nu are un spital oncologic. Pacienții sunt nevoiți să călătorească sute de kilometri pentru tratament, în condiții dificile. Fundația OncoHelp lucrează pentru a construi primul spital oncologic din Reșița, un loc unde oamenii pot primi tratament de calitate, mai aproape de casă, cu demnitate, speranță și sprijin real.
             </p>
             <div className="post-event-image-block post-event-image-block--clinic">
@@ -295,34 +296,44 @@ export default function DonatePage() {
           </div>
 
           <div className="post-event-section">
+            <div className="post-event-section-title">Spitalul din Reșița</div>
+            <p className="post-event-text">
+              Muzică pentru Viață 2016
+            </p>
+            <p className="post-event-text">
+              Muzică pentru Viață
+            </p>
+            <p className="post-event-text">
+              De peste 10 ani, Radio România Reșița dă glas speranței prin campania „Muzică pentru Viață" – un maraton caritabil care a transformat muzica în sprijin real și a adunat sute de mii de euro pentru oameni aflați în nevoie.
+            </p>
+            <p className="post-event-text">
+              În 2025, fiecare notă, fiecare voce și fiecare donație se unesc pentru un scop vital: construirea spitalului oncologic la Reșița. Împreună, demonstrăm că solidaritatea poate salva vieți și că, atunci când o comunitate se unește, speranța devine realitate.
+            </p>
             <div className="post-event-image-block post-event-image-block--history">
               <img src="/2016.jpg" alt="Muzică pentru Viață 2016" />
             </div>
-            <div className="post-event-section-title">Muzică pentru Viață</div>
-            <p className="post-event-text">
-              De peste 10 ani, Radio România Reșița dă glas speranței prin campania „Muzică pentru Viață" – un maraton caritabil care a transformat muzica în sprijin real și a adunat sute de mii de euro pentru oameni aflați în nevoie.
-              <br /><br />
-              În 2025, fiecare notă, fiecare voce și fiecare donație se unesc pentru un scop vital: construirea spitalului oncologic la Reșița. Împreună, demonstrăm că solidaritatea poate salva vieți și că, atunci când o comunitate se unește, speranța devine realitate.
-            </p>
           </div>
 
           <div className="post-event-section">
             <div className="post-event-section-title">Fiecare donație contează</div>
             <p className="post-event-text">
               Un pas esențial a fost deja făcut. OncoHelp a achiziționat o clădire în valoare de 1,2 milioane de euro, care va deveni viitorul spital oncologic din Reșița. Nu mai vorbim despre un vis îndepărtat, ci despre un proiect concret, cu fundație solidă și direcție clară.
-              <br /><br />
+            </p>
+            <p className="post-event-text">
               OncoHelp este una dintre cele mai dedicate fundații din vestul țării în îngrijirea pacienților cu cancer. De ani întregi, medici, asistenți și voluntari luptă pentru ca tratamentele moderne să fie cât mai aproape de cei care au nevoie de ele. Astăzi, această luptă are un loc real, un spațiu care așteaptă să fie transformat într-un spital al speranței.
-              <br /><br />
+            </p>
+            <p className="post-event-text">
               Un spital de această amploare, la Reșița, înseamnă o șansă reală la viață. Înseamnă mai puține drumuri istovitoare, mai puțină suferință și mai mult timp petrecut lângă familie pentru sutele de pacienți care, zi de zi, sunt nevoiți să parcurgă kilometri întregi pentru tratament.
-              <br /><br />
-              Un gest mic poate schimba o lume.
-              Fii parte din această schimbare și alătură-te campaniei Muzică Pentru Viață.
-              <br /><br />
+            </p>
+            <p className="post-event-text">
+              Un gest mic poate schimba o lume. Fii parte din această schimbare și alătură-te campaniei Muzică Pentru Viață.
+            </p>
+            <p className="post-event-text">
               „Una din convingerile noastre a fost şi este că accesul la sănătate trebuie să fie asigurat tuturor, dincolo de situaţia materială sau socială a fiecăruia."
-              <br />
               — Șerban Negru, Președintele Asociației OncoHelp
-              <br /><br />
-              Află mai multe despre proiectele OncoHelp pe <a href="https://oncohelp.ro" target="_blank" rel="noopener noreferrer">oncohelp.ro</a>.
+            </p>
+            <p className="post-event-text">
+              Află mai multe despre proiectele OncoHelp pe oncohelp.ro.
             </p>
             <div className="post-event-image-block post-event-image-block--live">
               <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" />
