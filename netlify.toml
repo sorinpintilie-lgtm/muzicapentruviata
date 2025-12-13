@@ -7,6 +7,13 @@
   NETLIFY_USE_NEW_BUILD_IMAGE = "true"
   # Disable secrets scanning for Firebase API keys (they are public by design)
   SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+  # Firebase Configuration for Netlify Functions
+  FIREBASE_API_KEY = "AIzaSyCJYe6cwFiNFULB8zQk7dyWP4ZVFJrnCwQ"
+  FIREBASE_AUTH_DOMAIN = "muzicapentruviata-46229.firebaseapp.com"
+  FIREBASE_PROJECT_ID = "muzicapentruviata-46229"
+  FIREBASE_STORAGE_BUCKET = "muzicapentruviata-46229.firebasestorage.app"
+  FIREBASE_MESSAGING_SENDER_ID = "927019121042"
+  FIREBASE_APP_ID = "1:927019121042:web:3b11229ad4f5b9c896a94b"
 
 [functions]
   directory = "netlify/functions"
