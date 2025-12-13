@@ -15,8 +15,8 @@ export default function DonatePage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
 
-  // Preset donation amounts (minimum 15 RON)
-  const presetAmounts = [15, 50, 100, 250, 'custom'];
+  // Preset donation amounts (minimum 1 RON)
+  const presetAmounts = [1, 15, 50, 100, 'custom'];
 
   // Handle successful payment return from EuPlatesc
   useEffect(() => {
@@ -101,8 +101,8 @@ export default function DonatePage() {
     setError('');
 
     const finalAmount = getFinalAmount();
-    if (!finalAmount || finalAmount < 15) {
-      setError('Suma minimă pentru donație este 15 RON (aproximativ 3 EUR / 3 USD).');
+    if (!finalAmount || finalAmount < 1) {
+      setError('Suma minimă pentru donație este 1 RON.');
       return;
     }
 
@@ -222,7 +222,7 @@ export default function DonatePage() {
                           placeholder="Altă"
                           value={customAmount}
                           onChange={handleCustomAmountChange}
-                          min="15"
+                          min="1"
                           step="1"
                           onClick={(e) => e.stopPropagation()}
                         />
