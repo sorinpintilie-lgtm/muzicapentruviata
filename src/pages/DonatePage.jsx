@@ -173,7 +173,7 @@ export default function DonatePage() {
 
   return (
     <div className="homepage-wrapper post-event-wrapper">
-      <div className="homepage-vertical-layout">
+      <div className="post-event-grid">
         {/* Donation Panel */}
         <div className="donation-panel" id="donation-form">
           <div className="donation-panel-inner">
@@ -286,10 +286,15 @@ export default function DonatePage() {
               </form>
             </div>
           </div>
+  
+          {/* Right side image */}
+          <div className="donation-panel-right-section">
+            <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)'}} />
+          </div>
         </div>
-
+  
         {/* Story Section - Now below donation form */}
-        <div className="post-event-story">
+        <div className="post-event-story" style={{gridColumn: '1 / -1'}}>
           <div className="post-event-section">
             <div className="post-event-section-title">De ce este important?</div>
             <p className="post-event-text">
@@ -298,7 +303,7 @@ export default function DonatePage() {
               primul spital oncologic din regiune, oferind acces la tratament de calitate pentru toți pacienții.
             </p>
             <div className="post-event-image-block post-event-image-block--clinic">
-              <img src="/tmk-resita-4-1200x675.jpg" alt="Spitalul din Reșița" />
+              <img src="/resita populatie.jpg" alt="Spitalul din Reșița" />
             </div>
           </div>
 
@@ -321,7 +326,7 @@ export default function DonatePage() {
               oferi speranță pacienților cu cancer din Banatul de Munte. Mulțumim pentru generozitate!
             </p>
             <div className="post-event-image-block post-event-image-block--live">
-              <img src="/ubb-resita.jpg" alt="Universitatea din Reșița" />
+              <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" />
             </div>
           </div>
         </div>

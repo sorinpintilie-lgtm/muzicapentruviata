@@ -282,7 +282,9 @@ function SiteFooter() {
             <div className="footer-column">
               <span className="footer-column-title">Beneficiar donații</span>
               <div className="footer-logo-main footer-logo-main--oncohelp">
-                <img src="/onco-help-logo-d.png" alt="Fundația OncoHelp" />
+                <a href="https://oncohelp.ro" target="_blank" rel="noopener noreferrer">
+                  <img src="/onco-help-logo-d.png" alt="Fundația OncoHelp" />
+                </a>
               </div>
             </div>
 
