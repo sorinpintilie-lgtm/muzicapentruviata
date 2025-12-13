@@ -26,22 +26,40 @@ export default function DonatePage() {
     const invoiceId = searchParams.get('invoice_id');
 
     if (action === 'confirmed' && amount && invoiceId) {
-      // Payment was successful - add donor to Firestore
-      const donorAmount = parseFloat(amount);
-      const donorName = name || 'Anonim';
+      // Payment was successful - confirm with server-side function
+      const confirmPayment = async () => {
+        try {
+          const response = await fetch('/.netlify/functions/confirm-payment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              amount: amount,
+              name: name || 'Anonim',
+              invoiceId: invoiceId,
+              status: action
+            }),
+          });
 
-      addDonor({
-        name: donorName,
-        amount: donorAmount,
-        message: `Donație prin EuPlatesc - Invoice: ${invoiceId}`
-      }).then(() => {
-        // Redirect to wall page to show the donor
-        navigate('/multumiri', { replace: true });
-      }).catch((err) => {
-        console.error('Error adding donor:', err);
-      });
+          if (response.ok) {
+            // Redirect to wall page to show the donor
+            navigate('/multumiri', { replace: true });
+          } else {
+            console.error('Payment confirmation failed');
+            // Still redirect to wall, but donation might not be recorded
+            navigate('/multumiri', { replace: true });
+          }
+        } catch (err) {
+          console.error('Error confirming payment:', err);
+          // Still redirect to wall, but donation might not be recorded
+          navigate('/multumiri', { replace: true });
+        }
+      };
+
+      confirmPayment();
     }
-  }, [searchParams, addDonor, navigate]);
+  }, [searchParams, navigate]);
 
   const handleAmountSelect = (amount) => {
     setSelectedAmount(amount);

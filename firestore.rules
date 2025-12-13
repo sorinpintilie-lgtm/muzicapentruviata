@@ -4,9 +4,9 @@ service cloud.firestore {
     // Allow public read access to donations collection for displaying money counter and donor wall
     match /donations/{document} {
       allow read: if true;
-      // Allow create operations (writes are handled by Netlify functions)
+      // Allow create operations (validated server-side by Netlify functions)
       allow create: if true;
-      // Deny update and delete operations from client-side
+      // Deny update and delete operations to prevent tampering
       allow update, delete: if false;
     }
   }
