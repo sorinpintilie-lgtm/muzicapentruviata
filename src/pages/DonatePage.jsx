@@ -221,12 +221,6 @@ export default function DonatePage() {
                       >
                         <div className="donation-amount-main">{amount}</div>
                         <div className="donation-amount-ron">RON</div>
-                        <div className="donation-amount-eur">
-                          {amount === 15 ? '3€' : amount === 25 ? '5€' : amount === 50 ? '10€' : amount === 100 ? '20€' : ''}
-                        </div>
-                        <div className="donation-amount-usd">
-                          {amount === 15 ? '$3' : amount === 25 ? '$5' : amount === 50 ? '$10' : amount === 100 ? '$20' : ''}
-                        </div>
                       </button>
                     )
                   ))}
