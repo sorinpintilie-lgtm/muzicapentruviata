@@ -151,6 +151,7 @@ body {
   font-size: 0.9rem;
   padding-inline: 18px;
   box-shadow: 0 10px 25px rgba(216, 27, 96, 0.3);
+  white-space: nowrap;
 }
 
 /* Money Counter Styles */
@@ -402,6 +403,7 @@ body {
 
 .mobile-donate-left {
   justify-self: center;
+  white-space: nowrap;
 }
 
 .mobile-hamburger-right {
