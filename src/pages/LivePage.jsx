@@ -18,25 +18,17 @@ export default function LivePage() {
 
         <div className="live-layout">
           <div className="live-video-section">
-            <div className="live-badge">Live în curând</div>
+            <div className="live-badge">Live acum</div>
             <div
               className="live-video-frame"
               aria-label="Transmisiune live Muzică pentru Viață"
             >
-              <div className="live-video-placeholder">
-                <p style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '600' }}>
-                  Transmisiunea live va începe din 14 Decembrie!
-                </p>
-              </div>
-              {/*
-                Pentru a integra un stream YouTube Live, înlocuiește VIDEO_ID cu id-ul clipului:
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
-                  title="Muzică pentru Viață Live"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              */}
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/OMy-E1TbmqQ"
+                title="Muzică pentru Viață Live"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
             <p className="live-note">
               În timpul evenimentului, aici vei putea vedea artiștii, voluntarii și oamenii
