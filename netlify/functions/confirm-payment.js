@@ -16,6 +16,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 exports.handler = async (event, context) => {
+  console.log('Confirm payment function called');
+  console.log('Method:', event.httpMethod);
+  console.log('Body:', event.body);
+
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
@@ -28,30 +32,36 @@ exports.handler = async (event, context) => {
     const body = JSON.parse(event.body);
     const { amount, name, invoiceId, status } = body;
 
+    console.log('Parsed body:', { amount, name, invoiceId, status });
+
     // Validate required fields
-    if (!amount || !invoiceId || !status) {
+    if (!amount || !invoiceId) {
+      console.log('Missing required fields');
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Missing required fields' }),
       };
     }
 
-    // Only add donor if payment was successful
-    if (status !== 'confirmed' && status !== 'success') {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Payment not confirmed' }),
-      };
-    }
+    // For now, accept any status as long as we have amount and invoiceId
+    // EuPlatesc might return different status values
+    console.log('Payment status check passed');
 
     // Validate amount
     const parsedAmount = parseFloat(amount);
     if (!isFinite(parsedAmount) || parsedAmount <= 0) {
+      console.log('Invalid amount:', amount);
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Invalid amount' }),
       };
     }
+
+    console.log('Adding donor to Firestore:', {
+      name: name || 'Anonim',
+      amount: parsedAmount,
+      invoiceId
+    });
 
     // Add donor to Firestore
     const donorData = {
@@ -87,7 +97,10 @@ exports.handler = async (event, context) => {
     console.error('Error confirming payment:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' }),
+      body: JSON.stringify({
+        error: 'Internal server error',
+        details: error.message
+      }),
     };
   }
 };

@@ -20,12 +20,23 @@ export default function DonatePage() {
 
   // Handle successful payment return from EuPlatesc
   useEffect(() => {
+    // Log all search params for debugging
+    console.log('EuPlatesc return params:', Object.fromEntries(searchParams.entries()));
+
     const action = searchParams.get('action');
     const amount = searchParams.get('amount');
-    const name = searchParams.get('fname');
-    const invoiceId = searchParams.get('invoice_id');
+    const name = searchParams.get('fname') || searchParams.get('name');
+    const invoiceId = searchParams.get('invoice_id') || searchParams.get('order_id');
 
-    if (action === 'confirmed' && amount && invoiceId) {
+    // Check for various possible success indicators from EuPlatesc
+    const isSuccess = action === 'confirmed' ||
+                     action === 'success' ||
+                     searchParams.get('status') === 'confirmed' ||
+                     searchParams.get('status') === 'success';
+
+    if (isSuccess && amount && invoiceId) {
+      console.log('Payment confirmed, calling confirmation function:', { action, amount, name, invoiceId });
+
       // Payment was successful - confirm with server-side function
       const confirmPayment = async () => {
         try {
@@ -38,15 +49,19 @@ export default function DonatePage() {
               amount: amount,
               name: name || 'Anonim',
               invoiceId: invoiceId,
-              status: action
+              status: action || 'confirmed'
             }),
           });
 
-          if (response.ok) {
+          const result = await response.json();
+          console.log('Confirmation response:', result);
+
+          if (response.ok && result.success) {
+            console.log('Donation recorded successfully');
             // Redirect to wall page to show the donor
             navigate('/multumiri', { replace: true });
           } else {
-            console.error('Payment confirmation failed');
+            console.error('Payment confirmation failed:', result);
             // Still redirect to wall, but donation might not be recorded
             navigate('/multumiri', { replace: true });
           }
@@ -58,6 +73,8 @@ export default function DonatePage() {
       };
 
       confirmPayment();
+    } else if (action || amount) {
+      console.log('Payment return detected but not confirmed:', { action, amount, name, invoiceId });
     }
   }, [searchParams, navigate]);
 
@@ -206,12 +223,12 @@ export default function DonatePage() {
 
                 {/* Custom Amount */}
                 <div className="donation-custom">
-                  <label className="donation-custom-label">Sau introdu o altă sumă:</label>
+                  <label className="donation-custom-label">Sau introdu orice sumă dorești:</label>
                   <div className="donation-custom-input-row">
                     <input
                       type="number"
                       className="donation-custom-input"
-                      placeholder="Sumă personalizată (min. 15 RON)"
+                      placeholder="Orice sumă (min. 15 RON)"
                       value={customAmount}
                       onChange={handleCustomAmountChange}
                       min="15"
