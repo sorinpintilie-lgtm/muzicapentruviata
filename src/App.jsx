@@ -262,12 +262,14 @@ function Layout({ children }) {
       </nav>
 
       <main className="app-shell-main">{children}</main>
+
+      <SiteFooter isScrolled={isScrolled} />
     </div>
   );
 }
 
 
-function SiteFooter() {
+function SiteFooter({ isScrolled }) {
   return (
     <footer className="app-footer">
       <div className="app-footer-inner">
@@ -279,6 +281,17 @@ function SiteFooter() {
 
         <section className="footer-logos" aria-label="Beneficiar, organizator și sponsori">
           <div className="footer-logos-row">
+            {isScrolled && (
+              <div className="footer-column footer-logo-scrolled">
+                <div className="footer-logo-main">
+                  <img
+                    src="/Logo Muzica pentru viata.svg"
+                    alt="Muzică pentru Viață"
+                    style={{ maxHeight: '60px', objectFit: 'contain' }}
+                  />
+                </div>
+              </div>
+            )}
             <div className="footer-column">
               <span className="footer-column-title">Beneficiar donații</span>
               <div className="footer-logo-main footer-logo-main--oncohelp">
@@ -329,6 +342,15 @@ function SiteFooter() {
           </div>
         </section>
 
+        <section className="footer-banking">
+          <h3 className="footer-banking-title">Detalii bancare pentru donații</h3>
+          <div className="footer-banking-details">
+            <p>RO65 RZBR 0000 0600 1720 1882 - LEI</p>
+            <p>RO97 RZBR 0000 0600 1720 1888 - EURO - swift RZBRROBU</p>
+            <p>Raiffeisen Bank Timișoara</p>
+          </div>
+        </section>
+
         <section
           className="audio-section"
           aria-label="Ascultă piesa Muzică pentru Viață 2025"
@@ -348,6 +370,11 @@ function SiteFooter() {
             <NavLink to="/politica-de-confidentialitate" className="footer-legal-link">
               Politica de confidențialitate
             </NavLink>
+          </div>
+          <div className="footer-contact">
+            <a href="https://wa.me/40255210100" className="footer-contact-link" target="_blank" rel="noopener noreferrer">
+              Contact WhatsApp: 0255 210 100
+            </a>
           </div>
           <p className="footer-copyright">
             © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
@@ -388,8 +415,6 @@ function App() {
         {/* Privacy Policy page - accessible without password */}
         <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
       </Routes>
-
-      <SiteFooter />
 
       {/* Global Radio Player - appears on all pages */}
       <GlobalRadioPlayer />

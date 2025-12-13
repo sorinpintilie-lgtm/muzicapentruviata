@@ -857,7 +857,7 @@ body {
 /* Preset amounts */
 .donation-amounts-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
   margin: 18px 0;
 }
@@ -1157,7 +1157,7 @@ body {
   }
 
   .donation-amounts-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
   }
 
@@ -3584,6 +3584,72 @@ h1 {
   gap: 16px;
   margin-bottom: 12px;
   flex-wrap: wrap;
+}
+
+.footer-contact {
+  margin-bottom: 12px;
+}
+
+.footer-contact-link {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.footer-contact-link:hover {
+  color: var(--accent);
+  background: rgba(216, 27, 96, 0.08);
+}
+
+.footer-banking {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+  text-align: center;
+}
+
+.footer-banking-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.footer-banking-details {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.footer-banking-details p {
+  margin: 4px 0;
+}
+
+.footer-logo-scrolled {
+  order: -1; /* Move to first position */
+}
+
+.donation-custom-input-inline {
+  border: none;
+  background: transparent;
+  outline: none;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.donation-custom-input-inline:focus {
+  outline: none;
 }
 
 .footer-legal-link {

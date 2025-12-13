@@ -16,7 +16,7 @@ export default function DonatePage() {
   const [error, setError] = useState('');
 
   // Preset donation amounts (minimum 15 RON)
-  const presetAmounts = [15, 50, 100, 250];
+  const presetAmounts = [15, 50, 100, 250, 'custom'];
 
   // Handle successful payment return from EuPlatesc
   useEffect(() => {
@@ -209,32 +209,36 @@ export default function DonatePage() {
                 {/* Preset Amounts */}
                 <div className="donation-amounts-grid">
                   {presetAmounts.map((amount) => (
-                    <button
-                      key={amount}
-                      type="button"
-                      className={`donation-amount-button ${selectedAmount === amount ? 'donation-amount-button--active' : ''}`}
-                      onClick={() => handleAmountSelect(amount)}
-                    >
-                      <div className="donation-amount-main">{amount}</div>
-                      <div className="donation-amount-ron">RON</div>
-                    </button>
+                    amount === 'custom' ? (
+                      <div
+                        key={amount}
+                        className={`donation-amount-button ${selectedAmount === 'custom' ? 'donation-amount-button--active' : ''}`}
+                        onClick={() => handleAmountSelect('custom')}
+                      >
+                        <input
+                          type="number"
+                          className="donation-amount-main donation-custom-input-inline"
+                          placeholder="Altă"
+                          value={customAmount}
+                          onChange={handleCustomAmountChange}
+                          min="15"
+                          step="1"
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                        <div className="donation-amount-ron">RON</div>
+                      </div>
+                    ) : (
+                      <button
+                        key={amount}
+                        type="button"
+                        className={`donation-amount-button ${selectedAmount === amount ? 'donation-amount-button--active' : ''}`}
+                        onClick={() => handleAmountSelect(amount)}
+                      >
+                        <div className="donation-amount-main">{amount}</div>
+                        <div className="donation-amount-ron">RON</div>
+                      </button>
+                    )
                   ))}
-                </div>
-
-                {/* Custom Amount */}
-                <div className="donation-custom">
-                  <label className="donation-custom-label">Sau introdu orice sumă dorești:</label>
-                  <div className="donation-custom-input-row">
-                    <input
-                      type="number"
-                      className="donation-custom-input"
-                      placeholder="Orice sumă (min. 15 RON)"
-                      value={customAmount}
-                      onChange={handleCustomAmountChange}
-                      min="15"
-                      step="1"
-                    />
-                  </div>
                 </div>
 
                 {/* Donor Information */}
@@ -287,7 +291,10 @@ export default function DonatePage() {
             </div>
 
             <div className="donation-panel-right">
-              <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)'}} />
+              <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)', display: 'block', margin: '0 auto'}} />
+              <p style={{textAlign: 'center', marginTop: '12px', fontSize: '0.9rem', color: '#666'}}>
+                Universitatea din Reșița - viitorul loc al spitalului oncologic
+              </p>
             </div>
           </div>
         </div>
