@@ -298,12 +298,6 @@ export default function DonatePage() {
           <div className="post-event-section">
             <div className="post-event-section-title">Spitalul din Reșița</div>
             <p className="post-event-text">
-              Muzică pentru Viață 2016
-            </p>
-            <p className="post-event-text">
-              Muzică pentru Viață
-            </p>
-            <p className="post-event-text">
               De peste 10 ani, Radio România Reșița dă glas speranței prin campania „Muzică pentru Viață" – un maraton caritabil care a transformat muzica în sprijin real și a adunat sute de mii de euro pentru oameni aflați în nevoie.
             </p>
             <p className="post-event-text">
