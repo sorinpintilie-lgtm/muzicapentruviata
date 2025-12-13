@@ -279,13 +279,13 @@ export default function DonatePage() {
               primul spital oncologic din regiune, oferind acces la tratament de calitate pentru toți pacienții.
             </p>
             <div className="post-event-image-block post-event-image-block--clinic">
-              <img src="/onco-help-logo-d.png" alt="OncoHelp" />
+              <img src="/tmk-resita-4-1200x675.jpg" alt="Spitalul din Reșița" />
             </div>
           </div>
 
           <div className="post-event-section">
             <div className="post-event-image-block post-event-image-block--history">
-              <img src="/2024.jpg" alt="Muzică pentru Viață 2024" />
+              <img src="/2016.jpg" alt="Muzică pentru Viață 2016" />
             </div>
             <div className="post-event-section-title">Muzică pentru Viață</div>
             <p className="post-event-text">
@@ -302,7 +302,7 @@ export default function DonatePage() {
               oferi speranță pacienților cu cancer din Banatul de Munte. Mulțumim pentru generozitate!
             </p>
             <div className="post-event-image-block post-event-image-block--live">
-              <img src="/resita.jpg" alt="Reșița" />
+              <img src="/ubb-resita.jpg" alt="Universitatea din Reșița" />
             </div>
           </div>
         </div>
