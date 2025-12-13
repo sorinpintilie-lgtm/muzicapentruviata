@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "tiktok:video": "node scripts/generate-tiktok-video.js"
+    "tiktok:video": "node scripts/generate-tiktok-video.js",
+    "init:firestore": "node scripts/init-firestore.js"
   },
   "packageManager": "yarn@1.22.19",
   "dependencies": {
