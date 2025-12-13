@@ -12,6 +12,7 @@ import MobileWallScreenshot from './pages/MobileWallScreenshot.jsx';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage.jsx';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
 import GlobalRadioPlayer from './components/GlobalRadioPlayer.jsx';
+import MoneyCounter from './components/MoneyCounter.jsx';
 
 function Layout({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -112,6 +113,10 @@ function Layout({ children }) {
             ×
           </button>
 
+          <div className="mobile-money-counter">
+            <MoneyCounter />
+          </div>
+
           <div className="mobile-drawer-links">
             <NavLink
               to="/"
@@ -171,17 +176,7 @@ function Layout({ children }) {
               }
               onClick={closeMobileMenu}
             >
-              Peretele Eroilor
-            </NavLink>
-
-            <NavLink
-              to="/sponsori"
-              className={({ isActive }) =>
-                'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
-              }
-              onClick={closeMobileMenu}
-            >
-              Sponsori
+              Comunitatea
             </NavLink>
           </div>
 
@@ -251,18 +246,11 @@ function Layout({ children }) {
                 'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
               }
             >
-              Peretele Eroilor
-            </NavLink>
-
-            <NavLink
-              to="/sponsori"
-              className={({ isActive }) =>
-                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
-              }
-            >
-              Sponsori
+              Comunitatea
             </NavLink>
           </div>
+
+          <MoneyCounter />
 
           <NavLink
             to="/#donation-form"
@@ -436,14 +424,13 @@ function SiteFooter() {
 
 function App() {
   const location = useLocation();
-  const isHomepage = location.pathname === '/' || location.pathname === '/donatii';
 
   return (
     <>
       <Routes>
-        {/* Homepage without layout */}
-        <Route path="/" element={<DonatePage />} />
-        <Route path="/donatii" element={<DonatePage />} />
+        {/* Homepage with layout */}
+        <Route path="/" element={<Layout><DonatePage /></Layout>} />
+        <Route path="/donatii" element={<Layout><DonatePage /></Layout>} />
 
         {/* Protected routes with layout */}
         <Route path="/live" element={
@@ -494,7 +481,7 @@ function App() {
         <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
       </Routes>
 
-      {!isHomepage && <SiteFooter />}
+      <SiteFooter />
 
       {/* Global Radio Player - appears on all pages */}
       <GlobalRadioPlayer />

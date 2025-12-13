@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { db } from './firebase.js';
 
 const DonorContext = createContext(undefined);
 
@@ -57,17 +59,49 @@ function loadInitialDonors() {
 }
 
 export function DonorProvider({ children }) {
-  const [donors, setDonors] = useState(() => {
-    const initialDonors = loadInitialDonors();
-    console.log('DonorProvider initialized with donors:', initialDonors);
-    return initialDonors;
-  });
+  const [donors, setDonors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Live Firestore subscription (realtime for everyone)
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    const q = query(collection(db, 'donations'), orderBy('created_at', 'desc'));
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setDonors(data);
+        setLoading(false);
+      },
+      (error) => {
+        // Important: don't fall back to fake data for a live money counter.
+        const info = {
+          code: error?.code,
+          message: error?.message,
+        };
+        console.error('Firestore subscription error:', info);
+
+        setError(info);
+        setDonors([]);
+        setLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
 
   // Removed localStorage saving to prevent caching issues
 
-  function addDonor({ name, amount, message }) {
+  async function addDonor({ name, amount, message }) {
     const trimmedName = (name || '').trim();
-    if (!trimmedName) return;
+    const finalName = trimmedName || 'Anonim';
 
     const normalized = String(amount ?? '')
       .replace(',', '.')
@@ -75,24 +109,35 @@ export function DonorProvider({ children }) {
 
     const parsed = normalized ? Number.parseFloat(normalized) : 0;
     const safeAmount = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
+    if (!safeAmount) return;
 
     const newDonor = {
-      id: Date.now().toString(36) + Math.random().toString(16).slice(2),
-      name: trimmedName,
+      name: finalName,
       amount: safeAmount,
       message: (message || '').trim(),
-      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
     };
 
-    setDonors((prev) => [newDonor, ...prev]);
+    // Add to database (Firestore subscription will update UI)
+    try {
+      await addDoc(collection(db, 'donations'), newDonor);
+    } catch (error) {
+      console.error('Error adding donor to Firestore:', {
+        code: error?.code,
+        message: error?.message,
+      });
+      // Could show a notification to user, but for now just log
+    }
   }
 
   const value = useMemo(
     () => ({
       donors,
       addDonor,
+      loading,
+      error,
     }),
-    [donors]
+    [donors, loading, error]
   );
 
   return <DonorContext.Provider value={value}>{children}</DonorContext.Provider>;

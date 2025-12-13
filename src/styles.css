@@ -153,6 +153,69 @@ body {
   box-shadow: 0 10px 25px rgba(216, 27, 96, 0.3);
 }
 
+/* Money Counter Styles */
+.money-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+  text-align: center;
+  min-width: 120px;
+  transition: all 0.15s ease;
+}
+
+.money-counter:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.2);
+}
+
+.money-counter-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.money-counter-amount {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Mobile Money Counter */
+.mobile-money-counter {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 8px;
+}
+
+.mobile-money-counter .money-counter {
+  background: transparent;
+  padding: 0;
+  min-width: auto;
+  border-radius: 0;
+}
+
+.mobile-money-counter .money-counter:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.mobile-money-counter .money-counter-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.mobile-money-counter .money-counter-amount {
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
 /* Mobile Navigation Styles */
 .mobile-nav {
   display: none;

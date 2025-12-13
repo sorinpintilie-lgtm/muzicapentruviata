@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDonors, getDonorSizeClass } from '../DonorContext.jsx';
 
 const animations = [
@@ -57,9 +57,44 @@ function getRowSpacerWidth(index) {
 }
 
 export default function WallPage() {
-  const { donors } = useDonors();
+  const { donors, loading, error } = useDonors();
   const containerRef = useRef(null);
   const [namesPerLine, setNamesPerLine] = useState([]);
+
+  // Aggregate donations by donor name (so size reflects total donated by that person).
+  const communityMembers = useMemo(() => {
+    const map = new Map();
+
+    for (const donation of donors || []) {
+      const rawName = (donation?.name || '').trim();
+      const normalized = rawName.replace(/\s+/g, ' ');
+      if (!normalized) continue;
+
+      // Do not show anonymous donors in the community wall, but keep them in totals.
+      if (normalized.toLowerCase() === 'anonim') continue;
+
+      const key = normalized.toLowerCase();
+      const amount = Number(donation?.amount) || 0;
+
+      const prev = map.get(key);
+      if (!prev) {
+        map.set(key, {
+          id: key,
+          name: normalized,
+          amount,
+          donationsCount: 1,
+        });
+      } else {
+        prev.amount += amount;
+        prev.donationsCount += 1;
+      }
+    }
+
+    const arr = Array.from(map.values());
+    // Sort by total amount donated (descending)
+    arr.sort((a, b) => (b.amount || 0) - (a.amount || 0));
+    return arr;
+  }, [donors]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -108,27 +143,42 @@ export default function WallPage() {
     <div className="app-content">
       <section className="app-section wall-section" aria-labelledby="wall-title">
         <div className="app-section-header">
-          <span className="app-section-overline">Mulțumim din inimă</span>
+          <span className="app-section-overline">Comunitatea Muzică pentru Viață</span>
           <h1 id="wall-title" className="app-section-title">
-            Peretele Eroilor
+            Comunitatea
           </h1>
           <p className="about-pill">
-            Voi sunteți adevărații eroi!
+            Mulțumim pentru fiecare donație!
           </p>
           <p className="app-section-lead">
-            Contribuția dumnevoastră contează mai mult decât credeți. Vă auzim, vă vedem, vă mulțumim!
+            Aici sunt oamenii care au ales să fie parte din schimbare. Mărimea numelui reflectă suma totală donată.
           </p>
+          <p className="app-section-lead" style={{ marginTop: '10px' }}>
+            {communityMembers.length} nume afișate • {donors.length} donații înregistrate
+          </p>
+
+          {loading && (
+            <p className="app-section-lead" style={{ marginTop: '10px' }}>
+              Se încarcă datele din baza de date...
+            </p>
+          )}
+
+          {error && (
+            <p className="app-section-lead" style={{ marginTop: '10px', color: '#b71c1c' }}>
+              Nu pot citi datele din Firestore (verifică Firestore Rules / permisiuni).
+            </p>
+          )}
         </div>
 
         <div className="donor-wall-flow" ref={containerRef}>
-          {donors.map((donor, index) => {
-            const sizeClass = getDonorSizeClass(donor.amount);
+          {communityMembers.map((member, index) => {
+            const sizeClass = getDonorSizeClass(member.amount);
             const animClass = getRandomAnimation(index);
             const margins = getRandomMargins(index);
             const classes = ['donor-name-simple', sizeClass, animClass];
             // No highlighting on general wall
             return (
-              <React.Fragment key={donor.id}>
+              <React.Fragment key={member.id}>
                 {shouldAddRowSpacer(index) && (
                   <div
                     style={{
@@ -150,10 +200,10 @@ export default function WallPage() {
                     className={classes.join(' ')}
                     style={{ animationDelay: `${getAnimationDelay(index)}s` }}
                   >
-                    {donor.name}
+                    {member.name}
                   </span>
                 </div>
-                {index < donors.length - 1 && <div className="donor-separator" />}
+                {index < communityMembers.length - 1 && <div className="donor-separator" />}
               </React.Fragment>
             );
           })}
