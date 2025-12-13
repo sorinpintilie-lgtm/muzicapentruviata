@@ -46,7 +46,7 @@ export default function SponsorsPage() {
               <div className="sponsor-section-logos">
                 <img src="/dacus_logo_site.png" alt="Dacus – partener" />
                 <img
-                  src="/skyro-LOGO-6A-final -without tagline-01.png"
+                  src="/Photoshoped png (1).png"
                   alt="Sky Radio – partener"
                 />
               </div>

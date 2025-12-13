@@ -331,7 +331,7 @@ function SiteFooter({ isScrolled }) {
                 </a>
                 <a href="https://sky.ro" target="_blank" rel="noopener noreferrer">
                   <img
-                    src="/skyro-LOGO-6A-final -without tagline-01.png"
+                    src="/Photoshoped png (1).png"
                     alt="Sky Radio"
                   />
                 </a>

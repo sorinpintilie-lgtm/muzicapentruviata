@@ -203,12 +203,11 @@ export default function DonatePage() {
                         <input
                           type="number"
                           className="donation-amount-main donation-custom-input-inline"
-                          placeholder="Alta"
+                          placeholder="Altă"
                           value={customAmount}
                           onChange={handleCustomAmountChange}
                           min="1"
                           step="1"
-                          onClick={(e) => e.stopPropagation()}
                         />
                         <div className="donation-amount-ron">RON</div>
                       </div>

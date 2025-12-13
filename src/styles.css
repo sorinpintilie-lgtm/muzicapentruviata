@@ -1173,13 +1173,30 @@ body {
   .post-event-image-block {
     margin-top: 12px;
     border-radius: 16px;
-    max-height: 50vh;
+    max-height: 200px !important;
     margin-left: -12px;
     margin-right: -12px;
   }
 
   .post-event-image-block img {
+    max-height: 200px !important;
+    object-fit: cover !important;
     transform: scale(1.05);
+  }
+
+  /* Improve mobile text spacing */
+  .post-event-section {
+    padding: 14px 16px;
+  }
+
+  .post-event-section-title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .post-event-text {
+    font-size: 0.88rem;
+    line-height: 1.5;
   }
 
   .donation-amounts-grid {
