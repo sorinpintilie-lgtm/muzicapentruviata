@@ -137,6 +137,7 @@ body {
   cursor: pointer;
   text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+  white-space: nowrap;
 }
 
 .site-nav-link:hover,
@@ -321,6 +322,7 @@ body {
   padding: 12px 0;
   border-bottom: 1px solid #f0f0f0;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .mobile-nav-link:hover,
