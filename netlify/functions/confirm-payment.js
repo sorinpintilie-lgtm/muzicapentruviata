@@ -1,5 +1,5 @@
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, addDoc } = require('firebase/firestore');
+const { getFirestore, collection, addDoc, query, where, getDocs, updateDoc } = require('firebase/firestore');
 
 // Firebase configuration (same as in the app)
 const firebaseConfig = {
@@ -57,27 +57,39 @@ exports.handler = async (event, context) => {
       };
     }
 
-    console.log('Adding donor to Firestore:', {
+    console.log('Confirming donation in Firestore:', {
       name: name || 'Anonim',
       amount: parsedAmount,
       invoiceId
     });
 
-    // Add donor to Firestore
-    const donorData = {
-      name: name || 'Anonim',
-      amount: parsedAmount,
-      message: `Donație confirmată prin EuPlatesc - Invoice: ${invoiceId}`,
-      created_at: new Date().toISOString(),
-    };
+    // Find and update the pending donation
+    const q = query(collection(db, 'donations'), where('invoiceId', '==', invoiceId));
+    const querySnapshot = await getDocs(q);
 
-    const docRef = await addDoc(collection(db, 'donations'), donorData);
-
-    console.log('Donation added successfully:', {
-      id: docRef.id,
-      amount: parsedAmount,
-      name: name || 'Anonim'
-    });
+    if (querySnapshot.empty) {
+      console.log('No pending donation found for invoiceId:', invoiceId);
+      // Create confirmed donation if no pending found
+      const donorData = {
+        name: name || 'Anonim',
+        amount: parsedAmount,
+        message: `Donație confirmată prin EuPlatesc - Invoice: ${invoiceId}`,
+        created_at: new Date().toISOString(),
+        status: 'confirmed',
+        invoiceId: invoiceId
+      };
+      const docRef = await addDoc(collection(db, 'donations'), donorData);
+      console.log('Confirmed donation created:', docRef.id);
+    } else {
+      // Update existing pending donation
+      const docRef = querySnapshot.docs[0].ref;
+      await updateDoc(docRef, {
+        name: name || 'Anonim',
+        message: `Donație confirmată prin EuPlatesc - Invoice: ${invoiceId}`,
+        status: 'confirmed'
+      });
+      console.log('Pending donation confirmed:', docRef.id);
+    }
 
     return {
       statusCode: 200,

@@ -114,7 +114,25 @@ export default function DonatePage() {
     setIsProcessing(true);
 
     try {
-      // Call Netlify function to initiate payment
+      // First, create pending donation in Firestore
+      const { addDoc, collection } = await import('firebase/firestore');
+      const { db } = await import('../firebase.js');
+
+      const invoiceId = 'MPV-' + Date.now();
+      const pendingDonation = {
+        name: donorName || 'Anonim',
+        amount: finalAmount,
+        message: `Donație inițiată - Invoice: ${invoiceId}`,
+        created_at: new Date().toISOString(),
+        status: 'pending',
+        invoiceId: invoiceId
+      };
+
+      console.log('Creating pending donation in Firestore...');
+      await addDoc(collection(db, 'donations'), pendingDonation);
+      console.log('Pending donation created');
+
+      // Then call Netlify function to initiate payment
       const response = await fetch('/.netlify/functions/initiate-payment', {
         method: 'POST',
         headers: {
@@ -125,6 +143,7 @@ export default function DonatePage() {
           currency: 'RON',
           orderDesc: `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'O singură dată'}`,
           email: donorEmail,
+          invoiceId: invoiceId, // Pass the invoice ID
         }),
       });
 

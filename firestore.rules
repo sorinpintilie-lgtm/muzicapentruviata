@@ -4,10 +4,12 @@ service cloud.firestore {
     // Allow public read access to donations collection for displaying money counter and donor wall
     match /donations/{document} {
       allow read: if true;
-      // Allow create operations (validated server-side by Netlify functions)
+      // Allow create operations (from client-side for pending donations and server-side for confirmations)
       allow create: if true;
-      // Deny update and delete operations to prevent tampering
-      allow update, delete: if false;
+      // Allow update operations for status changes (pending -> confirmed)
+      allow update: if request.auth == null && request.resource.data.diff(resource.data).affectedKeys() == ['status'].toSet() && request.resource.data.status == 'confirmed';
+      // Deny delete operations to prevent tampering
+      allow delete: if false;
     }
   }
 }

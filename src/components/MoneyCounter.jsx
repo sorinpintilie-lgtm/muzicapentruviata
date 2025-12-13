@@ -4,10 +4,12 @@ import { useDonors } from '../DonorContext.jsx';
 function MoneyCounter() {
   const { donors, loading, error } = useDonors();
 
-  const totalAmount = (donors || []).reduce(
-    (sum, donor) => sum + (Number(donor?.amount) || 0),
-    0
-  );
+  const totalAmount = (donors || [])
+    .filter(donor => donor.status === 'confirmed')
+    .reduce(
+      (sum, donor) => sum + (Number(donor?.amount) || 0),
+      0
+    );
 
   // Format the amount with commas and RON
   const formattedAmount = new Intl.NumberFormat('ro-RO', {
