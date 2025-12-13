@@ -10,7 +10,6 @@
   },
   "packageManager": "yarn@1.22.19",
   "dependencies": {
-    "@supabase/supabase-js": "^2.87.1",
     "dom-to-image": "^2.6.0",
     "firebase": "^12.6.0",
     "html2canvas": "^1.4.1",
