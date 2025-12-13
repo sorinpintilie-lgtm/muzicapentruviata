@@ -314,31 +314,6 @@ export default function DonatePage() {
             </div>
           </div>
 
-          <div className="post-event-section">
-            <div className="post-event-section-title">Fiecare donație contează</div>
-            <p className="post-event-text">
-              Un pas esențial a fost deja făcut. OncoHelp a achiziționat o clădire în valoare de 1,2 milioane de euro, care va deveni viitorul spital oncologic din Reșița. Nu mai vorbim despre un vis îndepărtat, ci despre un proiect concret, cu fundație solidă și direcție clară.
-            </p>
-            <p className="post-event-text">
-              OncoHelp este una dintre cele mai dedicate fundații din vestul țării în îngrijirea pacienților cu cancer. De ani întregi, medici, asistenți și voluntari luptă pentru ca tratamentele moderne să fie cât mai aproape de cei care au nevoie de ele. Astăzi, această luptă are un loc real, un spațiu care așteaptă să fie transformat într-un spital al speranței.
-            </p>
-            <p className="post-event-text">
-              Un spital de această amploare, la Reșița, înseamnă o șansă reală la viață. Înseamnă mai puține drumuri istovitoare, mai puțină suferință și mai mult timp petrecut lângă familie pentru sutele de pacienți care, zi de zi, sunt nevoiți să parcurgă kilometri întregi pentru tratament.
-            </p>
-            <p className="post-event-text">
-              Un gest mic poate schimba o lume. Fii parte din această schimbare și alătură-te campaniei Muzică Pentru Viață.
-            </p>
-            <p className="post-event-text">
-              „Una din convingerile noastre a fost şi este că accesul la sănătate trebuie să fie asigurat tuturor, dincolo de situaţia materială sau socială a fiecăruia."
-              — Șerban Negru, Președintele Asociației OncoHelp
-            </p>
-            <p className="post-event-text">
-              Află mai multe despre proiectele OncoHelp pe oncohelp.ro.
-            </p>
-            <div className="post-event-image-block post-event-image-block--live">
-              <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" />
-            </div>
-          </div>
         </div>
       </div>
     </div>
