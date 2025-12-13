@@ -378,6 +378,19 @@ function SiteFooter({ isScrolled }) {
             © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
           </p>
         </section>
+
+        <section className="footer-powered-by">
+          <p className="footer-powered-by-text">
+            Powered by{' '}
+            <a href="https://sky.ro" target="_blank" rel="noopener noreferrer" className="footer-powered-by-link">
+              <img
+                src="/Photoshoped png (1).png"
+                alt="Sky Radio"
+                className="footer-powered-by-logo"
+              />
+            </a>
+          </p>
+        </section>
       </div>
     </footer>
   );

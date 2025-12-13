@@ -203,7 +203,7 @@ export default function DonatePage() {
                         <input
                           type="number"
                           className="donation-amount-main donation-custom-input-inline"
-                          placeholder="Altă"
+                          placeholder="Alta"
                           value={customAmount}
                           onChange={handleCustomAmountChange}
                           min="1"
