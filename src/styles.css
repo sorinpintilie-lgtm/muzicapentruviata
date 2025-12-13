@@ -2531,6 +2531,20 @@ h1 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+.about-full-width-image {
+  margin-top: 32px;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.about-full-width-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Mobile-specific card styles */
 @media (max-width: 820px) {
   .feature-card-compact {

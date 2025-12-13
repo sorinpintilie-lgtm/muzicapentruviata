@@ -31,9 +31,6 @@ export default function AboutOncohelpPage() {
             </p>
           </div>
           <aside className="about-side-card">
-            <div className="about-image-card">
-              <img src="/conf univ dr serban negru.png" alt="Conf. Univ. Dr. Șerban Negru" />
-            </div>
             <strong>„Una din convingerile noastre…”</strong>
             <span>
               „Una din convingerile noastre a fost şi este că accesul la sănătate trebuie să fie
@@ -51,6 +48,10 @@ export default function AboutOncohelpPage() {
               .
             </span>
           </aside>
+        </div>
+
+        <div className="about-full-width-image">
+          <img src="/conf univ dr serban negru.png" alt="Conf. Univ. Dr. Șerban Negru" />
         </div>
       </section>
     </div>
