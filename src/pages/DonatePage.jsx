@@ -16,7 +16,7 @@ export default function DonatePage() {
   const [error, setError] = useState('');
 
   // Preset donation amounts (minimum 1 RON)
-  const presetAmounts = [1, 15, 50, 100, 'custom'];
+  const presetAmounts = [15, 50, 100, 'custom'];
 
   // Handle successful payment return from EuPlatesc
   useEffect(() => {
@@ -30,49 +30,14 @@ export default function DonatePage() {
 
     // Check for various possible success indicators from EuPlatesc
     const isSuccess = action === 'confirmed' ||
-                     action === 'success' ||
-                     searchParams.get('status') === 'confirmed' ||
-                     searchParams.get('status') === 'success';
+                      action === 'success' ||
+                      searchParams.get('status') === 'confirmed' ||
+                      searchParams.get('status') === 'success';
 
     if (isSuccess && amount && invoiceId) {
-      console.log('Payment confirmed, calling confirmation function:', { action, amount, name, invoiceId });
-
-      // Payment was successful - confirm with server-side function
-      const confirmPayment = async () => {
-        try {
-          const response = await fetch('/.netlify/functions/confirm-payment', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              amount: amount,
-              name: name || 'Anonim',
-              invoiceId: invoiceId,
-              status: action || 'confirmed'
-            }),
-          });
-
-          const result = await response.json();
-          console.log('Confirmation response:', result);
-
-          if (response.ok && result.success) {
-            console.log('Donation recorded successfully');
-            // Redirect to wall page to show the donor
-            navigate('/multumiri', { replace: true });
-          } else {
-            console.error('Payment confirmation failed:', result);
-            // Still redirect to wall, but donation might not be recorded
-            navigate('/multumiri', { replace: true });
-          }
-        } catch (err) {
-          console.error('Error confirming payment:', err);
-          // Still redirect to wall, but donation might not be recorded
-          navigate('/multumiri', { replace: true });
-        }
-      };
-
-      confirmPayment();
+      console.log('Payment successful, redirecting to wall:', { action, amount, name, invoiceId });
+      // Donation was already recorded when form was submitted, just redirect to wall
+      navigate('/multumiri', { replace: true });
     } else if (action || amount) {
       console.log('Payment return detected but not confirmed:', { action, amount, name, invoiceId });
     }
@@ -119,12 +84,12 @@ export default function DonatePage() {
       const { db } = await import('../firebase.js');
 
       const invoiceId = 'MPV-' + Date.now();
-      const pendingDonation = {
+      const donation = {
         name: donorName || 'Anonim',
         amount: finalAmount,
-        message: `Donație inițiată - Invoice: ${invoiceId}`,
+        message: `Donație confirmată prin EuPlatesc - Invoice: ${invoiceId}`,
         created_at: new Date().toISOString(),
-        status: 'pending',
+        status: 'confirmed',
         invoiceId: invoiceId
       };
 
@@ -238,7 +203,7 @@ export default function DonatePage() {
                         <input
                           type="number"
                           className="donation-amount-main donation-custom-input-inline"
-                          placeholder="Altă"
+                          placeholder="Alta"
                           value={customAmount}
                           onChange={handleCustomAmountChange}
                           min="1"
@@ -312,9 +277,6 @@ export default function DonatePage() {
 
             <div className="donation-panel-right">
               <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)', display: 'block', margin: '0 auto'}} />
-              <p style={{textAlign: 'center', marginTop: '12px', fontSize: '0.9rem', color: '#666'}}>
-                Universitatea din Reșița - viitorul loc al spitalului oncologic
-              </p>
             </div>
           </div>
         </div>
