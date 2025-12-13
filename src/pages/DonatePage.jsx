@@ -16,7 +16,7 @@ export default function DonatePage() {
   const [error, setError] = useState('');
 
   // Preset donation amounts (minimum 1 RON)
-  const presetAmounts = [15, 50, 100, 'custom'];
+  const presetAmounts = [15, 25, 50, 100, 'custom'];
 
   // Handle successful payment return from EuPlatesc
   useEffect(() => {
@@ -93,8 +93,8 @@ export default function DonatePage() {
         invoiceId: invoiceId
       };
 
-      console.log('Creating pending donation in Firestore...');
-      await addDoc(collection(db, 'donations'), pendingDonation);
+      console.log('Creating donation in Firestore...');
+      await addDoc(collection(db, 'donations'), donation);
       console.log('Pending donation created');
 
       // Then call Netlify function to initiate payment
@@ -221,6 +221,12 @@ export default function DonatePage() {
                       >
                         <div className="donation-amount-main">{amount}</div>
                         <div className="donation-amount-ron">RON</div>
+                        <div className="donation-amount-eur">
+                          {amount === 15 ? '3€' : amount === 25 ? '5€' : amount === 50 ? '10€' : amount === 100 ? '20€' : ''}
+                        </div>
+                        <div className="donation-amount-usd">
+                          {amount === 15 ? '$3' : amount === 25 ? '$5' : amount === 50 ? '$10' : amount === 100 ? '$20' : ''}
+                        </div>
                       </button>
                     )
                   ))}

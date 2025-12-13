@@ -918,6 +918,20 @@ body {
   color: var(--muted);
 }
 
+.donation-amount-eur {
+  font-size: 0.65rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.donation-amount-usd {
+  font-size: 0.65rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 1px;
+}
+
 /* Custom amount input */
 .donation-custom {
   margin-top: 8px;
