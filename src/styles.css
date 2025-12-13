@@ -119,6 +119,18 @@ body {
   gap: 16px;
 }
 
+.site-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-logo-scrolled {
+  height: 40px;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
 .site-nav-links {
   display: flex;
   flex-wrap: nowrap;

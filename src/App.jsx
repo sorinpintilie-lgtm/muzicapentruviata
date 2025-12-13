@@ -193,61 +193,70 @@ function Layout({ children }) {
       {/* Desktop Navigation */}
       <nav className="site-nav desktop-nav" aria-label="Navigație principală">
         <div className="site-nav-inner">
-          <div className="site-nav-links">
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
-              }
-            >
-              Donează
-            </NavLink>
+          <div className="site-nav-left">
+            {isScrolled && (
+              <img
+                src="/Logo Muzica pentru viata.svg"
+                alt="Muzică pentru Viață"
+                className="nav-logo-scrolled"
+              />
+            )}
+            <div className="site-nav-links">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Donează
+              </NavLink>
 
-            <NavLink
-              to="/live"
-              className={({ isActive }) =>
-                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
-              }
-            >
-              Live & Video
-            </NavLink>
+              <NavLink
+                to="/live"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Live & Video
+              </NavLink>
 
-            <NavLink
-              to="/galerie"
-              className={({ isActive }) =>
-                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
-              }
-            >
-              Cronologie
-            </NavLink>
+              <NavLink
+                to="/galerie"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Cronologie
+              </NavLink>
 
-            <NavLink
-              to="/despre-oncohelp"
-              className={({ isActive }) =>
-                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
-              }
-            >
-              Despre OncoHelp
-            </NavLink>
+              <NavLink
+                to="/despre-oncohelp"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Despre OncoHelp
+              </NavLink>
 
-            <NavLink
-              to="/despre-resita"
-              className={({ isActive }) =>
-                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
-              }
-            >
-              Despre Reșița
-            </NavLink>
+              <NavLink
+                to="/despre-resita"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Despre Reșița
+              </NavLink>
 
-            <NavLink
-              to="/multumiri"
-              className={({ isActive }) =>
-                'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
-              }
-            >
-              Comunitatea
-            </NavLink>
+              <NavLink
+                to="/multumiri"
+                className={({ isActive }) =>
+                  'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
+                }
+              >
+                Comunitatea
+              </NavLink>
+            </div>
           </div>
 
           <MoneyCounter />
@@ -281,17 +290,6 @@ function SiteFooter({ isScrolled }) {
 
         <section className="footer-logos" aria-label="Beneficiar, organizator și sponsori">
           <div className="footer-logos-row">
-            {isScrolled && (
-              <div className="footer-column footer-logo-scrolled">
-                <div className="footer-logo-main">
-                  <img
-                    src="/Logo Muzica pentru viata.svg"
-                    alt="Muzică pentru Viață"
-                    style={{ maxHeight: '60px', objectFit: 'contain' }}
-                  />
-                </div>
-              </div>
-            )}
             <div className="footer-column">
               <span className="footer-column-title">Beneficiar donații</span>
               <div className="footer-logo-main footer-logo-main--oncohelp">
