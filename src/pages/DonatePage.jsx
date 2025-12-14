@@ -729,60 +729,19 @@ export default function DonatePage() {
               
             </button>
             <div className="shorts-carousel-frame">
-              <div
-                className="shorts-video-container"
-                onClick={() => window.open(shortsVideos[currentShortIndex]?.youtubeUrl, '_blank')}
-                style={{ cursor: 'pointer', width: '100%', height: '100%', position: 'relative' }}
-              >
-                <img
-                  src={`https://img.youtube.com/vi/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}/maxresdefault.jpg`}
-                  alt={`YouTube Short ${currentShortIndex + 1}`}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    borderRadius: '12px'
-                  }}
-                  onError={(e) => {
-                    // Fallback to default thumbnail
-                    e.target.src = `https://img.youtube.com/vi/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}/hqdefault.jpg`;
-                  }}
-                />
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    background: 'rgba(0, 0, 0, 0.7)',
-                    borderRadius: '50%',
-                    width: '60px',
-                    height: '60px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: '20px'
-                  }}
-                >
-                  ▶
-                </div>
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '10px',
-                    right: '10px',
-                    background: 'rgba(0, 0, 0, 0.7)',
-                    color: 'white',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    fontSize: '12px',
-                    fontWeight: 'bold'
-                  }}
-                >
-                  SHORTS
-                </div>
-              </div>
+              <iframe
+                key={currentShortIndex}
+                src={`https://www.youtube.com/embed/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}?rel=0&modestbranding=1&playsinline=1&autoplay=0&controls=1&showinfo=0&iv_load_policy=3`}
+                title={`YouTube Short ${currentShortIndex + 1}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '12px',
+                  border: 'none'
+                }}
+              />
             </div>
             <button
               type="button"
