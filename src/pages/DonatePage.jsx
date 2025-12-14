@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDonors } from '../DonorContext.jsx';
+import { useI18n } from '../i18n/I18nProvider.jsx';
 
 export default function DonatePage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { addDonor } = useDonors();
+  const { lang, withBase } = useI18n();
 
   const [donationMode, setDonationMode] = useState('onetime');
   const [selectedAmount, setSelectedAmount] = useState(null);
@@ -14,6 +16,326 @@ export default function DonatePage() {
   const [donorEmail, setDonorEmail] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
+
+  const i18n = React.useMemo(
+    () =>
+      ({
+        ro: {
+          minAmountError: 'Suma minimă pentru donație este 1 RON.',
+          invalidEmailError: 'Te rugăm să introduci o adresă de email validă.',
+          paymentInitError: 'A apărut o eroare la inițierea plății. Te rugăm să încerci din nou.',
+          tagline: 'Muzică pentru Viață 2025',
+          titlePrefix: 'Împreună construim',
+          titleHighlight: 'primul spital pentru bolnavii de cancer',
+          titleSuffix: 'din Reșița',
+          summary:
+            'Fiecare donație contează. Alege suma cu care vrei să contribui la construirea spitalului oncologic din Reșița.',
+          modeSoonOne: 'O singură dată',
+          modeSoonMonthly: 'Lunar',
+          modeSoonTitleOne: 'Donațiile vor fi disponibile în curând',
+          modeSoonTitleMonthly: 'Donațiile lunare vor fi disponibile în curând',
+          customPlaceholder: 'Alta',
+          nameLabel: 'Numele tău (opțional):',
+          namePlaceholder: "Numele tău sau 'Anonim'",
+          emailLabel: 'Email (necesar pentru confirmare):',
+          emailPlaceholder: 'email@exemplu.ro',
+          processing: 'Se procesează...',
+          donateNow: 'DONEAZĂ ACUM',
+          donateWithAmount: (amount) => `DONEAZĂ ${amount} RON`,
+          payNote:
+            'Plata este securizată prin EuPlatesc. Vei fi redirecționat către pagina de plată. După finalizarea donației, vei fi adăugat pe peretele comunității noastre.',
+          whyTitle: 'De ce este important?',
+          whyP1:
+            'În fiecare an, în România, aproximativ 100.000 de oameni află că au cancer. Pentru mulți dintre ei, lupta nu înseamnă doar boala, ci și drumuri lungi, epuizare, costuri mari și timp prețios pierdut departe de cei dragi.',
+          whyP2:
+            'Reșița nu are un spital oncologic. Pacienții sunt nevoiți să călătorească sute de kilometri pentru tratament, în condiții dificile. Fundația OncoHelp lucrează pentru a construi primul spital oncologic din Reșița, un loc unde oamenii pot primi tratament de calitate, mai aproape de casă, cu demnitate, speranță și sprijin real.',
+          whyImgAlt: 'Spitalul din Reșița',
+          hospitalTitle: 'Spitalul din Reșița',
+          hospitalP1:
+            'De peste 10 ani, Radio România Reșița dă glas speranței prin campania „Muzică pentru Viață" – un maraton caritabil care a transformat muzica în sprijin real și a adunat sute de mii de euro pentru oameni aflați în nevoie.',
+          hospitalP2:
+            'În 2025, fiecare notă, fiecare voce și fiecare donație se unesc pentru un scop vital: construirea spitalului oncologic la Reșița. Împreună, demonstrăm că solidaritatea poate salva vieți și că, atunci când o comunitate se unește, speranța devine realitate.',
+          hospitalImgAlt: 'Muzică pentru Viață 2016',
+          rightImgAlt: 'Universitatea din Reșița',
+          orderDescOne: 'O singură dată',
+          orderDescMonthly: 'Lunar',
+        },
+        en: {
+          minAmountError: 'The minimum donation amount is 1 RON.',
+          invalidEmailError: 'Please enter a valid email address.',
+          paymentInitError: 'An error occurred while initiating the payment. Please try again.',
+          tagline: 'Muzică pentru Viață 2025',
+          titlePrefix: 'Together we build',
+          titleHighlight: 'the first hospital for cancer patients',
+          titleSuffix: 'in Reșița',
+          summary:
+            'Every donation matters. Choose the amount you want to contribute to building the oncology hospital in Reșița.',
+          modeSoonOne: 'One-time',
+          modeSoonMonthly: 'Monthly',
+          modeSoonTitleOne: 'Donations will be available soon',
+          modeSoonTitleMonthly: 'Monthly donations will be available soon',
+          customPlaceholder: 'Other',
+          nameLabel: 'Your name (optional):',
+          namePlaceholder: "Your name or 'Anonymous'",
+          emailLabel: 'Email (required for confirmation):',
+          emailPlaceholder: 'email@example.com',
+          processing: 'Processing...',
+          donateNow: 'DONATE NOW',
+          donateWithAmount: (amount) => `DONATE ${amount} RON`,
+          payNote:
+            'Payment is secured via EuPlatesc. You will be redirected to the payment page. After completing the donation, you will be added to our community wall.',
+          whyTitle: 'Why is it important?',
+          whyP1:
+            'Every year in Romania, around 100,000 people find out they have cancer. For many, the fight is not only the illness, but also long trips, exhaustion, high costs, and precious time lost far from loved ones.',
+          whyP2:
+            'Reșița does not have an oncology hospital. Patients are forced to travel hundreds of kilometers for treatment in difficult conditions. OncoHelp works to build the first oncology hospital in Reșița—a place where people can receive quality care closer to home, with dignity, hope and real support.',
+          whyImgAlt: 'Hospital in Reșița',
+          hospitalTitle: 'The hospital in Reșița',
+          hospitalP1:
+            'For over 10 years, Radio România Reșița has given voice to hope through the “Muzică pentru Viață” campaign—a charity marathon that turned music into real support and raised hundreds of thousands of euros for people in need.',
+          hospitalP2:
+            'In 2025, every note, every voice and every donation unite for a vital goal: building the oncology hospital in Reșița. Together, we prove that solidarity can save lives—and when a community unites, hope becomes reality.',
+          hospitalImgAlt: 'Muzică pentru Viață 2016',
+          rightImgAlt: 'University in Reșița',
+          orderDescOne: 'One-time',
+          orderDescMonthly: 'Monthly',
+        },
+        de: {
+          minAmountError: 'Der Mindestbetrag für eine Spende beträgt 1 RON.',
+          invalidEmailError: 'Bitte gib eine gültige E-Mail-Adresse ein.',
+          paymentInitError: 'Beim Start der Zahlung ist ein Fehler aufgetreten. Bitte versuche es erneut.',
+          tagline: 'Muzică pentru Viață 2025',
+          titlePrefix: 'Gemeinsam bauen wir',
+          titleHighlight: 'das erste Krankenhaus für Krebspatienten',
+          titleSuffix: 'in Reșița',
+          summary:
+            'Jede Spende zählt. Wähle den Betrag, mit dem du den Bau des Onkologie-Krankenhauses in Reșița unterstützen möchtest.',
+          modeSoonOne: 'Einmalig',
+          modeSoonMonthly: 'Monatlich',
+          modeSoonTitleOne: 'Spenden sind bald verfügbar',
+          modeSoonTitleMonthly: 'Monatliche Spenden sind bald verfügbar',
+          customPlaceholder: 'Andere',
+          nameLabel: 'Dein Name (optional):',
+          namePlaceholder: "Dein Name oder 'Anonym'",
+          emailLabel: 'E-Mail (für Bestätigung erforderlich):',
+          emailPlaceholder: 'email@beispiel.de',
+          processing: 'Wird verarbeitet...',
+          donateNow: 'JETZT SPENDEN',
+          donateWithAmount: (amount) => `SPENDE ${amount} RON`,
+          payNote:
+            'Die Zahlung ist über EuPlatesc gesichert. Du wirst zur Zahlungsseite weitergeleitet. Nach Abschluss der Spende wirst du unserer Community-Wall hinzugefügt.',
+          whyTitle: 'Warum ist es wichtig?',
+          whyP1:
+            'Jedes Jahr erfahren in Rumänien etwa 100.000 Menschen, dass sie Krebs haben. Für viele bedeutet der Kampf nicht nur die Krankheit, sondern auch lange Wege, Erschöpfung, hohe Kosten und wertvolle Zeit fern von Angehörigen.',
+          whyP2:
+            'Reșița hat kein Onkologie-Krankenhaus. Patienten müssen unter schwierigen Bedingungen Hunderte Kilometer zur Behandlung reisen. OncoHelp arbeitet daran, das erste Onkologie-Krankenhaus in Reșița zu bauen – ein Ort, an dem Menschen hochwertige Behandlung näher an Zuhause erhalten können, mit Würde, Hoffnung und echter Unterstützung.',
+          whyImgAlt: 'Krankenhaus in Reșița',
+          hospitalTitle: 'Das Krankenhaus in Reșița',
+          hospitalP1:
+            'Seit über 10 Jahren gibt Radio România Reșița der Hoffnung eine Stimme durch die Kampagne „Muzică pentru Viață“ – einen Charity-Marathon, der Musik in echte Hilfe verwandelt und Hunderttausende Euro für Menschen in Not gesammelt hat.',
+          hospitalP2:
+            'Im Jahr 2025 vereinen sich jede Note, jede Stimme und jede Spende für ein lebenswichtiges Ziel: den Bau des Onkologie-Krankenhauses in Reșița. Gemeinsam zeigen wir, dass Solidarität Leben retten kann – und wenn eine Gemeinschaft zusammensteht, wird Hoffnung Realität.',
+          hospitalImgAlt: 'Muzică pentru Viață 2016',
+          rightImgAlt: 'Universität in Reșița',
+          orderDescOne: 'Einmalig',
+          orderDescMonthly: 'Monatlich',
+        },
+        fr: {
+          minAmountError: 'Le montant minimum de don est de 1 RON.',
+          invalidEmailError: 'Veuillez saisir une adresse e-mail valide.',
+          paymentInitError: "Une erreur s’est produite lors de l’initiation du paiement. Veuillez réessayer.",
+          tagline: 'Muzică pentru Viață 2025',
+          titlePrefix: 'Ensemble, nous construisons',
+          titleHighlight: 'le premier hôpital pour les patients atteints de cancer',
+          titleSuffix: 'à Reșița',
+          summary:
+            'Chaque don compte. Choisissez le montant avec lequel vous souhaitez contribuer à la construction de l’hôpital d’oncologie à Reșița.',
+          modeSoonOne: 'Unique',
+          modeSoonMonthly: 'Mensuel',
+          modeSoonTitleOne: 'Les dons seront bientôt disponibles',
+          modeSoonTitleMonthly: 'Les dons mensuels seront bientôt disponibles',
+          customPlaceholder: 'Autre',
+          nameLabel: 'Votre nom (facultatif) :',
+          namePlaceholder: "Votre nom ou 'Anonyme'",
+          emailLabel: 'E-mail (obligatoire pour la confirmation) :',
+          emailPlaceholder: 'email@exemple.fr',
+          processing: 'Traitement en cours...',
+          donateNow: 'FAIRE UN DON',
+          donateWithAmount: (amount) => `DONNER ${amount} RON`,
+          payNote:
+            'Le paiement est sécurisé via EuPlatesc. Vous serez redirigé vers la page de paiement. Après le don, vous serez ajouté à notre mur de la communauté.',
+          whyTitle: 'Pourquoi est-ce important ?',
+          whyP1:
+            "Chaque année en Roumanie, environ 100 000 personnes apprennent qu’elles ont un cancer. Pour beaucoup, la lutte ne concerne pas seulement la maladie, mais aussi de longs trajets, l’épuisement, des coûts élevés et un temps précieux perdu loin des proches.",
+          whyP2:
+            "Reșița n’a pas d’hôpital d’oncologie. Les patients doivent parcourir des centaines de kilomètres pour se soigner, dans des conditions difficiles. OncoHelp travaille à construire le premier hôpital d’oncologie à Reșița : un lieu où les gens peuvent recevoir des soins de qualité, plus près de chez eux, avec dignité, espoir et un soutien réel.",
+          whyImgAlt: 'Hôpital à Reșița',
+          hospitalTitle: "L’hôpital à Reșița",
+          hospitalP1:
+            "Depuis plus de 10 ans, Radio România Reșița donne une voix à l’espoir avec la campagne « Muzică pentru Viață » – un marathon caritatif qui transforme la musique en soutien concret et a récolté des centaines de milliers d’euros pour les personnes dans le besoin.",
+          hospitalP2:
+            "En 2025, chaque note, chaque voix et chaque don s’unissent pour un objectif vital : construire l’hôpital d’oncologie à Reșița. Ensemble, nous prouvons que la solidarité peut sauver des vies et que, lorsqu’une communauté s’unit, l’espoir devient réalité.",
+          hospitalImgAlt: 'Muzică pentru Viață 2016',
+          rightImgAlt: 'Université à Reșița',
+          orderDescOne: 'Unique',
+          orderDescMonthly: 'Mensuel',
+        },
+        it: {
+          minAmountError: 'L’importo minimo per la donazione è 1 RON.',
+          invalidEmailError: 'Inserisci un indirizzo email valido.',
+          paymentInitError: 'Si è verificato un errore durante l’avvio del pagamento. Riprova.',
+          tagline: 'Muzică pentru Viață 2025',
+          titlePrefix: 'Insieme costruiamo',
+          titleHighlight: 'il primo ospedale per i pazienti oncologici',
+          titleSuffix: 'a Reșița',
+          summary:
+            'Ogni donazione conta. Scegli l’importo con cui vuoi contribuire alla costruzione dell’ospedale oncologico a Reșița.',
+          modeSoonOne: 'Una tantum',
+          modeSoonMonthly: 'Mensile',
+          modeSoonTitleOne: 'Le donazioni saranno disponibili a breve',
+          modeSoonTitleMonthly: 'Le donazioni mensili saranno disponibili a breve',
+          customPlaceholder: 'Altro',
+          nameLabel: 'Il tuo nome (opzionale):',
+          namePlaceholder: "Il tuo nome o 'Anonimo'",
+          emailLabel: 'Email (necessaria per la conferma):',
+          emailPlaceholder: 'email@esempio.it',
+          processing: 'Elaborazione...',
+          donateNow: 'DONA ORA',
+          donateWithAmount: (amount) => `DONA ${amount} RON`,
+          payNote:
+            'Il pagamento è protetto tramite EuPlatesc. Verrai reindirizzato alla pagina di pagamento. Dopo la donazione, sarai aggiunto al nostro muro della comunità.',
+          whyTitle: 'Perché è importante?',
+          whyP1:
+            'Ogni anno in Romania circa 100.000 persone scoprono di avere un tumore. Per molti la lotta non è solo la malattia, ma anche lunghi viaggi, stanchezza, costi elevati e tempo prezioso lontano dai propri cari.',
+          whyP2:
+            'Reșița non ha un ospedale oncologico. I pazienti sono costretti a viaggiare per centinaia di chilometri per curarsi, in condizioni difficili. OncoHelp lavora per costruire il primo ospedale oncologico a Reșița: un luogo dove le persone possano ricevere cure di qualità più vicino a casa, con dignità, speranza e supporto reale.',
+          whyImgAlt: 'Ospedale a Reșița',
+          hospitalTitle: "L’ospedale a Reșița",
+          hospitalP1:
+            'Da oltre 10 anni Radio România Reșița dà voce alla speranza con la campagna “Muzică pentru Viață” – una maratona di beneficenza che ha trasformato la musica in aiuto concreto e ha raccolto centinaia di migliaia di euro per chi è in difficoltà.',
+          hospitalP2:
+            'Nel 2025 ogni nota, ogni voce e ogni donazione si uniscono per un obiettivo vitale: costruire l’ospedale oncologico a Reșița. Insieme dimostriamo che la solidarietà può salvare vite e che, quando una comunità si unisce, la speranza diventa realtà.',
+          hospitalImgAlt: 'Muzică pentru Viață 2016',
+          rightImgAlt: 'Università a Reșița',
+          orderDescOne: 'Una tantum',
+          orderDescMonthly: 'Mensile',
+        },
+        es: {
+          minAmountError: 'El importe mínimo de donación es 1 RON.',
+          invalidEmailError: 'Por favor, introduce una dirección de email válida.',
+          paymentInitError: 'Se produjo un error al iniciar el pago. Por favor, inténtalo de nuevo.',
+          tagline: 'Muzică pentru Viață 2025',
+          titlePrefix: 'Juntos construimos',
+          titleHighlight: 'el primer hospital para pacientes con cáncer',
+          titleSuffix: 'en Reșița',
+          summary:
+            'Cada donación cuenta. Elige la cantidad con la que quieres contribuir a la construcción del hospital oncológico en Reșița.',
+          modeSoonOne: 'Una vez',
+          modeSoonMonthly: 'Mensual',
+          modeSoonTitleOne: 'Las donaciones estarán disponibles pronto',
+          modeSoonTitleMonthly: 'Las donaciones mensuales estarán disponibles pronto',
+          customPlaceholder: 'Otra',
+          nameLabel: 'Tu nombre (opcional):',
+          namePlaceholder: "Tu nombre o 'Anónimo'",
+          emailLabel: 'Email (necesario para confirmación):',
+          emailPlaceholder: 'email@ejemplo.es',
+          processing: 'Procesando...',
+          donateNow: 'DONAR AHORA',
+          donateWithAmount: (amount) => `DONAR ${amount} RON`,
+          payNote:
+            'El pago está asegurado por EuPlatesc. Serás redirigido a la página de pago. Tras completar la donación, serás añadido al muro de nuestra comunidad.',
+          whyTitle: '¿Por qué es importante?',
+          whyP1:
+            'Cada año en Rumanía, aproximadamente 100.000 personas descubren que tienen cáncer. Para muchos, la lucha no es solo la enfermedad, sino también viajes largos, agotamiento, grandes costes y tiempo valioso perdido lejos de sus seres queridos.',
+          whyP2:
+            'Reșița no tiene un hospital oncológico. Los pacientes se ven obligados a viajar cientos de kilómetros para recibir tratamiento, en condiciones difíciles. OncoHelp trabaja para construir el primer hospital oncológico en Reșița: un lugar donde las personas puedan recibir atención de calidad más cerca de casa, con dignidad, esperanza y apoyo real.',
+          whyImgAlt: 'Hospital en Reșița',
+          hospitalTitle: 'El hospital en Reșița',
+          hospitalP1:
+            'Desde hace más de 10 años, Radio România Reșița da voz a la esperanza con la campaña “Muzică pentru Viață”: un maratón solidario que transformó la música en apoyo real y reunió cientos de miles de euros para personas necesitadas.',
+          hospitalP2:
+            'En 2025, cada nota, cada voz y cada donación se unen por un objetivo vital: construir el hospital oncológico en Reșița. Juntos demostramos que la solidaridad puede salvar vidas y que, cuando una comunidad se une, la esperanza se convierte en realidad.',
+          hospitalImgAlt: 'Muzică pentru Viață 2016',
+          rightImgAlt: 'Universidad en Reșița',
+          orderDescOne: 'Una vez',
+          orderDescMonthly: 'Mensual',
+        },
+        ar: {
+          minAmountError: 'الحد الأدنى للتبرع هو 1 RON.',
+          invalidEmailError: 'يرجى إدخال بريد إلكتروني صالح.',
+          paymentInitError: 'حدث خطأ أثناء بدء الدفع. يرجى المحاولة مرة أخرى.',
+          tagline: 'Muzică pentru Viață 2025',
+          titlePrefix: 'معًا نبني',
+          titleHighlight: 'أول مستشفى لمرضى السرطان',
+          titleSuffix: 'في ريشيتسا',
+          summary:
+            'كل تبرع مهم. اختر المبلغ الذي ترغب في المساهمة به لبناء مستشفى الأورام في ريشيتسا.',
+          modeSoonOne: 'مرة واحدة',
+          modeSoonMonthly: 'شهريًا',
+          modeSoonTitleOne: 'ستتوفر التبرعات قريبًا',
+          modeSoonTitleMonthly: 'ستتوفر التبرعات الشهرية قريبًا',
+          customPlaceholder: 'مبلغ آخر',
+          nameLabel: 'اسمك (اختياري):',
+          namePlaceholder: "اسمك أو 'مجهول'",
+          emailLabel: 'البريد الإلكتروني (مطلوب للتأكيد):',
+          emailPlaceholder: 'email@example.com',
+          processing: 'جارٍ المعالجة...',
+          donateNow: 'تبرّع الآن',
+          donateWithAmount: (amount) => `تبرّع ${amount} RON`,
+          payNote:
+            'الدفع مؤمّن عبر EuPlatesc. سيتم تحويلك إلى صفحة الدفع. بعد إتمام التبرع ستتم إضافتك إلى جدار مجتمعنا.',
+          whyTitle: 'لماذا هذا مهم؟',
+          whyP1:
+            'كل عام في رومانيا، يكتشف حوالي 100,000 شخص أنهم مصابون بالسرطان. بالنسبة للكثيرين لا تعني المعركة المرض فقط، بل أيضًا رحلات طويلة وإرهاق وتكاليف مرتفعة ووقت ثمين بعيدًا عن الأحبة.',
+          whyP2:
+            'لا يوجد في ريشيتسا مستشفى للأورام. يضطر المرضى إلى السفر مئات الكيلومترات للعلاج في ظروف صعبة. تعمل OncoHelp على بناء أول مستشفى للأورام في ريشيتسا: مكان يمكن للناس فيه تلقي علاج عالي الجودة أقرب إلى البيت، بكرامة وأمل ودعم حقيقي.',
+          whyImgAlt: 'مستشفى في ريشيتسا',
+          hospitalTitle: 'مستشفى ريشيتسا',
+          hospitalP1:
+            'لأكثر من 10 سنوات تمنح إذاعة Radio România Reșița صوتًا للأمل عبر حملة “Muzică pentru Viață” – ماراثون خيري حوّل الموسيقى إلى دعم حقيقي وجمع مئات الآلاف من اليورو للأشخاص المحتاجين.',
+          hospitalP2:
+            'في عام 2025 تتحد كل نغمة وكل صوت وكل تبرع من أجل هدف حيوي: بناء مستشفى الأورام في ريشيتسا. معًا نثبت أن التضامن قادر على إنقاذ الأرواح، وأنه عندما يتحد المجتمع يصبح الأمل حقيقة.',
+          hospitalImgAlt: 'Muzică pentru Viață 2016',
+          rightImgAlt: 'جامعة ريشيتسا',
+          orderDescOne: 'مرة واحدة',
+          orderDescMonthly: 'شهريًا',
+        },
+      }[lang] || {
+        minAmountError: 'Suma minimă pentru donație este 1 RON.',
+        invalidEmailError: 'Te rugăm să introduci o adresă de email validă.',
+        paymentInitError: 'A apărut o eroare la inițierea plății. Te rugăm să încerci din nou.',
+        tagline: 'Muzică pentru Viață 2025',
+        titlePrefix: '',
+        titleHighlight: '',
+        titleSuffix: '',
+        summary: '',
+        modeSoonOne: '',
+        modeSoonMonthly: '',
+        modeSoonTitleOne: '',
+        modeSoonTitleMonthly: '',
+        customPlaceholder: '',
+        nameLabel: '',
+        namePlaceholder: '',
+        emailLabel: '',
+        emailPlaceholder: '',
+        processing: '',
+        donateNow: '',
+        donateWithAmount: (amount) => amount,
+        payNote: '',
+        whyTitle: '',
+        whyP1: '',
+        whyP2: '',
+        whyImgAlt: '',
+        hospitalTitle: '',
+        hospitalP1: '',
+        hospitalP2: '',
+        hospitalImgAlt: '',
+        rightImgAlt: '',
+        orderDescOne: '',
+        orderDescMonthly: '',
+      }),
+    [lang]
+  );
 
   // Preset donation amounts (minimum 1 RON)
   const presetAmounts = [15, 25, 50, 100, 'custom'];
@@ -37,11 +359,11 @@ export default function DonatePage() {
     if (isSuccess && amount && invoiceId) {
       console.log('Payment successful, redirecting to wall:', { action, amount, name, invoiceId });
       // Donation was already recorded when form was submitted, just redirect to wall
-      navigate('/multumiri', { replace: true });
+      navigate(withBase('/multumiri'), { replace: true });
     } else if (action || amount) {
       console.log('Payment return detected but not confirmed:', { action, amount, name, invoiceId });
     }
-  }, [searchParams, navigate]);
+  }, [searchParams, navigate, withBase]);
 
   const handleAmountSelect = (amount) => {
     setSelectedAmount(amount);
@@ -67,12 +389,12 @@ export default function DonatePage() {
 
     const finalAmount = getFinalAmount();
     if (!finalAmount || finalAmount < 1) {
-      setError('Suma minimă pentru donație este 1 RON.');
+      setError(i18n.minAmountError);
       return;
     }
 
     if (!donorEmail || !donorEmail.includes('@')) {
-      setError('Te rugăm să introduci o adresă de email validă.');
+      setError(i18n.invalidEmailError);
       return;
     }
 
@@ -106,7 +428,7 @@ export default function DonatePage() {
         body: JSON.stringify({
           amount: finalAmount.toFixed(2),
           currency: 'RON',
-          orderDesc: `Donație Muzică pentru Viață - ${donationMode === 'monthly' ? 'Lunar' : 'O singură dată'}`,
+          orderDesc: `Donation Muzică pentru Viață - ${donationMode === 'monthly' ? i18n.orderDescMonthly : i18n.orderDescOne}`,
           email: donorEmail,
           invoiceId: invoiceId, // Pass the invoice ID
         }),
@@ -150,7 +472,7 @@ export default function DonatePage() {
       form.submit();
     } catch (err) {
       console.error('Payment initiation error:', err);
-      setError('A apărut o eroare la inițierea plății. Te rugăm să încerci din nou.');
+      setError(i18n.paymentInitError);
       setIsProcessing(false);
     }
   };
@@ -162,12 +484,14 @@ export default function DonatePage() {
         <div className="donation-panel" id="donation-form">
           <div className="donation-panel-inner">
             <div className="donation-panel-left">
-              <span className="tagline">Muzică pentru Viață 2025</span>
+              <span className="tagline">{i18n.tagline}</span>
               <h1>
-                Împreună construim <span className="highlight">primul spital pentru bolnavii de cancer</span> din Reșița
+                {i18n.titlePrefix}{' '}
+                <span className="highlight">{i18n.titleHighlight}</span>{' '}
+                {i18n.titleSuffix}
               </h1>
               <p className="donation-summary">
-                Fiecare donație contează. Alege suma cu care vrei să contribui la construirea spitalului oncologic din Reșița.
+                {i18n.summary}
               </p>
 
               <form onSubmit={handleSubmit}>
@@ -177,17 +501,17 @@ export default function DonatePage() {
                     type="button"
                     className="donation-mode-tab donation-mode-tab--disabled"
                     disabled
-                    title="Donațiile vor fi disponibile în curând"
+                    title={i18n.modeSoonTitleOne}
                   >
-                    O singură dată
+                    {i18n.modeSoonOne}
                   </button>
                   <button
                     type="button"
                     className="donation-mode-tab donation-mode-tab--disabled"
                     disabled
-                    title="Donațiile lunare vor fi disponibile în curând"
+                    title={i18n.modeSoonTitleMonthly}
                   >
-                    Lunar
+                    {i18n.modeSoonMonthly}
                   </button>
                 </div>
 
@@ -203,7 +527,7 @@ export default function DonatePage() {
                         <input
                           type="number"
                           className="donation-amount-main donation-custom-input-inline"
-                          placeholder="Alta"
+                          placeholder={i18n.customPlaceholder}
                           value={customAmount}
                           onChange={handleCustomAmountChange}
                           min="1"
@@ -228,22 +552,22 @@ export default function DonatePage() {
                 {/* Donor Information */}
                 <div className="donor-info-row">
                   <div className="donation-custom">
-                    <label className="donation-custom-label">Numele tău (opțional):</label>
+                    <label className="donation-custom-label">{i18n.nameLabel}</label>
                     <input
                       type="text"
                       className="donation-custom-input"
-                      placeholder="Numele tău sau 'Anonim'"
+                      placeholder={i18n.namePlaceholder}
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
                     />
                   </div>
 
                   <div className="donation-custom">
-                    <label className="donation-custom-label">Email (necesar pentru confirmare):</label>
+                    <label className="donation-custom-label">{i18n.emailLabel}</label>
                     <input
                       type="email"
                       className="donation-custom-input"
-                      placeholder="email@exemplu.ro"
+                      placeholder={i18n.emailPlaceholder}
                       value={donorEmail}
                       onChange={(e) => setDonorEmail(e.target.value)}
                       required
@@ -264,18 +588,21 @@ export default function DonatePage() {
                   className="btn-primary donation-cta-big"
                   disabled={isProcessing}
                 >
-                  {isProcessing ? 'Se procesează...' : `DONEAZĂ ${getFinalAmount() > 0 ? getFinalAmount().toFixed(0) + ' RON' : 'ACUM'}`}
+                  {isProcessing
+                    ? i18n.processing
+                    : getFinalAmount() > 0
+                      ? i18n.donateWithAmount(getFinalAmount().toFixed(0))
+                      : i18n.donateNow}
                 </button>
 
                 <p className="donation-cta-note">
-                  Plata este securizată prin EuPlatesc. Vei fi redirecționat către pagina de plată.
-                  După finalizarea donației, vei fi adăugat pe peretele comunității noastre.
+                  {i18n.payNote}
                 </p>
               </form>
             </div>
 
             <div className="donation-panel-right">
-              <img src="/IMG_1101.jpg" alt="Universitatea din Reșița" style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)', display: 'block', margin: '0 auto'}} />
+              <img src="/IMG_1101.jpg" alt={i18n.rightImgAlt} style={{width: '100%', borderRadius: '18px', boxShadow: '0 18px 40px rgba(15, 23, 42, 0.12)', display: 'block', margin: '0 auto'}} />
             </div>
           </div>
         </div>
@@ -283,28 +610,28 @@ export default function DonatePage() {
         {/* Story Section - Now below donation form */}
         <div className="post-event-story">
           <div className="post-event-section">
-            <div className="post-event-section-title">De ce este important?</div>
+            <div className="post-event-section-title">{i18n.whyTitle}</div>
             <p className="post-event-text">
-              În fiecare an, în România, aproximativ 100.000 de oameni află că au cancer. Pentru mulți dintre ei, lupta nu înseamnă doar boala, ci și drumuri lungi, epuizare, costuri mari și timp prețios pierdut departe de cei dragi.
+              {i18n.whyP1}
             </p>
             <p className="post-event-text">
-              Reșița nu are un spital oncologic. Pacienții sunt nevoiți să călătorească sute de kilometri pentru tratament, în condiții dificile. Fundația OncoHelp lucrează pentru a construi primul spital oncologic din Reșița, un loc unde oamenii pot primi tratament de calitate, mai aproape de casă, cu demnitate, speranță și sprijin real.
+              {i18n.whyP2}
             </p>
             <div className="post-event-image-block post-event-image-block--clinic">
-              <img src="/resita populatie.jpg" alt="Spitalul din Reșița" />
+              <img src="/resita populatie.jpg" alt={i18n.whyImgAlt} />
             </div>
           </div>
 
           <div className="post-event-section">
-            <div className="post-event-section-title">Spitalul din Reșița</div>
+            <div className="post-event-section-title">{i18n.hospitalTitle}</div>
             <p className="post-event-text">
-              De peste 10 ani, Radio România Reșița dă glas speranței prin campania „Muzică pentru Viață" – un maraton caritabil care a transformat muzica în sprijin real și a adunat sute de mii de euro pentru oameni aflați în nevoie.
+              {i18n.hospitalP1}
             </p>
             <p className="post-event-text">
-              În 2025, fiecare notă, fiecare voce și fiecare donație se unesc pentru un scop vital: construirea spitalului oncologic la Reșița. Împreună, demonstrăm că solidaritatea poate salva vieți și că, atunci când o comunitate se unește, speranța devine realitate.
+              {i18n.hospitalP2}
             </p>
             <div className="post-event-image-block post-event-image-block--history">
-              <img src="/2016.jpg" alt="Muzică pentru Viață 2016" />
+              <img src="/2016.jpg" alt={i18n.hospitalImgAlt} />
             </div>
           </div>
 

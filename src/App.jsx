@@ -13,8 +13,10 @@ import TermsAndConditionsPage from './pages/TermsAndConditionsPage.jsx';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
 import GlobalRadioPlayer from './components/GlobalRadioPlayer.jsx';
 import MoneyCounter from './components/MoneyCounter.jsx';
+import { useI18n } from './i18n/I18nProvider.jsx';
 
 function Layout({ children }) {
+  const { t, withBase } = useI18n();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(true);
@@ -48,7 +50,7 @@ function Layout({ children }) {
       <header className="site-header">
         <img
           src="/Logo Muzica pentru viata.svg"
-          alt="Muzică pentru Viață"
+          alt={t('alt.logoMain')}
           className="logo-main-top"
         />
       </header>
@@ -59,22 +61,22 @@ function Layout({ children }) {
           <div className="mobile-logo-center">
             <img
               src="/Logo Muzica pentru viata.svg"
-              alt="Muzică pentru Viață"
+              alt={t('alt.logoMain')}
               style={{ height: '60px', maxWidth: '100%' }}
             />
           </div>
           <NavLink
-            to="/#donation-form"
+            to={withBase('/#donation-form')}
             className="btn-primary mobile-donate-left"
             style={{ fontSize: '1.2rem', padding: '12px 18px' }}
           >
-            DONEAZĂ ACUM
+            {t('cta.donateNow')}
           </NavLink>
           <nav className="mobile-nav mobile-hamburger-right">
             <button
               className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
               onClick={toggleMobileMenu}
-              aria-label="Deschide meniul"
+              aria-label={t('mobile.menuOpen')}
             >
               <span className="hamburger-line"></span>
               <span className="hamburger-line"></span>
@@ -86,11 +88,11 @@ function Layout({ children }) {
         <div className={`mobile-header-compact ${isScrolled ? 'active' : ''}`}>
           <div></div> {/* Empty left column */}
           <NavLink
-            to="/#donation-form"
+            to={withBase('/#donation-form')}
             className="btn-primary"
             style={{ fontSize: '1.35rem', padding: '15px 30px' }}
           >
-            DONEAZĂ ACUM
+            {t('cta.donateNow')}
           </NavLink>
           <div></div> {/* Empty right column */}
         </div>
@@ -108,7 +110,7 @@ function Layout({ children }) {
           <button
             className="mobile-drawer-close"
             onClick={closeMobileMenu}
-            aria-label="Închide meniul"
+            aria-label={t('mobile.menuClose')}
           >
             ×
           </button>
@@ -119,73 +121,73 @@ function Layout({ children }) {
 
           <div className="mobile-drawer-links">
             <NavLink
-              to="/"
+              to={withBase('/')}
               end
               className={({ isActive }) =>
                 'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
               }
               onClick={closeMobileMenu}
             >
-              Donează
+              {t('nav.donate')}
             </NavLink>
 
             <NavLink
-              to="/live"
+              to={withBase('/live')}
               className={({ isActive }) =>
                 'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
               }
               onClick={closeMobileMenu}
             >
-              Live & Video
+              {t('nav.live')}
             </NavLink>
 
             <NavLink
-              to="/galerie"
+              to={withBase('/galerie')}
               className={({ isActive }) =>
                 'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
               }
               onClick={closeMobileMenu}
             >
-              Cronologie
+              {t('nav.timeline')}
             </NavLink>
 
             <NavLink
-              to="/despre-oncohelp"
+              to={withBase('/despre-oncohelp')}
               className={({ isActive }) =>
                 'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
               }
               onClick={closeMobileMenu}
             >
-              Despre OncoHelp
+              {t('nav.aboutOncohelp')}
             </NavLink>
 
             <NavLink
-              to="/despre-resita"
+              to={withBase('/despre-resita')}
               className={({ isActive }) =>
                 'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
               }
               onClick={closeMobileMenu}
             >
-              Despre Reșița
+              {t('nav.aboutResita')}
             </NavLink>
 
             <NavLink
-              to="/multumiri"
+              to={withBase('/multumiri')}
               className={({ isActive }) =>
                 'mobile-nav-link' + (isActive ? ' mobile-nav-link-active' : '')
               }
               onClick={closeMobileMenu}
             >
-              Comunitatea
+              {t('nav.community')}
             </NavLink>
           </div>
 
           <NavLink
-            to="/#donation-form"
+            to={withBase('/#donation-form')}
             className="btn-primary mobile-nav-donate"
             onClick={closeMobileMenu}
           >
-            DONEAZĂ ACUM
+            {t('cta.donateNow')}
           </NavLink>
         </div>
       </div>
@@ -197,64 +199,64 @@ function Layout({ children }) {
             {isScrolled && (
               <img
                 src="/Logo Muzica pentru viata.svg"
-                alt="Muzică pentru Viață"
+                alt={t('alt.logoMain')}
                 className="nav-logo-scrolled"
               />
             )}
             <div className="site-nav-links">
               <NavLink
-                to="/"
+                to={withBase('/')}
                 end
                 className={({ isActive }) =>
                   'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
                 }
               >
-                Donează
+                {t('nav.donate')}
               </NavLink>
 
               <NavLink
-                to="/live"
+                to={withBase('/live')}
                 className={({ isActive }) =>
                   'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
                 }
               >
-                Live & Video
+                {t('nav.live')}
               </NavLink>
 
               <NavLink
-                to="/galerie"
+                to={withBase('/galerie')}
                 className={({ isActive }) =>
                   'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
                 }
               >
-                Cronologie
+                {t('nav.timeline')}
               </NavLink>
 
               <NavLink
-                to="/despre-oncohelp"
+                to={withBase('/despre-oncohelp')}
                 className={({ isActive }) =>
                   'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
                 }
               >
-                Despre OncoHelp
+                {t('nav.aboutOncohelp')}
               </NavLink>
 
               <NavLink
-                to="/despre-resita"
+                to={withBase('/despre-resita')}
                 className={({ isActive }) =>
                   'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
                 }
               >
-                Despre Reșița
+                {t('nav.aboutResita')}
               </NavLink>
 
               <NavLink
-                to="/multumiri"
+                to={withBase('/multumiri')}
                 className={({ isActive }) =>
                   'site-nav-link' + (isActive ? ' site-nav-link-active' : '')
                 }
               >
-                Comunitatea
+                {t('nav.community')}
               </NavLink>
             </div>
           </div>
@@ -262,10 +264,10 @@ function Layout({ children }) {
           <MoneyCounter />
 
           <NavLink
-            to="/#donation-form"
+            to={withBase('/#donation-form')}
             className="btn-primary nav-donate"
           >
-            DONEAZĂ ACUM
+            {t('cta.donateNow')}
           </NavLink>
         </div>
       </nav>
@@ -279,33 +281,34 @@ function Layout({ children }) {
 
 
 function SiteFooter({ isScrolled }) {
+  const { t, withBase } = useI18n();
   return (
     <footer className="app-footer">
       <div className="app-footer-inner">
         <section className="footer-top">
           <p className="footer-tagline">
-            Muzică pentru Viață • Împreună pentru pacienții cu cancer din Banatul de Munte
+            {t('footer.tagline')}
           </p>
         </section>
 
         <section className="footer-logos" aria-label="Beneficiar, organizator și sponsori">
           <div className="footer-logos-row">
             <div className="footer-column">
-              <span className="footer-column-title">Beneficiar donații</span>
+              <span className="footer-column-title">{t('footer.section.donationBeneficiary')}</span>
               <div className="footer-logo-main footer-logo-main--oncohelp">
                 <a href="https://oncohelp.ro" target="_blank" rel="noopener noreferrer">
-                  <img src="/onco-help-logo-d.png" alt="Fundația OncoHelp" />
+                  <img src="/onco-help-logo-d.png" alt={t('alt.logoOncohelp')} />
                 </a>
               </div>
             </div>
 
             <div className="footer-column">
-              <span className="footer-column-title">Organizat de</span>
+              <span className="footer-column-title">{t('footer.section.organizedBy')}</span>
               <div className="footer-logo-main footer-logo-main--radio" data-fallback-text="Radio România Reșița">
                 <a href="https://radioresita.ro" target="_blank" rel="noopener noreferrer">
                   <img
                     src="/Logo Radio Romania Resita.svg"
-                    alt="Radio România Reșița"
+                    alt={t('alt.logoRadio')}
                     onError={(e) => {
                       console.error('Radio Romania Resita logo failed to load');
                       e.target.style.display = 'none';
@@ -324,7 +327,7 @@ function SiteFooter({ isScrolled }) {
             </div>
 
             <div className="footer-column">
-              <span className="footer-column-title">Sponsori și parteneri</span>
+              <span className="footer-column-title">{t('footer.section.sponsorsPartners')}</span>
               <div className="footer-sponsor-grid">
                 <a href="https://dacus.ro" target="_blank" rel="noopener noreferrer">
                   <img src="/dacus_logo_site.png" alt="Dacus" />
@@ -332,7 +335,7 @@ function SiteFooter({ isScrolled }) {
                 <a href="https://sky.ro" target="_blank" rel="noopener noreferrer">
                   <img
                     src="/Photoshoped png (1).png"
-                    alt="Sky Radio"
+                    alt={t('alt.logoSky')}
                   />
                 </a>
               </div>
@@ -341,7 +344,7 @@ function SiteFooter({ isScrolled }) {
         </section>
 
         <section className="footer-banking">
-          <h3 className="footer-banking-title">Detalii bancare pentru donații</h3>
+          <h3 className="footer-banking-title">{t('footer.banking.title')}</h3>
           <div className="footer-banking-details">
             <p>RO65 RZBR 0000 0600 1720 1882 - LEI</p>
             <p>RO97 RZBR 0000 0600 1720 1888 - EURO - swift RZBRROBU</p>
@@ -355,23 +358,23 @@ function SiteFooter({ isScrolled }) {
         >
           <audio controls preload="none">
             <source src="/Muzică pentru Viață 2025.mp3" type="audio/mpeg" />
-            Browserul dumneavoastră nu suportă redarea audio.
+            {t('footer.audio.fallback')}
           </audio>
         </section>
 
         <section className="footer-legal">
           <div className="footer-legal-links">
-            <NavLink to="/termeni-si-conditii" className="footer-legal-link">
-              Termeni și condiții
+            <NavLink to={withBase('/termeni-si-conditii')} className="footer-legal-link">
+              {t('footer.legal.terms')}
             </NavLink>
             <span className="footer-legal-separator">|</span>
-            <NavLink to="/politica-de-confidentialitate" className="footer-legal-link">
-              Politica de confidențialitate
+            <NavLink to={withBase('/politica-de-confidentialitate')} className="footer-legal-link">
+              {t('footer.legal.privacy')}
             </NavLink>
           </div>
           <div className="footer-contact">
             <a href="https://wa.me/40751288777" className="footer-contact-link" target="_blank" rel="noopener noreferrer">
-              Contact WhatsApp: +40 751 288 777
+              {t('footer.contact.whatsapp')}
             </a>
           </div>
           <p className="footer-copyright">
@@ -381,11 +384,11 @@ function SiteFooter({ isScrolled }) {
 
         <section className="footer-powered-by">
           <p className="footer-powered-by-text">
-            Powered by{' '}
+            {t('footer.poweredBy')}{' '}
             <a href="https://sky.ro" target="_blank" rel="noopener noreferrer" className="footer-powered-by-link">
               <img
                 src="/Photoshoped png (1).png"
-                alt="Sky Radio"
+                alt={t('alt.logoSky')}
                 className="footer-powered-by-logo"
               />
             </a>
@@ -393,6 +396,44 @@ function SiteFooter({ isScrolled }) {
         </section>
       </div>
     </footer>
+  );
+}
+
+const LANG_PREFIXES = ['en', 'de', 'fr', 'it', 'es', 'ar'];
+
+function RoutesForAllLanguages() {
+  return (
+    <>
+      {/* Romanian (default, no prefix) */}
+      <Route path="/" element={<Layout><DonatePage /></Layout>} />
+      <Route path="/donatii" element={<Layout><DonatePage /></Layout>} />
+      <Route path="/live" element={<Layout><LivePage /></Layout>} />
+      <Route path="/galerie" element={<Layout><GalleryPage /></Layout>} />
+      <Route path="/despre-oncohelp" element={<Layout><AboutOncohelpPage /></Layout>} />
+      <Route path="/despre-resita" element={<Layout><AboutResitaPage /></Layout>} />
+      <Route path="/multumiri" element={<Layout><WallPage /></Layout>} />
+      <Route path="/multumiri/:donorName" element={<Layout><PersonalizedWallPage /></Layout>} />
+      <Route path="/sponsori" element={<Layout><SponsorsPage /></Layout>} />
+      <Route path="/mobile/:donorName" element={<Layout><MobileWallScreenshot /></Layout>} />
+      <Route path="/termeni-si-conditii" element={<Layout><TermsAndConditionsPage /></Layout>} />
+      <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
+
+      {/* Prefixed languages */}
+      {LANG_PREFIXES.flatMap((prefix) => [
+        <Route key={`${prefix}-root`} path={`/${prefix}`} element={<Layout><DonatePage /></Layout>} />,
+        <Route key={`${prefix}-donatii`} path={`/${prefix}/donatii`} element={<Layout><DonatePage /></Layout>} />,
+        <Route key={`${prefix}-live`} path={`/${prefix}/live`} element={<Layout><LivePage /></Layout>} />,
+        <Route key={`${prefix}-galerie`} path={`/${prefix}/galerie`} element={<Layout><GalleryPage /></Layout>} />,
+        <Route key={`${prefix}-oncohelp`} path={`/${prefix}/despre-oncohelp`} element={<Layout><AboutOncohelpPage /></Layout>} />,
+        <Route key={`${prefix}-resita`} path={`/${prefix}/despre-resita`} element={<Layout><AboutResitaPage /></Layout>} />,
+        <Route key={`${prefix}-wall`} path={`/${prefix}/multumiri`} element={<Layout><WallPage /></Layout>} />,
+        <Route key={`${prefix}-wall-personal`} path={`/${prefix}/multumiri/:donorName`} element={<Layout><PersonalizedWallPage /></Layout>} />,
+        <Route key={`${prefix}-sponsori`} path={`/${prefix}/sponsori`} element={<Layout><SponsorsPage /></Layout>} />,
+        <Route key={`${prefix}-mobile`} path={`/${prefix}/mobile/:donorName`} element={<Layout><MobileWallScreenshot /></Layout>} />,
+        <Route key={`${prefix}-terms`} path={`/${prefix}/termeni-si-conditii`} element={<Layout><TermsAndConditionsPage /></Layout>} />,
+        <Route key={`${prefix}-privacy`} path={`/${prefix}/politica-de-confidentialitate`} element={<Layout><PrivacyPolicyPage /></Layout>} />,
+      ])}
+    </>
   );
 }
 
@@ -406,25 +447,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* Homepage with layout */}
-        <Route path="/" element={<Layout><DonatePage /></Layout>} />
-        <Route path="/donatii" element={<Layout><DonatePage /></Layout>} />
-
-        {/* Routes with layout */}
-        <Route path="/live" element={<Layout><LivePage /></Layout>} />
-        <Route path="/galerie" element={<Layout><GalleryPage /></Layout>} />
-        <Route path="/despre-oncohelp" element={<Layout><AboutOncohelpPage /></Layout>} />
-        <Route path="/despre-resita" element={<Layout><AboutResitaPage /></Layout>} />
-        <Route path="/multumiri" element={<Layout><WallPage /></Layout>} />
-        <Route path="/multumiri/:donorName" element={<Layout><PersonalizedWallPage /></Layout>} />
-        <Route path="/sponsori" element={<Layout><SponsorsPage /></Layout>} />
-        <Route path="/mobile/:donorName" element={<Layout><MobileWallScreenshot /></Layout>} />
-
-        {/* Terms and Conditions page - accessible without password */}
-        <Route path="/termeni-si-conditii" element={<Layout><TermsAndConditionsPage /></Layout>} />
-
-        {/* Privacy Policy page - accessible without password */}
-        <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
+        <RoutesForAllLanguages />
       </Routes>
 
       {/* Global Radio Player - appears on all pages */}

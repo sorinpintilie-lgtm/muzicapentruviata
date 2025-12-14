@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDonors, getDonorSizeClass } from '../DonorContext.jsx';
 import html2canvas from 'html2canvas';
+import { useI18n } from '../i18n/I18nProvider.jsx';
 
 const animations = [
   'anim-float',
@@ -75,12 +76,125 @@ function getRowSpacerWidth(index) {
 }
 
 export default function PersonalizedWallPage() {
+  const { lang } = useI18n();
   const { donorName } = useParams();
   const { donors } = useDonors();
   const highlightedRef = useRef(null);
   const wallRef = useRef(null);
   const [isImageDownloading, setIsImageDownloading] = useState(false);
   const [isVideoDownloading, setIsVideoDownloading] = useState(false);
+
+  const i18n = React.useMemo(
+    () =>
+      ({
+        ro: {
+          overline: 'Mulțumim din inimă',
+          title: (name) => `${name}, parte dintre eroi!`,
+          lead:
+            'Numele tău strălucește printre toți cei care au ales să facă diferența. Fiecare gest contează, iar tu ai ales să fii parte din această poveste.',
+          shareTitle: 'Distribuie recunoștința ta',
+          shareSubtitle: 'Trimite prietenilor peretele tău de onoare sau descarcă imaginea și TikTok video.',
+          shareFacebook: 'Distribuie pe Facebook',
+          shareWhatsApp: 'Trimite pe WhatsApp',
+          downloading: 'Se descarcă...',
+          downloadImage: 'Descarcă imagine',
+          generatingVideo: 'Se generează video...',
+          downloadVideo: 'Descarcă TikTok video',
+          whatsappText: (url) => `Și eu susțin campania Muzică pentru Viață – vezi peretele meu de onoare:\n\n${url}`,
+        },
+        en: {
+          overline: 'With heartfelt thanks',
+          title: (name) => `${name}, one of the heroes!`,
+          lead:
+            'Your name shines among everyone who chose to make a difference. Every gesture matters—and you chose to be part of this story.',
+          shareTitle: 'Share your gratitude',
+          shareSubtitle: 'Send your honor wall to friends or download the image and TikTok video.',
+          shareFacebook: 'Share on Facebook',
+          shareWhatsApp: 'Send on WhatsApp',
+          downloading: 'Downloading...',
+          downloadImage: 'Download image',
+          generatingVideo: 'Generating video...',
+          downloadVideo: 'Download TikTok video',
+          whatsappText: (url) => `I support Muzică pentru Viață too — see my honor wall:\n\n${url}`,
+        },
+        de: {
+          overline: 'Von Herzen danke',
+          title: (name) => `${name}, einer der Held:innen!`,
+          lead:
+            'Dein Name leuchtet unter all jenen, die sich entschieden haben, einen Unterschied zu machen. Jede Geste zählt – und du bist Teil dieser Geschichte.',
+          shareTitle: 'Teile deine Dankbarkeit',
+          shareSubtitle: 'Schicke deine Ehrenwand an Freunde oder lade Bild und TikTok-Video herunter.',
+          shareFacebook: 'Auf Facebook teilen',
+          shareWhatsApp: 'Per WhatsApp senden',
+          downloading: 'Wird heruntergeladen...',
+          downloadImage: 'Bild herunterladen',
+          generatingVideo: 'Video wird erstellt...',
+          downloadVideo: 'TikTok-Video herunterladen',
+          whatsappText: (url) => `Auch ich unterstütze Muzică pentru Viață – sieh dir meine Ehrenwand an:\n\n${url}`,
+        },
+        fr: {
+          overline: 'Merci de tout cœur',
+          title: (name) => `${name}, parmi les héros !`,
+          lead:
+            'Votre nom brille parmi toutes celles et ceux qui ont choisi de faire la différence. Chaque geste compte, et vous avez choisi de faire partie de cette histoire.',
+          shareTitle: 'Partagez votre gratitude',
+          shareSubtitle: 'Envoyez votre mur d’honneur à vos amis ou téléchargez l’image et la vidéo TikTok.',
+          shareFacebook: 'Partager sur Facebook',
+          shareWhatsApp: 'Envoyer sur WhatsApp',
+          downloading: 'Téléchargement...',
+          downloadImage: "Télécharger l’image",
+          generatingVideo: 'Génération de la vidéo...',
+          downloadVideo: 'Télécharger la vidéo TikTok',
+          whatsappText: (url) => `Moi aussi, je soutiens Muzică pentru Viață – voici mon mur d’honneur :\n\n${url}`,
+        },
+        it: {
+          overline: 'Grazie di cuore',
+          title: (name) => `${name}, tra gli eroi!`,
+          lead:
+            'Il tuo nome brilla tra tutti coloro che hanno scelto di fare la differenza. Ogni gesto conta, e tu hai scelto di far parte di questa storia.',
+          shareTitle: 'Condividi la tua gratitudine',
+          shareSubtitle: 'Invia ai tuoi amici il tuo muro d’onore o scarica l’immagine e il video TikTok.',
+          shareFacebook: 'Condividi su Facebook',
+          shareWhatsApp: 'Invia su WhatsApp',
+          downloading: 'Download in corso...',
+          downloadImage: 'Scarica immagine',
+          generatingVideo: 'Generazione video...',
+          downloadVideo: 'Scarica video TikTok',
+          whatsappText: (url) => `Anch’io sostengo Muzică pentru Viață – guarda il mio muro d’onore:\n\n${url}`,
+        },
+        es: {
+          overline: 'Gracias de corazón',
+          title: (name) => `${name}, ¡entre los héroes!`,
+          lead:
+            'Tu nombre brilla entre todos los que eligieron marcar la diferencia. Cada gesto cuenta, y tú has elegido ser parte de esta historia.',
+          shareTitle: 'Comparte tu agradecimiento',
+          shareSubtitle: 'Envía tu muro de honor a tus amigos o descarga la imagen y el video de TikTok.',
+          shareFacebook: 'Compartir en Facebook',
+          shareWhatsApp: 'Enviar por WhatsApp',
+          downloading: 'Descargando...',
+          downloadImage: 'Descargar imagen',
+          generatingVideo: 'Generando video...',
+          downloadVideo: 'Descargar video TikTok',
+          whatsappText: (url) => `Yo también apoyo Muzică pentru Viață — mira mi muro de honor:\n\n${url}`,
+        },
+        ar: {
+          overline: 'شكرًا من القلب',
+          title: (name) => `${name}، من بين الأبطال!`,
+          lead:
+            'اسمك يلمع بين كل من اختار أن يصنع فرقًا. كل لفتة مهمة، وقد اخترت أن تكون جزءًا من هذه القصة.',
+          shareTitle: 'شارك امتنانك',
+          shareSubtitle: 'أرسل جدار الشرف لأصدقائك أو قم بتنزيل الصورة وفيديو تيك توك.',
+          shareFacebook: 'شارك على فيسبوك',
+          shareWhatsApp: 'أرسل عبر واتساب',
+          downloading: 'جارٍ التنزيل...',
+          downloadImage: 'تنزيل الصورة',
+          generatingVideo: 'جارٍ إنشاء الفيديو...',
+          downloadVideo: 'تنزيل فيديو تيك توك',
+          whatsappText: (url) => `أنا أيضًا أدعم Muzică pentru Viață – شاهد جدار الشرف الخاص بي:\n\n${url}`,
+        },
+      }[lang] || {}),
+    [lang]
+  );
 
   // Decode the donor name from URL
   const decodedDonorName = decodeURIComponent(donorName || '');
@@ -195,7 +309,7 @@ export default function PersonalizedWallPage() {
 
   const handleShareWhatsApp = () => {
     const shareUrl = window.location.href;
-    const text = `Și eu susțin campania Muzică pentru Viață – vezi peretele meu de onoare:\n\n${shareUrl}`;
+    const text = i18n.whatsappText(shareUrl);
     const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -205,20 +319,19 @@ export default function PersonalizedWallPage() {
     <div className="app-content">
       <section className="app-section wall-section" aria-labelledby="wall-title">
         <div className="app-section-header">
-          <span className="app-section-overline">Mulțumim din inimă</span>
+          <span className="app-section-overline">{i18n.overline}</span>
           <h1 id="wall-title" className="app-section-title">
-            {decodedDonorName}, parte dintre eroi!
+            {i18n.title(decodedDonorName)}
           </h1>
           <p className="app-section-lead">
-            Numele tău strălucește printre toți cei care au ales să facă diferența.
-            Fiecare gest contează, iar tu ai ales să fii parte din această poveste.
+            {i18n.lead}
           </p>
         </div>
 
         <div className="share-buttons-section">
-          <h2 className="share-section-title">Distribuie recunoștința ta</h2>
+          <h2 className="share-section-title">{i18n.shareTitle}</h2>
           <p className="share-section-subtitle">
-            Trimite prietenilor peretele tău de onoare sau descarcă imaginea și TikTok video.
+            {i18n.shareSubtitle}
           </p>
           <div className="share-buttons-container">
             <button
@@ -227,7 +340,7 @@ export default function PersonalizedWallPage() {
               onClick={handleShareFacebook}
             >
               <span className="share-button-icon">f</span>
-              <span className="share-button-text">Distribuie pe Facebook</span>
+              <span className="share-button-text">{i18n.shareFacebook}</span>
             </button>
             <button
               type="button"
@@ -235,7 +348,7 @@ export default function PersonalizedWallPage() {
               onClick={handleShareWhatsApp}
             >
               <span className="share-button-icon">↗</span>
-              <span className="share-button-text">Trimite pe WhatsApp</span>
+              <span className="share-button-text">{i18n.shareWhatsApp}</span>
             </button>
             <button
               type="button"
@@ -245,7 +358,7 @@ export default function PersonalizedWallPage() {
             >
               <span className="share-button-icon">⬇</span>
               <span className="share-button-text">
-                {isImageDownloading ? 'Se descarcă...' : 'Descarcă imagine'}
+                {isImageDownloading ? i18n.downloading : i18n.downloadImage}
               </span>
             </button>
             <button
@@ -256,7 +369,7 @@ export default function PersonalizedWallPage() {
             >
               <span className="share-button-icon">▶</span>
               <span className="share-button-text">
-                {isVideoDownloading ? 'Se generează video...' : 'Descarcă TikTok video'}
+                {isVideoDownloading ? i18n.generatingVideo : i18n.downloadVideo}
               </span>
             </button>
           </div>

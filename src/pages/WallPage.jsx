@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDonors, getDonorSizeClass } from '../DonorContext.jsx';
+import { useI18n } from '../i18n/I18nProvider.jsx';
 
 const animations = [
   'anim-float',
@@ -57,13 +58,101 @@ function getRowSpacerWidth(index) {
 }
 
 export default function WallPage() {
+  const { lang } = useI18n();
   const { donors, loading, error } = useDonors();
   const containerRef = useRef(null);
   const [namesPerLine, setNamesPerLine] = useState([]);
 
+  const i18n = React.useMemo(
+    () =>
+      ({
+        ro: {
+          overline: 'Comunitatea Muzică pentru Viață',
+          title: 'Comunitatea',
+          pill: 'Mulțumim pentru fiecare donație!',
+          lead:
+            'Aici sunt oamenii care au ales să fie parte din schimbare. Mărimea numelui reflectă suma totală donată.',
+          counts: (names, donations) => `${names} nume afișate • ${donations} donații înregistrate`,
+          loading: 'Se încarcă datele din baza de date...',
+          firestoreError: 'Nu pot citi datele din Firestore (verifică Firestore Rules / permisiuni).',
+        },
+        en: {
+          overline: 'Muzică pentru Viață community',
+          title: 'Community',
+          pill: 'Thank you for every donation!',
+          lead:
+            'Here are the people who chose to be part of change. The size of the name reflects the total amount donated.',
+          counts: (names, donations) => `${names} names displayed • ${donations} donations recorded`,
+          loading: 'Loading data from the database...',
+          firestoreError: 'Cannot read Firestore data (check Firestore Rules / permissions).',
+        },
+        de: {
+          overline: 'Muzică pentru Viață – Gemeinschaft',
+          title: 'Gemeinschaft',
+          pill: 'Danke für jede Spende!',
+          lead:
+            'Hier sind die Menschen, die Teil der Veränderung sein wollen. Die Größe des Namens spiegelt die insgesamt gespendete Summe wider.',
+          counts: (names, donations) => `${names} Namen angezeigt • ${donations} Spenden erfasst`,
+          loading: 'Daten werden aus der Datenbank geladen...',
+          firestoreError: 'Firestore-Daten können nicht gelesen werden (Firestore Rules / Berechtigungen prüfen).',
+        },
+        fr: {
+          overline: 'Communauté Muzică pentru Viață',
+          title: 'Communauté',
+          pill: 'Merci pour chaque don !',
+          lead:
+            'Voici les personnes qui ont choisi de faire partie du changement. La taille du nom reflète le montant total donné.',
+          counts: (names, donations) => `${names} noms affichés • ${donations} dons enregistrés`,
+          loading: 'Chargement des données depuis la base...',
+          firestoreError: "Impossible de lire les données Firestore (vérifiez les règles / permissions).",
+        },
+        it: {
+          overline: 'Comunità Muzică pentru Viață',
+          title: 'Comunità',
+          pill: 'Grazie per ogni donazione!',
+          lead:
+            'Ecco le persone che hanno scelto di far parte del cambiamento. La dimensione del nome riflette l’importo totale donato.',
+          counts: (names, donations) => `${names} nomi mostrati • ${donations} donazioni registrate`,
+          loading: 'Caricamento dei dati dal database...',
+          firestoreError: 'Impossibile leggere i dati da Firestore (controlla regole / permessi).',
+        },
+        es: {
+          overline: 'Comunidad Muzică pentru Viață',
+          title: 'Comunidad',
+          pill: '¡Gracias por cada donación!',
+          lead:
+            'Aquí están las personas que eligieron formar parte del cambio. El tamaño del nombre refleja la cantidad total donada.',
+          counts: (names, donations) => `${names} nombres mostrados • ${donations} donaciones registradas`,
+          loading: 'Cargando datos de la base de datos...',
+          firestoreError: 'No se pueden leer los datos de Firestore (revisa reglas/permisos).',
+        },
+        ar: {
+          overline: 'مجتمع Muzică pentru Viață',
+          title: 'المجتمع',
+          pill: 'شكرًا لكل تبرع!',
+          lead:
+            'هنا الأشخاص الذين اختاروا أن يكونوا جزءًا من التغيير. حجم الاسم يعكس إجمالي المبلغ المتبرع به.',
+          counts: (names, donations) => `${names} اسمًا معروضًا • ${donations} تبرعًا مسجلًا`,
+          loading: 'جارٍ تحميل البيانات من قاعدة البيانات...',
+          firestoreError: 'لا يمكن قراءة بيانات Firestore (تحقق من القواعد/الأذونات).',
+        },
+      }[lang] || {
+        overline: 'Comunitatea Muzică pentru Viață',
+        title: 'Comunitatea',
+        pill: '',
+        lead: '',
+        counts: (names, donations) => `${names} • ${donations}`,
+        loading: '',
+        firestoreError: '',
+      }),
+    [lang]
+  );
+
   // Aggregate donations by donor name (so size reflects total donated by that person).
   const communityMembers = useMemo(() => {
     const map = new Map();
+
+    const anonymousNames = new Set(['anonim', 'anonymous', 'anonym', 'anonyme', 'anonimo', 'مجهول']);
 
     for (const donation of donors || []) {
       const rawName = (donation?.name || '').trim();
@@ -71,7 +160,7 @@ export default function WallPage() {
       if (!normalized) continue;
 
       // Do not show anonymous donors in the community wall, but keep them in totals.
-      if (normalized.toLowerCase() === 'anonim') continue;
+      if (anonymousNames.has(normalized.toLowerCase())) continue;
 
       const key = normalized.toLowerCase();
       const amount = Number(donation?.amount) || 0;
@@ -143,29 +232,29 @@ export default function WallPage() {
     <div className="app-content">
       <section className="app-section wall-section" aria-labelledby="wall-title">
         <div className="app-section-header">
-          <span className="app-section-overline">Comunitatea Muzică pentru Viață</span>
+          <span className="app-section-overline">{i18n.overline}</span>
           <h1 id="wall-title" className="app-section-title">
-            Comunitatea
+            {i18n.title}
           </h1>
           <p className="about-pill">
-            Mulțumim pentru fiecare donație!
+            {i18n.pill}
           </p>
           <p className="app-section-lead">
-            Aici sunt oamenii care au ales să fie parte din schimbare. Mărimea numelui reflectă suma totală donată.
+            {i18n.lead}
           </p>
           <p className="app-section-lead" style={{ marginTop: '10px' }}>
-            {communityMembers.length} nume afișate • {donors.length} donații înregistrate
+            {i18n.counts(communityMembers.length, donors.length)}
           </p>
 
           {loading && (
             <p className="app-section-lead" style={{ marginTop: '10px' }}>
-              Se încarcă datele din baza de date...
+              {i18n.loading}
             </p>
           )}
 
           {error && (
             <p className="app-section-lead" style={{ marginTop: '10px', color: '#b71c1c' }}>
-              Nu pot citi datele din Firestore (verifică Firestore Rules / permisiuni).
+              {i18n.firestoreError}
             </p>
           )}
         </div>

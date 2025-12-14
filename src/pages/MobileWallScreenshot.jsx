@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDonors, getDonorSizeClass } from '../DonorContext.jsx';
 import html2canvas from 'html2canvas';
+import { useI18n } from '../i18n/I18nProvider.jsx';
 
 const animations = [
   'anim-float',
@@ -68,9 +69,72 @@ function shouldAddRowSpacer(index, reorderedDonors, decodedDonorName) {
 }
 
 export default function MobileWallScreenshot() {
+  const { lang } = useI18n();
   const { donorName } = useParams();
   const { donors } = useDonors();
   const highlightedRef = useRef(null);
+
+  const i18n = React.useMemo(
+    () =>
+      ({
+        ro: {
+          downloadScreenshot: 'Descarcă imagine',
+          downloading: 'Se descarcă...',
+          downloadVideo: 'Descarcă TikTok Video',
+          generatingVideo: 'Se generează video...',
+          banner: 'Și eu susțin campania Muzică pentru Viață',
+        },
+        en: {
+          downloadScreenshot: 'Download screenshot',
+          downloading: 'Downloading...',
+          downloadVideo: 'Download TikTok video',
+          generatingVideo: 'Generating video...',
+          banner: 'I support Muzică pentru Viață too',
+        },
+        de: {
+          downloadScreenshot: 'Screenshot herunterladen',
+          downloading: 'Wird heruntergeladen...',
+          downloadVideo: 'TikTok-Video herunterladen',
+          generatingVideo: 'Video wird erstellt...',
+          banner: 'Auch ich unterstütze Muzică pentru Viață',
+        },
+        fr: {
+          downloadScreenshot: "Télécharger la capture",
+          downloading: 'Téléchargement...',
+          downloadVideo: 'Télécharger la vidéo TikTok',
+          generatingVideo: 'Génération de la vidéo...',
+          banner: 'Moi aussi, je soutiens Muzică pentru Viață',
+        },
+        it: {
+          downloadScreenshot: 'Scarica screenshot',
+          downloading: 'Download in corso...',
+          downloadVideo: 'Scarica video TikTok',
+          generatingVideo: 'Generazione video...',
+          banner: 'Anch’io sostengo Muzică pentru Viață',
+        },
+        es: {
+          downloadScreenshot: 'Descargar captura',
+          downloading: 'Descargando...',
+          downloadVideo: 'Descargar video TikTok',
+          generatingVideo: 'Generando video...',
+          banner: 'Yo también apoyo la campaña Muzică pentru Viață',
+        },
+        ar: {
+          downloadScreenshot: 'تنزيل لقطة شاشة',
+          downloading: 'جارٍ التنزيل...',
+          downloadVideo: 'تنزيل فيديو تيك توك',
+          generatingVideo: 'جارٍ إنشاء الفيديو...',
+          banner: 'أنا أيضًا أدعم حملة Muzică pentru Viață',
+        },
+      }[lang] || {
+        downloadScreenshot: 'Download Screenshot',
+        downloading: 'Downloading...',
+        downloadVideo: 'Download TikTok Video',
+        generatingVideo: 'Generating video...',
+        banner: 'Muzică pentru Viață',
+      }),
+    [lang]
+  );
 
   // Decode the donor name from URL
   const decodedDonorName = decodeURIComponent(donorName || '');
@@ -235,7 +299,7 @@ export default function MobileWallScreenshot() {
         onClick={downloadScreenshot}
         disabled={isDownloading}
       >
-        {isDownloading ? 'Downloading...' : 'Download Screenshot'}
+        {isDownloading ? i18n.downloading : i18n.downloadScreenshot}
       </button>
       <button
         className="download-screenshot-btn"
@@ -243,7 +307,7 @@ export default function MobileWallScreenshot() {
         onClick={downloadVideo}
         disabled={isGeneratingVideo}
       >
-        {isGeneratingVideo ? 'Generating video...' : 'Download TikTok Video'}
+        {isGeneratingVideo ? i18n.generatingVideo : i18n.downloadVideo}
       </button>
       <div className="mobile-wall-content">
         <div className="donor-wall-flow mobile-wall-flow">
@@ -303,7 +367,7 @@ export default function MobileWallScreenshot() {
         </div>
 
         <div className="mobile-wall-footer-banner">
-          <span>Și eu susțin campania Muzică pentru Viață</span>
+          <span>{i18n.banner}</span>
         </div>
       </div>
     </div>

@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { DonorProvider } from './DonorContext.jsx';
+import { I18nProvider } from './i18n/I18nProvider.jsx';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <DonorProvider>
-        <App />
-      </DonorProvider>
+      <I18nProvider>
+        <DonorProvider>
+          <App />
+        </DonorProvider>
+      </I18nProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
