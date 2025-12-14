@@ -72,8 +72,10 @@ function appendCurrencyCookie(response: Response, currency: string | undefined) 
 export default async (request: Request, context: EdgeContext) => {
   const url = new URL(request.url);
   const { pathname } = url;
+  const accept = request.headers.get('accept') || '';
+  const isHtmlRequest = accept.includes('text/html');
 
-   // Don't redirect static assets / Netlify internals.
+  // Don't redirect static assets / Netlify internals.
   if (isStaticAsset(pathname)) {
     return context.next();
   }
@@ -81,10 +83,11 @@ export default async (request: Request, context: EdgeContext) => {
   const country = context.geo?.country?.code;
   const currency = mapCountryToCurrency(country);
 
-  // If we don't know the country, just continue.
-  if (!country) {
+  // If we don't know the country, or this isn't an HTML request,
+  // do not attempt language redirects. Still pass through normally.
+  if (!country || !isHtmlRequest) {
     const res = await context.next();
-    return appendCurrencyCookie(res, undefined);
+    return appendCurrencyCookie(res, currency);
   }
 
   const lang = mapCountryToLang(country);
