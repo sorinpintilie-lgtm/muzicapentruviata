@@ -503,6 +503,14 @@ body {
   margin-top: 8px;
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+.mobile-drawer-language .language-dropdown {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
 /* Mobile Header with Donate Button */
