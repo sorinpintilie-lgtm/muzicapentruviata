@@ -262,17 +262,17 @@ function Layout({ children }) {
             </div>
           </div>
 
-          <div className="nav-right-section">
-            <MoneyCounter />
+          <MoneyCounter />
+
+          <div className="nav-right-actions">
+            <NavLink
+              to={withBase('/#donation-form')}
+              className="btn-primary nav-donate"
+            >
+              {t('cta.donateNow')}
+            </NavLink>
             <LanguageSelector />
           </div>
-
-          <NavLink
-            to={withBase('/#donation-form')}
-            className="btn-primary nav-donate"
-          >
-            {t('cta.donateNow')}
-          </NavLink>
         </div>
       </nav>
 

@@ -167,6 +167,12 @@ body {
   white-space: nowrap;
 }
 
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Money Counter Styles */
 .money-counter {
   display: flex;
