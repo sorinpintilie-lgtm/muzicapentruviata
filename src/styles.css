@@ -1276,13 +1276,7 @@ body {
 /* Responsive styles for carousel */
 @media (min-width: 821px) {
   .shorts-carousel {
-    margin-top: 32px;
-    padding: 22px clamp(24px, 4vw, 32px) 26px;
-  }
-
-  .shorts-carousel-frame-wrapper {
-    max-width: 540px;
-    margin: 0 auto;
+    display: none; /* Hide on desktop */
   }
 }
 
