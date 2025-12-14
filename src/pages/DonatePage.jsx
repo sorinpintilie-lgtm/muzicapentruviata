@@ -771,84 +771,60 @@ Donează și tu acum aici: `;
 
         </div>
 
-        {/* Shorts Section - different implementation for mobile and desktop */}
-        <section className="shorts-section">
-          <div className="shorts-section-header">
+        {/* Shorts Carousel Section */}
+        <section className="shorts-carousel">
+          <div className="shorts-carousel-header">
             <h2>Celebrități care susțin campania Muzică pentru Viață</h2>
             <p>Clipuri scurte verticale cu mesaje de susținere pentru spitalul oncologic din Reșița.</p>
           </div>
-
-          {/* Mobile Carousel */}
-          <div className="shorts-mobile-carousel">
-            <div className="shorts-carousel-frame-wrapper">
-              <button
-                type="button"
-                className="shorts-carousel-nav shorts-carousel-nav-prev"
-                onClick={handlePrevShort}
-                aria-label="Previous video"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-              <div className="shorts-carousel-frame">
-                <iframe
-                  key={currentShortIndex}
-                  src={`https://www.youtube.com/embed/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}?rel=0&modestbranding=1&playsinline=1&autoplay=0&controls=1&showinfo=0&iv_load_policy=3`}
-                  title={`YouTube Short ${currentShortIndex + 1}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '12px',
-                    border: 'none'
-                  }}
-                />
-              </div>
-              <button
-                type="button"
-                className="shorts-carousel-nav shorts-carousel-nav-next"
-                onClick={handleNextShort}
-                aria-label="Next video"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
+          <div className="shorts-carousel-frame-wrapper">
+            <button
+              type="button"
+              className="shorts-carousel-nav shorts-carousel-nav-prev"
+              onClick={handlePrevShort}
+              aria-label="Previous video"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <div className="shorts-carousel-frame">
+              <iframe
+                key={currentShortIndex}
+                src={`https://www.youtube.com/embed/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}?rel=0&modestbranding=1&playsinline=1&autoplay=0&controls=1&showinfo=0&iv_load_policy=3`}
+                title={`YouTube Short ${currentShortIndex + 1}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '12px',
+                  border: 'none'
+                }}
+              />
             </div>
-            <div className="shorts-carousel-dots" aria-hidden="true">
-              {shortsVideos.map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={
-                    'shorts-carousel-dot' +
-                    (index === currentShortIndex ? ' shorts-carousel-dot-active' : '')
-                  }
-                  onClick={() => goToShort(index)}
-                />
-              ))}
-            </div>
+            <button
+              type="button"
+              className="shorts-carousel-nav shorts-carousel-nav-next"
+              onClick={handleNextShort}
+              aria-label="Next video"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </div>
-
-          {/* Desktop Grid */}
-          <div className="shorts-desktop-grid">
-            {shortsVideos.map((video, index) => (
-              <div key={video.id} className="shorts-grid-item">
-                <iframe
-                  src={`https://www.youtube.com/embed/${getVideoId(video.youtubeUrl)}?rel=0&modestbranding=1&playsinline=1&autoplay=0&controls=1&showinfo=0&iv_load_policy=3`}
-                  title={`YouTube Short ${index + 1}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    borderRadius: '12px',
-                    border: 'none'
-                  }}
-                />
-              </div>
+          <div className="shorts-carousel-dots" aria-hidden="true">
+            {shortsVideos.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                className={
+                  'shorts-carousel-dot' +
+                  (index === currentShortIndex ? ' shorts-carousel-dot-active' : '')
+                }
+                onClick={() => goToShort(index)}
+              />
             ))}
           </div>
         </section>
