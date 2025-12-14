@@ -52,6 +52,89 @@ export default function DonatePage() {
   const handlePrevShort = () => goToShort(currentShortIndex - 1);
   const handleNextShort = () => goToShort(currentShortIndex + 1);
 
+  // Share functionality
+  const shareText = `Și eu susțin Muzică pentru Viață.
+Un gest mic poate schimba o lume.
+ Împreună construim primul spital oncologic din Reșița.
+❤️ #MuzicaPentruViata #ImpreunaPentruViata`;
+
+  const shareUrl = window.location.origin;
+  const shareImage = `${window.location.origin}/2025.png`;
+
+  const handleShare = async (platform) => {
+    const shareData = {
+      title: 'Muzică pentru Viață 2025',
+      text: shareText,
+      url: shareUrl,
+    };
+
+    try {
+      switch (platform) {
+        case 'facebook':
+          window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
+            '_blank',
+            'width=600,height=400'
+          );
+          break;
+
+        case 'twitter':
+          window.open(
+            `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
+            '_blank',
+            'width=600,height=400'
+          );
+          break;
+
+        case 'whatsapp':
+          window.open(
+            `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`,
+            '_blank'
+          );
+          break;
+
+        case 'instagram':
+          // Instagram doesn't support direct sharing via URL, so we'll copy to clipboard
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(shareText + ' ' + shareUrl);
+            alert('Text copiat în clipboard! Poți împărtăși pe Instagram.');
+          } else {
+            alert('Te rugăm să copiezi manual textul pentru a împărtăși pe Instagram.');
+          }
+          break;
+
+        case 'download':
+          // Download the image
+          const link = document.createElement('a');
+          link.href = shareImage;
+          link.download = 'MuzicaPentruViata2025.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          break;
+
+        default:
+          // Try native Web Share API
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else {
+            // Fallback: copy to clipboard
+            if (navigator.clipboard) {
+              await navigator.clipboard.writeText(shareText + ' ' + shareUrl);
+              alert('Text copiat în clipboard!');
+            }
+          }
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
+      // Fallback: copy to clipboard
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(shareText + ' ' + shareUrl);
+        alert('Text copiat în clipboard!');
+      }
+    }
+  };
+
   const mapLangToFallbackCurrency = (language) => {
     if (language === 'ro') return 'RON';
     if (['de', 'fr', 'it', 'es'].includes(language)) return 'EUR';
@@ -764,6 +847,61 @@ export default function DonatePage() {
                 onClick={() => goToShort(index)}
               />
             ))}
+          </div>
+        </section>
+
+        {/* Share Section */}
+        <section className="share-section">
+          <div className="share-section-header">
+            <h2>Împarte cauza noastră</h2>
+            <p>Distribuie mesajul nostru și ajută-ne să ajungem la mai mulți oameni care pot contribui la construirea spitalului oncologic din Reșița.</p>
+          </div>
+
+          <div className="share-buttons-container">
+            <button
+              className="share-button facebook-share"
+              onClick={() => handleShare('facebook')}
+              aria-label="Share on Facebook"
+            >
+              <span className="share-button-icon">📘</span>
+              <span className="share-button-text">Facebook</span>
+            </button>
+
+            <button
+              className="share-button twitter-share"
+              onClick={() => handleShare('twitter')}
+              aria-label="Share on Twitter"
+            >
+              <span className="share-button-icon">🐦</span>
+              <span className="share-button-text">Twitter</span>
+            </button>
+
+            <button
+              className="share-button whatsapp-share"
+              onClick={() => handleShare('whatsapp')}
+              aria-label="Share on WhatsApp"
+            >
+              <span className="share-button-icon">💬</span>
+              <span className="share-button-text">WhatsApp</span>
+            </button>
+
+            <button
+              className="share-button instagram-share"
+              onClick={() => handleShare('instagram')}
+              aria-label="Share on Instagram"
+            >
+              <span className="share-button-icon">📷</span>
+              <span className="share-button-text">Instagram</span>
+            </button>
+
+            <button
+              className="share-button download-share"
+              onClick={() => handleShare('download')}
+              aria-label="Download image"
+            >
+              <span className="share-button-icon">⬇️</span>
+              <span className="share-button-text">Descarcă</span>
+            </button>
           </div>
         </section>
       </div>
