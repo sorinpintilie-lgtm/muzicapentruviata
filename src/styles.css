@@ -1015,6 +1015,119 @@ body {
   gap: 18px;
 }
 
+/* YouTube Shorts Carousel Section */
+.shorts-carousel {
+  margin-top: 24px;
+  border-radius: 22px;
+  padding: 18px 20px 22px;
+  background: #ffffff;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.shorts-carousel-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.shorts-carousel-header p {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.shorts-carousel-frame-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shorts-carousel-frame {
+  flex: 1;
+  position: relative;
+  padding-top: 177.78%; /* 9:16 aspect ratio for vertical Shorts */
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+  background: #000;
+}
+
+.shorts-carousel-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.shorts-carousel-nav {
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--accent);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.shorts-carousel-nav:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2);
+}
+
+.shorts-carousel-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  max-height: 40px;
+  overflow: hidden;
+}
+
+.shorts-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border-soft);
+  cursor: pointer;
+  padding: 0;
+}
+
+.shorts-carousel-dot-active {
+  background: var(--accent);
+}
+
+@media (max-width: 820px) {
+  .shorts-carousel {
+    margin-top: 16px;
+    padding: 14px 14px 18px;
+  }
+
+  .shorts-carousel-frame-wrapper {
+    gap: 8px;
+  }
+
+  .shorts-carousel-nav {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .shorts-carousel-dots {
+    max-height: 32px;
+  }
+}
+
 /* Story sections - desktop: grid layout, mobile: full-width text with images below */
 .post-event-section {
   margin-bottom: 0;

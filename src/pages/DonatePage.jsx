@@ -16,6 +16,22 @@ export default function DonatePage() {
   const [donorEmail, setDonorEmail] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
+  const [currentShortIndex, setCurrentShortIndex] = useState(0);
+
+  const shortsVideos = React.useMemo(
+    () => Array.from({ length: 30 }, (_, i) => ({ id: i, youtubeId: 'l-GOMoAAr9Q' })),
+    []
+  );
+
+  const goToShort = (index) => {
+    if (!shortsVideos.length) return;
+    const total = shortsVideos.length;
+    const nextIndex = ((index % total) + total) % total;
+    setCurrentShortIndex(nextIndex);
+  };
+
+  const handlePrevShort = () => goToShort(currentShortIndex - 1);
+  const handleNextShort = () => goToShort(currentShortIndex + 1);
 
   const i18n = React.useMemo(
     () =>
@@ -64,12 +80,13 @@ export default function DonatePage() {
           minAmountError: 'The minimum donation amount is 1 RON.',
           invalidEmailError: 'Please enter a valid email address.',
           paymentInitError: 'An error occurred while initiating the payment. Please try again.',
-          tagline: 'Muzică pentru Viață 2025',
-          titlePrefix: 'Together we build',
-          titleHighlight: 'the first hospital for cancer patients',
-          titleSuffix: 'in Reșița',
+          // Homepage hero copy (EN)
+          tagline: 'Music for Life 2025',
+          titlePrefix: 'Together, we are building',
+          titleHighlight: 'Reșița’s',
+          titleSuffix: 'first cancer hospital',
           summary:
-            'Every donation matters. Choose the amount you want to contribute to building the oncology hospital in Reșița.',
+            'Every donation matters. Choose the amount you wish to contribute to the construction of Reșița’s oncological hospital.',
           modeSoonOne: 'One-time',
           modeSoonMonthly: 'Monthly',
           modeSoonTitleOne: 'Donations will be available soon',
@@ -83,18 +100,18 @@ export default function DonatePage() {
           donateNow: 'DONATE NOW',
           donateWithAmount: (amount) => `DONATE ${amount} RON`,
           payNote:
-            'Payment is secured via EuPlatesc. You will be redirected to the payment page. After completing the donation, you will be added to our community wall.',
-          whyTitle: 'Why is it important?',
+            'Payments are securely processed via EuPlatesc. You will be redirected to the payment page. After completing your donation, you will be added to our community wall.',
+          whyTitle: 'Why is this important?',
           whyP1:
-            'Every year in Romania, around 100,000 people find out they have cancer. For many, the fight is not only the illness, but also long trips, exhaustion, high costs, and precious time lost far from loved ones.',
+            'Every year in Romania, around 100,000 people are diagnosed with cancer. For many of them, the fight is not only against the disease, but also against long journeys, exhaustion, high costs, and precious time lost far from loved ones.',
           whyP2:
-            'Reșița does not have an oncology hospital. Patients are forced to travel hundreds of kilometers for treatment in difficult conditions. OncoHelp works to build the first oncology hospital in Reșița—a place where people can receive quality care closer to home, with dignity, hope and real support.',
+            'Reșița does not have an oncological hospital. Patients are forced to travel hundreds of kilometers for treatment, under difficult conditions. The OncoHelp Foundation is working to build Reșița’s first oncological hospital — a place where people can receive quality treatment closer to home, with dignity, hope, and real support.',
           whyImgAlt: 'Hospital in Reșița',
-          hospitalTitle: 'The hospital in Reșița',
+          hospitalTitle: 'The Hospital in Reșița',
           hospitalP1:
-            'For over 10 years, Radio România Reșița has given voice to hope through the “Muzică pentru Viață” campaign—a charity marathon that turned music into real support and raised hundreds of thousands of euros for people in need.',
+            'For over 10 years, Radio România Reșița has given a voice to hope through the “Music for Life” campaign — a charity marathon that has turned music into real support and raised hundreds of thousands of euros for people in need.',
           hospitalP2:
-            'In 2025, every note, every voice and every donation unite for a vital goal: building the oncology hospital in Reșița. Together, we prove that solidarity can save lives—and when a community unites, hope becomes reality.',
+            'In 2025, every note, every voice, and every donation come together for a vital purpose: building the oncological hospital in Reșița. Together, we prove that solidarity can save lives and that when a community unites, hope becomes reality.',
           hospitalImgAlt: 'Muzică pentru Viață 2016',
           rightImgAlt: 'University in Reșița',
           orderDescOne: 'One-time',
@@ -607,7 +624,55 @@ export default function DonatePage() {
           </div>
         </div>
 
-        {/* Story Section - Now below donation form */}
+        {/* Shorts Carousel Section - directly under donation panel */}
+        <section className="shorts-carousel">
+          <div className="shorts-carousel-header">
+            <h2>YouTube Shorts</h2>
+            <p>Momente scurte din campania „Muzică pentru Viață”.</p>
+          </div>
+          <div className="shorts-carousel-frame-wrapper">
+            <button
+              type="button"
+              className="shorts-carousel-nav shorts-carousel-nav-prev"
+              onClick={handlePrevShort}
+              aria-label="Previous video"
+            >
+              
+            </button>
+            <div className="shorts-carousel-frame">
+              <iframe
+                key={currentShortIndex}
+                src="https://www.youtube.com/embed/l-GOMoAAr9Q?rel=0&modestbranding=1&playsinline=1"
+                title={`YouTube Short ${currentShortIndex + 1}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <button
+              type="button"
+              className="shorts-carousel-nav shorts-carousel-nav-next"
+              onClick={handleNextShort}
+              aria-label="Next video"
+            >
+              
+            </button>
+          </div>
+          <div className="shorts-carousel-dots" aria-hidden="true">
+            {shortsVideos.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                className={
+                  'shorts-carousel-dot' +
+                  (index === currentShortIndex ? ' shorts-carousel-dot-active' : '')
+                }
+                onClick={() => goToShort(index)}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Story Section - Now below donation form and shorts carousel */}
         <div className="post-event-story">
           <div className="post-event-section">
             <div className="post-event-section-title">{i18n.whyTitle}</div>

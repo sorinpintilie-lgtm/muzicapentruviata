@@ -346,8 +346,9 @@ function SiteFooter({ isScrolled }) {
         <section className="footer-banking">
           <h3 className="footer-banking-title">{t('footer.banking.title')}</h3>
           <div className="footer-banking-details">
+            <p>{t('footer.banking.beneficiary')}</p>
             <p>RO65 RZBR 0000 0600 1720 1882 - LEI</p>
-            <p>RO97 RZBR 0000 0600 1720 1888 - EURO - swift RZBRROBU</p>
+            <p>RO97 RZBR 0000 0600 1720 1888 – EUR – SWIFT RZBRROBU</p>
             <p>Raiffeisen Bank Timișoara</p>
           </div>
         </section>
@@ -378,7 +379,7 @@ function SiteFooter({ isScrolled }) {
             </a>
           </div>
           <p className="footer-copyright">
-            © {new Date().getFullYear()} Muzică pentru Viață. Toate drepturile rezervate.
+            © {new Date().getFullYear()} {t('footer.copyright')}
           </p>
         </section>
 
