@@ -21,7 +21,18 @@ export default function DonatePage() {
   const [currency, setCurrency] = useState('RON');
 
   const shortsVideos = React.useMemo(
-    () => Array.from({ length: 30 }, (_, i) => ({ id: i, youtubeId: 'l-GOMoAAr9Q' })),
+    () => [
+      { id: 0, youtubeId: 'y0lKg3Zij8E' },
+      { id: 1, youtubeId: 'vZxxebBuy8I' },
+      { id: 2, youtubeId: 'deRIAADFxO8' },
+      { id: 3, youtubeId: 'yjYPkDaI07c' },
+      { id: 4, youtubeId: 'Skf5B-3wKhE' },
+      { id: 5, youtubeId: 'llnYKVVwvO8' },
+      { id: 6, youtubeId: 'FcWQEMN6fh0' },
+      { id: 7, youtubeId: 'l-GOMoAAr9Q' },
+      { id: 8, youtubeId: 'UZip5FJJdDE' },
+      { id: 9, youtubeId: 'xhJXvFyE10Y' },
+    ],
     []
   );
 
