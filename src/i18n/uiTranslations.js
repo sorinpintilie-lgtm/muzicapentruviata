@@ -12,6 +12,8 @@ export const ui = {
     'mobile.menuOpen': 'Deschide meniul',
     'mobile.menuClose': 'Închide meniul',
 
+    'moneyCounter.label': 'Strânși până acum',
+
     'footer.tagline': 'Muzică pentru Viață • Împreună pentru pacienții cu cancer din Banatul de Munte',
     'footer.section.donationBeneficiary': 'Beneficiar donații',
     'footer.section.organizedBy': 'Organizat de',
@@ -41,6 +43,8 @@ export const ui = {
     'cta.donateNow': 'DONATE NOW',
     'mobile.menuOpen': 'Open menu',
     'mobile.menuClose': 'Close menu',
+
+    'moneyCounter.label': 'Raised so far',
 
     'footer.tagline': 'Music for Life • Together for cancer patients in Mountain Banat',
     'footer.section.donationBeneficiary': 'Donation beneficiary',
@@ -72,6 +76,8 @@ export const ui = {
     'mobile.menuOpen': 'Menü öffnen',
     'mobile.menuClose': 'Menü schließen',
 
+    'moneyCounter.label': 'Bisher gesammelt',
+
     'footer.tagline': 'Muzică pentru Viață • Gemeinsam für Krebspatienten in Banatul de Munte',
     'footer.section.donationBeneficiary': 'Spendenempfänger',
     'footer.section.organizedBy': 'Organisiert von',
@@ -99,6 +105,8 @@ export const ui = {
     'cta.donateNow': 'FAIRE UN DON',
     'mobile.menuOpen': 'Ouvrir le menu',
     'mobile.menuClose': 'Fermer le menu',
+
+    'moneyCounter.label': 'Récolté jusqu\'à présent',
 
     'footer.tagline': 'Muzică pentru Viață • Ensemble pour les patients atteints de cancer à Banatul de Munte',
     'footer.section.donationBeneficiary': 'Bénéficiaire des dons',
@@ -128,6 +136,8 @@ export const ui = {
     'mobile.menuOpen': 'Apri menu',
     'mobile.menuClose': 'Chiudi menu',
 
+    'moneyCounter.label': 'Raccolto finora',
+
     'footer.tagline': 'Muzică pentru Viață • Insieme per i pazienti oncologici a Banatul de Munte',
     'footer.section.donationBeneficiary': 'Beneficiario delle donazioni',
     'footer.section.organizedBy': 'Organizzato da',
@@ -156,6 +166,8 @@ export const ui = {
     'mobile.menuOpen': 'Abrir menú',
     'mobile.menuClose': 'Cerrar menú',
 
+    'moneyCounter.label': 'Recaudado hasta ahora',
+
     'footer.tagline': 'Muzică pentru Viață • Juntos por los pacientes con cáncer en Banatul de Munte',
     'footer.section.donationBeneficiary': 'Beneficiario de las donaciones',
     'footer.section.organizedBy': 'Organizado por',
@@ -183,6 +195,8 @@ export const ui = {
     'cta.donateNow': 'تبرّع الآن',
     'mobile.menuOpen': 'فتح القائمة',
     'mobile.menuClose': 'إغلاق القائمة',
+
+    'moneyCounter.label': 'تم جمعها حتى الآن',
 
     'footer.tagline': 'Muzică pentru Viață • معًا من أجل مرضى السرطان في Banatul de Munte',
     'footer.section.donationBeneficiary': 'الجهة المستفيدة من التبرعات',
