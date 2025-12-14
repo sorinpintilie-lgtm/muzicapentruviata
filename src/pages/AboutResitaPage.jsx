@@ -65,7 +65,8 @@ export default function AboutResitaPage() {
             <h3>Instituții de Învățământ</h3>
             <p>
               Orașul este gazda Universității Eftimie Murgu, una dintre cele mai importante
-              instituții de învățământ superior din regiunea Banatului.
+              instituții de învățământ superior din regiunea Banatului. Centrul Universitar
+              Universitatea „Babeș-Bolyai" Reșița
             </p>
           </div>
 
