@@ -59,49 +59,64 @@ function mapCountryToCurrency(countryCode: string | undefined) {
 
 function appendCurrencyCookie(response: Response, currency: string | undefined) {
   if (!currency) return response;
-  const cookieValue = `mpv_currency=${currency}; Path=/; Max-Age=604800; SameSite=Lax`;
-  const existing = response.headers.get('set-cookie');
-  if (existing) {
-    response.headers.set('set-cookie', `${existing}, ${cookieValue}`);
-  } else {
-    response.headers.set('set-cookie', cookieValue);
+  try {
+    const cookieValue = `mpv_currency=${currency}; Path=/; Max-Age=604800; SameSite=Lax`;
+    const newHeaders = new Headers(response.headers);
+    const existing = newHeaders.get('set-cookie');
+    if (existing) {
+      newHeaders.append('set-cookie', cookieValue);
+    } else {
+      newHeaders.set('set-cookie', cookieValue);
+    }
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: newHeaders,
+    });
+  } catch (e) {
+    console.error('Error setting currency cookie:', e);
+    return response;
   }
-  return response;
 }
 
 export default async (request: Request, context: EdgeContext) => {
-  const url = new URL(request.url);
-  const { pathname } = url;
-  const accept = request.headers.get('accept') || '';
-  const isHtmlRequest = accept.includes('text/html');
+  try {
+    const url = new URL(request.url);
+    const { pathname } = url;
+    const accept = request.headers.get('accept') || '';
+    const isHtmlRequest = accept.includes('text/html');
 
-  // Don't redirect static assets / Netlify internals.
-  if (isStaticAsset(pathname)) {
+    // Don't redirect static assets / Netlify internals.
+    if (isStaticAsset(pathname)) {
+      return context.next();
+    }
+
+    const country = context.geo?.country?.code;
+    const currency = mapCountryToCurrency(country);
+
+    // If we don't know the country, or this isn't an HTML request,
+    // do not attempt language redirects. Still pass through normally.
+    if (!country || !isHtmlRequest) {
+      const res = await context.next();
+      return appendCurrencyCookie(res, currency);
+    }
+
+    const lang = mapCountryToLang(country);
+
+    // If user is already on a language-prefixed path, or is in RO (default lang),
+    // don't redirect but still attach the currency cookie.
+    if (hasLangPrefix(pathname) || lang === 'ro') {
+      const res = await context.next();
+      return appendCurrencyCookie(res, currency);
+    }
+
+    const target = new URL(request.url);
+    target.pathname = pathname === '/' ? `/${lang}` : `/${lang}${pathname}`;
+    const redirect = Response.redirect(target.toString(), 302);
+    return appendCurrencyCookie(redirect, currency);
+  } catch (error) {
+    console.error('Edge function error:', error);
     return context.next();
   }
-
-  const country = context.geo?.country?.code;
-  const currency = mapCountryToCurrency(country);
-
-  // If we don't know the country, or this isn't an HTML request,
-  // do not attempt language redirects. Still pass through normally.
-  if (!country || !isHtmlRequest) {
-    const res = await context.next();
-    return appendCurrencyCookie(res, currency);
-  }
-
-  const lang = mapCountryToLang(country);
-
-  // If user is already on a language-prefixed path, or is in RO (default lang),
-  // don't redirect but still attach the currency cookie.
-  if (hasLangPrefix(pathname) || lang === 'ro') {
-    const res = await context.next();
-    return appendCurrencyCookie(res, currency);
-  }
-
-  const target = new URL(request.url);
-  target.pathname = pathname === '/' ? `/${lang}` : `/${lang}${pathname}`;
-  const redirect = Response.redirect(target.toString(), 302);
-  return appendCurrencyCookie(redirect, currency);
 };
 
