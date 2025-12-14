@@ -190,6 +190,10 @@ function Layout({ children }) {
           >
             {t('cta.donateNow')}
           </NavLink>
+
+          <div className="mobile-drawer-language">
+            <LanguageSelector />
+          </div>
         </div>
       </div>
 

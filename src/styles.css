@@ -497,6 +497,14 @@ body {
   padding: 14px 20px;
 }
 
+.mobile-drawer-language {
+  padding: 16px 0;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
 /* Mobile Header with Donate Button */
 .mobile-header-donate {
   display: none;
@@ -2396,6 +2404,10 @@ h1 {
 
 /* Mobile Styles */
 @media (max-width: 820px) {
+  .nav-right-actions .language-selector {
+    display: none; /* Hide desktop language selector on mobile, shown in drawer instead */
+  }
+
   .global-radio-player {
     bottom: 16px;
     right: 80px; /* Move more to the left to avoid overlapping WhatsApp button */
