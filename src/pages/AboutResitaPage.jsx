@@ -25,8 +25,9 @@ export default function AboutResitaPage() {
             'Reșița păstrează urme ale epocii de glorie industriale, cu fabrici istorice și clădiri care amintesc de perioada când orașul era un centru feroviar important.',
           feature1Alt: 'Arhitectură industrială din Reșița',
           feature2Title: 'Instituții de Învățământ',
-          feature2Text:
-            'Orașul este gazda Universității Eftimie Murgu, una dintre cele mai importante instituții de învățământ superior din regiunea Banatului. Centrul Universitar Universitatea „Babeș-Bolyai" Reșița',
+          feature2Text1:
+            'Orașul este gazda Universității Eftimie Murgu, una dintre cele mai importante instituții de învățământ superior din regiunea Banatului.',
+          feature2Text2: 'Centrul Universitar Universitatea „Babeș-Bolyai” Reșița',
           feature2Alt: 'Instituții culturale din Reșița',
           feature3Title: 'Spirit Comunitar',
           feature3Text:
@@ -60,8 +61,9 @@ export default function AboutResitaPage() {
             'Reșița preserves traces of its industrial golden age, with historic factories and buildings that recall the time when the city was an important railway hub.',
           feature1Alt: 'Industrial architecture in Reșița',
           feature2Title: 'Education',
-          feature2Text:
-            'The city hosts Eftimie Murgu University, one of the most important higher-education institutions in the Banat region. University Center “Babeș-Bolyai” University Reșița.',
+          feature2Text1:
+            'The city hosts Eftimie Murgu University, one of the most important higher-education institutions in the Banat region.',
+          feature2Text2: 'University Center “Babeș-Bolyai” University Reșița.',
           feature2Alt: 'Educational institutions in Reșița',
           feature3Title: 'Community Spirit',
           feature3Text:
@@ -95,8 +97,9 @@ export default function AboutResitaPage() {
             'Reșița bewahrt Spuren seiner industriellen Blütezeit – mit historischen Fabriken und Gebäuden, die an die Zeit erinnern, als die Stadt ein bedeutendes Eisenbahnzentrum war.',
           feature1Alt: 'Industriearchitektur in Reșița',
           feature2Title: 'Bildungseinrichtungen',
-          feature2Text:
-            'Die Stadt beherbergt die Universität Eftimie Murgu, eine der wichtigsten Hochschulen in der Region Banat. Universitätszentrum der „Babeș-Bolyai“-Universität Reșița.',
+          feature2Text1:
+            'Die Stadt beherbergt die Universität Eftimie Murgu, eine der wichtigsten Hochschulen in der Region Banat.',
+          feature2Text2: 'Universitätszentrum der „Babeș-Bolyai“-Universität Reșița.',
           feature2Alt: 'Bildungseinrichtungen in Reșița',
           feature3Title: 'Gemeinschaftsgeist',
           feature3Text:
@@ -130,8 +133,9 @@ export default function AboutResitaPage() {
             "Reșița conserve des traces de son âge d’or industriel, avec des usines historiques et des bâtiments qui rappellent l’époque où la ville était un centre ferroviaire important.",
           feature1Alt: 'Architecture industrielle à Reșița',
           feature2Title: "Institutions d’enseignement",
-          feature2Text:
-            'La ville accueille l’Université Eftimie Murgu, l’une des plus importantes institutions d’enseignement supérieur de la région du Banat. Centre universitaire de l’Université « Babeș-Bolyai » Reșița.',
+          feature2Text1:
+            'La ville accueille l’Université Eftimie Murgu, l’une des plus importantes institutions d’enseignement supérieur de la région du Banat.',
+          feature2Text2: 'Centre universitaire de l’Université « Babeș-Bolyai » Reșița.',
           feature2Alt: "Institutions d’enseignement à Reșița",
           feature3Title: 'Esprit communautaire',
           feature3Text:
@@ -165,8 +169,9 @@ export default function AboutResitaPage() {
             'Reșița conserva tracce della sua epoca d’oro industriale, con fabbriche storiche ed edifici che ricordano quando la città era un importante centro ferroviario.',
           feature1Alt: 'Architettura industriale a Reșița',
           feature2Title: "Istituzioni educative",
-          feature2Text:
-            'La città ospita l’Università Eftimie Murgu, una delle più importanti istituzioni di istruzione superiore nella regione del Banat. Centro Universitario dell’Università “Babeș-Bolyai” Reșița.',
+          feature2Text1:
+            'La città ospita l’Università Eftimie Murgu, una delle più importanti istituzioni di istruzione superiore nella regione del Banat.',
+          feature2Text2: 'Centro Universitario dell’Università “Babeș-Bolyai” Reșița.',
           feature2Alt: "Istituzioni educative a Reșița",
           feature3Title: 'Spirito comunitario',
           feature3Text:
@@ -200,8 +205,9 @@ export default function AboutResitaPage() {
             'Reșița conserva huellas de su época dorada industrial, con fábricas históricas y edificios que recuerdan cuando la ciudad era un importante centro ferroviario.',
           feature1Alt: 'Arquitectura industrial en Reșița',
           feature2Title: 'Instituciones educativas',
-          feature2Text:
-            'La ciudad alberga la Universidad Eftimie Murgu, una de las instituciones de educación superior más importantes de la región de Banat. Centro Universitario de la Universidad “Babeș-Bolyai” Reșița.',
+          feature2Text1:
+            'La ciudad alberga la Universidad Eftimie Murgu, una de las instituciones de educación superior más importantes de la región de Banat.',
+          feature2Text2: 'Centro Universitario de la Universidad “Babeș-Bolyai” Reșița.',
           feature2Alt: 'Instituciones educativas en Reșița',
           feature3Title: 'Espíritu comunitario',
           feature3Text:
@@ -235,8 +241,9 @@ export default function AboutResitaPage() {
             'تحافظ ريشيتسا على آثار عصرها الصناعي الذهبي من خلال مصانع تاريخية ومبانٍ تذكّر بالفترة التي كانت فيها المدينة مركزًا مهمًا للسكك الحديدية.',
           feature1Alt: 'عمارة صناعية في ريشيتسا',
           feature2Title: 'مؤسسات تعليمية',
-          feature2Text:
-            'تستضيف المدينة جامعة إفتيميه مورغو، إحدى أهم مؤسسات التعليم العالي في منطقة بانَات. مركز جامعة “بابيش-بولياي” في ريشيتسا.',
+          feature2Text1:
+            'تستضيف المدينة جامعة إفتيميه مورغو، إحدى أهم مؤسسات التعليم العالي في منطقة بانَات.',
+          feature2Text2: 'مركز جامعة “بابيش-بولياي” في ريشيتسا.',
           feature2Alt: 'مؤسسات تعليمية في ريشيتسا',
           feature3Title: 'روح المجتمع',
           feature3Text:
@@ -318,7 +325,13 @@ export default function AboutResitaPage() {
             </div>
             <h3>{copy.feature2Title}</h3>
             <p>
-              {copy.feature2Text}
+              {copy.feature2Text1}
+              {copy.feature2Text2 ? (
+                <>
+                  <br />
+                  {copy.feature2Text2}
+                </>
+              ) : null}
             </p>
           </div>
 
