@@ -624,7 +624,37 @@ export default function DonatePage() {
           </div>
         </div>
 
-        {/* Shorts Carousel Section - directly under donation panel */}
+        {/* Story Section - below donation form */}
+        <div className="post-event-story">
+          <div className="post-event-section">
+            <div className="post-event-section-title">{i18n.whyTitle}</div>
+            <p className="post-event-text">
+              {i18n.whyP1}
+            </p>
+            <p className="post-event-text">
+              {i18n.whyP2}
+            </p>
+            <div className="post-event-image-block post-event-image-block--clinic">
+              <img src="/resita populatie.jpg" alt={i18n.whyImgAlt} />
+            </div>
+          </div>
+
+          <div className="post-event-section">
+            <div className="post-event-section-title">{i18n.hospitalTitle}</div>
+            <p className="post-event-text">
+              {i18n.hospitalP1}
+            </p>
+            <p className="post-event-text">
+              {i18n.hospitalP2}
+            </p>
+            <div className="post-event-image-block post-event-image-block--history">
+              <img src="/2016.jpg" alt={i18n.hospitalImgAlt} />
+            </div>
+          </div>
+
+        </div>
+
+        {/* Shorts Carousel Section - placed after story, above footer */}
         <section className="shorts-carousel">
           <div className="shorts-carousel-header">
             <h2>YouTube Shorts</h2>
@@ -671,36 +701,6 @@ export default function DonatePage() {
             ))}
           </div>
         </section>
-
-        {/* Story Section - Now below donation form and shorts carousel */}
-        <div className="post-event-story">
-          <div className="post-event-section">
-            <div className="post-event-section-title">{i18n.whyTitle}</div>
-            <p className="post-event-text">
-              {i18n.whyP1}
-            </p>
-            <p className="post-event-text">
-              {i18n.whyP2}
-            </p>
-            <div className="post-event-image-block post-event-image-block--clinic">
-              <img src="/resita populatie.jpg" alt={i18n.whyImgAlt} />
-            </div>
-          </div>
-
-          <div className="post-event-section">
-            <div className="post-event-section-title">{i18n.hospitalTitle}</div>
-            <p className="post-event-text">
-              {i18n.hospitalP1}
-            </p>
-            <p className="post-event-text">
-              {i18n.hospitalP2}
-            </p>
-            <div className="post-event-image-block post-event-image-block--history">
-              <img src="/2016.jpg" alt={i18n.hospitalImgAlt} />
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   );
