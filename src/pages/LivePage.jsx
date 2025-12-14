@@ -157,11 +157,16 @@ export default function LivePage() {
               className="live-video-frame"
               aria-label={copy.videoAria}
             >
-              <div className="live-video-placeholder">
-                <p style={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '600' }}>
-                  {copy.placeholder}
-                </p>
-              </div>
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed?channel=RadioRomaniaResita"
+                title="Radio Romania Resita Live Stream"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ borderRadius: '12px' }}
+              ></iframe>
             </div>
             <p className="live-note">
               {copy.note}

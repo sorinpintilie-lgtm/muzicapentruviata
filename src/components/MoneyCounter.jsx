@@ -8,17 +8,29 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+// Approximate exchange rates (RON to other currencies)
+// These are rough estimates and should be updated periodically
+const EXCHANGE_RATES = {
+  RON: 1,
+  EUR: 0.201, // 1 RON ≈ 0.201 EUR
+  USD: 0.222, // 1 RON ≈ 0.222 USD
+};
+
 function MoneyCounter() {
   const { donors, loading, error } = useDonors();
   const { t } = useI18n();
 
-  const totalAmount = (donors || []).reduce(
+  // All amounts in database are stored in RON
+  const totalAmountRON = (donors || []).reduce(
     (sum, donor) => sum + (Number(donor?.amount) || 0),
     0
   );
 
   // Get currency from cookie, default to RON
   const currency = getCookie('mpv_currency') || 'RON';
+
+  // Convert RON total to display currency
+  const totalAmount = totalAmountRON * (EXCHANGE_RATES[currency] || 1);
 
   // Determine locale based on currency
   const locale = currency === 'EUR' ? 'de-DE' :
