@@ -265,13 +265,13 @@ function Layout({ children }) {
           <MoneyCounter />
 
           <div className="nav-right-actions">
+            <LanguageSelector />
             <NavLink
               to={withBase('/#donation-form')}
               className="btn-primary nav-donate"
             >
               {t('cta.donateNow')}
             </NavLink>
-            <LanguageSelector />
           </div>
         </div>
       </nav>
