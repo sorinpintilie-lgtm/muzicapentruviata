@@ -1107,14 +1107,12 @@ body {
   background: var(--accent);
 }
 
-/* Full-width presentation on larger screens */
+/* Desktop layout: keep carousel centered with content width */
 @media (min-width: 821px) {
   .shorts-carousel {
-    width: 100vw;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    border-radius: 0;
-    padding: 24px clamp(32px, 5vw, 56px) 28px;
+    margin-top: 32px;
+    border-radius: 22px;
+    padding: 22px clamp(24px, 4vw, 32px) 26px;
   }
 
   .shorts-carousel-frame-wrapper {

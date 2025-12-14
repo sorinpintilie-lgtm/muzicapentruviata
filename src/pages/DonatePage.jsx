@@ -383,10 +383,11 @@ export default function DonatePage() {
   );
 
   // Preset donation amounts in selected currency
+  // RON: 15, 25, 50, 100, ALTA
+  // EUR/USD: 3, 5, 10, 20, OTHER
   const presetAmounts = React.useMemo(() => {
-    if (currency === 'RON') return [50, 100, 250, 500, 'custom'];
-    if (currency === 'EUR') return [10, 20, 50, 100, 'custom'];
-    return [10, 25, 50, 100, 'custom']; // USD
+    if (currency === 'RON') return [15, 25, 50, 100, 'custom'];
+    return [3, 5, 10, 20, 'custom']; // EUR & USD
   }, [currency]);
 
   // Handle successful payment return from EuPlatesc
