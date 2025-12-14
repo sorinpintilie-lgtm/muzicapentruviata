@@ -262,9 +262,8 @@ function Layout({ children }) {
             </div>
           </div>
 
-          <MoneyCounter />
-
           <div className="nav-right-actions">
+            <MoneyCounter />
             <LanguageSelector />
             <NavLink
               to={withBase('/#donation-form')}

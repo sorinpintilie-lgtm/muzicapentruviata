@@ -185,8 +185,9 @@ body {
   color: var(--accent);
   font-weight: 600;
   text-align: center;
-  min-width: 120px;
+  min-width: 80px;
   transition: all 0.15s ease;
+  cursor: default;
 }
 
 .money-counter:hover {
@@ -195,16 +196,18 @@ body {
 }
 
 .money-counter-label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.9;
+  line-height: 1.2;
 }
 
 .money-counter-amount {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--accent);
+  line-height: 1.2;
 }
 
 /* Language Selector Styles */
