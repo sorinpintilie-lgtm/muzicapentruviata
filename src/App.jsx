@@ -401,42 +401,6 @@ function SiteFooter({ isScrolled }) {
 
 const LANG_PREFIXES = ['en', 'de', 'fr', 'it', 'es', 'ar'];
 
-function RoutesForAllLanguages() {
-  return (
-    <>
-      {/* Romanian (default, no prefix) */}
-      <Route path="/" element={<Layout><DonatePage /></Layout>} />
-      <Route path="/donatii" element={<Layout><DonatePage /></Layout>} />
-      <Route path="/live" element={<Layout><LivePage /></Layout>} />
-      <Route path="/galerie" element={<Layout><GalleryPage /></Layout>} />
-      <Route path="/despre-oncohelp" element={<Layout><AboutOncohelpPage /></Layout>} />
-      <Route path="/despre-resita" element={<Layout><AboutResitaPage /></Layout>} />
-      <Route path="/multumiri" element={<Layout><WallPage /></Layout>} />
-      <Route path="/multumiri/:donorName" element={<Layout><PersonalizedWallPage /></Layout>} />
-      <Route path="/sponsori" element={<Layout><SponsorsPage /></Layout>} />
-      <Route path="/mobile/:donorName" element={<Layout><MobileWallScreenshot /></Layout>} />
-      <Route path="/termeni-si-conditii" element={<Layout><TermsAndConditionsPage /></Layout>} />
-      <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
-
-      {/* Prefixed languages */}
-      {LANG_PREFIXES.flatMap((prefix) => [
-        <Route key={`${prefix}-root`} path={`/${prefix}`} element={<Layout><DonatePage /></Layout>} />,
-        <Route key={`${prefix}-donatii`} path={`/${prefix}/donatii`} element={<Layout><DonatePage /></Layout>} />,
-        <Route key={`${prefix}-live`} path={`/${prefix}/live`} element={<Layout><LivePage /></Layout>} />,
-        <Route key={`${prefix}-galerie`} path={`/${prefix}/galerie`} element={<Layout><GalleryPage /></Layout>} />,
-        <Route key={`${prefix}-oncohelp`} path={`/${prefix}/despre-oncohelp`} element={<Layout><AboutOncohelpPage /></Layout>} />,
-        <Route key={`${prefix}-resita`} path={`/${prefix}/despre-resita`} element={<Layout><AboutResitaPage /></Layout>} />,
-        <Route key={`${prefix}-wall`} path={`/${prefix}/multumiri`} element={<Layout><WallPage /></Layout>} />,
-        <Route key={`${prefix}-wall-personal`} path={`/${prefix}/multumiri/:donorName`} element={<Layout><PersonalizedWallPage /></Layout>} />,
-        <Route key={`${prefix}-sponsori`} path={`/${prefix}/sponsori`} element={<Layout><SponsorsPage /></Layout>} />,
-        <Route key={`${prefix}-mobile`} path={`/${prefix}/mobile/:donorName`} element={<Layout><MobileWallScreenshot /></Layout>} />,
-        <Route key={`${prefix}-terms`} path={`/${prefix}/termeni-si-conditii`} element={<Layout><TermsAndConditionsPage /></Layout>} />,
-        <Route key={`${prefix}-privacy`} path={`/${prefix}/politica-de-confidentialitate`} element={<Layout><PrivacyPolicyPage /></Layout>} />,
-      ])}
-    </>
-  );
-}
-
 function App() {
   const location = useLocation();
 
@@ -447,7 +411,35 @@ function App() {
   return (
     <>
       <Routes>
-        <RoutesForAllLanguages />
+        {/* Romanian (default, no prefix) */}
+        <Route path="/" element={<Layout><DonatePage /></Layout>} />
+        <Route path="/donatii" element={<Layout><DonatePage /></Layout>} />
+        <Route path="/live" element={<Layout><LivePage /></Layout>} />
+        <Route path="/galerie" element={<Layout><GalleryPage /></Layout>} />
+        <Route path="/despre-oncohelp" element={<Layout><AboutOncohelpPage /></Layout>} />
+        <Route path="/despre-resita" element={<Layout><AboutResitaPage /></Layout>} />
+        <Route path="/multumiri" element={<Layout><WallPage /></Layout>} />
+        <Route path="/multumiri/:donorName" element={<Layout><PersonalizedWallPage /></Layout>} />
+        <Route path="/sponsori" element={<Layout><SponsorsPage /></Layout>} />
+        <Route path="/mobile/:donorName" element={<Layout><MobileWallScreenshot /></Layout>} />
+        <Route path="/termeni-si-conditii" element={<Layout><TermsAndConditionsPage /></Layout>} />
+        <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
+
+        {/* Prefixed languages */}
+        {LANG_PREFIXES.flatMap((prefix) => [
+          <Route key={`${prefix}-root`} path={`/${prefix}`} element={<Layout><DonatePage /></Layout>} />,
+          <Route key={`${prefix}-donatii`} path={`/${prefix}/donatii`} element={<Layout><DonatePage /></Layout>} />,
+          <Route key={`${prefix}-live`} path={`/${prefix}/live`} element={<Layout><LivePage /></Layout>} />,
+          <Route key={`${prefix}-galerie`} path={`/${prefix}/galerie`} element={<Layout><GalleryPage /></Layout>} />,
+          <Route key={`${prefix}-oncohelp`} path={`/${prefix}/despre-oncohelp`} element={<Layout><AboutOncohelpPage /></Layout>} />,
+          <Route key={`${prefix}-resita`} path={`/${prefix}/despre-resita`} element={<Layout><AboutResitaPage /></Layout>} />,
+          <Route key={`${prefix}-wall`} path={`/${prefix}/multumiri`} element={<Layout><WallPage /></Layout>} />,
+          <Route key={`${prefix}-wall-personal`} path={`/${prefix}/multumiri/:donorName`} element={<Layout><PersonalizedWallPage /></Layout>} />,
+          <Route key={`${prefix}-sponsori`} path={`/${prefix}/sponsori`} element={<Layout><SponsorsPage /></Layout>} />,
+          <Route key={`${prefix}-mobile`} path={`/${prefix}/mobile/:donorName`} element={<Layout><MobileWallScreenshot /></Layout>} />,
+          <Route key={`${prefix}-terms`} path={`/${prefix}/termeni-si-conditii`} element={<Layout><TermsAndConditionsPage /></Layout>} />,
+          <Route key={`${prefix}-privacy`} path={`/${prefix}/politica-de-confidentialitate`} element={<Layout><PrivacyPolicyPage /></Layout>} />,
+        ])}
       </Routes>
 
       {/* Global Radio Player - appears on all pages */}
