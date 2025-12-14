@@ -725,7 +725,7 @@ export default function DonatePage() {
             <div className="shorts-carousel-frame">
               <iframe
                 key={currentShortIndex}
-                src="https://www.youtube.com/embed/l-GOMoAAr9Q?rel=0&modestbranding=1&playsinline=1"
+                src={`https://www.youtube.com/embed/${shortsVideos[currentShortIndex]?.youtubeId}?rel=0&modestbranding=1&playsinline=1`}
                 title={`YouTube Short ${currentShortIndex + 1}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
