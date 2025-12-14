@@ -62,75 +62,48 @@ Un gest mic poate schimba o lume.
   const shareImage = `${window.location.origin}/2025.png`;
 
   const handleShare = async (platform) => {
-    const shareData = {
-      title: 'Muzică pentru Viață 2025',
-      text: shareText,
-      url: shareUrl,
-    };
-
     try {
       switch (platform) {
         case 'facebook':
+          // Try to include image in Facebook share
           window.open(
-            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
-            '_blank',
-            'width=600,height=400'
-          );
-          break;
-
-        case 'twitter':
-          window.open(
-            `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}&picture=${encodeURIComponent(shareImage)}`,
             '_blank',
             'width=600,height=400'
           );
           break;
 
         case 'whatsapp':
+          // WhatsApp can handle text with image URL
           window.open(
-            `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`,
+            `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareImage + ' ' + shareUrl)}`,
             '_blank'
           );
           break;
 
         case 'instagram':
-          // Instagram doesn't support direct sharing via URL, so we'll copy to clipboard
+          // Instagram doesn't support direct sharing, copy text and image URL to clipboard
           if (navigator.clipboard) {
-            await navigator.clipboard.writeText(shareText + ' ' + shareUrl);
-            alert('Text copiat în clipboard! Poți împărtăși pe Instagram.');
+            await navigator.clipboard.writeText(shareText + ' ' + shareImage + ' ' + shareUrl);
+            alert('Text și link imagine copiate în clipboard! Poți împărtăși pe Instagram.');
           } else {
-            alert('Te rugăm să copiezi manual textul pentru a împărtăși pe Instagram.');
+            alert('Te rugăm să copiezi manual textul și linkul imaginii pentru a împărtăși pe Instagram.');
           }
           break;
 
-        case 'download':
-          // Download the image
-          const link = document.createElement('a');
-          link.href = shareImage;
-          link.download = 'MuzicaPentruViata2025.png';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          break;
-
         default:
-          // Try native Web Share API
-          if (navigator.share) {
-            await navigator.share(shareData);
-          } else {
-            // Fallback: copy to clipboard
-            if (navigator.clipboard) {
-              await navigator.clipboard.writeText(shareText + ' ' + shareUrl);
-              alert('Text copiat în clipboard!');
-            }
+          // Fallback: copy to clipboard
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(shareText + ' ' + shareImage + ' ' + shareUrl);
+            alert('Text și imagine copiate în clipboard!');
           }
       }
     } catch (error) {
       console.error('Error sharing:', error);
       // Fallback: copy to clipboard
       if (navigator.clipboard) {
-        await navigator.clipboard.writeText(shareText + ' ' + shareUrl);
-        alert('Text copiat în clipboard!');
+        await navigator.clipboard.writeText(shareText + ' ' + shareImage + ' ' + shareUrl);
+        alert('Text și imagine copiate în clipboard!');
       }
     }
   };
@@ -863,17 +836,7 @@ Un gest mic poate schimba o lume.
               onClick={() => handleShare('facebook')}
               aria-label="Share on Facebook"
             >
-              <span className="share-button-icon">📘</span>
               <span className="share-button-text">Facebook</span>
-            </button>
-
-            <button
-              className="share-button twitter-share"
-              onClick={() => handleShare('twitter')}
-              aria-label="Share on Twitter"
-            >
-              <span className="share-button-icon">🐦</span>
-              <span className="share-button-text">Twitter</span>
             </button>
 
             <button
@@ -881,7 +844,6 @@ Un gest mic poate schimba o lume.
               onClick={() => handleShare('whatsapp')}
               aria-label="Share on WhatsApp"
             >
-              <span className="share-button-icon">💬</span>
               <span className="share-button-text">WhatsApp</span>
             </button>
 
@@ -890,17 +852,7 @@ Un gest mic poate schimba o lume.
               onClick={() => handleShare('instagram')}
               aria-label="Share on Instagram"
             >
-              <span className="share-button-icon">📷</span>
               <span className="share-button-text">Instagram</span>
-            </button>
-
-            <button
-              className="share-button download-share"
-              onClick={() => handleShare('download')}
-              aria-label="Download image"
-            >
-              <span className="share-button-icon">⬇️</span>
-              <span className="share-button-text">Descarcă</span>
             </button>
           </div>
         </section>

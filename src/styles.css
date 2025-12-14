@@ -3715,7 +3715,6 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   padding: 12px 20px;
   border-radius: 999px;
   background: var(--accent-soft);
@@ -3736,11 +3735,6 @@ h1 {
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(216, 27, 96, 0.25);
-}
-
-.share-button-icon {
-  font-size: 1.2em;
-  line-height: 1;
 }
 
 .share-button-text {
@@ -3823,10 +3817,6 @@ h1 {
     padding: 10px 16px;
     font-size: 0.85rem;
     min-width: 110px;
-  }
-
-  .share-button-icon {
-    font-size: 1.1em;
   }
 }
 
