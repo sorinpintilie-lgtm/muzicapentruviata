@@ -22,7 +22,7 @@ export default function DonatePage() {
 
   const shortsVideos = React.useMemo(
     () => [
-      { id: 0, youtubeId: 'y0lKg3Zij8E' },
+      { id: 0, youtubeId: 'jNQXAC9IVRw' }, // Test video - Me at the zoo (first YouTube video)
       { id: 1, youtubeId: 'vZxxebBuy8I' },
       { id: 2, youtubeId: 'deRIAADFxO8' },
       { id: 3, youtubeId: 'yjYPkDaI07c' },
