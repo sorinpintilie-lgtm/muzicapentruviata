@@ -13,6 +13,7 @@ import TermsAndConditionsPage from './pages/TermsAndConditionsPage.jsx';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
 import GlobalRadioPlayer from './components/GlobalRadioPlayer.jsx';
 import MoneyCounter from './components/MoneyCounter.jsx';
+import LanguageSelector from './components/LanguageSelector.jsx';
 import { useI18n } from './i18n/I18nProvider.jsx';
 
 function Layout({ children }) {
@@ -261,7 +262,10 @@ function Layout({ children }) {
             </div>
           </div>
 
-          <MoneyCounter />
+          <div className="nav-right-section">
+            <MoneyCounter />
+            <LanguageSelector />
+          </div>
 
           <NavLink
             to={withBase('/#donation-form')}
