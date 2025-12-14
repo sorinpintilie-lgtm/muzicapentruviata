@@ -22,16 +22,16 @@ export default function DonatePage() {
 
   const shortsVideos = React.useMemo(
     () => [
-      { id: 0, youtubeUrl: 'https://www.youtube.com/shorts/y0lKg3Zij8E' },
-      { id: 1, youtubeUrl: 'https://www.youtube.com/shorts/vZxxebBuy8I' },
-      { id: 2, youtubeUrl: 'https://www.youtube.com/shorts/deRIAADFxO8' },
-      { id: 3, youtubeUrl: 'https://www.youtube.com/shorts/yjYPkDaI07c' },
-      { id: 4, youtubeUrl: 'https://www.youtube.com/shorts/Skf5B-3wKhE' },
-      { id: 5, youtubeUrl: 'https://www.youtube.com/shorts/llnYKVVwvO8' },
-      { id: 6, youtubeUrl: 'https://www.youtube.com/shorts/FcWQEMN6fh0' },
-      { id: 7, youtubeUrl: 'https://www.youtube.com/shorts/l-GOMoAAr9Q' },
-      { id: 8, youtubeUrl: 'https://www.youtube.com/shorts/UZip5FJJdDE' },
-      { id: 9, youtubeUrl: 'https://www.youtube.com/shorts/xhJXvFyE10Y' },
+      { id: 0, youtubeUrl: 'https://www.youtube.com/embed/y0lKg3Zij8E' },
+      { id: 1, youtubeUrl: 'https://www.youtube.com/embed/vZxxebBuy8I' },
+      { id: 2, youtubeUrl: 'https://www.youtube.com/embed/deRIAADFxO8' },
+      { id: 3, youtubeUrl: 'https://www.youtube.com/embed/yjYPkDaI07c' },
+      { id: 4, youtubeUrl: 'https://www.youtube.com/embed/Skf5B-3wKhE' },
+      { id: 5, youtubeUrl: 'https://www.youtube.com/embed/llnYKVVwvO8' },
+      { id: 6, youtubeUrl: 'https://www.youtube.com/embed/FcWQEMN6fh0' },
+      { id: 7, youtubeUrl: 'https://www.youtube.com/embed/l-GOMoAAr9Q' },
+      { id: 8, youtubeUrl: 'https://www.youtube.com/embed/UZip5FJJdDE' },
+      { id: 9, youtubeUrl: 'https://www.youtube.com/embed/xhJXvFyE10Y' },
     ],
     []
   );
