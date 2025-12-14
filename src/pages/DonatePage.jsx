@@ -56,7 +56,7 @@ export default function DonatePage() {
   const shareText = `Și eu susțin Muzică pentru Viață.
 Un gest mic poate schimba o lume.
  Împreună construim primul spital oncologic din Reșița.
-❤️ #MuzicaPentruViata #ImpreunaPentruViata`;
+#MuzicaPentruViata #ImpreunaPentruViata`;
 
   const shareUrl = window.location.origin;
   const shareImage = `${window.location.origin}/2025.png`;
