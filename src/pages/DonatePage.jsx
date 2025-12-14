@@ -56,54 +56,56 @@ export default function DonatePage() {
   const shareText = `Și eu susțin Muzică pentru Viață.
 Un gest mic poate schimba o lume.
  Împreună construim primul spital oncologic din Reșița.
-#MuzicaPentruViata #ImpreunaPentruViata`;
+#MuzicaPentruViata #ImpreunaPentruViata
+
+Donează și tu acum aici: `;
 
   const shareUrl = window.location.origin;
   const shareImage = `${window.location.origin}/2025.png`;
 
   const handleShare = async (platform) => {
+    const fullShareText = shareText + shareUrl;
+
     try {
       switch (platform) {
         case 'facebook':
-          // Try to include image in Facebook share
           window.open(
-            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}&picture=${encodeURIComponent(shareImage)}`,
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText.trim())}`,
             '_blank',
             'width=600,height=400'
           );
           break;
 
         case 'whatsapp':
-          // WhatsApp can handle text with image URL
           window.open(
-            `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareImage + ' ' + shareUrl)}`,
+            `https://wa.me/?text=${encodeURIComponent(fullShareText)}`,
             '_blank'
           );
           break;
 
         case 'instagram':
-          // Instagram doesn't support direct sharing, copy text and image URL to clipboard
+          // Instagram doesn't support direct sharing, copy text and URL to clipboard
           if (navigator.clipboard) {
-            await navigator.clipboard.writeText(shareText + ' ' + shareImage + ' ' + shareUrl);
-            alert('Text și link imagine copiate în clipboard! Poți împărtăși pe Instagram.');
+            await navigator.clipboard.writeText(fullShareText);
+            alert('Text copiat în clipboard! Poți împărtăși pe Instagram.');
           } else {
-            alert('Te rugăm să copiezi manual textul și linkul imaginii pentru a împărtăși pe Instagram.');
+            alert('Te rugăm să copiezi manual textul pentru a împărtăși pe Instagram.');
           }
           break;
 
         default:
           // Fallback: copy to clipboard
           if (navigator.clipboard) {
-            await navigator.clipboard.writeText(shareText + ' ' + shareImage + ' ' + shareUrl);
-            alert('Text și imagine copiate în clipboard!');
+            await navigator.clipboard.writeText(fullShareText);
+            alert('Text copiat în clipboard!');
           }
       }
     } catch (error) {
       console.error('Error sharing:', error);
       // Fallback: copy to clipboard
       if (navigator.clipboard) {
-        await navigator.clipboard.writeText(shareText + ' ' + shareImage + ' ' + shareUrl);
-        alert('Text și imagine copiate în clipboard!');
+        await navigator.clipboard.writeText(fullShareText);
+        alert('Text copiat în clipboard!');
       }
     }
   };
