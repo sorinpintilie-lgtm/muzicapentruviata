@@ -823,7 +823,7 @@ Donează și tu acum aici: `;
         {/* Share Section */}
         <section className="share-section">
           <div className="share-section-header">
-            <h2>Împarte cauza noastră</h2>
+            <h2>Distribuie cauza noastră</h2>
             <p>Distribuie mesajul nostru și ajută-ne să ajungem la mai mulți oameni care pot contribui la construirea spitalului oncologic din Reșița.</p>
           </div>
 
