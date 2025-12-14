@@ -69,8 +69,9 @@ Donează și tu acum aici: `;
     try {
       switch (platform) {
         case 'facebook':
+          // Use Facebook's Feed Dialog for better text support
           window.open(
-            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText.trim())}`,
+            `https://www.facebook.com/dialog/feed?display=popup&link=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent(shareText.trim())}&redirect_uri=${encodeURIComponent(shareUrl)}`,
             '_blank',
             'width=600,height=400'
           );
@@ -81,16 +82,6 @@ Donează și tu acum aici: `;
             `https://wa.me/?text=${encodeURIComponent(fullShareText)}`,
             '_blank'
           );
-          break;
-
-        case 'instagram':
-          // Instagram doesn't support direct sharing, copy text and URL to clipboard
-          if (navigator.clipboard) {
-            await navigator.clipboard.writeText(fullShareText);
-            alert('Text copiat în clipboard! Poți împărtăși pe Instagram.');
-          } else {
-            alert('Te rugăm să copiezi manual textul pentru a împărtăși pe Instagram.');
-          }
           break;
 
         default:
@@ -851,14 +842,6 @@ Donează și tu acum aici: `;
               aria-label="Share on WhatsApp"
             >
               <span className="share-button-text">WhatsApp</span>
-            </button>
-
-            <button
-              className="share-button instagram-share"
-              onClick={() => handleShare('instagram')}
-              aria-label="Share on Instagram"
-            >
-              <span className="share-button-text">Instagram</span>
             </button>
           </div>
         </section>
