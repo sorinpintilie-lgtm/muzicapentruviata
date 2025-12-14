@@ -22,19 +22,25 @@ export default function DonatePage() {
 
   const shortsVideos = React.useMemo(
     () => [
-      { id: 0, youtubeId: 'jNQXAC9IVRw' }, // Test video - Me at the zoo (first YouTube video)
-      { id: 1, youtubeId: 'vZxxebBuy8I' },
-      { id: 2, youtubeId: 'deRIAADFxO8' },
-      { id: 3, youtubeId: 'yjYPkDaI07c' },
-      { id: 4, youtubeId: 'Skf5B-3wKhE' },
-      { id: 5, youtubeId: 'llnYKVVwvO8' },
-      { id: 6, youtubeId: 'FcWQEMN6fh0' },
-      { id: 7, youtubeId: 'l-GOMoAAr9Q' },
-      { id: 8, youtubeId: 'UZip5FJJdDE' },
-      { id: 9, youtubeId: 'xhJXvFyE10Y' },
+      { id: 0, youtubeUrl: 'https://www.youtube.com/shorts/y0lKg3Zij8E' },
+      { id: 1, youtubeUrl: 'https://www.youtube.com/shorts/vZxxebBuy8I' },
+      { id: 2, youtubeUrl: 'https://www.youtube.com/shorts/deRIAADFxO8' },
+      { id: 3, youtubeUrl: 'https://www.youtube.com/shorts/yjYPkDaI07c' },
+      { id: 4, youtubeUrl: 'https://www.youtube.com/shorts/Skf5B-3wKhE' },
+      { id: 5, youtubeUrl: 'https://www.youtube.com/shorts/llnYKVVwvO8' },
+      { id: 6, youtubeUrl: 'https://www.youtube.com/shorts/FcWQEMN6fh0' },
+      { id: 7, youtubeUrl: 'https://www.youtube.com/shorts/l-GOMoAAr9Q' },
+      { id: 8, youtubeUrl: 'https://www.youtube.com/shorts/UZip5FJJdDE' },
+      { id: 9, youtubeUrl: 'https://www.youtube.com/shorts/xhJXvFyE10Y' },
     ],
     []
   );
+
+  // Extract video ID from YouTube Shorts URL
+  const getVideoId = (url) => {
+    const match = url.match(/\/shorts\/([a-zA-Z0-9_-]+)/);
+    return match ? match[1] : null;
+  };
 
   const goToShort = (index) => {
     if (!shortsVideos.length) return;
@@ -725,7 +731,7 @@ export default function DonatePage() {
             <div className="shorts-carousel-frame">
               <iframe
                 key={currentShortIndex}
-                src={`https://www.youtube.com/embed/${shortsVideos[currentShortIndex]?.youtubeId}?rel=0&modestbranding=1&playsinline=1`}
+                src={`https://www.youtube.com/embed/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}?rel=0&modestbranding=1&playsinline=1`}
                 title={`YouTube Short ${currentShortIndex + 1}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
