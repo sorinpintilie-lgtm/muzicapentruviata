@@ -180,6 +180,104 @@ export default function LivePage() {
           </div>
         </div>
 
+        {/* Social Media Section */}
+        <div className="social-media-section" style={{
+          textAlign: 'center',
+          marginTop: '32px',
+          padding: '24px',
+          background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+          borderRadius: '16px',
+          border: '2px solid #dee2e6'
+        }}>
+          <h3 style={{
+            fontSize: '1.4rem',
+            fontWeight: '700',
+            color: '#d81b60',
+            marginBottom: '16px'
+          }}>
+            Urmăriți-ne pe social media:
+          </h3>
+          <div style={{
+            display: 'flex',
+            gap: '20px',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            alignItems: 'center'
+          }}>
+            <a
+              href="https://www.facebook.com/RadioResita/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: '#1877f2',
+                textDecoration: 'none',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                background: 'rgba(24, 119, 242, 0.1)',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.background = 'rgba(24, 119, 242, 0.2)'}
+              onMouseLeave={(e) => e.target.style.background = 'rgba(24, 119, 242, 0.1)'}
+            >
+              <span>📘</span>
+              Facebook
+            </a>
+
+            <a
+              href="https://www.instagram.com/radioromaniaresita/?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: '#e4405f',
+                textDecoration: 'none',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                background: 'rgba(228, 64, 95, 0.1)',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.background = 'rgba(228, 64, 95, 0.2)'}
+              onMouseLeave={(e) => e.target.style.background = 'rgba(228, 64, 95, 0.1)'}
+            >
+              <span>📷</span>
+              Instagram
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@radioromaniaresita?lang=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: '#000000',
+                textDecoration: 'none',
+                fontSize: '1.1rem',
+                fontWeight: '600',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                background: 'rgba(0, 0, 0, 0.1)',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.background = 'rgba(0, 0, 0, 0.2)'}
+              onMouseLeave={(e) => e.target.style.background = 'rgba(0, 0, 0, 0.1)'}
+            >
+              <span>🎵</span>
+              TikTok
+            </a>
+          </div>
+        </div>
+
         {/* Radio Promotion Section */}
         <div className="radio-promotion-section" style={{
           textAlign: 'center',
