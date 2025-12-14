@@ -791,7 +791,7 @@ Donează și tu acum aici: `;
             <div className="shorts-carousel-frame">
               <iframe
                 key={currentShortIndex}
-                src={`https://www.youtube.com/embed/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}`}
+                src={`https://www.youtube-nocookie.com/embed/${getVideoId(shortsVideos[currentShortIndex]?.youtubeUrl)}`}
                 title={`YouTube Short ${currentShortIndex + 1}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
