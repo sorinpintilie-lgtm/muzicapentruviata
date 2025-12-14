@@ -14,6 +14,16 @@ const AR_COUNTRIES = new Set([
   'TR', 'EG',
 ]);
 
+// Very simple region-to-currency mapping.
+// - RO  -> RON
+// - EU* -> EUR
+// - rest of world -> USD
+// (*approximate list of European countries; can be adjusted anytime.)
+const EU_COUNTRIES = new Set([
+  'AT','BE','BG','CH','CY','CZ','DE','DK','EE','ES','FI','FR','GB','GR','HR','HU',
+  'IE','IS','IT','LI','LT','LU','LV','MT','NL','NO','PL','PT','RO','SE','SI','SK'
+]);
+
 function hasLangPrefix(pathname: string) {
   return LANG_PREFIXES.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
 }
@@ -39,23 +49,56 @@ function mapCountryToLang(countryCode: string) {
   return 'en';
 }
 
+function mapCountryToCurrency(countryCode: string | undefined) {
+  const cc = (countryCode || '').toUpperCase();
+  if (!cc) return undefined;
+  if (cc === 'RO') return 'RON';
+  if (EU_COUNTRIES.has(cc)) return 'EUR';
+  return 'USD';
+}
+
+function appendCurrencyCookie(response: Response, currency: string | undefined) {
+  if (!currency) return response;
+  const cookieValue = `mpv_currency=${currency}; Path=/; Max-Age=604800; SameSite=Lax`;
+  const existing = response.headers.get('set-cookie');
+  if (existing) {
+    response.headers.set('set-cookie', `${existing}, ${cookieValue}`);
+  } else {
+    response.headers.set('set-cookie', cookieValue);
+  }
+  return response;
+}
+
 export default async (request: Request, context: EdgeContext) => {
   const url = new URL(request.url);
   const { pathname } = url;
 
-  // If user is already on a language-prefixed path, do nothing.
-  if (hasLangPrefix(pathname)) return context.next();
-  // Don't redirect static assets / Netlify internals.
-  if (isStaticAsset(pathname)) return context.next();
+   // Don't redirect static assets / Netlify internals.
+  if (isStaticAsset(pathname)) {
+    return context.next();
+  }
 
   const country = context.geo?.country?.code;
-  if (!country) return context.next();
+  const currency = mapCountryToCurrency(country);
+
+  // If we don't know the country, just continue.
+  if (!country) {
+    const res = await context.next();
+    return appendCurrencyCookie(res, undefined);
+  }
 
   const lang = mapCountryToLang(country);
-  if (lang === 'ro') return context.next();
+
+  // If user is already on a language-prefixed path, or is in RO (default lang),
+  // don't redirect but still attach the currency cookie.
+  if (hasLangPrefix(pathname) || lang === 'ro') {
+    const res = await context.next();
+    return appendCurrencyCookie(res, currency);
+  }
 
   const target = new URL(request.url);
   target.pathname = pathname === '/' ? `/${lang}` : `/${lang}${pathname}`;
-  return Response.redirect(target.toString(), 302);
+  const redirect = Response.redirect(target.toString(), 302);
+  return appendCurrencyCookie(redirect, currency);
 };
 

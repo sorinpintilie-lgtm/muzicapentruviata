@@ -18,6 +18,8 @@ export default function DonatePage() {
   const [error, setError] = useState('');
   const [currentShortIndex, setCurrentShortIndex] = useState(0);
 
+  const [currency, setCurrency] = useState('RON');
+
   const shortsVideos = React.useMemo(
     () => Array.from({ length: 30 }, (_, i) => ({ id: i, youtubeId: 'l-GOMoAAr9Q' })),
     []
@@ -32,6 +34,32 @@ export default function DonatePage() {
 
   const handlePrevShort = () => goToShort(currentShortIndex - 1);
   const handleNextShort = () => goToShort(currentShortIndex + 1);
+
+  const mapLangToFallbackCurrency = (language) => {
+    if (language === 'ro') return 'RON';
+    if (['de', 'fr', 'it', 'es'].includes(language)) return 'EUR';
+    return 'USD';
+  };
+
+  useEffect(() => {
+    // Derive currency from IP-based cookie (set by Netlify edge) or fall back to lang.
+    try {
+      if (typeof document !== 'undefined') {
+        const cookies = document.cookie.split(';').map(c => c.trim());
+        const currencyCookie = cookies.find(c => c.startsWith('mpv_currency='));
+        if (currencyCookie) {
+          const value = currencyCookie.split('=')[1];
+          if (value === 'RON' || value === 'EUR' || value === 'USD') {
+            setCurrency(value);
+            return;
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Error reading currency cookie', e);
+    }
+    setCurrency(mapLangToFallbackCurrency(lang));
+  }, [lang]);
 
   const i18n = React.useMemo(
     () =>
@@ -57,7 +85,7 @@ export default function DonatePage() {
           emailPlaceholder: 'email@exemplu.ro',
           processing: 'Se procesează...',
           donateNow: 'DONEAZĂ ACUM',
-          donateWithAmount: (amount) => `DONEAZĂ ${amount} RON`,
+          donateWithAmount: (amount) => `DONEAZĂ ${amount}`,
           payNote:
             'Plata este securizată prin EuPlatesc. Vei fi redirecționat către pagina de plată. După finalizarea donației, vei fi adăugat pe peretele comunității noastre.',
           whyTitle: 'De ce este important?',
@@ -98,7 +126,7 @@ export default function DonatePage() {
           emailPlaceholder: 'email@example.com',
           processing: 'Processing...',
           donateNow: 'DONATE NOW',
-          donateWithAmount: (amount) => `DONATE ${amount} RON`,
+          donateWithAmount: (amount) => `DONATE ${amount}`,
           payNote:
             'Payments are securely processed via EuPlatesc. You will be redirected to the payment page. After completing your donation, you will be added to our community wall.',
           whyTitle: 'Why is this important?',
@@ -138,7 +166,7 @@ export default function DonatePage() {
           emailPlaceholder: 'email@beispiel.de',
           processing: 'Wird verarbeitet...',
           donateNow: 'JETZT SPENDEN',
-          donateWithAmount: (amount) => `SPENDE ${amount} RON`,
+          donateWithAmount: (amount) => `SPENDE ${amount}`,
           payNote:
             'Die Zahlung ist über EuPlatesc gesichert. Du wirst zur Zahlungsseite weitergeleitet. Nach Abschluss der Spende wirst du unserer Community-Wall hinzugefügt.',
           whyTitle: 'Warum ist es wichtig?',
@@ -178,7 +206,7 @@ export default function DonatePage() {
           emailPlaceholder: 'email@exemple.fr',
           processing: 'Traitement en cours...',
           donateNow: 'FAIRE UN DON',
-          donateWithAmount: (amount) => `DONNER ${amount} RON`,
+          donateWithAmount: (amount) => `DONNER ${amount}`,
           payNote:
             'Le paiement est sécurisé via EuPlatesc. Vous serez redirigé vers la page de paiement. Après le don, vous serez ajouté à notre mur de la communauté.',
           whyTitle: 'Pourquoi est-ce important ?',
@@ -218,7 +246,7 @@ export default function DonatePage() {
           emailPlaceholder: 'email@esempio.it',
           processing: 'Elaborazione...',
           donateNow: 'DONA ORA',
-          donateWithAmount: (amount) => `DONA ${amount} RON`,
+          donateWithAmount: (amount) => `DONA ${amount}`,
           payNote:
             'Il pagamento è protetto tramite EuPlatesc. Verrai reindirizzato alla pagina di pagamento. Dopo la donazione, sarai aggiunto al nostro muro della comunità.',
           whyTitle: 'Perché è importante?',
@@ -258,7 +286,7 @@ export default function DonatePage() {
           emailPlaceholder: 'email@ejemplo.es',
           processing: 'Procesando...',
           donateNow: 'DONAR AHORA',
-          donateWithAmount: (amount) => `DONAR ${amount} RON`,
+          donateWithAmount: (amount) => `DONAR ${amount}`,
           payNote:
             'El pago está asegurado por EuPlatesc. Serás redirigido a la página de pago. Tras completar la donación, serás añadido al muro de nuestra comunidad.',
           whyTitle: '¿Por qué es importante?',
@@ -298,7 +326,7 @@ export default function DonatePage() {
           emailPlaceholder: 'email@example.com',
           processing: 'جارٍ المعالجة...',
           donateNow: 'تبرّع الآن',
-          donateWithAmount: (amount) => `تبرّع ${amount} RON`,
+          donateWithAmount: (amount) => `تبرّع ${amount}`,
           payNote:
             'الدفع مؤمّن عبر EuPlatesc. سيتم تحويلك إلى صفحة الدفع. بعد إتمام التبرع ستتم إضافتك إلى جدار مجتمعنا.',
           whyTitle: 'لماذا هذا مهم؟',
@@ -354,8 +382,12 @@ export default function DonatePage() {
     [lang]
   );
 
-  // Preset donation amounts (minimum 1 RON)
-  const presetAmounts = [15, 25, 50, 100, 'custom'];
+  // Preset donation amounts in selected currency
+  const presetAmounts = React.useMemo(() => {
+    if (currency === 'RON') return [50, 100, 250, 500, 'custom'];
+    if (currency === 'EUR') return [10, 20, 50, 100, 'custom'];
+    return [10, 25, 50, 100, 'custom']; // USD
+  }, [currency]);
 
   // Handle successful payment return from EuPlatesc
   useEffect(() => {
@@ -400,6 +432,14 @@ export default function DonatePage() {
     return isFinite(parsed) && parsed > 0 ? parsed : 0;
   };
 
+   const formatCurrency = (amount) => {
+    if (!amount) return '';
+    const value = Number(amount).toFixed(0);
+    if (currency === 'RON') return `${value} RON`;
+    if (currency === 'EUR') return `${value} €`;
+    return `$${value}`;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -437,14 +477,15 @@ export default function DonatePage() {
       console.log('Pending donation created');
 
       // Then call Netlify function to initiate payment
+      const amountToSend = finalAmount.toFixed(2);
       const response = await fetch('/.netlify/functions/initiate-payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          amount: finalAmount.toFixed(2),
-          currency: 'RON',
+          amount: amountToSend,
+          currency,
           orderDesc: `Donation Muzică pentru Viață - ${donationMode === 'monthly' ? i18n.orderDescMonthly : i18n.orderDescOne}`,
           email: donorEmail,
           invoiceId: invoiceId, // Pass the invoice ID
@@ -550,7 +591,7 @@ export default function DonatePage() {
                           min="1"
                           step="1"
                         />
-                        <div className="donation-amount-ron">RON</div>
+                        <div className="donation-amount-ron">{currency}</div>
                       </div>
                     ) : (
                       <button
@@ -559,8 +600,8 @@ export default function DonatePage() {
                         className={`donation-amount-button ${selectedAmount === amount ? 'donation-amount-button--active' : ''}`}
                         onClick={() => handleAmountSelect(amount)}
                       >
-                        <div className="donation-amount-main">{amount}</div>
-                        <div className="donation-amount-ron">RON</div>
+                         <div className="donation-amount-main">{amount}</div>
+                         <div className="donation-amount-ron">{currency}</div>
                       </button>
                     )
                   ))}
@@ -607,9 +648,9 @@ export default function DonatePage() {
                 >
                   {isProcessing
                     ? i18n.processing
-                    : getFinalAmount() > 0
-                      ? i18n.donateWithAmount(getFinalAmount().toFixed(0))
-                      : i18n.donateNow}
+                     : getFinalAmount() > 0
+                       ? i18n.donateWithAmount(formatCurrency(getFinalAmount()))
+                       : i18n.donateNow}
                 </button>
 
                 <p className="donation-cta-note">
@@ -657,8 +698,8 @@ export default function DonatePage() {
         {/* Shorts Carousel Section - placed after story, above footer */}
         <section className="shorts-carousel">
           <div className="shorts-carousel-header">
-            <h2>YouTube Shorts</h2>
-            <p>Momente scurte din campania „Muzică pentru Viață”.</p>
+            <h2>Celebrități care susțin campania Muzică pentru Viață</h2>
+            <p>Clipuri scurte verticale cu mesaje de susținere pentru spitalul oncologic din Reșița.</p>
           </div>
           <div className="shorts-carousel-frame-wrapper">
             <button
