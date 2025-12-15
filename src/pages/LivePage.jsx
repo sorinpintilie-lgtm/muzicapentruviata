@@ -152,7 +152,7 @@ export default function LivePage() {
 
         <div className="live-layout">
           <div className="live-video-section">
-            <div className="live-badge">{copy.badge}</div>
+=======
             <div
               className="live-video-frame"
               aria-label={copy.videoAria}
@@ -160,7 +160,7 @@ export default function LivePage() {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/aA0lf1NlDz4?rel=0&modestbranding=1&playsinline=1&autoplay=0"
+                src="https://www.youtube.com/embed/5iYjoRNKV04?rel=0&modestbranding=1&playsinline=1&autoplay=0"
                 title="Radio Romania Resita Live Stream"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
