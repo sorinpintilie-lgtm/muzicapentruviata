@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useDonors, getDonorSizeClass } from '../DonorContext.jsx';
+import { useDonors, getDonorSizeClass, ALL_NAMES } from '../DonorContext.jsx';
 import { useI18n } from '../i18n/I18nProvider.jsx';
 
 const animations = [
@@ -27,6 +27,15 @@ function getAnimationDelay(index) {
 function seededRandom(seed) {
   const x = Math.sin(seed) * 10000;
   return x - Math.floor(x);
+}
+
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
 }
 
 function getRandomMargins(index) {
@@ -182,6 +191,20 @@ export default function WallPage() {
     const arr = Array.from(map.values());
     // Sort by total amount donated (descending)
     arr.sort((a, b) => (b.amount || 0) - (a.amount || 0));
+
+    // Add mockup donors at the bottom
+    const existingNames = new Set(arr.map(d => d.name.toLowerCase()));
+    const shuffledNames = shuffleArray(ALL_NAMES);
+    const mockupDonors = shuffledNames
+      .filter(name => !existingNames.has(name.toLowerCase()))
+      .map((name, index) => ({
+        id: `mock-${index}`,
+        name,
+        amount: Math.floor(Math.random() * 200) + 1, // Random amount 1-200 for varied sizes
+        donationsCount: 1,
+      }));
+    arr.push(...mockupDonors);
+
     return arr;
   }, [donors]);
 
@@ -241,9 +264,6 @@ export default function WallPage() {
           </p>
           <p className="app-section-lead">
             {i18n.lead}
-          </p>
-          <p className="app-section-lead" style={{ marginTop: '10px' }}>
-            {i18n.counts(communityMembers.length, donors.length)}
           </p>
 
           {loading && (
