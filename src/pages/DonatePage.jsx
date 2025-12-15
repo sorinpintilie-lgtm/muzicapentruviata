@@ -169,6 +169,10 @@ Donează și tu acum aici: `;
           rightImgAlt: 'Universitatea din Reșița',
           orderDescOne: 'O singură dată',
           orderDescMonthly: 'Lunar',
+          shareTitle: 'Distribuie cauza noastră',
+          shareDescription: 'Distribuie mesajul nostru și ajută-ne să ajungem la mai mulți oameni care pot contribui la construirea spitalului oncologic din Reșița.',
+          shareFacebook: 'Facebook',
+          shareWhatsapp: 'WhatsApp',
         },
         en: {
           minAmountError: 'The minimum donation amount is 1 RON.',
@@ -210,6 +214,10 @@ Donează și tu acum aici: `;
           rightImgAlt: 'University in Reșița',
           orderDescOne: 'One-time',
           orderDescMonthly: 'Monthly',
+          shareTitle: 'Share our cause',
+          shareDescription: 'Share our message and help us reach more people who can contribute to building Reșița\'s first cancer hospital.',
+          shareFacebook: 'Facebook',
+          shareWhatsapp: 'WhatsApp',
         },
         de: {
           minAmountError: 'Der Mindestbetrag für eine Spende beträgt 1 RON.',
@@ -250,6 +258,10 @@ Donează și tu acum aici: `;
           rightImgAlt: 'Universität in Reșița',
           orderDescOne: 'Einmalig',
           orderDescMonthly: 'Monatlich',
+          shareTitle: 'Teile unsere Sache',
+          shareDescription: 'Teile unsere Nachricht und hilf uns, mehr Menschen zu erreichen, die zum Bau des ersten Krebskrankenhauses in Reșița beitragen können.',
+          shareFacebook: 'Facebook',
+          shareWhatsapp: 'WhatsApp',
         },
         fr: {
           minAmountError: 'Le montant minimum de don est de 1 RON.',
@@ -290,6 +302,10 @@ Donează și tu acum aici: `;
           rightImgAlt: 'Université à Reșița',
           orderDescOne: 'Unique',
           orderDescMonthly: 'Mensuel',
+          shareTitle: 'Partagez notre cause',
+          shareDescription: 'Partagez notre message et aidez-nous à atteindre plus de personnes qui peuvent contribuer à la construction du premier hôpital pour patients atteints de cancer à Reșița.',
+          shareFacebook: 'Facebook',
+          shareWhatsapp: 'WhatsApp',
         },
         it: {
           minAmountError: 'L’importo minimo per la donazione è 1 RON.',
@@ -330,6 +346,10 @@ Donează și tu acum aici: `;
           rightImgAlt: 'Università a Reșița',
           orderDescOne: 'Una tantum',
           orderDescMonthly: 'Mensile',
+          shareTitle: 'Condividi la nostra causa',
+          shareDescription: 'Condividi il nostro messaggio e aiutaci a raggiungere più persone che possono contribuire alla costruzione del primo ospedale oncologico a Reșița.',
+          shareFacebook: 'Facebook',
+          shareWhatsapp: 'WhatsApp',
         },
         es: {
           minAmountError: 'El importe mínimo de donación es 1 RON.',
@@ -370,6 +390,10 @@ Donează și tu acum aici: `;
           rightImgAlt: 'Universidad en Reșița',
           orderDescOne: 'Una vez',
           orderDescMonthly: 'Mensual',
+          shareTitle: 'Comparte nuestra causa',
+          shareDescription: 'Comparte nuestro mensaje y ayúdanos a llegar a más personas que pueden contribuir a la construcción del primer hospital oncológico en Reșița.',
+          shareFacebook: 'Facebook',
+          shareWhatsapp: 'WhatsApp',
         },
         ar: {
           minAmountError: 'الحد الأدنى للتبرع هو 1 RON.',
@@ -410,6 +434,10 @@ Donează și tu acum aici: `;
           rightImgAlt: 'جامعة ريشيتسا',
           orderDescOne: 'مرة واحدة',
           orderDescMonthly: 'شهريًا',
+          shareTitle: 'شارك قضيتنا',
+          shareDescription: 'شارك رسالتنا وساعدنا في الوصول إلى المزيد من الأشخاص الذين يمكنهم المساهمة في بناء أول مستشفى للسرطان في ريشيتسا.',
+          shareFacebook: 'فيسبوك',
+          shareWhatsapp: 'واتساب',
         },
       }[lang] || {
         minAmountError: 'Suma minimă pentru donație este 1 RON.',
@@ -839,8 +867,8 @@ Donează și tu acum aici: `;
         {/* Share Section */}
         <section className="share-section">
           <div className="share-section-header">
-            <h2>Distribuie cauza noastră</h2>
-            <p>Distribuie mesajul nostru și ajută-ne să ajungem la mai mulți oameni care pot contribui la construirea spitalului oncologic din Reșița.</p>
+            <h2>{i18n.shareTitle}</h2>
+            <p>{i18n.shareDescription}</p>
           </div>
 
           <div className="share-buttons-container">
@@ -849,7 +877,7 @@ Donează și tu acum aici: `;
               onClick={() => handleShare('facebook')}
               aria-label="Share on Facebook"
             >
-              <span className="share-button-text">Facebook</span>
+              <span className="share-button-text">{i18n.shareFacebook}</span>
             </button>
 
             <button
@@ -857,7 +885,7 @@ Donează și tu acum aici: `;
               onClick={() => handleShare('whatsapp')}
               aria-label="Share on WhatsApp"
             >
-              <span className="share-button-text">WhatsApp</span>
+              <span className="share-button-text">{i18n.shareWhatsapp}</span>
             </button>
           </div>
         </section>
