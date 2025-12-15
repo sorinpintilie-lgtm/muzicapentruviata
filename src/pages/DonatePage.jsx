@@ -582,18 +582,29 @@ Donează și tu acum aici: `;
         fp_hash: paymentData.fp_hash,
         email: paymentData.email,
         fname: donorName || 'Anonim',
-        ExtraData: JSON.stringify([
-          { key: 'silenturl', value: 'https://muzicapentruviata.ro/.netlify/functions/euplatesc-webhook' },
-          { key: 'successurl', value: 'https://muzicapentruviata.ro/success' },
-          { key: 'failedurl', value: 'https://muzicapentruviata.ro/failed' }
-        ]),
       };
 
+      // Add main fields
       Object.entries(fields).forEach(([key, value]) => {
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = key;
         input.value = value;
+        form.appendChild(input);
+      });
+
+      // Add ExtraData fields separately
+      const extraDataFields = [
+        { key: 'silenturl', value: 'https://muzicapentruviata.ro/.netlify/functions/euplatesc-webhook' },
+        { key: 'successurl', value: 'https://muzicapentruviata.ro/success' },
+        { key: 'failedurl', value: 'https://muzicapentruviata.ro/failed' }
+      ];
+
+      extraDataFields.forEach(item => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = `ExtraData[${item.key}]`;
+        input.value = item.value;
         form.appendChild(input);
       });
 
