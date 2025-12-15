@@ -162,6 +162,13 @@ export default function WallPage() {
   const communityMembers = useMemo(() => {
     const map = new Map();
 
+    // Exchange rates for converting to RON
+    const EXCHANGE_RATES = {
+      RON: 1,
+      EUR: 0.201, // 1 RON ≈ 0.201 EUR
+      USD: 0.222, // 1 RON ≈ 0.222 USD
+    };
+
     const anonymousNames = new Set(['anonim', 'anonymous', 'anonym', 'anonyme', 'anonimo', 'مجهول']);
 
     for (const donation of (donors || []).filter(d => d?.status === 'confirmed')) {
@@ -174,17 +181,22 @@ export default function WallPage() {
 
       const key = normalized.toLowerCase();
       const amount = Number(donation?.amount) || 0;
+      const currency = donation?.currency || 'RON'; // Default to RON if not specified
+      const rate = EXCHANGE_RATES[currency] || 1; // Default to 1 if currency not found
+
+      // Convert amount to RON for consistent display
+      const amountInRON = currency === 'RON' ? amount : amount / rate;
 
       const prev = map.get(key);
       if (!prev) {
         map.set(key, {
           id: key,
           name: normalized,
-          amount,
+          amount: amountInRON,
           donationsCount: 1,
         });
       } else {
-        prev.amount += amount;
+        prev.amount += amountInRON;
         prev.donationsCount += 1;
       }
     }

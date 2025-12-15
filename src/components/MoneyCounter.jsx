@@ -20,14 +20,19 @@ function MoneyCounter() {
   const { donors, loading, error } = useDonors();
   const { t } = useI18n();
 
-  // All amounts in database are stored in RON
+  // Convert all confirmed donations to RON for total calculation
   // Only count confirmed donations (exclude pending and failed)
   const totalAmountRON = (donors || [])
     .filter(donor => donor?.status === 'confirmed')
-    .reduce(
-      (sum, donor) => sum + (Number(donor?.amount) || 0),
-      0
-    );
+    .reduce((sum, donor) => {
+      const amount = Number(donor?.amount) || 0;
+      const currency = donor?.currency || 'RON'; // Default to RON if not specified
+      const rate = EXCHANGE_RATES[currency] || 1; // Default to 1 if currency not found
+
+      // Convert to RON: if amount is in EUR/USD, divide by rate; if already RON, use as-is
+      const amountInRON = currency === 'RON' ? amount : amount / rate;
+      return sum + amountInRON;
+    }, 0);
 
   // Get currency from cookie, default to RON
   const currency = getCookie('mpv_currency') || 'RON';

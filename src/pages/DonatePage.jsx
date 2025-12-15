@@ -532,6 +532,7 @@ Donează și tu acum aici: `;
       const donation = {
         name: donorName || 'Anonim',
         amount: finalAmount,
+        currency: currency,  // Store the currency (RON, EUR, USD)
         message: 'Awaiting payment confirmation',
         created_at: new Date().toISOString(),
         status: 'pending',
