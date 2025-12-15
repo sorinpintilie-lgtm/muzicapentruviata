@@ -529,19 +529,19 @@ Donează și tu acum aici: `;
       const { addDoc, collection } = await import('firebase/firestore');
       const { db } = await import('../firebase.js');
 
-      const invoiceId = 'MPV-' + Date.now();
       const donation = {
         name: donorName || 'Anonim',
         amount: finalAmount,
-        message: `Donație confirmată prin EuPlatesc - Invoice: ${invoiceId}`,
+        message: 'Awaiting payment confirmation',
         created_at: new Date().toISOString(),
-        status: 'confirmed',
-        invoiceId: invoiceId
+        status: 'pending',
+        invoiceId: ''  // Will be populated by webhook
       };
 
       console.log('Creating donation in Firestore...');
-      await addDoc(collection(db, 'donations'), donation);
-      console.log('Pending donation created');
+      const docRef = await addDoc(collection(db, 'donations'), donation);
+      const donationDocId = docRef.id;
+      console.log('Pending donation created with ID:', donationDocId);
 
       // Then call Netlify function to initiate payment
       const amountToSend = finalAmount.toFixed(2);
@@ -555,7 +555,7 @@ Donează și tu acum aici: `;
           currency,
           orderDesc: `Donation Muzică pentru Viață - ${donationMode === 'monthly' ? i18n.orderDescMonthly : i18n.orderDescOne}`,
           email: donorEmail,
-          invoiceId: invoiceId, // Pass the invoice ID
+          invoiceId: donationDocId, // Use the Firebase document ID
         }),
       });
 
@@ -582,7 +582,11 @@ Donează și tu acum aici: `;
         fp_hash: paymentData.fp_hash,
         email: paymentData.email,
         fname: donorName || 'Anonim',
-        ExtraData: JSON.stringify({ donorName: donorName || 'Anonim' }),
+        ExtraData: JSON.stringify([
+          { key: 'silenturl', value: 'https://muzicapentruviata.ro/.netlify/functions/euplatesc-webhook' },
+          { key: 'successurl', value: 'https://muzicapentruviata.ro/success' },
+          { key: 'failedurl', value: 'https://muzicapentruviata.ro/failed' }
+        ]),
       };
 
       Object.entries(fields).forEach(([key, value]) => {

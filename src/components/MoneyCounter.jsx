@@ -21,10 +21,13 @@ function MoneyCounter() {
   const { t } = useI18n();
 
   // All amounts in database are stored in RON
-  const totalAmountRON = (donors || []).reduce(
-    (sum, donor) => sum + (Number(donor?.amount) || 0),
-    0
-  );
+  // Only count confirmed donations (exclude pending and failed)
+  const totalAmountRON = (donors || [])
+    .filter(donor => donor?.status === 'confirmed')
+    .reduce(
+      (sum, donor) => sum + (Number(donor?.amount) || 0),
+      0
+    );
 
   // Get currency from cookie, default to RON
   const currency = getCookie('mpv_currency') || 'RON';

@@ -140,12 +140,24 @@ export default function MobileWallScreenshot() {
   const decodedDonorName = decodeURIComponent(donorName || '');
 
   // Reorder donors to put the highlighted one in the middle
+  // Only include confirmed donations, but always include the highlighted donor (even if pending)
   const reorderedDonors = React.useMemo(() => {
-    const highlightedIndex = donors.findIndex(
+    // Filter to only confirmed donations, but add back the highlighted donor if they're pending
+    let filteredDonors = donors.filter(d => d?.status === 'confirmed');
+    const highlightedDonor = donors.find(
       d => d.name.toLowerCase() === decodedDonorName.toLowerCase()
     );
 
-    if (highlightedIndex === -1) return donors;
+    // If highlighted donor exists but is not in confirmed list, add them
+    if (highlightedDonor && !filteredDonors.find(d => d.id === highlightedDonor.id)) {
+      filteredDonors = [highlightedDonor, ...filteredDonors];
+    }
+
+    const highlightedIndex = filteredDonors.findIndex(
+      d => d.name.toLowerCase() === decodedDonorName.toLowerCase()
+    );
+
+    if (highlightedIndex === -1) return filteredDonors;
 
     const donorsCopy = [...donors];
 

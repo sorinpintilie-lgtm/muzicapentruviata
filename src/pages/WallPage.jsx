@@ -158,12 +158,13 @@ export default function WallPage() {
   );
 
   // Aggregate donations by donor name (so size reflects total donated by that person).
+  // Only include confirmed donations (exclude pending and failed)
   const communityMembers = useMemo(() => {
     const map = new Map();
 
     const anonymousNames = new Set(['anonim', 'anonymous', 'anonym', 'anonyme', 'anonimo', 'مجهول']);
 
-    for (const donation of donors || []) {
+    for (const donation of (donors || []).filter(d => d?.status === 'confirmed')) {
       const rawName = (donation?.name || '').trim();
       const normalized = rawName.replace(/\s+/g, ' ');
       if (!normalized) continue;
