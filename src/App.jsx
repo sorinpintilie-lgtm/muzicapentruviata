@@ -435,7 +435,9 @@ function App() {
         <Route path="/termeni-si-conditii" element={<Layout><TermsAndConditionsPage /></Layout>} />
         <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
         <Route path="/success" element={<Layout><SuccessPage /></Layout>} />
+        <Route path="/success/" element={<Layout><SuccessPage /></Layout>} />
         <Route path="/failed" element={<Layout><FailedPage /></Layout>} />
+        <Route path="/failed/" element={<Layout><FailedPage /></Layout>} />
 
         {/* Prefixed languages */}
         {LANG_PREFIXES.flatMap((prefix) => [
@@ -452,7 +454,9 @@ function App() {
           <Route key={`${prefix}-terms`} path={`/${prefix}/termeni-si-conditii`} element={<Layout><TermsAndConditionsPage /></Layout>} />,
           <Route key={`${prefix}-privacy`} path={`/${prefix}/politica-de-confidentialitate`} element={<Layout><PrivacyPolicyPage /></Layout>} />,
           <Route key={`${prefix}-success`} path={`/${prefix}/success`} element={<Layout><SuccessPage /></Layout>} />,
+          <Route key={`${prefix}-success-slash`} path={`/${prefix}/success/`} element={<Layout><SuccessPage /></Layout>} />,
           <Route key={`${prefix}-failed`} path={`/${prefix}/failed`} element={<Layout><FailedPage /></Layout>} />,
+          <Route key={`${prefix}-failed-slash`} path={`/${prefix}/failed/`} element={<Layout><FailedPage /></Layout>} />,
         ])}
       </Routes>
 
