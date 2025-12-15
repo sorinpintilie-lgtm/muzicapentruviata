@@ -152,7 +152,6 @@ export default function LivePage() {
 
         <div className="live-layout">
           <div className="live-video-section">
-=======
             <div
               className="live-video-frame"
               aria-label={copy.videoAria}
