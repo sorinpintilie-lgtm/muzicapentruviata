@@ -11,6 +11,8 @@ import SponsorsPage from './pages/SponsorsPage.jsx';
 import MobileWallScreenshot from './pages/MobileWallScreenshot.jsx';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage.jsx';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
+import SuccessPage from './pages/SuccessPage.jsx';
+import FailedPage from './pages/FailedPage.jsx';
 import GlobalRadioPlayer from './components/GlobalRadioPlayer.jsx';
 import MoneyCounter from './components/MoneyCounter.jsx';
 import LanguageSelector from './components/LanguageSelector.jsx';
@@ -432,6 +434,8 @@ function App() {
         <Route path="/mobile/:donorName" element={<Layout><MobileWallScreenshot /></Layout>} />
         <Route path="/termeni-si-conditii" element={<Layout><TermsAndConditionsPage /></Layout>} />
         <Route path="/politica-de-confidentialitate" element={<Layout><PrivacyPolicyPage /></Layout>} />
+        <Route path="/success" element={<Layout><SuccessPage /></Layout>} />
+        <Route path="/failed" element={<Layout><FailedPage /></Layout>} />
 
         {/* Prefixed languages */}
         {LANG_PREFIXES.flatMap((prefix) => [
@@ -447,6 +451,8 @@ function App() {
           <Route key={`${prefix}-mobile`} path={`/${prefix}/mobile/:donorName`} element={<Layout><MobileWallScreenshot /></Layout>} />,
           <Route key={`${prefix}-terms`} path={`/${prefix}/termeni-si-conditii`} element={<Layout><TermsAndConditionsPage /></Layout>} />,
           <Route key={`${prefix}-privacy`} path={`/${prefix}/politica-de-confidentialitate`} element={<Layout><PrivacyPolicyPage /></Layout>} />,
+          <Route key={`${prefix}-success`} path={`/${prefix}/success`} element={<Layout><SuccessPage /></Layout>} />,
+          <Route key={`${prefix}-failed`} path={`/${prefix}/failed`} element={<Layout><FailedPage /></Layout>} />,
         ])}
       </Routes>
 
