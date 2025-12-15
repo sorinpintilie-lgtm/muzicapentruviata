@@ -21,8 +21,3 @@
 [[edge_functions]]
   path = "/*"
   function = "geo-lang-redirect"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
