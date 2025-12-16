@@ -136,7 +136,6 @@ exports.handler = async (event, context) => {
       nonce: nonce,        // Form field name (lowercase)
       fp_hash: fpHash,      // Form field name (lowercase with underscore)
       email: email,
-      back_to_site: `${process.env.URL || 'https://muzicapentruviata.netlify.app'}/`, // Return URL
       endpoint: ENDPOINT,
     };
 
