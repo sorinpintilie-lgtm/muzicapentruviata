@@ -624,9 +624,7 @@ Donează și tu acum aici: `;
 
       // Add ExtraData fields separately
       const extraDataFields = [
-        { key: 'silenturl', value: 'https://muzicapentruviata.ro/.netlify/functions/euplatesc-webhook' },
-        { key: 'successurl', value: 'https://muzicapentruviata.ro/success' },
-        { key: 'failedurl', value: 'https://muzicapentruviata.ro/failed' }
+        { key: 'silenturl', value: 'https://muzicapentruviata.ro/.netlify/functions/euplatesc-webhook' }
       ];
 
       extraDataFields.forEach(item => {
