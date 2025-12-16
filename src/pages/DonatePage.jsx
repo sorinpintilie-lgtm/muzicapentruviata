@@ -493,19 +493,29 @@ Donează și tu acum aici: `;
     const amount = searchParams.get('amount');
     const name = searchParams.get('fname') || searchParams.get('name');
     const invoiceId = searchParams.get('invoice_id') || searchParams.get('order_id');
+    const euplatescReturn = searchParams.get('euplatesc_return');
 
     // Check for various possible success indicators from EuPlatesc
     const isSuccess = action === 'confirmed' ||
                       action === 'success' ||
                       searchParams.get('status') === 'confirmed' ||
-                      searchParams.get('status') === 'success';
+                      searchParams.get('status') === 'success' ||
+                      euplatescReturn === 'success';
+
+    const isFailed = action === 'failed' ||
+                     searchParams.get('status') === 'failed' ||
+                     euplatescReturn === 'failed';
 
     if (isSuccess && amount && invoiceId) {
       console.log('Payment successful, redirecting to wall:', { action, amount, name, invoiceId });
       // Donation was already recorded when form was submitted, just redirect to wall
       navigate(withBase('/multumiri'), { replace: true });
-    } else if (action || amount) {
-      console.log('Payment return detected but not confirmed:', { action, amount, name, invoiceId });
+    } else if (isFailed) {
+      console.log('Payment failed, redirecting to donate page:', { action, amount, name, invoiceId });
+      // Redirect to donate page to allow user to try again
+      navigate(withBase('/'), { replace: true });
+    } else if (action || amount || euplatescReturn) {
+      console.log('Payment return detected but not confirmed:', { action, amount, name, invoiceId, euplatescReturn });
     }
   }, [searchParams, navigate, withBase]);
 

@@ -1,5 +1,5 @@
-/success    /index.html   200
-/success    /index.html   200 POST
-/failed     /index.html   200
-/failed     /index.html   200 POST
+/success    /?euplatesc_return=success   302!
+/success    /?euplatesc_return=success   302! POST
+/failed     /?euplatesc_return=failed   302!
+/failed     /?euplatesc_return=failed   302! POST
 /*          /index.html   200
