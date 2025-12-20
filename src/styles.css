@@ -1466,6 +1466,14 @@ body {
   animation: fadeInScale 0.9s ease-out;
 }
 
+.post-event-image-block video {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  display: block;
+  object-fit: contain;
+}
+
 .post-event-image-block::after {
   content: "";
   position: absolute;
@@ -1528,6 +1536,12 @@ body {
     max-height: 200px !important;
     object-fit: cover !important;
     transform: scale(1.05);
+  }
+
+  .post-event-image-block video {
+    max-height: none !important;
+    object-fit: contain !important;
+    transform: none;
   }
 
   /* Improve mobile text spacing */

@@ -794,7 +794,7 @@ Donează și tu acum aici: `;
             <p className="post-event-text">
               {i18n.whyP2}
             </p>
-            <div className="post-event-image-block post-event-image-block--clinic">
+            <div className="post-event-image-block post-event-image-block--clinic" style={{ maxHeight: 'none', overflow: 'visible' }}>
               <video
                 src="/AQNB0pFAZpEKLhTzi6GtckdGG9FUpSQCmmeov4uYLPeBjzmh-boBXe2-MgLUTlDUYqN1qsLjvD6oPN1xAujgPbmXvljWzNBRM19s2jpdnJMl1g.mp4"
                 controls
@@ -802,12 +802,6 @@ Donează și tu acum aici: `;
                 muted
                 loop
                 playsInline
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: '12px',
-                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)'
-                }}
               >
                 Your browser does not support the video tag.
               </video>
