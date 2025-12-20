@@ -3,6 +3,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDonors } from '../DonorContext.jsx';
 import { useI18n } from '../i18n/I18nProvider.jsx';
 
+// This is a commentary added to the code as requested.
+
 export default function DonatePage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
