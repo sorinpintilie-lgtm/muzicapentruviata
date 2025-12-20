@@ -1457,6 +1457,11 @@ body {
   background: #000;
 }
 
+.post-event-image-block--clinic {
+  max-height: none;
+  overflow: visible;
+}
+
 .post-event-image-block img {
   width: 100%;
   height: 100%;
@@ -1542,6 +1547,12 @@ body {
     max-height: none !important;
     object-fit: contain !important;
     transform: none;
+  }
+
+  /* Allow video controls to be visible for clinic video */
+  .post-event-image-block--clinic {
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   /* Improve mobile text spacing */
