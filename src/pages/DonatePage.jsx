@@ -795,7 +795,22 @@ Donează și tu acum aici: `;
               {i18n.whyP2}
             </p>
             <div className="post-event-image-block post-event-image-block--clinic">
-              <img src="/resita populatie.jpg" alt={i18n.whyImgAlt} />
+              <video
+                src="/AQNB0pFAZpEKLhTzi6GtckdGG9FUpSQCmmeov4uYLPeBjzmh-boBXe2-MgLUTlDUYqN1qsLjvD6oPN1xAujgPbmXvljWzNBRM19s2jpdnJMl1g.mp4"
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)'
+                }}
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
 
