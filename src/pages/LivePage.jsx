@@ -159,7 +159,7 @@ export default function LivePage() {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/wUkq-w93XPs?rel=0&modestbranding=1&playsinline=1&autoplay=0"
+                src="https://www.youtube.com/embed/ATiU4yNKkWU?rel=0&modestbranding=1&playsinline=1&autoplay=0"
                 title="Radio Romania Resita Live Stream"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
