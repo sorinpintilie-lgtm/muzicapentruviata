@@ -86,9 +86,9 @@ const timelineI18n = {
         alt: 'Imagine din anul 2024 pentru campania Muzică Pentru Viață',
       },
       {
-        title: 'Un vis devenit realitate!',
+        title: 'Un record de solidaritate!',
         description:
-          'Întreaga lume se alătură campaniei Muzică Pentru Viață, iar visul unui spital oncologic la Reșița devine, pas cu pas, realitate.',
+          'În 2025, comunitatea s-a unit în jurul campaniei Muzica pentru Viață, reușind să strângă suma record de 314.225 lei, un pas esențial în drumul către spitalul oncologic din Reșița.',
         alt: 'Imagine din anul 2025 pentru campania Muzică Pentru Viață',
       },
     ],

@@ -156,11 +156,19 @@ Donează și tu acum aici: `;
           donateWithAmount: (amount) => `DONEAZĂ ${amount}`,
           payNote:
             'Plata este securizată prin EuPlatesc. Vei fi redirecționat către pagina de plată. După finalizarea donației, vei fi adăugat pe peretele comunității noastre.',
-          whyTitle: 'De ce este important?',
+          whyTitle: 'Mulțumim, comunitate Muzica pentru Viață',
           whyP1:
-            'În fiecare an, în România, aproximativ 100.000 de oameni află că au cancer. Pentru mulți dintre ei, lupta nu înseamnă doar boala, ci și drumuri lungi, epuizare, costuri mari și timp prețios pierdut departe de cei dragi.',
+            'Campania Muzica pentru Viață 2025 s-a încheiat, iar ceea ce ați reușit împreună este cu adevărat remarcabil. Prin implicare, generozitate și solidaritate, ați contribuit la strângerea sumei de 314.225 lei — un record absolut pentru această campanie.',
           whyP2:
-            'Reșița nu are un spital oncologic. Pacienții sunt nevoiți să călătorească sute de kilometri pentru tratament, în condiții dificile. Fundația OncoHelp lucrează pentru a construi primul spital oncologic din Reșița, un loc unde oamenii pot primi tratament de calitate, mai aproape de casă, cu demnitate, speranță și sprijin real.',
+            'Această reușită nu aparține unei singure persoane sau unei singure instituții. Ea aparține unei comunități unite, care a ales să fie prezentă, să creadă și să acționeze. Mulțumim tuturor celor care au donat, au distribuit mesajul campaniei, au fost alături de noi în online, la radio, pe scenă sau în culise. Fiecare implicare a contat.',
+          whyP3:
+            'Platforma MuzicaPentruViata.ro va rămâne activă în continuare. Cei care doresc pot contribui oricând mai departe către OncoHelp, pentru ca proiectul spitalului oncologic din Reșița să prindă viață.',
+          whyP4:
+            'Ați demonstrat că un gest mic poate schimba o lume. Împreună ați arătat că solidaritatea nu este un slogan, ci o forță reală de schimbare.',
+          whyP5:
+            'Vă mulțumim pentru încredere, pentru energie și pentru faptul că ați ales să faceți parte din această campanie.',
+          whyP6:
+            'Muzica pentru Viață înseamnă comunitate. Iar comunitatea a fost extraordinară.',
           whyImgAlt: 'Spitalul din Reșița',
           hospitalTitle: 'Spitalul din Reșița',
           hospitalP1:
@@ -796,18 +804,18 @@ Donează și tu acum aici: `;
             <p className="post-event-text">
               {i18n.whyP2}
             </p>
-            <div className="post-event-image-block post-event-image-block--clinic" style={{ maxHeight: 'none', overflow: 'visible' }}>
-              <video
-                src="/AQNB0pFAZpEKLhTzi6GtckdGG9FUpSQCmmeov4uYLPeBjzmh-boBXe2-MgLUTlDUYqN1qsLjvD6oPN1xAujgPbmXvljWzNBRM19s2jpdnJMl1g.mp4"
-                controls
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <p className="post-event-text">
+              {i18n.whyP3}
+            </p>
+            <p className="post-event-text">
+              {i18n.whyP4}
+            </p>
+            <p className="post-event-text">
+              {i18n.whyP5}
+            </p>
+            <p className="post-event-text">
+              {i18n.whyP6}
+            </p>
           </div>
 
           <div className="post-event-section">
