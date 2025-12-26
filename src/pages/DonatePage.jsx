@@ -796,7 +796,7 @@ Donează și tu acum aici: `;
 
         {/* Story Section - below donation form */}
         <div className="post-event-story">
-          <div className="post-event-section">
+          <div className="post-event-section" style={{ width: '100%', maxWidth: 'none' }}>
             <div className="post-event-section-title">{i18n.whyTitle}</div>
             <p className="post-event-text">
               {i18n.whyP1}
